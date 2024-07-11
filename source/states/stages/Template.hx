@@ -7,6 +7,14 @@ class Template extends BaseStage
 	// If you're moving your stage from PlayState to a stage file,
 	// you might have to rename some variables if they're missing, for example: camZooming -> game.camZooming
 
+	public function preload(graphic:String, ?lib:String) {
+        var newthing:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image(graphic, lib));
+        newthing.visible = false;
+        add(newthing);
+        remove(newthing);
+		trace(graphic);
+    }
+
 	override function create()
 	{
 		// Spawn your stage sprites here.

@@ -197,6 +197,12 @@ class Paths
 		var file:Sound = returnSound('music', key, library);
 		return file;
 	}
+	
+	inline static public function song(key:String, ?library:String):Sound
+	{
+		var file:Sound = returnSound('songs', key, library);
+		return file;
+	}
 
 	inline static public function voices(song:String, postfix:String = null):Any
 	{
@@ -226,9 +232,12 @@ class Paths
 		{
 			localTrackedAssets.push(file);
 			return currentTrackedAssets.get(file);
+			trace('Sprite Loaded Successfully: $file');	
 		}
-		else if (FileSystem.exists(file))
+		else if (FileSystem.exists(file)) {
 			bitmap = BitmapData.fromFile(file);
+			trace('Sprite Loaded Successfully: $file');
+		}
 		else
 		#end
 		{
@@ -237,9 +246,12 @@ class Paths
 			{
 				localTrackedAssets.push(file);
 				return currentTrackedAssets.get(file);
+				trace('Sprite Loaded Successfully: $file');
 			}
-			else if (OpenFlAssets.exists(file, IMAGE))
+			else if (OpenFlAssets.exists(file, IMAGE)) {
 				bitmap = OpenFlAssets.getBitmapData(file);
+				trace('Sprite Loaded Successfully: $file');
+			}
 		}
 
 		if (bitmap != null)
@@ -248,7 +260,7 @@ class Paths
 			if(retVal != null) return retVal;
 		}
 
-		trace('oh no its returning null NOOOO ($file)');
+		trace('Sprite Not Found: $file');
 		return null;
 	}
 

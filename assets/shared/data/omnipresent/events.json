@@ -1,0 +1,366 @@
+{
+	"song": {
+		"events": [
+			[
+				13161.2903225806,
+				[
+					[
+						"Change Character",
+						"dad",
+						"xterion-first"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d-xterion"
+					]
+				]
+			],
+			[
+				26322.5806451613,
+				[
+					[
+						"Change Character",
+						"dad",
+						"tailsdoll"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d"
+					]
+				]
+			],
+			[
+				38709.6774193548,
+				[
+					[
+						"Change Character",
+						"dad",
+						"xterion-first"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d-xterion"
+					]
+				]
+			],
+			[
+				51096.7741935484,
+				[
+					[
+						"Change Character",
+						"dad",
+						"tailsdoll"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d"
+					]
+				]
+			],
+			[
+				57290.3225806452,
+				[
+					[
+						"Change Character",
+						"dad",
+						"xterion-first"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d-xterion"
+					]
+				]
+			],
+			[
+				63483.870967742,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d"
+					],
+					[
+						"Change Character",
+						"dad",
+						"tailsdoll"
+					]
+				]
+			],
+			[
+				66580.6451612904,
+				[
+					[
+						"Change Character",
+						"gf",
+						"xterion-first"
+					]
+				]
+			],
+			[
+				75870.9677419356,
+				[
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
+				82064.5161290324,
+				[
+					[
+						"Change Character",
+						"dad",
+						"xterion-first"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d-xterion"
+					]
+				]
+			],
+			[
+				88258.0645161291,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d"
+					],
+					[
+						"Change Character",
+						"dad",
+						"tailsdoll"
+					]
+				]
+			],
+			[
+				91354.8387096775,
+				[
+					[
+						"Change Character",
+						"dad",
+						"xterion-first"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d-xterion"
+					]
+				]
+			],
+			[
+				100645.161290323,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Needlemouse"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-needle"
+					]
+				]
+			],
+			[
+				113032.258064516,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Tails-Encore"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf"
+					]
+				]
+			],
+			[
+				125419.35483871,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-needle"
+					],
+					[
+						"Change Character",
+						"dad",
+						"Needlemouse"
+					]
+				]
+			],
+			[
+				137806.451612903,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Tails-Encore"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf"
+					]
+				]
+			],
+			[
+				150193.548387097,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-needle"
+					],
+					[
+						"Change Character",
+						"dad",
+						"Needlemouse"
+					]
+				]
+			],
+			[
+				162580.64516129,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Tails-Encore"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf"
+					]
+				]
+			],
+			[
+				174967.741935484,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-needle"
+					],
+					[
+						"Change Character",
+						"dad",
+						"Needlemouse"
+					],
+					[
+						"Change Character",
+						"gf",
+						"Tails-Encore"
+					]
+				]
+			],
+			[
+				176516.129032258,
+				[
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
+				187354.838709677,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Tails-Encore"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf"
+					]
+				]
+			],
+			[
+				199741.935483871,
+				[
+					[
+						"Change Character",
+						"dad",
+						"fleetway"
+					]
+				]
+			],
+			[
+				205935.483870967,
+				[
+					[
+						"STOP CHARTING HERE",
+						"next persons turn",
+						""
+					]
+				]
+			],
+			[
+				205935.483870967,
+				[
+					[
+						"Change Character",
+						"gf",
+						"sonic"
+					]
+				]
+			],
+			[
+				411870.967741934,
+				[
+					[
+						"STOP CHARTING HERE",
+						"next persons turn",
+						""
+					]
+				]
+			],
+			[
+				614709.677419352,
+				[
+					[
+						"STOP CHARTING HERE",
+						"next persons turn",
+						""
+					]
+				]
+			],
+			[
+				825290.32258064,
+				[
+					[
+						"STOP CHARTING HERE",
+						"next persons turn",
+						""
+					]
+				]
+			],
+			[
+				1030221.4472537,
+				[
+					[
+						"STOP CHARTING HERE",
+						"final persons turn",
+						""
+					]
+				]
+			]
+		]
+	}
+}
