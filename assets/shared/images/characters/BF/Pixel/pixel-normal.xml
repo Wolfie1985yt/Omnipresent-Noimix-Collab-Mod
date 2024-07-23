@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="pixel-normal.png">
+<SubTexture name="PxFb Idle0000" x="616" y="400" width="288" height="336" frameX="-136" frameY="-72" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Idle0001" x="920" y="0" width="304" height="336" frameX="-120" frameY="-72" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Idle0002" x="601" y="1112" width="304" height="327" frameX="-120" frameY="-81" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Idle0003" x="920" y="336" width="288" height="328" frameX="-136" frameY="-80" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Down0000" x="1218" y="1112" width="288" height="288" frameX="-120" frameY="-120" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Down0001" x="1512" y="0" width="290" height="280" frameX="-127" frameY="-128" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Up0000" x="0" y="400" width="280" height="376" frameX="-136" frameY="-32" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Up0001" x="328" y="0" width="272" height="393" frameX="-144" frameY="-24" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Right0000" x="336" y="776" width="336" height="328" frameX="-120" frameY="-80" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Right0001" x="672" y="776" width="352" height="328" frameX="-112" frameY="-80" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Left0000" x="1224" y="0" width="288" height="328" frameX="-128" frameY="-80" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Left0001" x="0" y="1112" width="297" height="328" frameX="-120" frameY="-80" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Fail Down0000" x="1224" y="328" width="288" height="304" frameX="-120" frameY="-104" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Fail Down0001" x="1224" y="632" width="288" height="296" frameX="-128" frameY="-112" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Fail Up0000" x="600" y="0" width="320" height="384" frameX="-112" frameY="-24" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Fail Up0001" x="0" y="0" width="328" height="400" frameX="-104" frameY="-8" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Fail Right0000" x="280" y="400" width="336" height="344" frameX="-120" frameY="-64" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Fail Right0001" x="0" y="776" width="336" height="336" frameX="-120" frameY="-72" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Fail Left0000" x="297" y="1112" width="304" height="328" frameX="-112" frameY="-80" frameWidth="500" frameHeight="500" />
+<SubTexture name="PxFb Fail Left0001" x="905" y="1112" width="313" height="320" frameX="-112" frameY="-88" frameWidth="500" frameHeight="500" />
+</TextureAtlas>

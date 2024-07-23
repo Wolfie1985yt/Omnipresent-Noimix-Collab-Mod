@@ -39,8 +39,8 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
-		var option:Option = new Option('GPU Caching', //Name
-			"If checked, allows the GPU to be used for caching textures, decreasing RAM usage.\nDon't turn this on if you have a shitty Graphics Card.", //Description
+		var option:Option = new Option('Smart Caching', //Name
+			"If checked, images that tend to cause lag will be loaded in the GPU, dont turn on if you have less than 4gb of VRAM.", //Description
 			'cacheOnGPU',
 			'bool');
 		addOption(option);
@@ -54,7 +54,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 
 		final refreshRate:Int = FlxG.stage.application.window.displayMode.refreshRate;
 		option.minValue = 60;
-		option.maxValue = 240;
+		option.maxValue = 360;
 		option.defaultValue = Std.int(FlxMath.bound(refreshRate, option.minValue, option.maxValue));
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;

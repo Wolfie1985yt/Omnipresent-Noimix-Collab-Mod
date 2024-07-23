@@ -97,7 +97,7 @@
 					[
 						"Change Character",
 						"gf",
-						"xterion-first"
+						"xterion-second"
 					]
 				]
 			],
@@ -167,7 +167,7 @@
 					[
 						"Change Character",
 						"bf",
-						"bf-needle"
+						"bf-needle-encore"
 					]
 				]
 			],
@@ -182,7 +182,7 @@
 					[
 						"Change Character",
 						"bf",
-						"bf"
+						"bf-encore"
 					]
 				]
 			],
@@ -192,7 +192,7 @@
 					[
 						"Change Character",
 						"bf",
-						"bf-needle"
+						"bf-needle-encore"
 					],
 					[
 						"Change Character",
@@ -212,7 +212,7 @@
 					[
 						"Change Character",
 						"bf",
-						"bf"
+						"bf-encore"
 					]
 				]
 			],
@@ -222,7 +222,7 @@
 					[
 						"Change Character",
 						"bf",
-						"bf-needle"
+						"bf-needle-encore"
 					],
 					[
 						"Change Character",
@@ -242,7 +242,7 @@
 					[
 						"Change Character",
 						"bf",
-						"bf"
+						"bf-encore"
 					]
 				]
 			],
@@ -252,7 +252,7 @@
 					[
 						"Change Character",
 						"bf",
-						"bf-needle"
+						"bf-needle-encore"
 					],
 					[
 						"Change Character",
@@ -287,7 +287,7 @@
 					[
 						"Change Character",
 						"bf",
-						"bf"
+						"bf-encore"
 					]
 				]
 			],
@@ -322,12 +322,427 @@
 				]
 			],
 			[
+				312774.193548386,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Chaotix"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					],
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
+				325161.290322579,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Knuckles-Encore"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-flipped"
+					]
+				]
+			],
+			[
+				329806.451612902,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					],
+					[
+						"Change Character",
+						"dad",
+						"Chaotix"
+					]
+				]
+			],
+			[
+				340645.161290321,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Knuckles-Encore"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-flipped"
+					]
+				]
+			],
+			[
+				342967.741935483,
+				[
+					[
+						"Change Character",
+						"gf",
+						"Chaotix-flipped"
+					]
+				]
+			],
+			[
+				343741.93548387,
+				[
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
+				353032.258064515,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Chaotix"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					]
+				]
+			],
+			[
+				356129.032258063,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-flipped"
+					],
+					[
+						"Change Character",
+						"dad",
+						"Knuckles-Encore"
+					]
+				]
+			],
+			[
+				359225.806451611,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Chaotix"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					]
+				]
+			],
+			[
+				362322.58064516,
+				[
+					[
+						"Change Character",
+						"dad",
+						"wechBeast"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					]
+				]
+			],
+			[
+				393290.322580643,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-flipped"
+					],
+					[
+						"Change Character",
+						"dad",
+						"Knuckles-Encore"
+					]
+				]
+			],
+			[
+				399483.87096774,
+				[
+					[
+						"Change Character",
+						"dad",
+						"wechBeast"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					]
+				]
+			],
+			[
+				405677.419354837,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-flipped"
+					],
+					[
+						"Change Character",
+						"dad",
+						"Knuckles-Encore"
+					],
+					[
+						"Change Character",
+						"gf",
+						"wechBeast-flipped"
+					]
+				]
+			],
+			[
+				406838.709677418,
+				[
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
 				411870.967741934,
 				[
 					[
-						"STOP CHARTING HERE",
-						"next persons turn",
-						""
+						"Change Character",
+						"dad",
+						"Satanos"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					]
+				]
+			],
+			[
+				435096.774193546,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Eggman-Encore"
+					],
+					[
+						"Change Character",
+						"gf",
+						"Satanos"
+					]
+				]
+			],
+			[
+				437806.451612901,
+				[
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
+				461419.354838707,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Satanos"
+					]
+				]
+			],
+			[
+				476129.032258062,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Eggman-Encore"
+					]
+				]
+			],
+			[
+				489290.322580643,
+				[
+					[
+						"Change Character",
+						"gf",
+						"Eggman-Encore"
+					],
+					[
+						"Change Character",
+						"dad",
+						"Satanos"
+					]
+				]
+			],
+			[
+				492387.096774191,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Eggman-Encore"
+					],
+					[
+						"Change Character",
+						"gf",
+						"Satanos"
+					]
+				]
+			],
+			[
+				501677.419354836,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Satanos"
+					],
+					[
+						"Change Character",
+						"gf",
+						"Eggman-Encore"
+					]
+				]
+			],
+			[
+				514064.51612903,
+				[
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
+				517161.290322578,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Eggman-Encore"
+					]
+				]
+			],
+			[
+				524903.225806449,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Satanos"
+					]
+				]
+			],
+			[
+				529548.387096772,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Eggman-Encore"
+					]
+				]
+			],
+			[
+				540387.096774191,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sonicexe"
+					]
+				]
+			],
+			[
+				565161.290322578,
+				[
+					[
+						"Change Character",
+						"dad",
+						"lordxEncore"
+					]
+				]
+			],
+			[
+				577548.387096771,
+				[
+					[
+						"Change Character",
+						"dad",
+						"fatal-sonic"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					]
+				]
+			],
+			[
+				589935.483870965,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sonicexe"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					]
+				]
+			],
+			[
+				596129.032258061,
+				[
+					[
+						"Change Character",
+						"dad",
+						"lordxEncore"
+					]
+				]
+			],
+			[
+				602322.580645158,
+				[
+					[
+						"Change Character",
+						"dad",
+						"fatal-sonic"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
 					]
 				]
 			],
@@ -335,9 +750,349 @@
 				614709.677419352,
 				[
 					[
-						"STOP CHARTING HERE",
-						"next persons turn",
-						""
+						"Change Character",
+						"dad",
+						"sonicexe"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					]
+				]
+			],
+			[
+				617806.4516129,
+				[
+					[
+						"Change Character",
+						"dad",
+						"lordxEncore"
+					]
+				]
+			],
+			[
+				620903.225806448,
+				[
+					[
+						"Change Character",
+						"dad",
+						"fatal-sonic"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					]
+				]
+			],
+			[
+				625548.387096771,
+				[
+					[
+						"Change Character",
+						"dad",
+						"lordxEncore"
+					],
+					[
+						"Change Character",
+						"gf",
+						"fatal-sonic"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					]
+				]
+			],
+			[
+				639483.870967738,
+				[
+					[
+						"Change Character",
+						"dad",
+						"ycr-cherribun"
+					],
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
+				642580.645161287,
+				[
+					[
+						"Change Character",
+						"dad",
+						"BEAST-Enc"
+					],
+					[
+						"Change Character",
+						"bf",
+						"Encore-right"
+					]
+				]
+			],
+			[
+				654967.74193548,
+				[
+					[
+						"Change Character",
+						"dad",
+						"majin"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-majin"
+					]
+				]
+			],
+			[
+				667354.838709674,
+				[
+					[
+						"Change Character",
+						"dad",
+						"BEAST-Enc"
+					],
+					[
+						"Change Character",
+						"bf",
+						"Encore-right"
+					]
+				]
+			],
+			[
+				668903.225806448,
+				[
+					[
+						"Change Character",
+						"dad",
+						"majin"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-majin"
+					]
+				]
+			],
+			[
+				670451.612903222,
+				[
+					[
+						"Change Character",
+						"dad",
+						"BEAST-Enc"
+					],
+					[
+						"Change Character",
+						"bf",
+						"Encore-right"
+					]
+				]
+			],
+			[
+				671999.999999996,
+				[
+					[
+						"Change Character",
+						"dad",
+						"majin"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-majin"
+					]
+				]
+			],
+			[
+				682838.709677416,
+				[
+					[
+						"Change Character",
+						"dad",
+						"BEAST-Enc"
+					],
+					[
+						"Change Character",
+						"bf",
+						"Encore-right"
+					]
+				]
+			],
+			[
+				684387.09677419,
+				[
+					[
+						"Change Character",
+						"gf",
+						"majin"
+					]
+				]
+			],
+			[
+				692129.032258061,
+				[
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					],
+					[
+						"Change Character",
+						"dad",
+						"sunky"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					]
+				]
+			],
+			[
+				699870.967741932,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sanic"
+					]
+				]
+			],
+			[
+				706064.516129028,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sunky"
+					]
+				]
+			],
+			[
+				709548.38709677,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sanic"
+					]
+				]
+			],
+			[
+				724258.064516125,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sunky"
+					]
+				]
+			],
+			[
+				730838.709677415,
+				[
+					[
+						"Change Character",
+						"gf",
+						"sanic"
+					]
+				]
+			],
+			[
+				743225.806451609,
+				[
+					[
+						"Change Character",
+						"dad",
+						"coldsteel"
+					],
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
+				773612.903225802,
+				[
+					[
+						"Change Character",
+						"dad",
+						"guitar"
+					]
+				]
+			],
+			[
+				798967.741935479,
+				[
+					[
+						"Change Character",
+						"dad",
+						"coldsteel"
+					]
+				]
+			],
+			[
+				804580.645161286,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sunky"
+					]
+				]
+			],
+			[
+				806709.67741935,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sanic"
+					]
+				]
+			],
+			[
+				811354.838709673,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sunky"
+					]
+				]
+			],
+			[
+				812129.03225806,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sanic"
+					]
+				]
+			],
+			[
+				814451.612903221,
+				[
+					[
+						"Change Character",
+						"dad",
+						"coldsteel"
+					],
+					[
+						"Change Character",
+						"gf",
+						"sanic"
 					]
 				]
 			],
@@ -352,12 +1107,932 @@
 				]
 			],
 			[
+				825290.32258064,
+				[
+					[
+						"Change Character",
+						"dad",
+						"faker-encore"
+					],
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
+				837677.419354834,
+				[
+					[
+						"Change Character",
+						"dad",
+						"hog"
+					]
+				]
+			],
+			[
+				850064.516129027,
+				[
+					[
+						"Change Character",
+						"dad",
+						"faker-encore"
+					]
+				]
+			],
+			[
+				856258.064516124,
+				[
+					[
+						"Change Character",
+						"dad",
+						"hog"
+					]
+				]
+			],
+			[
+				862451.612903221,
+				[
+					[
+						"Change Character",
+						"dad",
+						"faker-encore"
+					]
+				]
+			],
+			[
+				865548.387096769,
+				[
+					[
+						"Change Character",
+						"dad",
+						"hog"
+					]
+				]
+			],
+			[
+				867096.774193543,
+				[
+					[
+						"Change Character",
+						"gf",
+						"faker-encore"
+					]
+				]
+			],
+			[
+				877935.483870963,
+				[
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					],
+					[
+						"Change Character",
+						"dad",
+						"exe-encore"
+					]
+				]
+			],
+			[
+				890322.580645156,
+				[
+					[
+						"Change Character",
+						"dad",
+						"scorched"
+					]
+				]
+			],
+			[
+				902709.677419349,
+				[
+					[
+						"Change Character",
+						"dad",
+						"exe-encore"
+					]
+				]
+			],
+			[
+				915096.774193543,
+				[
+					[
+						"Change Character",
+						"dad",
+						"scorched"
+					]
+				]
+			],
+			[
+				939870.96774193,
+				[
+					[
+						"Change Character",
+						"dad",
+						"exe-encore"
+					]
+				]
+			],
+			[
+				952258.064516123,
+				[
+					[
+						"Change Character",
+						"dad",
+						"scorched"
+					],
+					[
+						"Change Character",
+						"gf",
+						"exe-encore"
+					]
+				]
+			],
+			[
+				964645.161290317,
+				[
+					[
+						"Change Character",
+						"dad",
+						"exe-encore"
+					],
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
+				977032.25806451,
+				[
+					[
+						"Change Character",
+						"dad",
+						"ycr-mad-cherribun"
+					]
+				]
+			],
+			[
+				982221.447253699,
+				[
+					[
+						"Change Character",
+						"dad",
+						"tailsdoll"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d"
+					]
+				]
+			],
+			[
+				987410.636442888,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d-xterion"
+					],
+					[
+						"Change Character",
+						"dad",
+						"xterion-first"
+					]
+				]
+			],
+			[
+				992599.825632078,
+				[
+					[
+						"Change Character",
+						"dad",
+						"tailsdoll"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d"
+					]
+				]
+			],
+			[
+				995194.420226672,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d-xterion"
+					],
+					[
+						"Change Character",
+						"dad",
+						"xterion-first"
+					]
+				]
+			],
+			[
+				1002978.20401046,
+				[
+					[
+						"Change Character",
+						"dad",
+						"needlemouse"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-needle-encore"
+					]
+				]
+			],
+			[
+				1013356.58238883,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					],
+					[
+						"Change Character",
+						"dad",
+						"Tails-Encore"
+					]
+				]
+			],
+			[
+				1023734.96076721,
+				[
+					[
+						"Change Character",
+						"dad",
+						"fleetway"
+					],
+					[
+						"Change Character",
+						"gf",
+						"sonic"
+					]
+				]
+			],
+			[
 				1030221.4472537,
 				[
 					[
 						"STOP CHARTING HERE",
 						"final persons turn",
 						""
+					]
+				]
+			],
+			[
+				1044491.71752397,
+				[
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					],
+					[
+						"Change Character",
+						"dad",
+						"wechBeast"
+					]
+				]
+			],
+			[
+				1054870.09590235,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Knuckles-Encore"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-flipped"
+					]
+				]
+			],
+			[
+				1065248.47428073,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Satanos"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					]
+				]
+			],
+			[
+				1070437.66346991,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Eggman-Encore"
+					]
+				]
+			],
+			[
+				1086005.23103748,
+				[
+					[
+						"Change Character",
+						"dad",
+						"BEAST-Enc"
+					],
+					[
+						"Change Character",
+						"bf",
+						"Encore-right"
+					]
+				]
+			],
+			[
+				1087302.52833478,
+				[
+					[
+						"Change Character",
+						"dad",
+						"fatal-sonic"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					]
+				]
+			],
+			[
+				1091194.42022667,
+				[
+					[
+						"Change Character",
+						"dad",
+						"majin"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-majin"
+					]
+				]
+			],
+			[
+				1092491.71752397,
+				[
+					[
+						"Change Character",
+						"dad",
+						"lordxEncore"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					]
+				]
+			],
+			[
+				1096383.60941586,
+				[
+					[
+						"Change Character",
+						"bf",
+						"Encore-right"
+					],
+					[
+						"Change Character",
+						"dad",
+						"BEAST-Enc"
+					]
+				]
+			],
+			[
+				1097680.90671316,
+				[
+					[
+						"Change Character",
+						"dad",
+						"fatal-sonic"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					]
+				]
+			],
+			[
+				1098978.20401045,
+				[
+					[
+						"Change Character",
+						"dad",
+						"lordxEncore"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					]
+				]
+			],
+			[
+				1100275.50130775,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-majin"
+					],
+					[
+						"Change Character",
+						"dad",
+						"majin"
+					]
+				]
+			],
+			[
+				1106761.98779424,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sunky"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					]
+				]
+			],
+			[
+				1109356.58238883,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sanic"
+					]
+				]
+			],
+			[
+				1117140.36617262,
+				[
+					[
+						"Change Character",
+						"dad",
+						"coldsteel"
+					]
+				]
+			],
+			[
+				1127518.74455099,
+				[
+					[
+						"Change Character",
+						"dad",
+						"exe-encore"
+					]
+				]
+			],
+			[
+				1137897.12292937,
+				[
+					[
+						"Change Character",
+						"dad",
+						"scorched"
+					]
+				]
+			],
+			[
+				1149572.79860505,
+				[
+					[
+						"Change Character",
+						"dad",
+						"BEAST-Enc"
+					],
+					[
+						"Change Character",
+						"bf",
+						"Encore-right"
+					]
+				]
+			],
+			[
+				1151518.74455099,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					],
+					[
+						"Change Character",
+						"dad",
+						"Tails-Encore"
+					]
+				]
+			],
+			[
+				1152167.39319964,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Knuckles-Encore"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-flipped"
+					]
+				]
+			],
+			[
+				1152816.04184829,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					],
+					[
+						"Change Character",
+						"dad",
+						"Eggman-Encore"
+					]
+				]
+			],
+			[
+				1153464.69049694,
+				[
+					[
+						"Change Character",
+						"dad",
+						"lordxEncore"
+					]
+				]
+			],
+			[
+				1154113.33914559,
+				[
+					[
+						"Change Character",
+						"dad",
+						"majin"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-majin"
+					]
+				]
+			],
+			[
+				1154761.98779424,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					],
+					[
+						"Change Character",
+						"dad",
+						"fleetway"
+					],
+					[
+						"Change Character",
+						"gf",
+						"sonic"
+					]
+				]
+			],
+			[
+				1155410.63644289,
+				[
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					],
+					[
+						"Change Character",
+						"dad",
+						"tailsdoll"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d"
+					]
+				]
+			],
+			[
+				1156059.28509153,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					],
+					[
+						"Change Character",
+						"dad",
+						"sunky"
+					]
+				]
+			],
+			[
+				1156707.93374018,
+				[
+					[
+						"Change Character",
+						"dad",
+						"sanic"
+					]
+				]
+			],
+			[
+				1157356.58238883,
+				[
+					[
+						"Change Character",
+						"dad",
+						"exe-encore"
+					]
+				]
+			],
+			[
+				1158653.87968613,
+				[
+					[
+						"Change Character",
+						"dad",
+						"BEAST-Enc"
+					],
+					[
+						"Change Character",
+						"gf",
+						"Tails-Encore"
+					],
+					[
+						"Change Character",
+						"bf",
+						"Encore-right"
+					]
+				]
+			],
+			[
+				1161248.47428072,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Needlemouse"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-needle-encore"
+					],
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					]
+				]
+			],
+			[
+				1162545.77157802,
+				[
+					[
+						"Change Character",
+						"dad",
+						"fatal-sonic"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					]
+				]
+			],
+			[
+				1163843.06887532,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					],
+					[
+						"Change Character",
+						"dad",
+						"wechBeast"
+					]
+				]
+			],
+			[
+				1165140.36617262,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Satanos"
+					]
+				]
+			],
+			[
+				1166437.66346991,
+				[
+					[
+						"Change Character",
+						"dad",
+						"coldsteel"
+					]
+				]
+			],
+			[
+				1167086.31211856,
+				[
+					[
+						"Change Character",
+						"dad",
+						"xterion-first"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d-xterion"
+					]
+				]
+			],
+			[
+				1167734.96076721,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					],
+					[
+						"Change Character",
+						"dad",
+						"scorched"
+					]
+				]
+			],
+			[
+				1169032.25806451,
+				[
+					[
+						"Change Character",
+						"dad",
+						"BEAST-Enc"
+					],
+					[
+						"Change Character",
+						"bf",
+						"Encore-right"
+					],
+					[
+						"Change Character",
+						"gf",
+						"Tails-Encore"
+					]
+				]
+			],
+			[
+				1169356.58238883,
+				[
+					[
+						"Change Character",
+						"dad",
+						"Needlemouse"
+					],
+					[
+						"Change Character",
+						"gf",
+						"gf"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-needle-encore"
+					]
+				]
+			],
+			[
+				1169680.90671316,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					],
+					[
+						"Change Character",
+						"dad",
+						"fatal-sonic"
+					]
+				]
+			],
+			[
+				1170329.5553618,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore"
+					],
+					[
+						"Change Character",
+						"dad",
+						"BEAST-Enc"
+					],
+					[
+						"Change Character",
+						"gf",
+						"Needlemouse"
+					]
+				]
+			],
+			[
+				1176816.04184829,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-needle-encore"
+					]
+				]
+			],
+			[
+				1182005.23103748,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-john9doe-3d"
+					]
+				]
+			],
+			[
+				1187194.42022667,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					]
+				]
+			],
+			[
+				1190924.1499564,
+				[
+					[
+						"Change Character",
+						"bf",
+						"bf-encore-pixel"
+					]
+				]
+			],
+			[
+				1195480.38360941,
+				[
+					[
+						"Change Character",
+						"dad",
+						"faker_pixel"
+					],
+					[
+						"Change Character",
+						"bf",
+						"bf-pixel-normal"
+					],
+					[
+						"Change Character",
+						"gf",
+						"gf"
 					]
 				]
 			]

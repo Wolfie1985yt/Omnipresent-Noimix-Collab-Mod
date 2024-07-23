@@ -1,78 +1,89 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
-				0,
-				0
+				1,
+				-14
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "idle",
-			"fps": 24,
-			"name": "Chaotix_IDLE",
-			"indices": []
+			"indices": [],
+			"name": "chaotix fake idle"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				103,
-				7
+				-5,
+				-13
 			],
-			"anim": "singLEFT",
+			"loop": false,
 			"fps": 24,
-			"name": "Chaotix_LEFT",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				58,
-				-134
-			],
-			"anim": "singDOWN",
-			"fps": 24,
-			"name": "Chaotix_DOWN",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				158,
-				43
-			],
-			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "Chaotix_RIGHT",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				110,
-				150
-			],
 			"anim": "singUP",
+			"indices": [],
+			"name": "chaotix fake up"
+		},
+		{
+			"offsets": [
+				1,
+				-14
+			],
+			"loop": false,
 			"fps": 24,
-			"name": "Chaotix_UP",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "chaotix fake right"
+		},
+		{
+			"offsets": [
+				1,
+				-14
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "chaotix fake left"
+		},
+		{
+			"offsets": [
+				-11,
+				-14
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "chaotix fake down"
+		},
+		{
+			"offsets": [
+				379,
+				496
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "transformation",
+			"indices": [],
+			"name": "chaotix beast transformation"
 		}
 	],
-	"no_antialiasing": false,
-	"image": "characters/ChotixXenotixAndChaotix/HD/chaotix",
+	"no_antialiasing": true,
+	"image": "characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix",
 	"position": [
-		100,
-		90
+		470,
+		570
 	],
-	"healthicon": "chaotix-beast",
+	"healthicon": "chaotix-pixel",
 	"flip_x": false,
 	"healthbar_colors": [
-		255,
-		183,
-		249
+		204,
+		51,
+		51
 	],
 	"camera_position": [
-		-200,
-		-130
+		-910,
+		-500
 	],
-	"sing_duration": 6.1,
-	"scale": 1.8
+	"sing_duration": 4,
+	"scale": 6
 }

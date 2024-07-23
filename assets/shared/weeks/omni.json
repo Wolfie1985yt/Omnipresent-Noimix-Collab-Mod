@@ -2,7 +2,7 @@
 	"songs": [
 		[
 			"omnipresent",
-			"tankman",
+			"icon-BEAST",
 			[
 				246,
 				182,
@@ -26,5 +26,6 @@
 	],
 	"hideStoryMode": true,
 	"weekBefore": "",
-	"startUnlocked": true
+	"startUnlocked": true,
+	"difficulties": "hard"
 }

@@ -1,0 +1,122 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-295,
+				-180
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "PxFb Down"
+		},
+		{
+			"offsets": [
+				-295,
+				-180
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singUP",
+			"indices": [],
+			"name": "PxFb Up"
+		},
+		{
+			"offsets": [
+				-325,
+				-180
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "PxFb Right"
+		},
+		{
+			"offsets": [
+				-275,
+				-180
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "PxFb Fail Left"
+		},
+		{
+			"offsets": [
+				-295,
+				-180
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "PxFb Fail Down"
+		},
+		{
+			"offsets": [
+				-295,
+				-180
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "PxFb Fail Up"
+		},
+		{
+			"offsets": [
+				-325,
+				-180
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "PxFb Fail Right"
+		},
+		{
+			"offsets": [
+				-295,
+				-180
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "idle",
+			"indices": [],
+			"name": "PxFb Idle"
+		},
+		{
+			"offsets": [
+				-275,
+				-180
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "PxFb Left"
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/BF/Pixel/pixel-normal",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "bfpixel",
+	"flip_x": true,
+	"healthbar_colors": [
+		20,
+		83,
+		195
+	],
+	"camera_position": [
+		-50,
+		100
+	],
+	"sing_duration": 6,
+	"scale": 0.8
+}

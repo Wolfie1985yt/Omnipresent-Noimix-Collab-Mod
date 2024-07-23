@@ -1,0 +1,100 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				624,
+				600
+			],
+			"indices": [
+				0,
+				1,
+				2,
+				3
+			],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "sanic idle"
+		},
+		{
+			"offsets": [
+				648,
+				595
+			],
+			"indices": [
+				0,
+				1
+			],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "sanic up"
+		},
+		{
+			"offsets": [
+				608,
+				595
+			],
+			"indices": [
+				0,
+				1
+			],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "sanic right"
+		},
+		{
+			"offsets": [
+				627,
+				479
+			],
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4
+			],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "sanic down"
+		},
+		{
+			"offsets": [
+				633,
+				570
+			],
+			"indices": [
+				0,
+				1
+			],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "sanic left"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/Sanic/sanic",
+	"position": [
+		-70,
+		-110
+	],
+	"healthicon": "sanic",
+	"flip_x": false,
+	"healthbar_colors": [
+		23,
+		95,
+		255
+	],
+	"camera_position": [
+		0,
+		210
+	],
+	"sing_duration": 4,
+	"scale": 0.25,
+	"_editor_isPlayer": false
+}
