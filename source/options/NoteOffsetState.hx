@@ -43,11 +43,13 @@ class NoteOffsetState extends MusicBeatState
 
 		// Cameras
 		camGame = initPsychCamera();
-
+		camGame.bgColor = FlxColor.WHITE; // Set the background color to white or any other desired color
+		camGame.bgColor.alpha = 0;
+		
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		FlxG.cameras.add(camHUD, false);
-
+		
 		camOther = new FlxCamera();
 		camOther.bgColor.alpha = 0;
 		FlxG.cameras.add(camOther, false);

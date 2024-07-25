@@ -29,6 +29,9 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
+		ClientPrefs.data.cacheOnGPU = false;
+		ClientPrefs.saveSettings();
+		
 		#if MODS_ALLOWED
 		Mods.pushGlobalMods();
 		#end

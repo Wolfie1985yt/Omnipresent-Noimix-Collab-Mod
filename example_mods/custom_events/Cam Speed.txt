@@ -1,0 +1,2 @@
+changes camera speed when switching focus
+(1 is default)

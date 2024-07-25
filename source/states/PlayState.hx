@@ -31,6 +31,7 @@ import states.editors.CharacterEditorState;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
+import substates.OmniGameOverSubstate;
 
 #if !flash
 import flixel.addons.display.FlxRuntimeShader;
@@ -1930,7 +1931,7 @@ class PlayState extends MusicBeatState
 				modchartTweens.clear();
 				#end
 
-				openSubState(new GameOverSubstate());
+				openSubState(new OmniGameOverSubstate());
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 

@@ -250,7 +250,10 @@ class Paths
 			}
 			else if (OpenFlAssets.exists(file, IMAGE)) {
 				bitmap = OpenFlAssets.getBitmapData(file);
-				trace('Sprite Loaded Successfully: $file');
+				if (!ClientPrefs.data.cacheOnGPU)
+				{
+					trace('Sprite Loaded in RAM: $file');
+				}
 			}
 		}
 
@@ -290,6 +293,7 @@ class Paths
 			bitmap.dispose();
 			bitmap.disposeImage();
 			bitmap = BitmapData.fromTexture(texture);
+			trace('Sprite Loaded in GPU: $file');
 		}
 		var newGraphic:FlxGraphic = FlxGraphic.fromBitmapData(bitmap, false, file);
 		newGraphic.persist = true;

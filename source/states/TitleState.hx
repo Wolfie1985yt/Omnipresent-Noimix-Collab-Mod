@@ -70,6 +70,9 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
+		ClientPrefs.data.cacheOnGPU = false;
+		ClientPrefs.saveSettings();
+		
 		Paths.clearStoredMemory();
 
 		#if LUA_ALLOWED

@@ -16,6 +16,13 @@ function onCreate()
 	precacheSong('omnipresent/Voices-Opponent');
 	precacheSong('omnipresent/Voices-Player');
 
+	makeLuaSprite('faker_pixel', 'bgs/faker-encore/fakerpixel', 0, 0);
+	scaleObject('faker_pixel', 1, 1);
+	setScrollFactor('faker_pixel', 1, 1);
+	setProperty('faker_pixel.antialiasing', false);
+	setProperty('faker_pixel.visible', false);
+	addLuaSprite('faker_pixel', false);
+
 	makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/egg_bg', -1000, -1000);
 	scaleObject('eggman_bg', 1.5, 1.5);
 	setScrollFactor('eggman_bg', 1, 1);
@@ -200,7 +207,7 @@ function onStepHit()
 		xx2 = 750;
 		yy2 = 630;
 		setProperty('boyfriendGroup.x',70);
-		setProperty('boyfriendGroup.y',113);
+		setProperty('boyfriendGroup.y',144);
 		setProperty('dadGroup.x',90);
 		setProperty('dadGroup.y',170);
 		setProperty('gfGroup.x',2460);
@@ -387,9 +394,9 @@ function onStepHit()
 		setProperty('gfGroup.x',790);
 		setProperty('gfGroup.y',0);
 		setProperty('defaultCamZoom',0.77);
-		setObjectOrder('gfGroup', 100)
-		setObjectOrder('dadGroup', 101)
-		setObjectOrder('boyfriendGroup', 102)
+		setObjectOrder('gfGroup', 104)
+		setObjectOrder('dadGroup', 105)
+		setObjectOrder('boyfriendGroup', 106)
 	end
 	if curStep == 7232 or curStep == 7332 or curStep == 8336 or curStep == 8392 or curStep == 11728 then --sanic
 		runTimer('ringStart',0.1);
@@ -444,7 +451,7 @@ function onStepHit()
 		xx2 = 895;
 		yy2 = 475;
 		setProperty('boyfriendGroup.x',900);
-		setProperty('boyfriendGroup.y',75);
+		setProperty('boyfriendGroup.y',25);
 		setProperty('dadGroup.x',200);
 		setProperty('dadGroup.y',75);
 		setProperty('gfGroup.x',-220);
@@ -479,10 +486,15 @@ function onStepHit()
 		setProperty('boyfriendGroup.x',900);
 		setProperty('boyfriendGroup.y',75);
 		setProperty('dadGroup.x',200);
-		setProperty('dadGroup.y',75);
+		setProperty('dadGroup.y',25);
 		setProperty('gfGroup.x',-800);
 		setProperty('gfGroup.y',75);
 		setProperty('defaultCamZoom',0.7);
+		setObjectOrder('eggman_bg',104);
+		setObjectOrder('eggman_eys',105);
+		setObjectOrder('gfGroup', 109)
+		setObjectOrder('dadGroup', 110)
+		setObjectOrder('boyfriendGroup', 111)
 	end
 	if curStep == 12784 then --faker ending
 		runTimer('ringStart',0.1);
@@ -498,6 +510,10 @@ function onStepHit()
 		setProperty('gfGroup.x',800);
 		setProperty('gfGroup.y',75);
 		setProperty('defaultCamZoom',1.7);
+		setProperty('faker_pixel.visible', true);
+		setObjectOrder('gfGroup',1000);
+		setObjectOrder('dadGroup',1001);
+		setObjectOrder('boyfriendGroup',1002);
 	end
 	if curStep == 5584 then --remove eggman
 		cancelTimer('eyes up');

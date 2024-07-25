@@ -6,6 +6,13 @@ import backend.ClientPrefs;
 import openfl.Assets;
 import sys.io.Process;
 
+#if (VIDEOS_ALLOWED && !mobile)
+import vlc.MP4Handler as VideoHandler;
+#end
+#if mobile
+import vlc.MP4Handler;
+#end
+
 class Omni extends BaseStage
 {
 	// If you're moving your stage from PlayState to a stage file,
@@ -159,8 +166,6 @@ class Omni extends BaseStage
 	var scorchedTrees:BGSprite;
 	var scorchedRocks:BGSprite;
 
-	var faker_pixel:FlxSprite;
-
 	var monitorCounter:Int = 0;
 	var monitorAnims:Array<String> = ["fatal", "nmi", "needle", "starved", "idle"];
 
@@ -170,14 +175,32 @@ class Omni extends BaseStage
 		add(newthing);
         remove(newthing);
     }
+	
+	public function preloadVideo(graphic:String) {
+        #if desktop
+		var videoPreloader:VideoHandler = new VideoHandler();
+		videoPreloader.play(Paths.video(graphic));
+        videoPreloader.dispose();
+		videoPreloader.stop();
+		videoPreloader.volume = 0;
+		trace('Video Successfully Preloaded: assets/videos/' + graphic + '.mp4');		
+		#else
+		var videoPreloader:MP4Sprite = new MP4Sprite(0,0);
+		videoPreloader.destroy();
+		videoPreloader.alpha = 0;
+		#end
+    }
 
 	override function create()
 	{
 		Assets.cache.clear();
-		if (ClientPrefs.data.cacheOnGPU) {
+		if (ClientPrefs.data.smartCache) {
 			gpuCache = true;
 		}
 		if (gpuCache) {
+			ClientPrefs.data.cacheOnGPU = true;
+			backend.ClientPrefs.saveSettings();
+			
 			preload('bgs/digitalized/ring');
 			preload('bgs/LordXStage/floor');
 			preload('bgs/LordXStage/hills1');
@@ -220,12 +243,15 @@ class Omni extends BaseStage
 			preload('bgs/triple-trouble-encore/tails/ts_sky');
 			preload('bgs/triple-trouble-encore/tails/ts_trees1');
 			preload('bgs/triple-trouble-encore/tails/ts_trees2');
-			
+			preload('characters/Wechidna/wechBeast');
+		}
+		
+		//Characters
+		if (gpuCache) {
 			ClientPrefs.data.cacheOnGPU = false;
 			backend.ClientPrefs.saveSettings();
 		}
 		
-		//Characters
 		preload('characters/Wechidna/wechBeast');
 		preload('characters/XTerion/3D/xterion-first');
 		preload('characters/LordX/lordxEncore');
@@ -1019,14 +1045,6 @@ class Omni extends BaseStage
 		scorchedFloor.visible = false;
 		add(scorchedFloor);
 		
-		faker_pixel = new FlxSprite(0, 0);
-		faker_pixel.loadGraphic(Paths.image('bgs/faker-encore/fakerpixel'));
-		faker_pixel.scrollFactor.set(1, 1);
-		faker_pixel.scale.set(1, 1);
-		faker_pixel.visible = false;
-		faker_pixel.antialiasing = false;
-		add(faker_pixel);
-		
 		//Icons
 		preload('icons/icon-xterion-first');
 		preload('icons/icon-needlemouse');
@@ -1078,10 +1096,45 @@ class Omni extends BaseStage
 		preload('num8');
 		preload('num9');
 		preload('combo');
+		
+		//Videos
+		preloadVideo('bfhair');
+		preloadVideo('bitchless');
+		preloadVideo('EGGMAN NO');
+		preloadVideo('Fatal Error Singing');
+		preloadVideo('fleetgeta');
+		preloadVideo('forkliftcertified');
+		preloadVideo('gettrolled');
+		preloadVideo('Googoogaagaa');
+		preloadVideo('he has a point');
+		preloadVideo('HogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHog');
+		preloadVideo('hogToaster');
+		preloadVideo('howitfeelstochew5gum');
+		preloadVideo("HUEHUEHUE'D");
+		preloadVideo('i am wechidn-asdfl;');
+		preloadVideo('imbouttocuuuuuuuuuuuuuuuuuuu');
+		preloadVideo('its his mic fr');
+		preloadVideo('Mother I have shidded the bed.');
+		preloadVideo('MWAHAHAHA');
+		preloadVideo('myfinger');
+		preloadVideo('no_ice_cream');
+		preloadVideo('omg sonic');
+		preloadVideo('tune this out bitch');
+		preloadVideo('Scorched Yes');
+		preloadVideo('sonic_jacking_off');
+		preloadVideo('Sunky Chad');
+		preloadVideo('test1');
+		preloadVideo('what');
+		preloadVideo('YEAAAAAAAAAAAAAAAAAAAAAAAAA');
 	}
 	
 	override function createPost()
 	{
+		if (gpuCache) {
+			ClientPrefs.data.cacheOnGPU = false;
+			backend.ClientPrefs.saveSettings();
+		}
+		
 		needleFg = new FlxSprite(-690, -80).loadGraphic(Paths.image('bgs/needlemouse/fg'));
 		needleFg.setGraphicSize(Std.int(needleFg.width * 1.1));
 		needleFg.scrollFactor.set(1, 0.9);
@@ -1185,11 +1238,6 @@ class Omni extends BaseStage
 		ring.cameras = [camHUD];
 		ring.antialiasing = ClientPrefs.data.antialiasing;
 		add(ring);
-		
-		if (gpuCache) {
-			ClientPrefs.data.cacheOnGPU = true;
-			backend.ClientPrefs.saveSettings();
-		}
 	}
 
 	override function update(elapsed:Float)
@@ -1315,6 +1363,9 @@ class Omni extends BaseStage
 				wechidna_treesFG.visible = false;
 				wechidna_thingFG.visible = false;
 				wechidna_grassFG.visible = false;
+				dadGroup.scrollFactor.set(1, 1);
+				boyfriendGroup.scrollFactor.set(1, 1);
+				gfGroup.scrollFactor.set(1, 1);
 				
 			case 3408, 3648, 3712: //chaotix
 				redRingTransition();
@@ -1355,6 +1406,9 @@ class Omni extends BaseStage
 				fucklesEspioBg.visible = false;
 				fucklesKnuxBg.visible = false;
 				fucklesVectorBg.visible = false;
+				dadGroup.scrollFactor.set(1, 1);
+				boyfriendGroup.scrollFactor.set(1, 1);
+				gfGroup.scrollFactor.set(1, 1);
 				
 			case 4256, 4768, 5056, 5184, 5424, 11184: //satanos
 				redRingTransition();
@@ -1820,9 +1874,6 @@ class Omni extends BaseStage
 				scorchedHills.destroy();
 				scorchedTrees.destroy();
 				scorchedRocks.destroy();
-				
-			case 12784: //Finale
-				faker_pixel.visible = true;
 			}
 	}
 	

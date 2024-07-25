@@ -1,0 +1,4 @@
+a proper zoom
+
+v1: zoom (1 is default)
+v2: speed, ease

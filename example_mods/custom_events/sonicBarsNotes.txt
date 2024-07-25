@@ -1,0 +1,4 @@
+Lowers the arrows while the bars are activated
+
+Value 1: Top bar color
+Value 2: Bottom bar color

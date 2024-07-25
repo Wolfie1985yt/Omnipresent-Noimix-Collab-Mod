@@ -41,7 +41,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Smart Caching', //Name
 			"If checked, images that tend to cause lag will be loaded in the GPU, dont turn on if you have less than 4gb of VRAM.", //Description
-			'cacheOnGPU',
+			'smartCache',
 			'bool');
 		addOption(option);
 

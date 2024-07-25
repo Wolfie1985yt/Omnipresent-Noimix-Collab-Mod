@@ -1,0 +1,104 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				50,
+				90
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				85,
+				89
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				44,
+				125
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				54,
+				70
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				50,
+				101
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				50,
+				90
+			],
+			"anim": "ending",
+			"fps": 24,
+			"name": "end",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				50,
+				90
+			],
+			"anim": "idle-alt",
+			"fps": 24,
+			"name": "end",
+			"indices": [
+				30
+			]
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": true,
+	"image": "characters/XTerion/3D/xterion-first",
+	"position": [
+		120,
+		450
+	],
+	"healthicon": "xterion-first",
+	"flip_x": false,
+	"healthbar_colors": [
+		11,
+		11,
+		143
+	],
+	"camera_position": [
+		100,
+		-250
+	],
+	"sing_duration": 4,
+	"scale": 2.6,
+	"_editor_isPlayer": false
+}
