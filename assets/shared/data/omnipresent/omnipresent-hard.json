@@ -26890,7 +26890,7 @@
 				"altAnim": false,
 				"bpm": 155,
 				"changeBPM": false,
-				"mustHitSection": true
+				"mustHitSection": false
 			},
 			{
 				"sectionNotes": [
