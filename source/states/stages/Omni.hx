@@ -252,6 +252,10 @@ class Omni extends BaseStage
 			backend.ClientPrefs.saveSettings();
 		}
 		
+		preload('characters/BF/3D/bf-3d');
+		preload('characters/TailsDoll/3D/Tails_Doll');
+		preload('healthBar');
+		preload('timeBar');
 		preload('characters/Wechidna/wechBeast');
 		preload('characters/XTerion/3D/xterion-first');
 		preload('characters/LordX/lordxEncore');
@@ -1075,6 +1079,8 @@ class Omni extends BaseStage
 		preload('icons/icon-scorched');
 		preload('icons/icon-bfpixel');
 		preload('icons/icon-fakerpixel');
+		preload('icons/icon-taildoll');
+		preload('icons/icon-bf-3d');
 		
 		//Other
 		preload('noteSplashes/noteSplashes');
