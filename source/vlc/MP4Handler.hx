@@ -1,89 +1,4 @@
 package vlc;
-#if desktop
-
-import flixel.FlxG;
-import hxcodec.openfl.Video;
-import openfl.events.Event;
-import sys.FileSystem;
-
-class MP4Handler extends Video
-{
-	// Variables
-	public var autoResize:Bool = true;
-
-	public function new():Void
-	{
-		super();
-
-		onOpening.add(function()
-		{
-			volume = Std.int((FlxG.sound.muted ? 0 : 1) * (FlxG.sound.volume * 170));
-		});
-
-		FlxG.addChildBelowMouse(this);
-	}
-
-	override public function play(location:String, shouldLoop:Bool = false):Int
-	{
-		if (FlxG.autoPause)
-		{
-			if (!FlxG.signals.focusGained.has(resume))
-				FlxG.signals.focusGained.add(resume);
-
-			if (!FlxG.signals.focusLost.has(pause))
-				FlxG.signals.focusLost.add(pause);
-		}
-
-		FlxG.stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
-
-		if (FileSystem.exists(Sys.getCwd() + location))
-			return super.play(Sys.getCwd() + location, shouldLoop);
-		else
-			return super.play(location, shouldLoop);
-	}
-
-	override public function dispose():Void
-	{
-		if (FlxG.autoPause)
-		{
-			if (FlxG.signals.focusGained.has(resume))
-				FlxG.signals.focusGained.remove(resume);
-
-			if (FlxG.signals.focusLost.has(pause))
-				FlxG.signals.focusLost.remove(pause);
-		}
-
-		if (FlxG.stage.hasEventListener(Event.ENTER_FRAME))
-			FlxG.stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
-
-		super.dispose();
-
-		FlxG.removeChild(this);
-	}
-
-	@:noCompletion private function onEnterFrame(e:Event):Void
-	{
-		if (autoResize)
-		{
-			var aspectRatio:Float = FlxG.width / FlxG.height;
-
-			if (FlxG.stage.stageWidth / FlxG.stage.stageHeight > aspectRatio)
-			{
-				// stage is wider than video
-				width = FlxG.stage.stageHeight * aspectRatio;
-				height = FlxG.stage.stageHeight;
-			}
-			else
-			{
-				// stage is taller than video
-				width = FlxG.stage.stageWidth;
-				height = FlxG.stage.stageWidth * (1 / aspectRatio);
-			}
-		}
-		volume = Std.int((FlxG.sound.muted ? 0 : 1) * (FlxG.sound.volume * 170));
-	}
-}
-#else //hxCodec 2.5.1
 
 import openfl.events.Event;
 import flixel.FlxG;
@@ -111,8 +26,6 @@ class MP4Handler extends VlcBitmap
 
 		FlxG.addChildBelowMouse(this);
 
-		FlxG.stage.addEventListener(Event.ENTER_FRAME, update);
-
 		FlxG.signals.focusGained.add(function()
 		{
 			resume();
@@ -121,27 +34,6 @@ class MP4Handler extends VlcBitmap
 		{
 			pause();
 		});
-	}
-
-	function update(e:Event)
-	{
-		if (ClientPrefs.showCutscene.contains(SongName) && ClientPrefs.cutsceneYouSaw.contains(SongName) && SongName != 'fatality-encore') {
-			if ((FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE || FlxG.mouse.justPressedMiddle || FlxG.mouse.justPressed) && isPlaying) finishVideo();
-		} else {
-			if ((ClientPrefs.StartVideo && ClientPrefs.StartVideoSaw && ClientPrefs.storyProgressExe != 3) || ClientPrefs.GalleryCanSkip) {
-				if ((FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.SPACE || FlxG.mouse.justPressedMiddle || FlxG.mouse.justPressed) && isPlaying) finishVideo();
-			}
-		}
-		
-		
-		if (!ClientPrefs.GalleryCanSkip) {
-			if (FlxG.sound.muted || FlxG.sound.volume <= 0)
-				volume = 0;
-			else
-				volume = FlxG.sound.volume + 0.4;
-		} else {
-			FlxG.sound.music.volume = 0.00045;
-		}
 	}
 
 	#if sys
@@ -183,8 +75,6 @@ class MP4Handler extends VlcBitmap
 		if (FlxG.sound.music != null && pauseMusic)
 			FlxG.sound.music.resume();
 
-		FlxG.stage.removeEventListener(Event.ENTER_FRAME, update);
-
 		dispose();
 
 		if (FlxG.game.contains(this))
@@ -222,4 +112,3 @@ class MP4Handler extends VlcBitmap
 		#end
 	}
 }
-#end
