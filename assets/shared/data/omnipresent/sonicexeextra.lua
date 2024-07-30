@@ -2,7 +2,7 @@
 local json
 
 --Name of the char json
-local char2parse = 'sunky'
+local char2parse = 'sonicexe'
 
 --Sing Anims
 local anims = {
@@ -87,15 +87,16 @@ function singStuff(membersIndex, noteData, noteType, isSustainNote)
 end
 
 function onCreatePost()
-	setProperty('sunky.visible',false);
+	setProperty('sonicexe.visible',false);
+	setProperty('sonicexe.antialiasing',false);
 end
 
 function onStepHit()
-	if curStep == 8430 then
-		setProperty('sunky.visible',true);
+	if curStep == 6464 then
+		setProperty('sonicexe.visible',true);
 	end
-	if curStep == 8528 then
-		setProperty('sunky.visible',false);
+	if curStep == 6608 then
+		setProperty('sonicexe.visible',false);
 	end
 end
 

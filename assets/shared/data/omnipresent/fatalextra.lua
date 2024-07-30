@@ -2,7 +2,7 @@
 local json
 
 --Name of the char json
-local char2parse = 'fatal-sonic'
+local char2parse = 'true-fatal'
 
 --Sing Anims
 local anims = {
@@ -13,7 +13,7 @@ local anims = {
 }
 
 --Name of the Notetype that the character sings with
-local noteTypeName = 'all'
+local noteTypeName = 'ALL'
 --Name of the alt anim suffix, will be used for the noteType name too so e.g: 'rizz-alt'
 local altAnimSuffix = '-alt'
 
@@ -22,7 +22,7 @@ local isPlayer = false
 
 --Character stage offset
 local stageOffsets = {
-    0, --x
+    730, --x
     0 --y
 }
 
@@ -87,16 +87,16 @@ function singStuff(membersIndex, noteData, noteType, isSustainNote)
 end
 
 function onCreatePost()
-	setProperty('fatal-sonic.visible',false);
-	setProperty('fatal-sonic.antialiasing',false);
+	setProperty('true-fatal.visible',false);
+	setProperty('true-fatal.antialiasing',false);
 end
 
 function onStepHit()
 	if curStep == 12480 then
-		setProperty('fatal-sonic.visible',true);
+		setProperty('true-fatal.visible',true);
 	end
 	if curStep == 12528 then
-		setProperty('fatal-sonic.visible',false);
+		setProperty('true-fatal.visible',false);
 	end
 end
 

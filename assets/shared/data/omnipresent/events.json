@@ -1626,24 +1626,49 @@
 				[
 					[
 						"Change Character",
+						"bf",
+						"Encore-right"
+					],
+					[
+						"Change Character",
 						"dad",
 						"BEAST-Enc"
+					]
+				]
+			],
+			[
+				1149897.12292937,
+				[
+					[
+						"badapplelol",
+						"a",
+						"0.87"
+					],
+					[
+						"Cam Zoom",
+						"1",
+						"1, linear"
+					]
+				]
+			],
+			[
+				1150870.09590235,
+				[
+					[
+						"Flash Camera",
+						"0.6",
+						""
 					],
 					[
 						"Change Character",
 						"bf",
-						"Encore-right"
+						"bf-encore-small"
 					]
 				]
 			],
 			[
 				1151518.74455099,
 				[
-					[
-						"Change Character",
-						"bf",
-						"bf-encore"
-					],
 					[
 						"Change Character",
 						"dad",
@@ -1658,22 +1683,12 @@
 						"Change Character",
 						"dad",
 						"Knuckles-Encore"
-					],
-					[
-						"Change Character",
-						"bf",
-						"bf-encore-flipped"
 					]
 				]
 			],
 			[
 				1152816.04184829,
 				[
-					[
-						"Change Character",
-						"bf",
-						"bf-encore"
-					],
 					[
 						"Change Character",
 						"dad",
@@ -1697,12 +1712,7 @@
 					[
 						"Change Character",
 						"dad",
-						"majin"
-					],
-					[
-						"Change Character",
-						"bf",
-						"bf-encore-majin"
+						"majin-flipped"
 					]
 				]
 			],
@@ -1711,18 +1721,8 @@
 				[
 					[
 						"Change Character",
-						"bf",
-						"bf-encore"
-					],
-					[
-						"Change Character",
 						"dad",
 						"fleetway"
-					],
-					[
-						"Change Character",
-						"gf",
-						"sonic"
 					]
 				]
 			],
@@ -1731,29 +1731,14 @@
 				[
 					[
 						"Change Character",
-						"gf",
-						"gf"
-					],
-					[
-						"Change Character",
 						"dad",
-						"tailsdoll"
-					],
-					[
-						"Change Character",
-						"bf",
-						"bf-john9doe-3d"
+						"tailsdoll-flipped"
 					]
 				]
 			],
 			[
 				1156059.28509153,
 				[
-					[
-						"Change Character",
-						"bf",
-						"bf-encore"
-					],
 					[
 						"Change Character",
 						"dad",
@@ -1767,7 +1752,7 @@
 					[
 						"Change Character",
 						"dad",
-						"sanic"
+						"sanic-flipped"
 					]
 				]
 			],
@@ -1792,12 +1777,7 @@
 					[
 						"Change Character",
 						"gf",
-						"Tails-Encore"
-					],
-					[
-						"Change Character",
-						"bf",
-						"Encore-right"
+						"Tails-Encore-flipped"
 					]
 				]
 			],
@@ -1808,11 +1788,6 @@
 						"Change Character",
 						"dad",
 						"Needlemouse"
-					],
-					[
-						"Change Character",
-						"bf",
-						"bf-needle-encore"
 					],
 					[
 						"Change Character",
@@ -1827,12 +1802,7 @@
 					[
 						"Change Character",
 						"dad",
-						"fatal-sonic"
-					],
-					[
-						"Change Character",
-						"bf",
-						"bf-encore-pixel"
+						"true-fatal"
 					]
 				]
 			],
@@ -1841,13 +1811,8 @@
 				[
 					[
 						"Change Character",
-						"bf",
-						"bf-encore"
-					],
-					[
-						"Change Character",
 						"dad",
-						"wechBeast"
+						"wechBeast-flipped"
 					]
 				]
 			],
@@ -1867,7 +1832,7 @@
 					[
 						"Change Character",
 						"dad",
-						"coldsteel"
+						"coldsteel-flipped"
 					]
 				]
 			],
@@ -1877,12 +1842,7 @@
 					[
 						"Change Character",
 						"dad",
-						"xterion-first"
-					],
-					[
-						"Change Character",
-						"bf",
-						"bf-john9doe-3d-xterion"
+						"xterion-second"
 					]
 				]
 			],
@@ -1891,13 +1851,8 @@
 				[
 					[
 						"Change Character",
-						"bf",
-						"bf-encore"
-					],
-					[
-						"Change Character",
 						"dad",
-						"scorched"
+						"scorched-flipped"
 					]
 				]
 			],
@@ -1908,16 +1863,6 @@
 						"Change Character",
 						"dad",
 						"BEAST-Enc"
-					],
-					[
-						"Change Character",
-						"bf",
-						"Encore-right"
-					],
-					[
-						"Change Character",
-						"gf",
-						"Tails-Encore"
 					]
 				]
 			],
@@ -1927,17 +1872,12 @@
 					[
 						"Change Character",
 						"dad",
-						"Needlemouse"
+						"Needlemouse-flipped"
 					],
 					[
 						"Change Character",
 						"gf",
 						"gf"
-					],
-					[
-						"Change Character",
-						"bf",
-						"bf-needle-encore"
 					]
 				]
 			],
@@ -1946,24 +1886,14 @@
 				[
 					[
 						"Change Character",
-						"bf",
-						"bf-encore-pixel"
-					],
-					[
-						"Change Character",
 						"dad",
-						"fatal-sonic"
+						"true-fatal"
 					]
 				]
 			],
 			[
 				1170329.5553618,
 				[
-					[
-						"Change Character",
-						"bf",
-						"bf-encore"
-					],
 					[
 						"Change Character",
 						"dad",
@@ -1982,7 +1912,7 @@
 					[
 						"Change Character",
 						"bf",
-						"bf-needle-encore"
+						"bf-needle-encore-small"
 					]
 				]
 			],
@@ -1992,17 +1922,17 @@
 					[
 						"Change Character",
 						"bf",
-						"bf-john9doe-3d"
+						"bf-john9doe-3d-small"
 					]
 				]
 			],
 			[
-				1187194.42022667,
+				1187032.25806451,
 				[
 					[
 						"Change Character",
 						"bf",
-						"bf-encore-pixel"
+						"bf-encore-pixel-smaller"
 					]
 				]
 			],
@@ -2011,8 +1941,18 @@
 				[
 					[
 						"Change Character",
-						"bf",
-						"bf-encore-pixel"
+						"gf",
+						"bf-pixel-normal"
+					]
+				]
+			],
+			[
+				1194706.19006102,
+				[
+					[
+						"badapplelol",
+						"b",
+						"0.1"
 					]
 				]
 			],
@@ -2033,6 +1973,16 @@
 						"Change Character",
 						"gf",
 						"gf"
+					]
+				]
+			],
+			[
+				1195867.4803836,
+				[
+					[
+						"badapplelol",
+						"b",
+						"0.5"
 					]
 				]
 			]

@@ -10,6 +10,7 @@ local satanosMoment = false;
 local fatalMoment = false;
 local exeMoment = false;
 local scorchedMoment = false;
+local finalMoment = false;
 
 function onCreate()
 	precacheSong('omnipresent/Inst');
@@ -38,6 +39,13 @@ function onCreate()
 	addLuaSprite('eggman_eys', false);
 end
 function onUpdate(elapsed)
+	if finalMoment == true then
+		setProperty('defaultCamZoom',1);
+		setProperty('cameraSpeed',200);
+		setProperty('dadGroup.alpha',0.5);
+		setProperty('gfGroup.alpha',0.5);
+		setProperty('true-fatal.alpha',0.5);
+	end
 	if wechBeastMoment == true then
 		if mustHitSection == false then
 			setProperty('defaultCamZoom',0.5)
@@ -277,8 +285,10 @@ function onStepHit()
 		setProperty('dadGroup.y',0);
 		setProperty('gfGroup.x',800);
 		setProperty('gfGroup.y',-60);
-		setProperty('eggman_bg.visible', true);
-		setProperty('eggman_eys.visible', true);
+		if curStep <= 12263 then
+			setProperty('eggman_bg.visible', true);
+			setProperty('eggman_eys.visible', true);
+		end
 		satanosMoment = false;
 		setProperty('defaultCamZoom', 0.5);
 		runTimer('eyes up', 0.01);
@@ -496,7 +506,26 @@ function onStepHit()
 		setObjectOrder('dadGroup', 110)
 		setObjectOrder('boyfriendGroup', 111)
 	end
+	if curStep == 12240 then --badappleshit
+		xx = 1035;
+		yy = 440;
+		xx2 = 1035;
+		yy2 = 440;
+		ofs = 0;
+		ofs2 = 15;
+		setProperty('boyfriendGroup.x',750);
+		setProperty('boyfriendGroup.y',-95);
+		setProperty('dadGroup.x',-200);
+		setProperty('dadGroup.y',0);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+		setProperty('defaultCamZoom',0.6);
+		setObjectOrder('dadGroup', 100)
+		setObjectOrder('gfGroup', 101)
+		setObjectOrder('boyfriendGroup', 102)
+	end
 	if curStep == 12784 then --faker ending
+		finalMoment = false;
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
 		xx = 630;
@@ -528,20 +557,172 @@ function onStepHit()
 		removeLuaSprite('eggman_bg');
 		removeLuaSprite('eggman_eys');
 	end
+	if curStep == 12240 then --xeno final moment
+		finalMoment = true;
+		setProperty('boyfriendGroup.x',750);
+		setProperty('boyfriendGroup.y',-95);
+		setProperty('dadGroup.x',700);
+		setProperty('dadGroup.y',450);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+	end
+	if curStep == 12248 then --tails soul final moment
+		setProperty('dadGroup.x',600);
+		setProperty('dadGroup.y',150);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+	end
+	if curStep == 12256 then --knuckles soul final moment
+		setProperty('dadGroup.x',300);
+		setProperty('dadGroup.y',150);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+	end
+	if curStep == 12264 then --eggman soul final moment
+		setProperty('dadGroup.x',300);
+		setProperty('dadGroup.y',350);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+	end
+	if curStep == 12272 then --lordx final moment
+		setProperty('dadGroup.x',750);
+		setProperty('dadGroup.y',-100);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+	end
+	if curStep == 12280 then --majin final moment
+		setProperty('dadGroup.x',1120);
+		setProperty('dadGroup.y',0);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+	end
+	if curStep == 12288 then --fleetway final moment
+		setProperty('dadGroup.x',380);
+		setProperty('dadGroup.y',50);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+	end
+	if curStep == 12296 then --tailsdoll final moment
+		setProperty('dadGroup.x',1120);
+		setProperty('dadGroup.y',150);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+	end
+	if curStep == 12304 then --sunky final moment
+		setProperty('dadGroup.x',380);
+		setProperty('dadGroup.y',-50);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+	end
+	if curStep == 12312 then --sanic final moment
+		setProperty('dadGroup.x',1080);
+		setProperty('dadGroup.y',150);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+	end
+	if curStep == 12320 then --exe final moment
+		setProperty('dadGroup.x',380);
+		setProperty('dadGroup.y',350);
+		setProperty('gfGroup.x',75);
+		setProperty('gfGroup.y',-100);
+	end
+	if curStep == 12336 then --xeno and tails soul final moment
+		setProperty('dadGroup.x',380);
+		setProperty('dadGroup.y',550);
+		setProperty('gfGroup.x',1285);
+		setProperty('gfGroup.y',150);
+	end
+	if curStep == 12368 then --needlemouse final moment
+		setProperty('dadGroup.x',480);
+		setProperty('dadGroup.y',80);
+		setProperty('gfGroup.x',1225);
+		setProperty('gfGroup.y',150);
+	end
+	if curStep == 12384 or curStep == 12472 then --fatal final moment
+		setProperty('dadGroup.x',710);
+		setProperty('dadGroup.y',20);
+		setProperty('gfGroup.x',1225);
+		setProperty('gfGroup.y',150);
+	end
+	if curStep == 12400 then --wechidna final moment
+		setProperty('dadGroup.x',0);
+		setProperty('dadGroup.y',880);
+		setProperty('gfGroup.x',1225);
+		setProperty('gfGroup.y',150);
+	end
+	if curStep == 12416 then --satanos final moment
+		setProperty('dadGroup.x',480);
+		setProperty('dadGroup.y',80);
+		setProperty('gfGroup.x',1225);
+		setProperty('gfGroup.y',150);
+	end
+	if curStep == 12432 then --coldsteel final moment
+		setProperty('dadGroup.x',1080);
+		setProperty('dadGroup.y',240);
+		setProperty('gfGroup.x',1225);
+		setProperty('gfGroup.y',150);
+	end
+	if curStep == 12440 then --xterion final moment
+		setProperty('dadGroup.x',440);
+		setProperty('dadGroup.y',-40);
+		setProperty('gfGroup.x',1225);
+		setProperty('gfGroup.y',150);
+	end
+	if curStep == 12448 then --scorched final moment
+		setProperty('dadGroup.x',1440);
+		setProperty('dadGroup.y',540);
+		setProperty('gfGroup.x',1225);
+		setProperty('gfGroup.y',150);
+	end
+	if curStep == 12464 then --xeno final moment
+		setProperty('dadGroup.x',380);
+		setProperty('dadGroup.y',480);
+		setProperty('gfGroup.x',1225);
+		setProperty('gfGroup.y',150);
+	end
+	if curStep == 12468 then --needlemouse final moment again
+		setProperty('dadGroup.x',1200);
+		setProperty('dadGroup.y',80);
+		setProperty('gfGroup.x',1225);
+		setProperty('gfGroup.y',150);
+	end
+	if curStep == 12480 then --finale moment
+		setProperty('dadGroup.x',380);
+		setProperty('dadGroup.y',480);
+		setProperty('gfGroup.x',1200);
+		setProperty('gfGroup.y',80);
+	end
 end
 function onTimerCompleted(tag)
-	if tag == 'eyes up' then
+	if tag == 'eyes up' and curStep <= 12243 then
 		doTweenY('egg_eys-TweenUp', 'eggman_eys', -1000, 2.5, 'sineInOut')
 		runTimer('eyes down', 2.5, 1)
 	end
-	if tag == 'eyes down' then
+	if tag == 'eyes down' and curStep <= 12243 then
 		doTweenY('egg_eys-TweenDown', 'eggman_eys', -1100, 2.5, 'sineInOut')
 		runTimer('eyes up', 2.5, 1)
 	end
-	if tag == 'ringStart' then
+	if tag == 'ringStart' and curStep <= 12243 then
 		setProperty('cameraSpeed',2);
 	end
 	if tag == 'ringFinish' then
 		setProperty('cameraSpeed',1);
+	end
+	if tag == 'ringStart' and finalMoment == true then
+		setProperty('cameraSpeed',20);
+	end
+end
+function onEvent(n, v1, v2)
+	if n == 'Change Character' and curStep >= 12239 and curStep <= 12780 then
+		triggerEvent('Flash Camera', 0.6, '');
+		setProperty('boyfriendGroup.color', 000000);
+		setProperty('dadGroup.color', 000000);
+		setProperty('gfGroup.color', 000000);
+		setProperty('iconP1.color', 000000);
+		setProperty('iconP2.color', 000000);
+		setProperty('healthBar.color', 000000);
+		setProperty('healthBarP1.color', 000000);
+		setProperty('healthBarP2.color', 000000);
+		setProperty('true-fatal.color', 000000);
 	end
 end

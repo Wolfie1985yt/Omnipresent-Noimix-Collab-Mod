@@ -1,0 +1,80 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-203,
+				-294
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Needlemouse_IDLE",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-36,
+				-71
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Needlemouse_UP",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-196,
+				-253
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Needlemouse_DOWN",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-212,
+				-267
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "Needlemouse_LEFT"
+		},
+		{
+			"offsets": [
+				72,
+				-258
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "Needlemouse_RIGHT"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/NeedlemouseSarahShadowmouseLutherSunter/Needlemouse",
+	"position": [
+		-150,
+		-60
+	],
+	"healthicon": "needlemouse",
+	"flip_x": true,
+	"healthbar_colors": [
+		76,
+		5,
+		202
+	],
+	"camera_position": [
+		50,
+		120
+	],
+	"sing_duration": 4,
+	"scale": 1.2,
+	"_editor_isPlayer": false
+}

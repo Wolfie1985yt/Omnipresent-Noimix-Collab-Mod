@@ -274,6 +274,7 @@ class Omni extends BaseStage
 		preload('characters/FakerAndExe/faker-exe-encore');
 		preload('characters/FatalAndCritical/fatal-error-sonic');
 		preload('characters/FatalAndCritical/fatal-error-sonic-glitched');
+		preload('characters/FatalAndCritical/true-fatal');
 		preload('characters/Fleetway/fleetway1');
 		preload('characters/HogAndScorched/Hog');
 		preload('characters/HogAndScorched/scorched');
@@ -289,7 +290,6 @@ class Omni extends BaseStage
 		preload('characters/XenoAndGrimbo/Pixel/Sonic_EXE_Pixel');
 		preload('characters/XenoAndGrimbo/HD/YCR-Cherribun');
 		preload('characters/BF/HD/BF_Requital');
-		preload('characters/BF/HD/Death/BF_exe_death');
 		preload('characters/BF/Pixel/pixel-normal');
 		preload('characters/FakerAndExe/faker_pixel');
 		
@@ -1071,6 +1071,8 @@ class Omni extends BaseStage
 		preload('icons/icon-sunky');
 		preload('icons/icon-sanic');
 		preload('icons/icon-fatal-glitched');
+		preload('icons/icon-bunfriend-needlemouse');
+		preload('icons/icon-true-fatal');
 		preload('icons/icon-ycrep4');
 		preload('icons/icon-ycr-pissy');
 		preload('icons/icon-coldsteel');
@@ -1087,6 +1089,8 @@ class Omni extends BaseStage
 		preload('ready');
 		preload('set');
 		preload('go');
+		preload('StartScreens/Circle-omnipresent');
+		preload('StartScreens/Text-omnipresent');
 		preload('sick');
 		preload('good');
 		preload('bad');
@@ -1104,6 +1108,7 @@ class Omni extends BaseStage
 		preload('combo');
 		
 		//Videos
+		/*
 		preloadVideo('bfhair');
 		preloadVideo('bitchless');
 		preloadVideo('EGGMAN NO');
@@ -1132,6 +1137,7 @@ class Omni extends BaseStage
 		preloadVideo('test1');
 		preloadVideo('what');
 		preloadVideo('YEAAAAAAAAAAAAAAAAAAAAAAAAA');
+		*/
 	}
 	
 	override function createPost()
@@ -1880,6 +1886,13 @@ class Omni extends BaseStage
 				scorchedHills.destroy();
 				scorchedTrees.destroy();
 				scorchedRocks.destroy();
+		
+			case 12228:
+				FlxTween.tween(xeno_sky, {alpha: 0}, 0.87, {ease: FlxEase.linear});
+				FlxTween.tween(xeno_fg, {alpha: 0}, 0.87, {ease: FlxEase.linear});
+				FlxTween.tween(xeno_trees1, {alpha: 0}, 0.87, {ease: FlxEase.linear});
+				FlxTween.tween(xeno_trees2, {alpha: 0}, 0.87, {ease: FlxEase.linear});
+				FlxTween.tween(xeno_floor, {alpha: 0}, 0.87, {ease: FlxEase.linear});
 			}
 	}
 	
