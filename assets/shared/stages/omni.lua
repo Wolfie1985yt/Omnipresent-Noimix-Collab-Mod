@@ -13,6 +13,12 @@ local scorchedMoment = false;
 local finalMoment = false;
 
 function onCreate()
+	addCharacterToList('wechBeast', 'dad');
+	addCharacterToList('wechBeast-flipped', 'dad');
+	addCharacterToList('wechBeast-flipped', 'gf');
+	addCharacterToList('Satanos', 'dad');
+	addCharacterToList('lordxEncore', 'dad');
+
 	precacheSong('omnipresent/Inst');
 	precacheSong('omnipresent/Voices-Opponent');
 	precacheSong('omnipresent/Voices-Player');
@@ -692,6 +698,9 @@ function onStepHit()
 		setProperty('gfGroup.x',1200);
 		setProperty('gfGroup.y',80);
 	end
+end
+function onSpawnNote()
+    setPropertyFromGroup('notes', i, 'noteSplashData.useRGBShader', false)
 end
 function onTimerCompleted(tag)
 	if tag == 'eyes up' and curStep <= 12243 then

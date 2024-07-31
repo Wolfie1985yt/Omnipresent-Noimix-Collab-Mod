@@ -5,6 +5,7 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import backend.ClientPrefs;
 import openfl.Assets;
 import sys.io.Process;
+import states.PlayState as PlayState;
 
 #if (VIDEOS_ALLOWED && !mobile)
 import vlc.MP4Handler as VideoHandler;
@@ -193,7 +194,7 @@ class Omni extends BaseStage
 
 	override function create()
 	{
-		Assets.cache.clear();
+		Paths.clearStoredMemory();
 		if (ClientPrefs.data.smartCache) {
 			gpuCache = true;
 		}
@@ -251,12 +252,11 @@ class Omni extends BaseStage
 			ClientPrefs.data.cacheOnGPU = false;
 			backend.ClientPrefs.saveSettings();
 		}
-		
+	
 		preload('characters/BF/3D/bf-3d');
 		preload('characters/TailsDoll/3D/Tails_Doll');
 		preload('healthBar');
 		preload('timeBar');
-		preload('characters/Wechidna/wechBeast');
 		preload('characters/XTerion/3D/xterion-first');
 		preload('characters/LordX/lordxEncore');
 		preload('characters/Tails/tails-encore');
@@ -1085,7 +1085,7 @@ class Omni extends BaseStage
 		preload('icons/icon-bf-3d');
 		
 		//Other
-		preload('noteSplashes/noteSplashes');
+		preload('noteSplashes/noteSplashes-Bloodsplash');
 		preload('ready');
 		preload('set');
 		preload('go');
@@ -1106,6 +1106,13 @@ class Omni extends BaseStage
 		preload('num8');
 		preload('num9');
 		preload('combo');
+		preload('pauseStuff/pauseTop');
+		preload('pauseStuff/bottomPanel');
+		preload('pauseStuff/graybut');
+		preload('pauseStuff/blackbut');
+		preload('pauseStuff/Exittomenu');
+		preload('pauseStuff/RestartSong');
+		preload('pauseStuff/Resume');
 		
 		//Videos
 		/*

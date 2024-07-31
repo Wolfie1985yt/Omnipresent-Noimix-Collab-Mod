@@ -70,7 +70,6 @@ class CreditsState extends MusicBeatState
 			['Divide',				'divide',			'Original Faker Artist',									'https://drive.google.com/file/d/1JlalyUieEGe0DHd_lzP0vUtEdZbPHEZH/view?usp=sharing',			'000cb7'],
 			['DStickman',			'DStickman',		'Artist of Restoration of Sonic.EXE',						'https://www.youtube.com/@DStickmanP',															'ffca18'],
 			['Erick Animations',	'erick',			'Original Sonic.EXE mod Artist',							'https://twitter.com/ErickAnim101?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor',		'878787'],
-			['Estaguy',				'Estaguy',			'Artist of Restoration of Sonic.EXE',						'https://youtube.com/@Estaguy24',																'c20007'],
 			['GioIsDead',			'GioIsDead',		'Artist of Restoration of Sonic.EXE',						'https://www.youtube.com/@JustANormalYoutubeGuy',												'ff0000'],
 			['G-San',				'face',				'Artist',													'',																								'878787'],
 			['HyperDream',			'HyperDream',		'Artist of Restoration of Sonic.EXE',						'https://www.youtube.com/@-Illusional-',														'7fd8ff'],
