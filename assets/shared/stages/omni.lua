@@ -133,7 +133,6 @@ function onUpdate(elapsed)
                 triggerEvent('Camera Follow Pos',xx2,yy2)
             end
         end
-        triggerEvent('Camera Follow Pos','','')
 	end
 end
 function onStepHit()
@@ -755,6 +754,14 @@ function onStepHit()
 		yy2 = 430;
 	end
 	if curStep == 4512 then
+		xx2 = 1350;
+		yy2 = 330;
+	end
+	if curStep == 4920 then
+		xx2 = 1570;
+		yy2 = 430;
+	end
+	if curStep == 4928 then
 		xx2 = 1350;
 		yy2 = 330;
 	end
