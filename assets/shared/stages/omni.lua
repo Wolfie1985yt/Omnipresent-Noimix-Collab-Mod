@@ -698,7 +698,68 @@ function onStepHit()
 		setProperty('gfGroup.x',1200);
 		setProperty('gfGroup.y',80);
 	end
+
+
+
+	--extra camera movements
+	if curStep == 256 then
+		xx2 = 1350;
+		yy2 = 680;
+	end
+	if curStep == 512 then
+		xx2 = 1350;
+		yy2 = 680;
+	end
+	if curStep == 1024 then
+		xx2 = 1350;
+		yy2 = 680;
+	end
+	if curStep == 2176 then
+		xx2 = 2250;
+		yy2 = 930;
+	end
+	if curStep == 2192 then
+		xx2 = 2050;
+		yy2 = 830;
+	end
+	if curStep == 2384 then
+		xx2 = 2250;
+		yy2 = 930;
+	end
+	if curStep == 2448 then
+		xx2 = 2050;
+		yy2 = 830;
+	end
+	if curStep == 2688 then
+		xx2 = 2250;
+		yy2 = 930;
+	end
+	if curStep == 2704 then
+		xx2 = 2050;
+		yy2 = 830;
+	end
+	if curStep == 3408 then
+		setProperty('cameraSpeed', 20)
+	end
+	if curStep == 3424 then
+		setProperty('cameraSpeed', 3)
+	end
+	if curStep == 4000 then
+		setProperty('cameraSpeed', 5)
+	elseif curStep == 4240 then
+		xx2 = -650;
+		yy2 = -40;
+	end
+	if curStep == 4496 then
+		xx2 = 1570;
+		yy2 = 430;
+	end
+	if curStep == 4512 then
+		xx2 = 1350;
+		yy2 = 330;
+	end
 end
+
 function onSpawnNote()
     setPropertyFromGroup('notes', i, 'noteSplashData.useRGBShader', false)
 end
@@ -714,8 +775,8 @@ function onTimerCompleted(tag)
 	if tag == 'ringStart' and curStep <= 12243 then
 		setProperty('cameraSpeed',2);
 	end
-	if tag == 'ringFinish' then
-		setProperty('cameraSpeed',1);
+	if tag == 'ringFinish' and curStep >= 4000 then
+		setProperty('cameraSpeed',3);
 	end
 	if tag == 'ringStart' and finalMoment == true then
 		setProperty('cameraSpeed',20);
