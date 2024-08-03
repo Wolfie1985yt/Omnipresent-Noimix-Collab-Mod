@@ -54,6 +54,10 @@ class FreeplayState extends MusicBeatState
 	
 	override public function create()
 	{
+		#if DISCORD_ALLOWED
+		DiscordClient.changePresence("In the Freeplay Menu", null); 
+		#end
+		
 		Paths.clearUnusedMemory();
 		FlxG.sound.playMusic(Paths.music('freeplaymode'), 0.7);
 

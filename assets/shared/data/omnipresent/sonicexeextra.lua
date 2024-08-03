@@ -22,8 +22,8 @@ local isPlayer = false
 
 --Character stage offset
 local stageOffsets = {
-    0, --x
-    0 --y
+    600, --x
+    300 --y
 }
 
 local idleSuffix = '' --alt idle thing don't touch
@@ -88,12 +88,14 @@ end
 
 function onCreatePost()
 	setProperty('sonicexe.visible',false);
-	setProperty('sonicexe.antialiasing',false);
+	setProperty('sonicexe.antialiasing',true);
 end
 
 function onStepHit()
 	if curStep == 6464 then
 		setProperty('sonicexe.visible',true);
+		setProperty('gfGroup.x',-400);
+		setProperty('gfGroup.y',275);
 	end
 	if curStep == 6608 then
 		setProperty('sonicexe.visible',false);

@@ -1,135 +1,135 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				-42,
 				-147
 			],
-			"loop": false,
-			"fps": 10,
 			"anim": "idle",
-			"indices": [],
-			"name": "idle"
+			"fps": 10,
+			"name": "idle",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
-				-37,
+				-42,
 				-147
 			],
-			"loop": false,
-			"fps": 10,
 			"anim": "singUPmiss",
+			"fps": 10,
+			"name": "up-miss",
 			"indices": [
 				0,
 				1,
 				2
-			],
-			"name": "up-miss"
+			]
 		},
 		{
+			"loop": false,
 			"offsets": [
-				-19,
+				-18,
 				-147
 			],
-			"loop": false,
-			"fps": 10,
 			"anim": "singRIGHT",
+			"fps": 10,
+			"name": "right",
 			"indices": [
 				0,
 				1,
 				2
-			],
-			"name": "right"
+			]
 		},
 		{
+			"loop": false,
 			"offsets": [
-				-24,
+				-23,
 				-142
 			],
-			"loop": false,
-			"fps": 10,
 			"anim": "singDOWNmiss",
+			"fps": 10,
+			"name": "down-miss",
 			"indices": [
 				0,
 				1,
 				2
-			],
-			"name": "down-miss"
+			]
 		},
 		{
+			"loop": false,
 			"offsets": [
-				-19,
+				-18,
 				-147
 			],
-			"loop": false,
-			"fps": 10,
 			"anim": "singRIGHTmiss",
-			"indices": [
-				0,
-				1,
-				2
-			],
-			"name": "right-miss"
-		},
-		{
-			"offsets": [
-				-34,
-				-144
-			],
-			"loop": false,
 			"fps": 10,
-			"anim": "singLEFTmiss",
+			"name": "right-miss",
 			"indices": [
 				0,
 				1,
 				2
-			],
-			"name": "left-miss"
+			]
 		},
 		{
-			"offsets": [
-				-37,
-				-147
-			],
 			"loop": false,
-			"fps": 10,
-			"anim": "singUP",
-			"indices": [
-				0,
-				1,
-				2
-			],
-			"name": "up"
-		},
-		{
 			"offsets": [
 				-34,
 				-145
 			],
-			"loop": false,
+			"anim": "singLEFTmiss",
 			"fps": 10,
-			"anim": "singLEFT",
+			"name": "left-miss",
 			"indices": [
 				0,
 				1,
 				2
-			],
-			"name": "left"
+			]
 		},
 		{
-			"offsets": [
-				-24,
-				-142
-			],
 			"loop": false,
+			"offsets": [
+				-36,
+				-147
+			],
+			"anim": "singUP",
 			"fps": 10,
-			"anim": "singDOWN",
+			"name": "up",
 			"indices": [
 				0,
 				1,
 				2
+			]
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-34,
+				-144
 			],
-			"name": "down"
+			"anim": "singLEFT",
+			"fps": 10,
+			"name": "left",
+			"indices": [
+				0,
+				1,
+				2
+			]
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-23,
+				-142
+			],
+			"anim": "singDOWN",
+			"fps": 10,
+			"name": "down",
+			"indices": [
+				0,
+				1,
+				2
+			]
 		}
 	],
 	"vocals_file": "",

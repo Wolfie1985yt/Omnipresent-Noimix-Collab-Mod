@@ -23,7 +23,7 @@ local isPlayer = false
 --Character stage offset
 local stageOffsets = {
     0, --x
-    0 --y
+    300 --y
 }
 
 local idleSuffix = '' --alt idle thing don't touch

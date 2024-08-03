@@ -1,5 +1,7 @@
 function opponentNoteHit(membersIndex, notedata, noteType, isSustainNote)
 	if noteType == 'DAD and GF' then
+		setProperty('gf.idleSuffix','-nothing')
+		runTimer('gf-idle', 0.3)
 		if notedata == 0 then
 			triggerEvent('Play Animation', 'singLEFT', 'gf')
 		end
@@ -14,6 +16,8 @@ function opponentNoteHit(membersIndex, notedata, noteType, isSustainNote)
 		end
 	end
 	if noteType == 'DAD and GF' and gfSection then
+		setProperty('dad.idleSuffix','-nothing')
+		runTimer('dad-idle', 0.3)
 		if notedata == 0 then
 			triggerEvent('Play Animation', 'singLEFT', 'dad')
 		end
@@ -26,5 +30,13 @@ function opponentNoteHit(membersIndex, notedata, noteType, isSustainNote)
 		if notedata == 3 then
 			triggerEvent('Play Animation', 'singRIGHT', 'dad')
 		end
+	end
+end
+function onTimerCompleted(tag, loops, loopsLeft)
+	if tag == 'dad-idle' then
+		setProperty('dad.idleSuffix','')
+	end
+	if tag == 'gf-idle' then
+		setProperty('gf.idleSuffix','')
 	end
 end

@@ -71,7 +71,9 @@ class StoryMenuState extends MusicBeatState
 
 	override public function create()
 	{
-
+		#if DISCORD_ALLOWED
+		DiscordClient.changePresence("In the Story Menu", null);
+		#end
 		Paths.clearUnusedMemory();
 		persistentUpdate = persistentDraw = true;
 		FlxG.sound.playMusic(Paths.music('storymodemenumusic'), 0.7);

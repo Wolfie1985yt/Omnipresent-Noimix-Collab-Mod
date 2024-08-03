@@ -221,6 +221,16 @@ class PlayState extends MusicBeatState
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 
+	var creditsText1:FlxTypedGroup<FlxText>;
+	var creditsText2:FlxTypedGroup<FlxText>;
+	var creditsText3:FlxTypedGroup<FlxText>;
+	var creditoText1:FlxText;
+	var creditoText2:FlxText;
+	var creditoText3:FlxText;
+	var box1:FlxSprite;
+	var box2:FlxSprite;
+	var box3:FlxSprite;
+
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
 	public static var seenCutscene:Bool = false;
@@ -1204,6 +1214,178 @@ class PlayState extends MusicBeatState
 	{
 		startingSong = false;
 
+		creditsText1 = new FlxTypedGroup<FlxText>();
+		creditsText2 = new FlxTypedGroup<FlxText>();
+		creditsText3 = new FlxTypedGroup<FlxText>();
+		if(!paused) {
+			switch(SONG.song.toLowerCase())
+			{	
+				default:
+					box1 = new FlxSprite(0, -1000).loadGraphic(Paths.image("blank"));
+					box1.cameras = [camOther];
+					box1.setGraphicSize(Std.int(box1.height * 0.8));
+					box1.screenCenter(X);
+					add(box1);
+
+					box2 = new FlxSprite(0, -1000).loadGraphic(Paths.image("box"));
+					box2.cameras = [camOther];
+					box2.setGraphicSize(Std.int(box2.height * 0.8));
+					box2.screenCenter(X);
+					add(box2);
+					
+					box3 = new FlxSprite(0, -1000).loadGraphic(Paths.image("blank"));
+					box3.cameras = [camOther];
+					box3.setGraphicSize(Std.int(box3.height * 0.8));
+					box3.screenCenter(X);
+					add(box3);
+
+					var texti1:String;
+					var size1:String;
+					
+					var texti2:String;
+					var size2:String;
+					
+					var texti3:String;
+					var size3:String;
+
+					#if desktop
+					if (FileSystem.exists(Paths.json(curSong.toLowerCase() + "/credits1"))) {
+						texti1 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits1"))).split("TIME")[0];
+						size1 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits1"))).split("SIZE")[1];
+					} else {
+						texti1 = File.getContent((Paths.json("unfinished-credits"))).split("TIME")[0];
+						size1 = File.getContent((Paths.json("unfinished-credits"))).split("SIZE")[1];
+					}
+					#else
+					if (OpenFlAssets.exists(Paths.json(curSong.toLowerCase() + "/credits1"))) {
+						texti1 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits1"))).split("TIME")[0];
+						size1 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits1"))).split("SIZE")[1];
+					} else {
+						texti1 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("TIME")[0];
+						size1 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("SIZE")[1];
+					}
+					#end
+					
+					#if desktop
+					if (FileSystem.exists(Paths.json(curSong.toLowerCase() + "/credits2"))) {
+						texti2 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits2"))).split("TIME")[0];
+						size2 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits2"))).split("SIZE")[1];
+					} else {
+						texti2 = File.getContent((Paths.json("unfinished-credits"))).split("TIME")[0];
+						size2 = File.getContent((Paths.json("unfinished-credits"))).split("SIZE")[1];
+					}
+					#else
+					if (OpenFlAssets.exists(Paths.json(curSong.toLowerCase() + "/credits2"))) {
+						texti2 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits2"))).split("TIME")[0];
+						size2 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits2"))).split("SIZE")[1];
+					} else {
+						texti2 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("TIME")[0];
+						size2 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("SIZE")[1];
+					}
+					#end
+					
+					#if desktop
+					if (FileSystem.exists(Paths.json(curSong.toLowerCase() + "/credits3"))) {
+						texti3 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits3"))).split("TIME")[0];
+						size3 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits3"))).split("SIZE")[1];
+					} else {
+						texti3 = File.getContent((Paths.json("unfinished-credits"))).split("TIME")[0];
+						size3 = File.getContent((Paths.json("unfinished-credits"))).split("SIZE")[1];
+					}
+					#else
+					if (OpenFlAssets.exists(Paths.json(curSong.toLowerCase() + "/credits3"))) {
+						texti3 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits3"))).split("TIME")[0];
+						size3 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits3"))).split("SIZE")[1];
+					} else {
+						texti3 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("TIME")[0];
+						size3 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("SIZE")[1];
+					}
+					#end
+					
+					creditoText1 = new FlxText(0, -1000, 0, texti1, 28);
+					creditoText1.cameras = [camOther];
+					creditoText1.setFormat(Paths.font("PressStart2P.ttf"), Std.parseInt(size1), FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					creditoText1.setGraphicSize(Std.int(creditoText1.width * 0.8));
+					creditoText1.updateHitbox();
+					creditoText1.screenCenter(X);
+					creditoText1.x += 200;
+					creditsText1.add(creditoText1);
+					
+					creditoText2 = new FlxText(0, -1000, 0, texti2, 28);
+					creditoText2.cameras = [camOther];
+					creditoText2.setFormat(Paths.font("PressStart2P.ttf"), Std.parseInt(size2), FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					creditoText2.setGraphicSize(Std.int(creditoText2.width * 0.8));
+					creditoText2.updateHitbox();
+					creditoText2.screenCenter(X);
+					creditsText2.add(creditoText2);
+					
+					creditoText3 = new FlxText(0, -1000, 0, texti3, 28);
+					creditoText3.cameras = [camOther];
+					creditoText3.setFormat(Paths.font("PressStart2P.ttf"), Std.parseInt(size3), FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					creditoText3.setGraphicSize(Std.int(creditoText3.width * 0.8));
+					creditoText3.updateHitbox();
+					creditoText3.screenCenter(X);
+					creditoText3.x -= 200;
+					creditsText3.add(creditoText3);
+			}
+			add(creditsText1);
+			add(creditsText2);
+			add(creditsText3);
+
+			switch (SONG.song.toLowerCase())
+			{
+				default:
+					var timei1:String;
+					var timei2:String;
+					var timei3:String;
+
+					#if desktop
+					if (FileSystem.exists(Paths.json(curSong.toLowerCase() + "/credits1"))) {
+						timei1 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits1"))).split("TIME")[1];
+					} else {
+						timei1 = "2.35";
+					}
+					#else
+					if (OpenFlAssets.exists(Paths.json(curSong.toLowerCase() + "/credits1"))) {
+						timei1 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits1"))).split("TIME")[1];
+					} else {
+						timei1 = "2.35";
+					}
+					#end
+					
+					#if desktop
+					if (FileSystem.exists(Paths.json(curSong.toLowerCase() + "/credits2"))) {
+						timei2 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits2"))).split("TIME")[1];
+					} else {
+						timei2 = "2.35";
+					}
+					#else
+					if (OpenFlAssets.exists(Paths.json(curSong.toLowerCase() + "/credits2"))) {
+						timei2 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits2"))).split("TIME")[1];
+					} else {
+						timei2 = "2.35";
+					}
+					#end
+					
+					#if desktop
+					if (FileSystem.exists(Paths.json(curSong.toLowerCase() + "/credits3"))) {
+						timei3 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits3"))).split("TIME")[1];
+					} else {
+						timei3 = "2.35";
+					}
+					#else
+					if (OpenFlAssets.exists(Paths.json(curSong.toLowerCase() + "/credits3"))) {
+						timei3 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits3"))).split("TIME")[1];
+					} else {
+						timei3 = "2.35";
+					}
+					#end
+
+					new FlxTimer().start(Std.parseFloat(timei1), function(tmr:FlxTimer) {
+						tweencredits();
+					});
+				}
+			}
 		@:privateAccess
 		FlxG.sound.playMusic(inst._sound, 1, false);
 		#if FLX_PITCH FlxG.sound.music.pitch = playbackRate; #end
@@ -1232,6 +1414,52 @@ class PlayState extends MusicBeatState
 		#end
 		setOnScripts('songLength', songLength);
 		callOnScripts('onSongStart');
+	}
+
+	function tweencredits()
+	{
+		FlxTween.tween(creditoText1, {y: FlxG.height - 705}, 0.5, {ease: FlxEase.circOut});
+		FlxTween.tween(box1, {y: 0}, 0.5, {ease: FlxEase.circOut});
+		//tween away
+		new FlxTimer().start(3, function(tmr:FlxTimer)
+			{
+				FlxTween.tween(creditoText1, {y: -1000}, 0.5, {ease: FlxEase.circOut});
+				FlxTween.tween(box1, {y: -1000}, 0.5, {ease: FlxEase.circOut});
+				//removal
+				new FlxTimer().start(0.5, function(tmr:FlxTimer)
+					{
+						remove(creditsText1);
+						remove(box1);
+					});
+			});
+		FlxTween.tween(creditoText2, {y: FlxG.height - 705}, 0.5, {ease: FlxEase.circOut});
+		FlxTween.tween(box2, {y: 0}, 0.5, {ease: FlxEase.circOut});
+		//tween away
+		new FlxTimer().start(3, function(tmr:FlxTimer)
+			{
+				FlxTween.tween(creditoText2, {y: -1000}, 0.5, {ease: FlxEase.circOut});
+				FlxTween.tween(box2, {y: -1000}, 0.5, {ease: FlxEase.circOut});
+				//removal
+				new FlxTimer().start(0.5, function(tmr:FlxTimer)
+					{
+						remove(creditsText2);
+						remove(box2);
+					});
+			});
+		FlxTween.tween(creditoText3, {y: FlxG.height - 705}, 0.5, {ease: FlxEase.circOut});
+		FlxTween.tween(box3, {y: 0}, 0.5, {ease: FlxEase.circOut});
+		//tween away
+		new FlxTimer().start(3, function(tmr:FlxTimer)
+			{
+				FlxTween.tween(creditoText3, {y: -1000}, 0.5, {ease: FlxEase.circOut});
+				FlxTween.tween(box3, {y: -1000}, 0.5, {ease: FlxEase.circOut});
+				//removal
+				new FlxTimer().start(0.5, function(tmr:FlxTimer)
+					{
+						remove(creditsText3);
+						remove(box3);
+					});
+			});
 	}
 
 	var debugNum:Int = 0;

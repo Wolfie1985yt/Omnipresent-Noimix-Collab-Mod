@@ -1,5 +1,7 @@
 function goodNoteHit(membersIndex, notedata, noteType, isSustainNote)
 	if noteType == 'GF and BF' then
+		setProperty('gf.idleSuffix','-nothing')
+		runTimer('gf-idle', 0.3)
 		if notedata == 0 then
 			triggerEvent('Play Animation', 'singLEFT', 'gf')
 		end
@@ -14,6 +16,8 @@ function goodNoteHit(membersIndex, notedata, noteType, isSustainNote)
 		end
 	end
 	if noteType == 'GF and BF' and gfSection then
+		setProperty('boyfriend.idleSuffix','-nothing')
+		runTimer('bf-idle', 0.3)
 		if notedata == 0 then
 			triggerEvent('Play Animation', 'singLEFT', 'bf')
 		end
@@ -26,5 +30,16 @@ function goodNoteHit(membersIndex, notedata, noteType, isSustainNote)
 		if notedata == 3 then
 			triggerEvent('Play Animation', 'singRIGHT', 'bf')
 		end
+	end
+end
+function onTimerCompleted(tag, loops, loopsLeft)
+	if tag == 'dad-idle' then
+		setProperty('dad.idleSuffix','')
+	end
+	if tag == 'gf-idle' then
+		setProperty('gf.idleSuffix','')
+	end
+	if tag == 'bf-idle' then
+		setProperty('boyfriend.idleSuffix','')
 	end
 end

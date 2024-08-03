@@ -80,6 +80,10 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
+		#if DISCORD_ALLOWED
+		DiscordClient.changePresence("In the Main Menu", null); 
+		#end
+
 		instance = this;
 		if (lockMouseSelection) lockMouseSelection = false;
 		FlxG.sound.playMusic(Paths.music('storymodemenumusic'), 0.7);
