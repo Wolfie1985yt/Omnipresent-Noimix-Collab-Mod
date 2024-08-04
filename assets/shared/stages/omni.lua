@@ -765,6 +765,14 @@ function onStepHit()
 		xx2 = 1350;
 		yy2 = 330;
 	end
+	if curStep == 5568 then
+		xx2 = 1570;
+		yy2 = 430;
+	end
+	if curStep == 7072 then
+		xx = 470;
+		yy = 170;
+	end
 end
 
 function onSpawnNote()
