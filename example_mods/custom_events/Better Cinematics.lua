@@ -6,7 +6,7 @@ function onCreatePost()
 
 ------------------------------------------------------------------------
 	--THE TOP BAR--
-	makeLuaSprite('UpperBar', 'empty', -110, -350)
+	makeLuaSprite('UpperBar', 'empty', -110, -360)
 	makeGraphic('UpperBar', 1500, 350, '000000')
 	setObjectCamera('UpperBar', 'HUD')
 	addLuaSprite('UpperBar', false)

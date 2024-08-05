@@ -11,6 +11,7 @@ local fatalMoment = false;
 local exeMoment = false;
 local scorchedMoment = false;
 local finalMoment = false;
+local fakerpixelMoment = false;
 
 function onCreate()
 	addCharacterToList('wechBeast', 'dad');
@@ -43,6 +44,15 @@ function onCreate()
 	setProperty('eggman_eys.antialiasing', true);
 	setProperty('eggman_eys.visible', false);
 	addLuaSprite('eggman_eys', false);
+	
+	makeLuaSprite('simplejump', 'epicjump', 0, 0);
+	setScrollFactor('simplejump', 0, 0);
+	setGraphicSize('simplejump',screenWidth,screenHeight);
+	setProperty('simplejump.antialiasing', true);
+	setProperty('simplejump.visible', false);
+	setObjectCamera('simplejump','camHUD');
+	screenCenter('simplejump');
+	addLuaSprite('simplejump', false);
 end
 function onUpdate(elapsed)
 	if finalMoment == true then
@@ -51,6 +61,8 @@ function onUpdate(elapsed)
 		setProperty('dadGroup.alpha',0.5);
 		setProperty('gfGroup.alpha',0.5);
 		setProperty('true-fatal.alpha',0.5);
+		ofs = 0;
+		ofs2 = 0;
 	end
 	if wechBeastMoment == true then
 		if mustHitSection == false then
@@ -86,6 +98,10 @@ function onUpdate(elapsed)
 		else
 			setProperty('defaultCamZoom',0.65)
 		end
+	end
+	if fakerpixelMoment == true then
+		setProperty('cameraSpeed',1);
+		setProperty('defaultCamZoom',1.7);
 	end
 	if forceCamera == true then
 		if mustHitSection == false then
@@ -134,8 +150,116 @@ function onUpdate(elapsed)
             end
         end
 	end
+	if not Credits and curStep >= 16 then
+        setProperty('CreditsTxt.x',Lerp(getProperty('CreditsTxt.x'),12,0.05))
+        setProperty('CreditsBG.x',Lerp(getProperty('CreditsBG.x'),0,0.05))
+    else
+        setProperty('CreditsTxt.x',Lerp(getProperty('CreditsTxt.x'),-682+12,0.01))
+        setProperty('CreditsBG.x',Lerp(getProperty('CreditsBG.x'),-682,0.01))
+    end
+    if curStep >= 47 and curStep <= 48 or curStep >= 2095 and curStep <= 2096 or curStep >= 4287 and curStep <= 4288 or curStep >= 6383 and curStep <= 6384 or curStep >= 8559 and curStep <= 8560 or curStep >= 10783 and curStep <= 10784 then
+        if getProperty('CreditsBG.x')>-0.9 then
+            Credits = true
+        end
+	end
+end
+function Lerp(Min,Max,Ratio)
+    return Min + Ratio * (Max - Min)
 end
 function onStepHit()
+	if curStep == 6607 then
+		setProperty('simplejump.visible',true);
+		setProperty('simplejump.alpha',0);
+		doTweenAlpha('jump1', 'simplejump', 1, 0.3875, 'linear');
+	end
+	if curStep == 6640 then
+		removeLuaSprite('simplejump');
+	end
+	if curStep == 16 then --wolfie credits
+		makeLuaSprite('CreditsBG',nil,-292,200)
+		makeGraphic('CreditsBG',252,100,'ffffff')
+		setProperty('CreditsBG.alpha',0.4)
+		setObjectCamera('CreditsBG','other')
+		addLuaSprite('CreditsBG',false)
+		Text = 'Part Charted by:\n\n  Wolfie_1985';
+		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
+		setTextAlignment('CreditsTxt','left')
+		setTextSize('CreditsTxt',24)
+		setObjectCamera('CreditsTxt','other')
+		addLuaText('CreditsTxt',true)
+	end
+	if curStep == 2064 then --charizard credits
+		Credits = false;
+		makeLuaSprite('CreditsBG',nil,-292,200)
+		makeGraphic('CreditsBG',252,100,'ffffff')
+		setProperty('CreditsBG.alpha',0.4)
+		setObjectCamera('CreditsBG','other')
+		addLuaSprite('CreditsBG',false)
+		Text = 'Part Charted by:\n\nCharizardslash';
+		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
+		setTextAlignment('CreditsTxt','left')
+		setTextSize('CreditsTxt',24)
+		setObjectCamera('CreditsTxt','other')
+		addLuaText('CreditsTxt',true)
+	end
+	if curStep == 4256 then --raimbow credits
+		Credits = false;
+		makeLuaSprite('CreditsBG',nil,-292,200)
+		makeGraphic('CreditsBG',252,100,'ffffff')
+		setProperty('CreditsBG.alpha',0.4)
+		setObjectCamera('CreditsBG','other')
+		addLuaSprite('CreditsBG',false)
+		Text = 'Part Charted by:\n\n Raimbowcore12';
+		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
+		setTextAlignment('CreditsTxt','left')
+		setTextSize('CreditsTxt',24)
+		setObjectCamera('CreditsTxt','other')
+		addLuaText('CreditsTxt',true)
+	end
+	if curStep == 6352 then --Mr. Half credits
+		Credits = false;
+		makeLuaSprite('CreditsBG',nil,-292,200)
+		makeGraphic('CreditsBG',252,100,'ffffff')
+		setProperty('CreditsBG.alpha',0.4)
+		setObjectCamera('CreditsBG','other')
+		addLuaSprite('CreditsBG',false)
+		Text = 'Part Charted by:\n\n    Mr. Half';
+		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
+		setTextAlignment('CreditsTxt','left')
+		setTextSize('CreditsTxt',24)
+		setObjectCamera('CreditsTxt','other')
+		addLuaText('CreditsTxt',true)
+	end
+	if curStep == 8528 then --leafy credits
+		Credits = false;
+		makeLuaSprite('CreditsBG',nil,-292,200)
+		makeGraphic('CreditsBG',252,100,'ffffff')
+		setProperty('CreditsBG.alpha',0.4)
+		setObjectCamera('CreditsBG','other')
+		addLuaSprite('CreditsBG',false)
+		Text = 'Part Charted by:\n\n Leafy-Ivy_Ray';
+		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
+		setTextAlignment('CreditsTxt','left')
+		setTextSize('CreditsTxt',24)
+		setObjectCamera('CreditsTxt','other')
+		addLuaText('CreditsTxt',true)
+	end
+	if curStep == 10752 then --heckat credits
+		Credits = false;
+		makeLuaSprite('CreditsBG',nil,-292,200)
+		makeGraphic('CreditsBG',252,100,'ffffff')
+		setProperty('CreditsBG.alpha',0.4)
+		setObjectCamera('CreditsBG','other')
+		addLuaSprite('CreditsBG',false)
+		Text = 'Part Charted by:\n\n     Heckat';
+		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
+		setTextAlignment('CreditsTxt','left')
+		setTextSize('CreditsTxt',24)
+		setObjectCamera('CreditsTxt','other')
+		addLuaText('CreditsTxt',true)
+		setObjectOrder('CreditsBG', 300);
+		setObjectOrder('CreditsTxt', 301);
+	end
 	if curStep == 136 or curStep == 400 or curStep == 592 or curStep == 848 or curStep == 944 or curStep == 10224 or curStep == 10320 then --xterion
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
@@ -466,7 +590,7 @@ function onStepHit()
 		xx2 = 895;
 		yy2 = 475;
 		setProperty('boyfriendGroup.x',900);
-		setProperty('boyfriendGroup.y',25);
+		setProperty('boyfriendGroup.y',50);
 		setProperty('dadGroup.x',200);
 		setProperty('dadGroup.y',75);
 		setProperty('gfGroup.x',-220);
@@ -507,9 +631,9 @@ function onStepHit()
 		setProperty('defaultCamZoom',0.7);
 		setObjectOrder('eggman_bg',104);
 		setObjectOrder('eggman_eys',105);
-		setObjectOrder('gfGroup', 109)
-		setObjectOrder('dadGroup', 110)
-		setObjectOrder('boyfriendGroup', 111)
+		setObjectOrder('gfGroup', 114)
+		setObjectOrder('dadGroup', 115)
+		setObjectOrder('boyfriendGroup', 116)
 	end
 	if curStep == 12240 then --badappleshit
 		xx = 1035;
@@ -517,7 +641,7 @@ function onStepHit()
 		xx2 = 1035;
 		yy2 = 440;
 		ofs = 0;
-		ofs2 = 15;
+		ofs2 = 0;
 		setProperty('boyfriendGroup.x',750);
 		setProperty('boyfriendGroup.y',-95);
 		setProperty('dadGroup.x',-200);
@@ -537,6 +661,9 @@ function onStepHit()
 		yy = 805;
 		xx2 = 895;
 		yy2 = 805;
+		ofs = 10;
+		ofs2 = 10;
+		fakerpixelMoment = true;
 		setProperty('boyfriendGroup.x',399);
 		setProperty('boyfriendGroup.y',434);
 		setProperty('dadGroup.x',204);
@@ -564,6 +691,8 @@ function onStepHit()
 	end
 	if curStep == 12240 then --xeno final moment
 		finalMoment = true;
+		ofs = 0;
+		ofs2 = 0;
 		setProperty('boyfriendGroup.x',750);
 		setProperty('boyfriendGroup.y',-95);
 		setProperty('dadGroup.x',700);
@@ -698,8 +827,6 @@ function onStepHit()
 		setProperty('gfGroup.y',80);
 	end
 
-
-
 	--extra camera movements
 	if curStep == 256 then
 		xx2 = 1350;
@@ -733,9 +860,17 @@ function onStepHit()
 		xx2 = 2250;
 		yy2 = 930;
 	end
-	if curStep == 2704 then
+	if curStep == 2696 or curStep == 2952 then
+		xx2 = 300;
+		yy2 = 400;
+		ofs = 0;
+		ofs2 = 0;
+	end
+	if curStep == 2704 or curStep == 2960 then
 		xx2 = 2050;
 		yy2 = 830;
+		ofs = 20;
+		ofs2 = 20;
 	end
 	if curStep == 3408 then
 		setProperty('cameraSpeed', 20)
@@ -774,7 +909,6 @@ function onStepHit()
 		yy = 170;
 	end
 end
-
 function onSpawnNote()
     setPropertyFromGroup('notes', i, 'noteSplashData.useRGBShader', false)
 end
@@ -796,6 +930,12 @@ function onTimerCompleted(tag)
 	if tag == 'ringStart' and finalMoment == true then
 		setProperty('cameraSpeed',20);
 	end
+	if tag == 'dad-idle' then
+		setProperty('dad.idleSuffix','')
+	end
+	if tag == 'bf-idle' then
+		setProperty('boyfriend.idleSuffix','')
+	end
 end
 function onEvent(n, v1, v2)
 	if n == 'Change Character' and curStep >= 12239 and curStep <= 12780 then
@@ -809,5 +949,55 @@ function onEvent(n, v1, v2)
 		setProperty('healthBarP1.color', 000000);
 		setProperty('healthBarP2.color', 000000);
 		setProperty('true-fatal.color', 000000);
+	end
+end
+function onBeatHit()
+	if curBeat > 1999 and curBeat < 2064 then
+		triggerEvent('Philly Glow', 1, '');
+		triggerEvent('Philly Glow', 2, '');
+	end
+end
+function opponentNoteHit(membersIndex, notedata, noteType, isSustainNote)
+	if curStep >= 12815 then
+		setProperty('dad.idleSuffix','-nothing')
+		runTimer('dad-idle', 0.3)
+		if notedata == 0 then
+			triggerEvent('Play Animation', 'singLEFT', 'dad')
+		end
+		if notedata == 1 then
+			triggerEvent('Play Animation', 'singDOWN', 'dad')
+		end
+		if notedata == 2 then
+			triggerEvent('Play Animation', 'singUP', 'dad')
+		end
+		if notedata == 3 then
+			triggerEvent('Play Animation', 'singRIGHT', 'dad')
+		end
+	end
+end
+function goodNoteHit(membersIndex, notedata, noteType, isSustainNote)
+	if curStep >= 12815 then
+		setProperty('boyfriend.idleSuffix','-nothing')
+		runTimer('bf-idle', 0.3)
+		if notedata == 0 then
+			triggerEvent('Play Animation', 'singLEFT', 'bf')
+		end
+		if notedata == 1 then
+			triggerEvent('Play Animation', 'singDOWN', 'bf')
+		end
+		if notedata == 2 then
+			triggerEvent('Play Animation', 'singUP', 'bf')
+		end
+		if notedata == 3 then
+			triggerEvent('Play Animation', 'singRIGHT', 'bf')
+		end
+	end
+end
+function onTweenCompleted(tag)
+	if tag == 'jump1' and curStep <= 6640 then
+		doTweenAlpha('jump2', 'simplejump', 0, 0.3875, 'linear');
+	end
+	if tag == 'jump2' and curStep <= 6640 then
+		doTweenAlpha('jump1', 'simplejump', 1, 0.3875, 'linear');
 	end
 end

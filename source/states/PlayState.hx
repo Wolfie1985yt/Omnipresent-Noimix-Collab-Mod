@@ -102,10 +102,14 @@ class PlayState extends MusicBeatState
 	public var gfMap:Map<String, Character> = new Map<String, Character>();
 	public var variables:Map<String, Dynamic> = new Map<String, Dynamic>();
 
+	var bgSize:Float = 1;
+
 	#if HSCRIPT_ALLOWED
 	public var hscriptArray:Array<HScript> = [];
 	public var instancesExclude:Array<String> = [];
 	#end
+
+	var showTime:Bool = (ClientPrefs.data.timeBarType != 'Disabled');
 
 	#if LUA_ALLOWED
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
@@ -230,6 +234,9 @@ class PlayState extends MusicBeatState
 	var box1:FlxSprite;
 	var box2:FlxSprite;
 	var box3:FlxSprite;
+	
+	var timeBarBGBG:AttachedSprite;
+	var healthBarBG:AttachedSprite;
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
@@ -474,13 +481,23 @@ class PlayState extends MusicBeatState
 
 		comboGroup = new FlxSpriteGroup();
 		add(comboGroup);
-		noteGroup = new FlxTypedGroup<FlxBasic>();
-		add(noteGroup);
 		uiGroup = new FlxSpriteGroup();
 		add(uiGroup);
+		noteGroup = new FlxTypedGroup<FlxBasic>();
+		add(noteGroup);
+
+		healthBarBG = new AttachedSprite('hpR-dark');
+		healthBarBG.y = FlxG.height * 0.89;
+		healthBarBG.setGraphicSize(Std.int(healthBarBG.width * bgSize));
+		healthBarBG.screenCenter(X);
+		healthBarBG.scrollFactor.set();
+		healthBarBG.cameras = [camHUD];
+		healthBarBG.y -= 3;
+		healthBarBG.visible = !ClientPrefs.data.hideHud;
+		healthBarBG.alpha = ClientPrefs.data.healthBarAlpha;
+		healthBarBG.sprTracker = healthBar;
 
 		Conductor.songPosition = -5000 / Conductor.songPosition;
-		var showTime:Bool = (ClientPrefs.data.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
 		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.scrollFactor.set();
@@ -495,7 +512,20 @@ class PlayState extends MusicBeatState
 		timeBar.screenCenter(X);
 		timeBar.alpha = 0;
 		timeBar.visible = showTime;
+		
+		timeBarBGBG = new AttachedSprite('tbR-dark');
+		timeBarBGBG.color = 0xFFFFFFFF;
+		timeBarBGBG.y = timeTxt.y + (timeTxt.height / 4);
+		timeBarBGBG.scrollFactor.set();
+		timeBarBGBG.alpha = 0;
+		timeBarBGBG.xAdd = -16;
+		timeBarBGBG.yAdd = -0.5;
+		timeBarBGBG.sprTracker = timeBar;
+		timeBarBGBG.scale.x += 0.025;
+		timeBarBGBG.scale.y += 0.1;
+		
 		uiGroup.add(timeBar);
+		uiGroup.add(timeBarBGBG);
 		uiGroup.add(timeTxt);
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
@@ -544,6 +574,7 @@ class PlayState extends MusicBeatState
 		healthBar.alpha = ClientPrefs.data.healthBarAlpha;
 		reloadHealthBarColors();
 		uiGroup.add(healthBar);
+		uiGroup.add(healthBarBG);
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
@@ -1253,16 +1284,16 @@ class PlayState extends MusicBeatState
 						texti1 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits1"))).split("TIME")[0];
 						size1 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits1"))).split("SIZE")[1];
 					} else {
-						texti1 = File.getContent((Paths.json("unfinished-credits"))).split("TIME")[0];
-						size1 = File.getContent((Paths.json("unfinished-credits"))).split("SIZE")[1];
+						texti1 = File.getContent((Paths.json("unfinished-credits1"))).split("TIME")[0];
+						size1 = File.getContent((Paths.json("unfinished-credits1"))).split("SIZE")[1];
 					}
 					#else
 					if (OpenFlAssets.exists(Paths.json(curSong.toLowerCase() + "/credits1"))) {
 						texti1 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits1"))).split("TIME")[0];
 						size1 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits1"))).split("SIZE")[1];
 					} else {
-						texti1 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("TIME")[0];
-						size1 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("SIZE")[1];
+						texti1 = OpenFlAssets.getText((Paths.json("unfinished-credits1"))).split("TIME")[0];
+						size1 = OpenFlAssets.getText((Paths.json("unfinished-credits1"))).split("SIZE")[1];
 					}
 					#end
 					
@@ -1271,16 +1302,16 @@ class PlayState extends MusicBeatState
 						texti2 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits2"))).split("TIME")[0];
 						size2 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits2"))).split("SIZE")[1];
 					} else {
-						texti2 = File.getContent((Paths.json("unfinished-credits"))).split("TIME")[0];
-						size2 = File.getContent((Paths.json("unfinished-credits"))).split("SIZE")[1];
+						texti2 = File.getContent((Paths.json("unfinished-credits2"))).split("TIME")[0];
+						size2 = File.getContent((Paths.json("unfinished-credits2"))).split("SIZE")[1];
 					}
 					#else
 					if (OpenFlAssets.exists(Paths.json(curSong.toLowerCase() + "/credits2"))) {
 						texti2 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits2"))).split("TIME")[0];
 						size2 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits2"))).split("SIZE")[1];
 					} else {
-						texti2 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("TIME")[0];
-						size2 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("SIZE")[1];
+						texti2 = OpenFlAssets.getText((Paths.json("unfinished-credits2"))).split("TIME")[0];
+						size2 = OpenFlAssets.getText((Paths.json("unfinished-credits2"))).split("SIZE")[1];
 					}
 					#end
 					
@@ -1289,18 +1320,22 @@ class PlayState extends MusicBeatState
 						texti3 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits3"))).split("TIME")[0];
 						size3 = File.getContent((Paths.json(curSong.toLowerCase() + "/credits3"))).split("SIZE")[1];
 					} else {
-						texti3 = File.getContent((Paths.json("unfinished-credits"))).split("TIME")[0];
-						size3 = File.getContent((Paths.json("unfinished-credits"))).split("SIZE")[1];
+						texti3 = File.getContent((Paths.json("unfinished-credits3"))).split("TIME")[0];
+						size3 = File.getContent((Paths.json("unfinished-credits3"))).split("SIZE")[1];
 					}
 					#else
 					if (OpenFlAssets.exists(Paths.json(curSong.toLowerCase() + "/credits3"))) {
 						texti3 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits3"))).split("TIME")[0];
 						size3 = OpenFlAssets.getText((Paths.json(curSong.toLowerCase() + "/credits3"))).split("SIZE")[1];
 					} else {
-						texti3 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("TIME")[0];
-						size3 = OpenFlAssets.getText((Paths.json("unfinished-credits"))).split("SIZE")[1];
+						texti3 = OpenFlAssets.getText((Paths.json("unfinished-credits3"))).split("TIME")[0];
+						size3 = OpenFlAssets.getText((Paths.json("unfinished-credits3"))).split("SIZE")[1];
 					}
 					#end
+					
+					trace('text1: ' + texti1);
+					trace('text2: ' + texti2);
+					trace('text3: ' + texti3);
 					
 					creditoText1 = new FlxText(0, -1000, 0, texti1, 28);
 					creditoText1.cameras = [camOther];

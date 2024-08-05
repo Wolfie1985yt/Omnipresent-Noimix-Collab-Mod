@@ -1,105 +1,106 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				-295,
 				-180
 			],
-			"loop": false,
+			"anim": "idle",
 			"fps": 10,
-			"anim": "singDOWN",
+			"name": "PxFb Idle",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-295,
+				-180
+			],
 			"indices": [],
+			"fps": 12,
+			"anim": "singDOWN",
+			"loop": false,
 			"name": "PxFb Down"
 		},
 		{
 			"offsets": [
 				-295,
-				-180
+				-181
 			],
-			"loop": false,
-			"fps": 10,
-			"anim": "singUP",
 			"indices": [],
+			"fps": 12,
+			"anim": "singUP",
+			"loop": false,
 			"name": "PxFb Up"
 		},
 		{
 			"offsets": [
-				-325,
+				-289,
 				-180
 			],
-			"loop": false,
-			"fps": 10,
-			"anim": "singRIGHT",
 			"indices": [],
+			"fps": 12,
+			"anim": "singRIGHT",
+			"loop": false,
 			"name": "PxFb Right"
 		},
 		{
 			"offsets": [
-				-275,
+				-279,
 				-180
 			],
-			"loop": false,
-			"fps": 10,
-			"anim": "singLEFTmiss",
 			"indices": [],
+			"fps": 12,
+			"anim": "singLEFTmiss",
+			"loop": false,
 			"name": "PxFb Fail Left"
 		},
 		{
 			"offsets": [
-				-295,
+				-289,
 				-180
 			],
-			"loop": false,
-			"fps": 10,
-			"anim": "singDOWNmiss",
 			"indices": [],
+			"fps": 12,
+			"anim": "singDOWNmiss",
+			"loop": false,
 			"name": "PxFb Fail Down"
 		},
 		{
 			"offsets": [
 				-295,
-				-180
+				-181
 			],
-			"loop": false,
-			"fps": 10,
-			"anim": "singUPmiss",
 			"indices": [],
+			"fps": 12,
+			"anim": "singUPmiss",
+			"loop": false,
 			"name": "PxFb Fail Up"
 		},
 		{
 			"offsets": [
-				-325,
+				-283,
 				-180
 			],
-			"loop": false,
-			"fps": 10,
-			"anim": "singRIGHTmiss",
 			"indices": [],
+			"fps": 12,
+			"anim": "singRIGHTmiss",
+			"loop": false,
 			"name": "PxFb Fail Right"
 		},
 		{
 			"offsets": [
-				-295,
+				-282,
 				-180
 			],
-			"loop": false,
-			"fps": 10,
-			"anim": "idle",
 			"indices": [],
-			"name": "PxFb Idle"
-		},
-		{
-			"offsets": [
-				-275,
-				-180
-			],
-			"loop": false,
-			"fps": 10,
+			"fps": 12,
 			"anim": "singLEFT",
-			"indices": [],
+			"loop": false,
 			"name": "PxFb Left"
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": true,
 	"image": "characters/BF/Pixel/pixel-normal",
 	"position": [
@@ -118,5 +119,6 @@
 		100
 	],
 	"sing_duration": 6,
-	"scale": 0.8
+	"scale": 0.8,
+	"_editor_isPlayer": true
 }

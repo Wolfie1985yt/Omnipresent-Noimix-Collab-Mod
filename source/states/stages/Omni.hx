@@ -5,6 +5,7 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import backend.ClientPrefs;
 import openfl.Assets;
 import sys.io.Process;
+import objects.Character;
 import states.PlayState as PlayState;
 
 #if (VIDEOS_ALLOWED && !mobile)
@@ -19,9 +20,18 @@ class Omni extends BaseStage
 	// If you're moving your stage from PlayState to a stage file,
 	// you might have to rename some variables if they're missing, for example: camZooming -> game.camZooming
 
+	//For Philly Glow events
+	var blammedLightsBlack:FlxSprite;
+	var phillyGlowGradient:PhillyGlowGradient;
+	var phillyGlowParticles:FlxTypedGroup<PhillyGlowParticle>;
+	var curLightEvent:Int = -1;
+	var phillyLightsColors:Array<FlxColor>;
+
 	var gpuCache:Bool = false;
 	var lowQuality:Bool = false;
 
+	var sunkyTransition:FlxSprite;
+	var daJumpscare:FlxSprite;
 	var ring:FlxSprite;
 
 	var tailsdoll_floor:FlxSprite;
@@ -314,6 +324,8 @@ class Omni extends BaseStage
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Loading the Song.", null);
 		#end
+
+		phillyLightsColors = [0xFF31A2FD, 0xFF31FD8C, 0xFFFB33F5, 0xFFFD4531, 0xFFFBA633];
 		
 		xterion_floor = new FlxSprite(-400, 100);
 		xterion_floor.frames = Paths.getSparrowAtlas("bgs/digitalized/bg");
@@ -1100,6 +1112,8 @@ class Omni extends BaseStage
 			add(coldsteel_shadow);
 		}
 		
+		phillyLightsColors = [0xFF31A2FD, 0xFF31FD8C, 0xFFFB33F5, 0xFFFD4531, 0xFFFBA633];
+		
 		faker_sky = new FlxSprite(-500, -700);
 		faker_sky.loadGraphic(Paths.image('bgs/faker-encore/skyP1'));
 		faker_sky.scrollFactor.set(0.6, 0.6);
@@ -1676,6 +1690,27 @@ class Omni extends BaseStage
 		hogOverlay.scale.y = 1.25;
 		hogOverlay.visible = false;
 		add(hogOverlay);
+
+		if (!lowQuality) {
+			sunkyTransition = new FlxSprite(-131, -200);
+			sunkyTransition.frames = Paths.getSparrowAtlas('bgs/sunky/sunkTransition');
+			sunkyTransition.animation.addByPrefix('b', 'sunkTransition', 26, false);
+			sunkyTransition.scrollFactor.set(1, 1);
+			sunkyTransition.antialiasing = true;
+			sunkyTransition.cameras = [camHUD];
+			sunkyTransition.visible = true;
+			add(sunkyTransition);
+		} else {
+			sunkyTransition = new FlxSprite(0, 0);
+			sunkyTransition.frames = Paths.getSparrowAtlas('blank');
+			sunkyTransition.animation.addByPrefix('b', 'fun', 24, false);
+			sunkyTransition.scrollFactor.set(1, 1);
+			sunkyTransition.antialiasing = true;
+			sunkyTransition.cameras = [camHUD];
+			sunkyTransition.visible = true;
+			sunkyTransition.screenCenter();
+			add(sunkyTransition);
+		}
 	
 		faker_overlay = new FlxSprite(0, 0);
 		faker_overlay.loadGraphic(Paths.image('bgs/faker-encore/jover'));
@@ -1699,6 +1734,32 @@ class Omni extends BaseStage
 			scorchedRocks.scale.y = 1.25;
 			scorchedRocks.visible = false;
 			add(scorchedRocks);
+		}
+	
+		if (!lowQuality) {
+			daJumpscare = new FlxSprite();
+			daJumpscare.frames = Paths.getSparrowAtlas('sonicJUMPSCARE');
+			daJumpscare.animation.addByPrefix('jump', "sonicSPOOK", 21.29032258, false);
+			daJumpscare.scale.x = 1.1;
+			daJumpscare.scale.y = 1.1;
+			daJumpscare.updateHitbox();
+			daJumpscare.screenCenter();
+			daJumpscare.y += 370;
+			daJumpscare.visible = false;
+			daJumpscare.cameras = [camOther];
+			add(daJumpscare);
+		} else {
+			daJumpscare = new FlxSprite();
+			daJumpscare.frames = Paths.getSparrowAtlas('blank');
+			daJumpscare.animation.addByPrefix('jump', "fun", 21.29032258, false);
+			daJumpscare.scale.x = 1.1;
+			daJumpscare.scale.y = 1.1;
+			daJumpscare.updateHitbox();
+			daJumpscare.screenCenter();
+			daJumpscare.y += 370;
+			daJumpscare.visible = false;
+			daJumpscare.cameras = [camOther];
+			add(daJumpscare);
 		}
 	
 		ring = new FlxSprite(0, 0);
@@ -2052,6 +2113,13 @@ class Omni extends BaseStage
 				lordx_smallflower2.visible = false;
 				lordx_tree.visible = false;
 			
+			case 7160:
+				sunkyTransition.visible = true;
+				sunkyTransition.animation.play('b', true);
+			
+			case 7169:
+				sunkyTransition.destroy();
+			
 			case 7168, 7296, 7482, 8314, 8384, 11696: //sunky
 				redRingTransition();
 				xeno_sky.visible = false;
@@ -2362,6 +2430,10 @@ class Omni extends BaseStage
 				FlxTween.tween(xeno_trees1, {alpha: 0}, 0.87, {ease: FlxEase.linear});
 				FlxTween.tween(xeno_trees2, {alpha: 0}, 0.87, {ease: FlxEase.linear});
 				FlxTween.tween(xeno_floor, {alpha: 0}, 0.87, {ease: FlxEase.linear});
+
+			case 6624:
+				daJumpscare.visible = true;
+				daJumpscare.animation.play('jump',true);
 			}
 	}
 	
@@ -2417,51 +2489,130 @@ class Omni extends BaseStage
 		}
 	}
 
-	// For events
+	override function eventPushed(event:objects.Note.EventNote)
+	{
+		switch(event.event)
+		{
+			case "Philly Glow":
+				blammedLightsBlack = new FlxSprite(FlxG.width * -0.5, FlxG.height * -0.5).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+				blammedLightsBlack.visible = false;
+				insert(members.indexOf(coldsteel_whiteFuck), blammedLightsBlack);
+
+				phillyGlowGradient = new PhillyGlowGradient(-400, 225); //This shit was refusing to properly load FlxGradient so fuck it
+				phillyGlowGradient.visible = false;
+				insert(members.indexOf(blammedLightsBlack) + 1, phillyGlowGradient);
+				if(!ClientPrefs.data.flashing) phillyGlowGradient.intendedAlpha = 0.7;
+
+				Paths.image('philly/particle'); //precache philly glow particle image
+				phillyGlowParticles = new FlxTypedGroup<PhillyGlowParticle>();
+				phillyGlowParticles.visible = false;
+				insert(members.indexOf(phillyGlowGradient) + 1, phillyGlowParticles);
+		}
+	}
 	override function eventCalled(eventName:String, value1:String, value2:String, flValue1:Null<Float>, flValue2:Null<Float>, strumTime:Float)
 	{
 		switch(eventName)
 		{
-			case "My Event":
-		}
-	}
-	override function eventPushed(event:objects.Note.EventNote)
-	{
-		// used for preloading assets used on events that doesn't need different assets based on its values
-		switch(event.event)
-		{
-			case "My Event":
-				//precacheImage('myImage') //preloads images/myImage.png
-				//precacheSound('mySound') //preloads sounds/mySound.ogg
-				//precacheMusic('myMusic') //preloads music/myMusic.ogg
-		}
-	}
-	override function eventPushedUnique(event:objects.Note.EventNote)
-	{
-		// used for preloading assets used on events where its values affect what assets should be preloaded
-		switch(event.event)
-		{
-			case "My Event":
-				switch(event.value1)
-				{
-					// If value 1 is "blah blah", it will preload these assets:
-					case 'blah blah':
-						//precacheImage('myImageOne') //preloads images/myImageOne.png
-						//precacheSound('mySoundOne') //preloads sounds/mySoundOne.ogg
-						//precacheMusic('myMusicOne') //preloads music/myMusicOne.ogg
+			case "Philly Glow":
+				if(flValue1 == null || flValue1 <= 0) flValue1 = 0;
+				var lightId:Int = Math.round(flValue1);
 
-					// If value 1 is "coolswag", it will preload these assets:
-					case 'coolswag':
-						//precacheImage('myImageTwo') //preloads images/myImageTwo.png
-						//precacheSound('mySoundTwo') //preloads sounds/mySoundTwo.ogg
-						//precacheMusic('myMusicTwo') //preloads music/myMusicTwo.ogg
-					
-					// If value 1 is not "blah blah" or "coolswag", it will preload these assets:
-					default:
-						//precacheImage('myImageThree') //preloads images/myImageThree.png
-						//precacheSound('mySoundThree') //preloads sounds/mySoundThree.ogg
-						//precacheMusic('myMusicThree') //preloads music/myMusicThree.ogg
+				var chars:Array<Character> = [boyfriend, gf, dad];
+				switch(lightId)
+				{
+					case 0:
+						coldsteel_whiteFuck.visible = true;
+						coldsteel_shadow.visible = true;
+						
+						if(phillyGlowGradient.visible)
+						{
+							doFlash();
+							if(ClientPrefs.data.camZooms)
+							{
+								FlxG.camera.zoom += 0.5;
+								camHUD.zoom += 0.1;
+							}
+
+							blammedLightsBlack.visible = false;
+							phillyGlowGradient.visible = false;
+							phillyGlowParticles.visible = false;
+							curLightEvent = -1;
+
+							for (who in chars)
+							{
+								who.color = FlxColor.WHITE;
+							}
+						}
+
+					case 1: //turn on
+						curLightEvent = FlxG.random.int(0, phillyLightsColors.length-1, [curLightEvent]);
+						var color:FlxColor = phillyLightsColors[curLightEvent];
+
+						coldsteel_whiteFuck.visible = false;
+						coldsteel_shadow.visible = false;
+						
+						if(!phillyGlowGradient.visible)
+						{
+							doFlash();
+							if(ClientPrefs.data.camZooms)
+							{
+								FlxG.camera.zoom += 0.5;
+								camHUD.zoom += 0.1;
+							}
+
+							blammedLightsBlack.visible = true;
+							blammedLightsBlack.alpha = 1;
+							phillyGlowGradient.visible = true;
+							phillyGlowParticles.visible = true;
+						}
+						else if(ClientPrefs.data.flashing)
+						{
+							var colorButLower:FlxColor = color;
+							colorButLower.alphaFloat = 0.25;
+							FlxG.camera.flash(colorButLower, 0.5, null, true);
+						}
+
+						var charColor:FlxColor = color;
+						if(!ClientPrefs.data.flashing) charColor.saturation *= 0.5;
+						else charColor.saturation *= 0.75;
+
+						for (who in chars)
+						{
+							who.color = charColor;
+						}
+						phillyGlowParticles.forEachAlive(function(particle:PhillyGlowParticle)
+						{
+							particle.color = color;
+						});
+						phillyGlowGradient.color = color;
+
+						color.brightness *= 0.5;
+
+					case 2: // spawn particles
+						if(!ClientPrefs.data.lowQuality)
+						{
+							var particlesNum:Int = FlxG.random.int(8, 12);
+							var width:Float = (2000 / particlesNum);
+							var color:FlxColor = phillyLightsColors[curLightEvent];
+							for (j in 0...3)
+							{
+								for (i in 0...particlesNum)
+								{
+									var particle:PhillyGlowParticle = new PhillyGlowParticle(-400 + width * i + FlxG.random.float(-width / 5, width / 5), phillyGlowGradient.originalY + 200 + (FlxG.random.float(0, 125) + j * 40), color);
+									phillyGlowParticles.add(particle);
+								}
+							}
+						}
+						phillyGlowGradient.bop();
 				}
 		}
+	}
+
+	function doFlash()
+	{
+		var color:FlxColor = FlxColor.WHITE;
+		if(!ClientPrefs.data.flashing) color.alphaFloat = 0.5;
+
+		FlxG.camera.flash(color, 0.15, null, true);
 	}
 }

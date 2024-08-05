@@ -1,0 +1,2 @@
+Value 1: How long it should last
+Value 2: .alpha (default is 0.5)

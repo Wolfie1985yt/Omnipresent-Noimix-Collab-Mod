@@ -1,61 +1,62 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				-20,
 				-100
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 8,
-			"name": "faker idle",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "faker idle"
 		},
 		{
-			"loop": false,
-			"offsets": [
-				-20,
-				-90
-			],
-			"anim": "singUP",
-			"fps": 7,
-			"name": "faker up",
-			"indices": []
-		},
-		{
-			"loop": false,
 			"offsets": [
 				-10,
 				-100
 			],
+			"indices": [],
+			"fps": 11,
 			"anim": "singLEFT",
-			"fps": 7,
-			"name": "faker left",
-			"indices": []
+			"loop": false,
+			"name": "faker left"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-30,
 				-100
 			],
+			"indices": [],
+			"fps": 11,
 			"anim": "singRIGHT",
-			"fps": 7,
-			"name": "faker right",
-			"indices": []
+			"loop": false,
+			"name": "faker right"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-20,
 				-100
 			],
+			"indices": [],
+			"fps": 11,
 			"anim": "singDOWN",
-			"fps": 7,
-			"name": "faker down",
-			"indices": []
+			"loop": false,
+			"name": "faker down"
+		},
+		{
+			"offsets": [
+				-20,
+				-99
+			],
+			"indices": [],
+			"fps": 11,
+			"anim": "singUP",
+			"loop": false,
+			"name": "faker up"
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": true,
 	"image": "characters/FakerAndExe/faker_pixel",
 	"position": [
@@ -73,6 +74,7 @@
 		0,
 		0
 	],
-	"sing_duration": 6.1,
-	"scale": 1
+	"sing_duration": 1,
+	"scale": 1,
+	"_editor_isPlayer": false
 }
