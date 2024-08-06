@@ -14,6 +14,15 @@ local finalMoment = false;
 local fakerpixelMoment = false;
 
 function onCreate()
+	makeLuaSprite('flashingshit', '', 0, 0);
+	makeGraphic('flashingshit',1920,1080,'000000')
+	addLuaSprite('flashingshit', true);
+	setLuaSpriteScrollFactor('flashingshit',0,0)
+	setProperty('flashingshit.scale.x',2)
+	setProperty('flashingshit.scale.y',2)
+	setProperty('flashingshit.alpha',0)
+	setObjectCamera('flashingshit', 'other')
+
 	addCharacterToList('wechBeast', 'dad');
 	addCharacterToList('wechBeast-flipped', 'dad');
 	addCharacterToList('wechBeast-flipped', 'gf');
@@ -334,6 +343,7 @@ function onStepHit()
 		setProperty('gfGroup.x',2460);
 		setProperty('gfGroup.y',500);
 		setProperty('defaultCamZoom',0.7);
+		setProperty('gf.alpha',1);
 	end
 	if curStep == 3232 or curStep == 3408 or curStep == 3648 or curStep == 3712 then --chaotix
 		runTimer('ringStart',0.1);
@@ -827,6 +837,84 @@ function onStepHit()
 		setProperty('gfGroup.y',80);
 	end
 
+	--character/screen fades
+	--doTweenAlpha('dadAlpha', 'dadGroup', alpha, time, 'ease');
+	--doTweenAlpha('gfAlpha', 'gfGroup', alpha, time, 'ease');
+	--doTweenAlpha('bfAlpha', 'boyfriendGroup', alpha, time, 'ease');
+
+	if curStep == 912 or curStep == 1900 or curStep == 3553 or curStep == 4256 or curStep == 4528 or curStep == 5344 or curStep == 7172 or curStep == 7712 then --reset alpha
+		setProperty('dad.alpha', 1);
+		setProperty('gf.alpha', 0.7);
+		setProperty('boyfriend.alpha', 1);
+		setProperty('sonicexe.alpha',0.7);
+	end
+
+	if curStep == 8416 then
+		setProperty('gf.alpha',0);
+		setProperty('sunky.alpha',0);
+	end
+	if curStep == 688 or curStep == 3544 or curStep == 8960 then
+		setProperty('gf.alpha',0.7);
+		triggerEvent('Flash Camera', 0.6, '');
+	end
+	if curStep == 4192 or curStep == 1808 or curStep == 4496 or curStep == 5056 or curStep == 5088 or curStep == 5184 or curStep == 6504 or curStep == 7072 or curStep == 9840 then
+		setProperty('gf.alpha',0.7);
+	end
+	if curStep == 4511 then
+		doTweenAlpha('gfAlpha', 'gf', 0, 1.16, 'linear');
+	end
+	if curStep == 5120 or curStep == 5248 then
+		doTweenAlpha('gfAlpha', 'gf', 0, 0.5, 'linear');
+	end
+	if curStep == 6484 then
+		doTweenAlpha('gfAlpha', 'gf', 0, 0.6, 'linear');
+		doTweenAlpha('sonicAlpha', 'sonicexe', 0, 0.6, 'linear');
+	end
+	if curStep == 720 or curStep == 1808 or curStep == 4192 then
+		doTweenAlpha('gfAlpha', 'gf', 0, 1.55, 'linear');
+	end
+	if curStep == 7088 then
+		doTweenAlpha('gfAlpha', 'gf', 0, 0.775, 'linear');
+	end
+	if curStep == 7552 then
+		setProperty('gf.alpha',0.8);
+	end
+	if curStep == 7622 then
+		doTweenAlpha('gfAlpha', 'gf', 0, 1, 'linear');
+	end
+	if curStep == 8430 then
+		doTweenAlpha('gfAlpha', 'gf', 0.8, 0.2, 'linear');
+		doTweenAlpha('gfAlpha', 'sunky', 0.8, 0.2, 'linear');
+	end
+	if curStep == 8456 then
+		doTweenAlpha('gfAlpha', 'gf', 0, 0.5, 'linear');
+		doTweenAlpha('gfAlpha', 'sunky', 0, 0.5, 'linear');
+	end
+	if curStep == 8976 then
+		doTweenAlpha('gfAlpha', 'gf', 0, 1, 'linear');
+	end
+	if curStep == 9840 then
+		doTweenAlpha('gfAlpha', 'gf', 0, 1.55, 'linear');
+	end
+	if curStep == 12207 then
+		doTweenAlpha('hudAlpha', 'camHUD', 0, 1.29, 'linear');
+		doTweenAlpha('flashingshitAlpha', 'flashingshit', 1, 0.3225, 'linear');
+	end
+	if curStep == 12224 then
+		doTweenAlpha('hudAlpha', 'camHUD', 1, 1.29, 'linear');
+		doTweenAlpha('flashingshitAlpha', 'flashingshit', 0, 1.29, 'linear');
+	end
+	if curStep == 12752 then
+		doTweenAlpha('hudAlpha', 'camHUD', 0, 1.55, 'linear');
+		doTweenAlpha('flashingshitAlpha', 'flashingshit', 0, 1.55, 'linear');
+	end
+	if curStep == 12816 then
+		doTweenAlpha('flashingshitAlpha', 'flashingshit', 0, 6.2, 'linear');
+	end
+	if curStep == 12848 then
+		doTweenAlpha('hudAlpha', 'camHUD', 1, 3.1, 'linear');
+	end
+	
 	--extra camera movements
 	if curStep == 256 then
 		xx2 = 1350;

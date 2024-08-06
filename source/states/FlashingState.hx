@@ -6,14 +6,27 @@ import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import flixel.addons.transition.FlxTransitionableState;
 
+import states.WarningState;
+import system.SystemInfo;
+
 class FlashingState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
+
+	var RAM:Float = 0;
+	var Incompatible:Bool = false;
 
 	var warnText:FlxText;
 	override function create()
 	{
 		super.create();
+
+		RAM = SystemInfo.getTotalRAM();
+		
+		if (RAM < 15) {
+			Incompatible = true;
+		}
+		trace(RAM);
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
@@ -35,7 +48,6 @@ class FlashingState extends MusicBeatState
 		if(!leftState) {
 			var back:Bool = controls.BACK;
 			if (controls.ACCEPT || back) {
-				leftState = true;
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
 				if(!back) {
@@ -44,14 +56,26 @@ class FlashingState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					FlxFlicker.flicker(warnText, 1, 0.1, false, true, function(flk:FlxFlicker) {
 						new FlxTimer().start(0.5, function (tmr:FlxTimer) {
-							MusicBeatState.switchState(new TitleState());
+							if (Incompatible) {
+								leftState = false;
+								MusicBeatState.switchState(new WarningState());
+							} else {
+								leftState = true;
+								MusicBeatState.switchState(new TitleState());
+							}
 						});
 					});
 				} else {
 					FlxG.sound.play(Paths.sound('cancelMenu'));
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new TitleState());
+							if (Incompatible) {
+								leftState = false;
+								MusicBeatState.switchState(new WarningState());
+							} else {
+								leftState = true;
+								MusicBeatState.switchState(new TitleState());
+							}
 						}
 					});
 				}
