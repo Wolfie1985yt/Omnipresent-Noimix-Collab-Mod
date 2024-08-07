@@ -911,6 +911,17 @@ function onStepHit()
 		xx = 470;
 		yy = 170;
 	end
+	if curStep == 10400 then
+		xx2 = 1350;
+		yy2 = 680;
+	end
+	if curStep == 11424 then
+		xx2 = 1570;
+		yy2 = 430;
+	end
+	if curStep == 12944 then
+		setProperty('defaultCamZoom',1.65);
+	end
 end
 function onSpawnNote()
     setPropertyFromGroup('notes', i, 'noteSplashData.useRGBShader', false)
