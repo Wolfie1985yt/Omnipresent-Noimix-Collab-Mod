@@ -5,9 +5,7 @@ import sys.io.Process;
 class SystemInfo {
 	public static function getTotalRAM()
 	{
-        var batchFilePath:String = Sys.getCwd() + "\\assets\\run_get_total_ram.bat";
-        var process:Process = new Process("cmd", ["/c", batchFilePath]);
-        process.close();
+		Sys.command('${Sys.getCwd()}\\assets\\run_get_total_ram.bat', ['${Sys.getCwd()}\\assets\\run_get_total_ram.bat']);
         var outputFilePath:String = 'assets/shared/data/output.txt';
         var output:String = File.getContent(outputFilePath);
         var trimmedOutput:String = StringTools.trim(output);

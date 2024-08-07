@@ -46,8 +46,8 @@
 		},
 		{
 			"offsets": [
-				274,
-				107
+				273,
+				108
 			],
 			"loop": false,
 			"fps": 24,
@@ -56,17 +56,18 @@
 			"name": "left"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				272,
 				169
 			],
-			"indices": [],
-			"fps": 30,
 			"anim": "laugh",
-			"loop": false,
-			"name": "laugh"
+			"fps": 32,
+			"name": "laugh",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
 	"image": "characters/Eggman/eggman-encore",
 	"position": [
@@ -85,5 +86,6 @@
 		20
 	],
 	"sing_duration": 4,
-	"scale": 0.95
+	"scale": 0.95,
+	"_editor_isPlayer": false
 }

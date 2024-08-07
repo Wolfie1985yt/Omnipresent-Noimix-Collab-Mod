@@ -69,7 +69,7 @@ import states.TitleState;
 		'opponentplay' => false
 	];
 
-	public var comboOffset:Array<Int> = [0, 0, 0, 0];
+	public var comboOffset:Array<Int> = [-381, -261, -286, -216];
 	public var ratingOffset:Int = 0;
 	public var sickWindow:Int = 45;
 	public var goodWindow:Int = 90;

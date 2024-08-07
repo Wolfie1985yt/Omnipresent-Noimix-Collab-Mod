@@ -4,6 +4,8 @@ local ofs = 20;
 local ofs2 = 20;
 local xx2 = 900;
 local yy2 = 480;
+local xx3 = 0;
+local yy3 = 0;
 local forceCamera = true;
 local wechBeastMoment = false;
 local satanosMoment = false;
@@ -12,8 +14,13 @@ local exeMoment = false;
 local scorchedMoment = false;
 local finalMoment = false;
 local fakerpixelMoment = false;
+local traceBF = true;
+local traceDad = true;
+local gfMoment = true;
 
 function onCreate()
+	setProperty('cpuControlled',true);
+
 	makeLuaSprite('flashingshit', '', 0, 0);
 	makeGraphic('flashingshit',1920,1080,'000000')
 	addLuaSprite('flashingshit', true);
@@ -62,118 +69,6 @@ function onCreate()
 	setObjectCamera('simplejump','camHUD');
 	screenCenter('simplejump');
 	addLuaSprite('simplejump', false);
-end
-function onUpdate(elapsed)
-	if finalMoment == true then
-		setProperty('defaultCamZoom',1);
-		setProperty('cameraSpeed',200);
-		setProperty('dadGroup.alpha',0.5);
-		setProperty('gfGroup.alpha',0.5);
-		setProperty('true-fatal.alpha',0.5);
-		ofs = 0;
-		ofs2 = 0;
-	end
-	if wechBeastMoment == true then
-		if mustHitSection == false then
-			setProperty('defaultCamZoom',0.5)
-		else
-			setProperty('defaultCamZoom',0.7)
-		end
-	end
-	if satanosMoment == true then
-		if mustHitSection == false then
-			setProperty('defaultCamZoom',0.6)
-		else
-			setProperty('defaultCamZoom',0.65)
-		end
-	end
-	if fatalMoment == true then
-		if mustHitSection == false then
-			setProperty('defaultCamZoom',0.6)
-		else
-			setProperty('defaultCamZoom',0.9)
-		end
-	end
-	if exeMoment == true then
-		if mustHitSection == false then
-			setProperty('defaultCamZoom',0.7)
-		else
-			setProperty('defaultCamZoom',0.75)
-		end
-	end
-	if scorchedMoment == true then
-		if mustHitSection == false then
-			setProperty('defaultCamZoom',0.55)
-		else
-			setProperty('defaultCamZoom',0.65)
-		end
-	end
-	if fakerpixelMoment == true then
-		setProperty('cameraSpeed',1);
-		setProperty('defaultCamZoom',1.7);
-	end
-	if forceCamera == true then
-		if mustHitSection == false then
-			if getProperty('dad.animation.curAnim.name') == 'singLEFT' then
-               triggerEvent('Camera Follow Pos',xx-ofs,yy)
-            end
-			if getProperty('dad.animation.curAnim.name') == 'singRIGHT' then
-                triggerEvent('Camera Follow Pos',xx+ofs,yy)
-            end
-			if getProperty('dad.animation.curAnim.name') == 'singUP' then
-                triggerEvent('Camera Follow Pos',xx,yy-ofs)
-            end
-			if getProperty('dad.animation.curAnim.name') == 'singDOWN' then
-                triggerEvent('Camera Follow Pos',xx,yy+ofs)
-            end
-            if getProperty('dad.animation.curAnim.name') == 'idle' then
-                triggerEvent('Camera Follow Pos',xx,yy)
-            end
-        else
-			if getProperty('boyfriend.animation.curAnim.name') == 'singLEFT' then
-                triggerEvent('Camera Follow Pos',xx2-ofs2,yy2)
-            end
-			if getProperty('boyfriend.animation.curAnim.name') == 'singRIGHT' then
-                triggerEvent('Camera Follow Pos',xx2+ofs2,yy2)
-            end
-			if getProperty('boyfriend.animation.curAnim.name') == 'singUP' then
-                triggerEvent('Camera Follow Pos',xx2,yy2-ofs2)
-            end
-			if getProperty('boyfriend.animation.curAnim.name') == 'singDOWN' then
-                triggerEvent('Camera Follow Pos',xx2,yy2+ofs2)
-            end
-			if getProperty('boyfriend.animation.curAnim.name') == 'singLEFTmiss' then
-                triggerEvent('Camera Follow Pos',xx2-ofs2,yy2)
-            end
-			if getProperty('boyfriend.animation.curAnim.name') == 'singRIGHTmiss' then
-                triggerEvent('Camera Follow Pos',xx2+ofs2,yy2)
-            end
-			if getProperty('boyfriend.animation.curAnim.name') == 'singUPmiss' then
-                triggerEvent('Camera Follow Pos',xx2,yy2-ofs2)
-            end
-			if getProperty('boyfriend.animation.curAnim.name') == 'singDOWNmiss' then
-                triggerEvent('Camera Follow Pos',xx2,yy2+ofs2)
-            end
-            if getProperty('boyfriend.animation.curAnim.name') == 'idle' then
-                triggerEvent('Camera Follow Pos',xx2,yy2)
-            end
-        end
-	end
-	if not Credits and curStep >= 16 then
-        setProperty('CreditsTxt.x',Lerp(getProperty('CreditsTxt.x'),12,0.05))
-        setProperty('CreditsBG.x',Lerp(getProperty('CreditsBG.x'),0,0.05))
-    else
-        setProperty('CreditsTxt.x',Lerp(getProperty('CreditsTxt.x'),-682+12,0.01))
-        setProperty('CreditsBG.x',Lerp(getProperty('CreditsBG.x'),-682,0.01))
-    end
-    if curStep >= 47 and curStep <= 48 or curStep >= 2095 and curStep <= 2096 or curStep >= 4287 and curStep <= 4288 or curStep >= 6383 and curStep <= 6384 or curStep >= 8559 and curStep <= 8560 or curStep >= 10783 and curStep <= 10784 then
-        if getProperty('CreditsBG.x')>-0.9 then
-            Credits = true
-        end
-	end
-end
-function Lerp(Min,Max,Ratio)
-    return Min + Ratio * (Max - Min)
 end
 function onStepHit()
 	if curStep == 6607 then
@@ -884,11 +779,11 @@ function onStepHit()
 	end
 	if curStep == 8430 then
 		doTweenAlpha('gfAlpha', 'gf', 0.8, 0.2, 'linear');
-		doTweenAlpha('gfAlpha', 'sunky', 0.8, 0.2, 'linear');
+		doTweenAlpha('sunkyAlpha', 'sunky', 0.8, 0.2, 'linear');
 	end
 	if curStep == 8456 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 0.5, 'linear');
-		doTweenAlpha('gfAlpha', 'sunky', 0, 0.5, 'linear');
+		doTweenAlpha('sunkyAlpha', 'sunky', 0, 0.5, 'linear');
 	end
 	if curStep == 8976 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 1, 'linear');
@@ -906,7 +801,7 @@ function onStepHit()
 	end
 	if curStep == 12752 then
 		doTweenAlpha('hudAlpha', 'camHUD', 0, 1.55, 'linear');
-		doTweenAlpha('flashingshitAlpha', 'flashingshit', 0, 1.55, 'linear');
+		doTweenAlpha('flashingshitAlpha', 'flashingshit', 1, 1.55, 'linear');
 	end
 	if curStep == 12816 then
 		doTweenAlpha('flashingshitAlpha', 'flashingshit', 0, 6.2, 'linear');
@@ -914,7 +809,12 @@ function onStepHit()
 	if curStep == 12848 then
 		doTweenAlpha('hudAlpha', 'camHUD', 1, 3.1, 'linear');
 	end
-	
+	if curStep == 12496 then
+		doTweenAlpha('gfAlpha', 'gf', 0, 2.58, 'linear');
+		doTweenAlpha('dadAlpha', 'dad', 0, 2.58, 'linear');
+		doTweenAlpha('fatalAlpha', 'true-fatal', 0, 2.58, 'linear');
+	end
+
 	--extra camera movements
 	if curStep == 256 then
 		xx2 = 1350;
@@ -927,6 +827,21 @@ function onStepHit()
 	if curStep == 1024 then
 		xx2 = 1350;
 		yy2 = 680;
+	end
+	if curStep == 2160 or curStep == 2560 then
+		gfMoment = false;
+		traceBF = false;
+		xx = 300;
+		yy = 400;
+		xx2 = 300;
+		yy2 = 400;
+		triggerEvent('Camera Follow Pos',xx2,yy2)
+	end
+	if curStep == 2192 or curStep == 2576 then
+		gfMoment = true;
+		traceBF = true;
+		xx2 = 2050;
+		yy2 = 830;
 	end
 	if curStep == 2176 then
 		xx2 = 2250;
@@ -1028,9 +943,9 @@ end
 function onEvent(n, v1, v2)
 	if n == 'Change Character' and curStep >= 12239 and curStep <= 12780 then
 		triggerEvent('Flash Camera', 0.6, '');
-		setProperty('boyfriendGroup.color', 000000);
-		setProperty('dadGroup.color', 000000);
-		setProperty('gfGroup.color', 000000);
+		setProperty('boyfriend.color', 000000);
+		setProperty('dad.color', 000000);
+		setProperty('gf.color', 000000);
 		setProperty('iconP1.color', 000000);
 		setProperty('iconP2.color', 000000);
 		setProperty('healthBar.color', 000000);
@@ -1087,5 +1002,165 @@ function onTweenCompleted(tag)
 	end
 	if tag == 'jump2' and curStep <= 6640 then
 		doTweenAlpha('jump1', 'simplejump', 1, 0.3875, 'linear');
+	end
+end
+function onUpdate(elapsed)
+	xx3 = xx2;
+	yy3 = yy2;
+	if finalMoment == true then
+		setProperty('defaultCamZoom',1.2);
+		setProperty('cameraSpeed',200);
+		setProperty('dad.alpha',0.5);
+		setProperty('gf.alpha',0.5);
+		setProperty('true-fatal.alpha',0.5);
+		ofs = 0;
+		ofs2 = 0;
+	end
+	if wechBeastMoment == true then
+		if mustHitSection == false then
+			setProperty('defaultCamZoom',0.5)
+		else
+			setProperty('defaultCamZoom',0.7)
+		end
+	end
+	if satanosMoment == true then
+		if mustHitSection == false then
+			setProperty('defaultCamZoom',0.6)
+		else
+			setProperty('defaultCamZoom',0.65)
+		end
+	end
+	if fatalMoment == true then
+		if mustHitSection == false then
+			setProperty('defaultCamZoom',0.6)
+		else
+			setProperty('defaultCamZoom',0.9)
+		end
+	end
+	if exeMoment == true then
+		if mustHitSection == false then
+			setProperty('defaultCamZoom',0.7)
+		else
+			setProperty('defaultCamZoom',0.75)
+		end
+	end
+	if scorchedMoment == true then
+		if mustHitSection == false then
+			setProperty('defaultCamZoom',0.55)
+		else
+			setProperty('defaultCamZoom',0.65)
+		end
+	end
+	if fakerpixelMoment == true then
+		setProperty('cameraSpeed',1);
+		setProperty('defaultCamZoom',1.7);
+	end
+	if forceCamera == true then
+		if mustHitSection == false and traceDad == true then
+			if getProperty('dad.animation.curAnim.name') == 'singLEFT' then
+               triggerEvent('Camera Follow Pos',xx-ofs,yy)
+            end
+			if getProperty('dad.animation.curAnim.name') == 'singRIGHT' then
+                triggerEvent('Camera Follow Pos',xx+ofs,yy)
+            end
+			if getProperty('dad.animation.curAnim.name') == 'singUP' then
+                triggerEvent('Camera Follow Pos',xx,yy-ofs)
+            end
+			if getProperty('dad.animation.curAnim.name') == 'singDOWN' then
+                triggerEvent('Camera Follow Pos',xx,yy+ofs)
+            end
+            if getProperty('dad.animation.curAnim.name') == 'idle' then
+                triggerEvent('Camera Follow Pos',xx,yy)
+            end
+		end
+        if mustHitSection == true and traceBF == true then
+			if getProperty('boyfriend.animation.curAnim.name') == 'singLEFT' then
+                triggerEvent('Camera Follow Pos',xx2-ofs2,yy2)
+            end
+			if getProperty('boyfriend.animation.curAnim.name') == 'singRIGHT' then
+                triggerEvent('Camera Follow Pos',xx2+ofs2,yy2)
+            end
+			if getProperty('boyfriend.animation.curAnim.name') == 'singUP' then
+                triggerEvent('Camera Follow Pos',xx2,yy2-ofs2)
+            end
+			if getProperty('boyfriend.animation.curAnim.name') == 'singDOWN' then
+                triggerEvent('Camera Follow Pos',xx2,yy2+ofs2)
+            end
+			if getProperty('boyfriend.animation.curAnim.name') == 'singLEFTmiss' then
+                triggerEvent('Camera Follow Pos',xx2-ofs2,yy2)
+            end
+			if getProperty('boyfriend.animation.curAnim.name') == 'singRIGHTmiss' then
+                triggerEvent('Camera Follow Pos',xx2+ofs2,yy2)
+            end
+			if getProperty('boyfriend.animation.curAnim.name') == 'singUPmiss' then
+                triggerEvent('Camera Follow Pos',xx2,yy2-ofs2)
+            end
+			if getProperty('boyfriend.animation.curAnim.name') == 'singDOWNmiss' then
+                triggerEvent('Camera Follow Pos',xx2,yy2+ofs2)
+            end
+            if getProperty('boyfriend.animation.curAnim.name') == 'idle' and traceBF == true then
+                triggerEvent('Camera Follow Pos',xx2,yy2)
+            end
+        end
+	end
+	if not Credits and curStep >= 16 then
+        setProperty('CreditsTxt.x',Lerp(getProperty('CreditsTxt.x'),12,0.05))
+        setProperty('CreditsBG.x',Lerp(getProperty('CreditsBG.x'),0,0.05))
+    else
+        setProperty('CreditsTxt.x',Lerp(getProperty('CreditsTxt.x'),-682+12,0.01))
+        setProperty('CreditsBG.x',Lerp(getProperty('CreditsBG.x'),-682,0.01))
+    end
+    if curStep >= 47 and curStep <= 48 or curStep >= 2095 and curStep <= 2096 or curStep >= 4287 and curStep <= 4288 or curStep >= 6383 and curStep <= 6384 or curStep >= 8559 and curStep <= 8560 or curStep >= 10783 and curStep <= 10784 then
+        if getProperty('CreditsBG.x')>-0.9 then
+            Credits = true
+        end
+	end
+end
+function Lerp(Min,Max,Ratio)
+    return Min + Ratio * (Max - Min)
+end
+
+function goodNoteHit(id, direction, noteType, isSustainNote, gfNote)
+	if getPropertyFromGroup('notes', id, 'gfNote') and gfMoment == true and mustHitSection == true then
+		if getProperty('gf.animation.curAnim.name') == 'singLEFT' then
+			triggerEvent('Camera Follow Pos',xx3-ofs,yy3)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'singRIGHT' then
+			triggerEvent('Camera Follow Pos',xx3+ofs,yy3)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'singUP' then
+			triggerEvent('Camera Follow Pos',xx3,yy3-ofs)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'singDOWN' then
+			triggerEvent('Camera Follow Pos',xx3,yy3+ofs)
+		end	
+		if getProperty('gf.animation.curAnim.name') == 'idle-alt' then
+			triggerEvent('Camera Follow Pos',xx3,yy3)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'idle' then
+			triggerEvent('Camera Follow Pos',xx3,yy3)
+		end
+	end
+end
+function onNoteMiss()
+	if getPropertyFromGroup('notes', id, 'gfNote') and gfMoment == true and mustHitSection == true then
+		if getProperty('gf.animation.curAnim.name') == 'singLEFT' then
+			triggerEvent('Camera Follow Pos',xx3,yy3)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'singRIGHT' then
+			triggerEvent('Camera Follow Pos',xx3+ofs,yy3)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'singUP' then
+			triggerEvent('Camera Follow Pos',xx3,yy3-ofs)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'singDOWN' then
+			triggerEvent('Camera Follow Pos',xx3,yy3+ofs)
+		end	
+		if getProperty('gf.animation.curAnim.name') == 'idle-alt' then
+			triggerEvent('Camera Follow Pos',xx3,yy3)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'idle' then
+			triggerEvent('Camera Follow Pos',xx3,yy3)
+		end
 	end
 end
