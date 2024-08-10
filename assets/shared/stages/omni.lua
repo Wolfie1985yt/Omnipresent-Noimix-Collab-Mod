@@ -761,7 +761,8 @@ function onStepHit()
 		setProperty('sunky.alpha',0);
 	end
 	if curStep == 3544 then
-		setProperty('gfGroup.y',-470);
+		setProperty('gfGroup.y',-540);
+		setProperty('gfGroup.x',-150);
 	end
 	if curStep == 688 or curStep == 3544 or curStep == 8960 then
 		setProperty('gf.alpha',0.7);
@@ -1045,6 +1046,10 @@ function onUpdate(elapsed)
 	if curStep >= 12240 and curStep <= 12495 then
 		triggerEvent('Cam Zoom', '1', '0.01, linear');
 		setProperty('defaultCamZoom',1);
+	end
+	if curStep >= 12784 then
+		setProperty('dad.alpha',1);
+		finalMoment = false;
 	end
 	if curStep == 12496 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 2.43, 'linear');
