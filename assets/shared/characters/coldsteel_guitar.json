@@ -2,90 +2,79 @@
 	"animations": [
 		{
 			"offsets": [
-				86,
-				139
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "idle",
-			"indices": [],
-			"name": "sonic idle"
-		},
-		{
-			"offsets": [
-				40,
-				147
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singLEFT",
-			"indices": [],
-			"name": "sonic left"
-		},
-		{
-			"offsets": [
-				74,
-				147
+				-73,
+				-104
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singDOWN",
 			"indices": [],
-			"name": "sonic down"
+			"name": "coldsteel down"
 		},
 		{
 			"offsets": [
-				75,
-				149
+				-3,
+				5
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "coldsteel idle"
+		},
+		{
+			"offsets": [
+				133,
+				-71
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "coldsteel left"
+		},
+		{
+			"offsets": [
+				-170,
+				10
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singUP",
 			"indices": [],
-			"name": "sonic up"
+			"name": "coldsteel up"
 		},
 		{
 			"offsets": [
-				57,
-				145
+				-57,
+				40
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHT",
 			"indices": [],
-			"name": "sonic right"
-		},
-		{
-			"offsets": [
-				76,
-				31
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "hey",
-			"indices": [],
-			"name": "sonic hey"
+			"name": "coldsteel right"
 		}
 	],
 	"vocals_file": "",
 	"no_antialiasing": true,
-	"image": "characters/BF/HD/Sonic",
+	"image": "characters/Coldsteel/coldsteel_guitar",
 	"position": [
 		0,
 		350
 	],
-	"healthicon": "sonic-rr",
+	"healthicon": "coldsteel",
 	"flip_x": false,
 	"healthbar_colors": [
+		175,
 		0,
-		87,
-		255
+		235
 	],
 	"camera_position": [
-		100,
-		-100
+		160,
+		160
 	],
 	"sing_duration": 4,
-	"scale": 1,
+	"scale": 1.1,
 	"_editor_isPlayer": false
 }

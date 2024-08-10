@@ -33,6 +33,9 @@ function onCreate()
 	addCharacterToList('wechBeast', 'dad');
 	addCharacterToList('wechBeast-flipped', 'dad');
 	addCharacterToList('wechBeast-flipped', 'gf');
+	addCharacterToList('bf-encore', 'bf');
+	addCharacterToList('bf-encore-black', 'bf');
+	addCharacterToList('Eggman-Encore', 'dad');
 	addCharacterToList('Satanos', 'dad');
 	addCharacterToList('lordxEncore', 'dad');
 
@@ -169,7 +172,7 @@ function onStepHit()
 		runTimer('ringFinish',0.2);
 		xx = 600;
 		yy = 580;
-		xx2 = 900;
+		xx2 = 1100;
 		yy2 = 580;
 		setProperty('boyfriendGroup.x',1100);
 		setProperty('boyfriendGroup.y',125);
@@ -197,10 +200,10 @@ function onStepHit()
 	if curStep == 1040 or curStep == 1296 or curStep == 1552 or curStep == 1808 or curStep == 10416 then --needlemouse
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
-		xx = 600;
+		xx = 550;
 		yy = 680;
 		xx2 = 1100;
-		yy2 = 680;
+		yy2 = 780;
 		setProperty('boyfriendGroup.x',975);
 		setProperty('boyfriendGroup.y',375);
 		setProperty('dadGroup.x',20);
@@ -229,8 +232,8 @@ function onStepHit()
 		runTimer('ringFinish',0.2);
 		xx = 300;
 		yy = 400;
-		xx2 = 2050;
-		yy2 = 830;
+		xx2 = 2150;
+		yy2 = 870;
 		setProperty('boyfriendGroup.x',2080);
 		setProperty('boyfriendGroup.y',510);
 		setProperty('dadGroup.x',-150);
@@ -274,10 +277,10 @@ function onStepHit()
 	if curStep == 3744 or curStep == 4128 or curStep == 10928 then --wechidna
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
-		xx = 1550;
-		yy = 1450;
-		xx2 = 1650;
-		yy2 = 1650;
+		xx = 1450;
+		yy = 1350;
+		xx2 = 1750;
+		yy2 = 1700;
 		setProperty('boyfriendGroup.x',1800);
 		setProperty('boyfriendGroup.y',1300);
 		setProperty('dadGroup.x',880);
@@ -310,9 +313,9 @@ function onStepHit()
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
 		xx = 550;
-		yy = 230;
-		xx2 = 1350;
-		yy2 = 330;
+		yy = 130;
+		xx2 = 1450;
+		yy2 = 320;
 		setProperty('boyfriendGroup.x',1530);
 		setProperty('boyfriendGroup.y',-70);
 		setProperty('dadGroup.x',130);
@@ -349,8 +352,8 @@ function onStepHit()
 		fatalMoment = false;
 		xx = 480;
 		yy = 550;
-		xx2 = 795;
-		yy2 = 640;
+		xx2 = 995;
+		yy2 = 700;
 		setProperty('boyfriendGroup.x',1000);
 		setProperty('boyfriendGroup.y',275);
 		setProperty('dadGroup.x',75);
@@ -363,7 +366,7 @@ function onStepHit()
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
 		xx = 150;
-		yy = 340;
+		yy = 240;
 		xx2 = 750;
 		yy2 = 590;
 		setProperty('boyfriendGroup.x',100);
@@ -414,8 +417,8 @@ function onStepHit()
 		runTimer('ringFinish',0.2);
 		xx = 800;
 		yy = 625;
-		xx2 = 1100;
-		yy2 = 625;
+		xx2 = 1200;
+		yy2 = 675;
 		setProperty('boyfriendGroup.x',1110);
 		setProperty('boyfriendGroup.y',275);
 		setProperty('dadGroup.x',410);
@@ -460,8 +463,8 @@ function onStepHit()
 	if curStep == 7680 or curStep == 8416 or curStep == 11824 then --coldsteel
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
-		xx = 1000;
-		yy = 695;
+		xx = 900;
+		yy = 655;
 		xx2 = 1570;
 		yy2 = 715;
 		setProperty('boyfriendGroup.x',1550);
@@ -471,6 +474,14 @@ function onStepHit()
 		setProperty('gfGroup.x',750);
 		setProperty('gfGroup.y',400);
 		setProperty('defaultCamZoom',0.9);
+	end
+	if curStep == 7994 then --guitarsteel
+		setProperty('dadGroup.x',435);
+		setProperty('dadGroup.y',50);
+	end
+	if curStep == 8256 then --end guitarsteel
+		setProperty('dadGroup.x',475);
+		setProperty('dadGroup.y',400);
 	end
 	if curStep == 8528 or curStep == 8784 or curStep == 8912 then --faker
 		runTimer('ringStart',0.1);
@@ -508,7 +519,7 @@ function onStepHit()
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
 		xx = 230;
-		yy = -50;
+		yy = -150;
 		xx2 = 495;
 		yy2 = 150;
 		setProperty('boyfriendGroup.x',500);
@@ -553,10 +564,11 @@ function onStepHit()
 		setProperty('dadGroup.y',0);
 		setProperty('gfGroup.x',75);
 		setProperty('gfGroup.y',-100);
-		setProperty('defaultCamZoom',0.6);
+		setProperty('defaultCamZoom',1);
 		setObjectOrder('dadGroup', 100)
 		setObjectOrder('gfGroup', 101)
 		setObjectOrder('boyfriendGroup', 102)
+		finalMoment = true;
 	end
 	if curStep == 12784 then --faker ending
 		finalMoment = false;
@@ -748,6 +760,9 @@ function onStepHit()
 		setProperty('gf.alpha',0);
 		setProperty('sunky.alpha',0);
 	end
+	if curStep == 3544 then
+		setProperty('gfGroup.y',-470);
+	end
 	if curStep == 688 or curStep == 3544 or curStep == 8960 then
 		setProperty('gf.alpha',0.7);
 		triggerEvent('Flash Camera', 0.6, '');
@@ -809,11 +824,6 @@ function onStepHit()
 	if curStep == 12848 then
 		doTweenAlpha('hudAlpha', 'camHUD', 1, 3.1, 'linear');
 	end
-	if curStep == 12496 then
-		doTweenAlpha('gfAlpha', 'gf', 0, 2.58, 'linear');
-		doTweenAlpha('dadAlpha', 'dad', 0, 2.58, 'linear');
-		doTweenAlpha('fatalAlpha', 'true-fatal', 0, 2.58, 'linear');
-	end
 
 	--extra camera movements
 	if curStep == 256 then
@@ -840,28 +850,28 @@ function onStepHit()
 	if curStep == 2192 or curStep == 2576 then
 		gfMoment = true;
 		traceBF = true;
-		xx2 = 2050;
-		yy2 = 830;
+		xx2 = 2150;
+		yy2 = 870;
 	end
 	if curStep == 2176 then
-		xx2 = 2250;
-		yy2 = 930;
+		xx2 = 2300;
+		yy2 = 870;
 	end
 	if curStep == 2192 then
-		xx2 = 2050;
-		yy2 = 830;
+		xx2 = 2150;
+		yy2 = 870;
 	end
 	if curStep == 2384 then
-		xx2 = 2250;
-		yy2 = 930;
+		xx2 = 2300;
+		yy2 = 870;
 	end
 	if curStep == 2448 then
-		xx2 = 2050;
-		yy2 = 830;
+		xx2 = 2150;
+		yy2 = 870;
 	end
 	if curStep == 2688 then
-		xx2 = 2250;
-		yy2 = 930;
+		xx2 = 2300;
+		yy2 = 870;
 	end
 	if curStep == 2696 or curStep == 2952 then
 		xx2 = 300;
@@ -870,8 +880,8 @@ function onStepHit()
 		ofs2 = 0;
 	end
 	if curStep == 2704 or curStep == 2960 then
-		xx2 = 2050;
-		yy2 = 830;
+		xx2 = 2150;
+		yy2 = 870;
 		ofs = 20;
 		ofs2 = 20;
 	end
@@ -889,27 +899,31 @@ function onStepHit()
 	end
 	if curStep == 4496 then
 		xx2 = 1570;
-		yy2 = 430;
+		yy2 = 370;
 	end
 	if curStep == 4512 then
-		xx2 = 1350;
-		yy2 = 330;
+		xx2 = 1450;
+		yy2 = 370;
 	end
 	if curStep == 4920 then
 		xx2 = 1570;
-		yy2 = 430;
+		yy2 = 370;
 	end
 	if curStep == 4928 then
-		xx2 = 1350;
-		yy2 = 330;
+		xx2 = 1450;
+		yy2 = 370;
 	end
 	if curStep == 5568 then
 		xx2 = 1570;
-		yy2 = 430;
+		yy2 = 370;
 	end
 	if curStep == 7072 then
 		xx = 470;
 		yy = 170;
+	end
+	if curStep == 8430 then
+		xx =  700;
+		yy = 695;
 	end
 	if curStep == 10400 then
 		xx2 = 1350;
@@ -917,7 +931,7 @@ function onStepHit()
 	end
 	if curStep == 11424 then
 		xx2 = 1570;
-		yy2 = 430;
+		yy2 = 370;
 	end
 	if curStep == 12944 then
 		setProperty('defaultCamZoom',1.65);
@@ -954,9 +968,9 @@ end
 function onEvent(n, v1, v2)
 	if n == 'Change Character' and curStep >= 12239 and curStep <= 12780 then
 		triggerEvent('Flash Camera', 0.6, '');
-		setProperty('boyfriend.color', 000000);
-		setProperty('dad.color', 000000);
-		setProperty('gf.color', 000000);
+		setProperty('boyfriendGroup.color', 000000);
+		setProperty('dadGroup.color', 000000);
+		setProperty('gfGroup.color', 000000);
 		setProperty('iconP1.color', 000000);
 		setProperty('iconP2.color', 000000);
 		setProperty('healthBar.color', 000000);
@@ -1018,14 +1032,24 @@ end
 function onUpdate(elapsed)
 	xx3 = xx2;
 	yy3 = yy2;
-	if finalMoment == true then
-		setProperty('defaultCamZoom',1.2);
+	if finalMoment == true and curStep <= 12495 then
+		setProperty('defaultCamZoom',1);
 		setProperty('cameraSpeed',200);
 		setProperty('dad.alpha',0.5);
 		setProperty('gf.alpha',0.5);
 		setProperty('true-fatal.alpha',0.5);
+		setProperty('gfGroup.color', 000000);
 		ofs = 0;
 		ofs2 = 0;
+	end
+	if curStep >= 12240 and curStep <= 12495 then
+		triggerEvent('Cam Zoom', '1', '0.01, linear');
+		setProperty('defaultCamZoom',1);
+	end
+	if curStep == 12496 then
+		doTweenAlpha('gfAlpha', 'gf', 0, 2.43, 'linear');
+		doTweenAlpha('dadAlpha', 'dad', 0, 2.43, 'linear');
+		doTweenAlpha('fatalAlpha', 'true-fatal', 0, 2.43, 'linear');
 	end
 	if wechBeastMoment == true then
 		if mustHitSection == false then
@@ -1113,6 +1137,26 @@ function onUpdate(elapsed)
                 triggerEvent('Camera Follow Pos',xx2,yy2)
             end
         end
+		if getPropertyFromGroup('notes', id, 'gfNote') and gfMoment == true and mustHitSection == true then
+			if getProperty('gf.animation.curAnim.name') == 'singLEFT' then
+				triggerEvent('Camera Follow Pos',xx3-ofs,yy3)
+			end
+			if getProperty('gf.animation.curAnim.name') == 'singRIGHT' then
+				triggerEvent('Camera Follow Pos',xx3+ofs,yy3)
+			end
+			if getProperty('gf.animation.curAnim.name') == 'singUP' then
+				triggerEvent('Camera Follow Pos',xx3,yy3-ofs)
+			end
+			if getProperty('gf.animation.curAnim.name') == 'singDOWN' then
+				triggerEvent('Camera Follow Pos',xx3,yy3+ofs)
+			end	
+			if getProperty('gf.animation.curAnim.name') == 'idle-alt' then
+				triggerEvent('Camera Follow Pos',xx3,yy3)
+			end
+			if getProperty('gf.animation.curAnim.name') == 'idle' then
+				triggerEvent('Camera Follow Pos',xx3,yy3)
+			end
+		end
 	end
 	if not Credits and curStep >= 16 then
         setProperty('CreditsTxt.x',Lerp(getProperty('CreditsTxt.x'),12,0.05))
@@ -1156,7 +1200,7 @@ end
 function onNoteMiss()
 	if getPropertyFromGroup('notes', id, 'gfNote') and gfMoment == true and mustHitSection == true then
 		if getProperty('gf.animation.curAnim.name') == 'singLEFT' then
-			triggerEvent('Camera Follow Pos',xx3,yy3)
+			triggerEvent('Camera Follow Pos',xx3-ofs,yy3)
 		end
 		if getProperty('gf.animation.curAnim.name') == 'singRIGHT' then
 			triggerEvent('Camera Follow Pos',xx3+ofs,yy3)
@@ -1173,5 +1217,11 @@ function onNoteMiss()
 		if getProperty('gf.animation.curAnim.name') == 'idle' then
 			triggerEvent('Camera Follow Pos',xx3,yy3)
 		end
+	end
+end
+function onEvent(name)
+	if name == 'Change Character' then
+		setProperty('health', health - 0.000000001);
+		setProperty('boyfriend.visible',true);
 	end
 end

@@ -747,7 +747,7 @@ class PlayState extends MusicBeatState
 					boyfriendMap.set(newCharacter, newBoyfriend);
 					boyfriendGroup.add(newBoyfriend);
 					startCharacterPos(newBoyfriend);
-					newBoyfriend.alpha = 0.00001;
+					newBoyfriend.alpha = 0.000000001;
 					startCharacterScripts(newBoyfriend.curCharacter);
 				}
 
@@ -757,7 +757,7 @@ class PlayState extends MusicBeatState
 					dadMap.set(newCharacter, newDad);
 					dadGroup.add(newDad);
 					startCharacterPos(newDad, true);
-					newDad.alpha = 0.00001;
+					newDad.alpha = 0.000000001;
 					startCharacterScripts(newDad.curCharacter);
 				}
 
@@ -768,7 +768,7 @@ class PlayState extends MusicBeatState
 					gfMap.set(newCharacter, newGf);
 					gfGroup.add(newGf);
 					startCharacterPos(newGf);
-					newGf.alpha = 0.00001;
+					newGf.alpha = 0.000000001;
 					startCharacterScripts(newGf.curCharacter);
 				}
 		}
@@ -2284,11 +2284,8 @@ class PlayState extends MusicBeatState
 
 			case 'Add Camera Zoom':
 				if(ClientPrefs.data.camZooms && FlxG.camera.zoom < 1.35) {
-					if(flValue1 == null) flValue1 = 0.015;
-					if(flValue2 == null) flValue2 = 0.03;
-
-					FlxG.camera.zoom += flValue1;
-					camHUD.zoom += flValue2;
+					if(flValue1 == null) flValue1 = 0.03;
+					camHUD.zoom += flValue1;
 				}
 
 			case 'Play Animation':
@@ -3400,12 +3397,6 @@ class PlayState extends MusicBeatState
 		{
 			if (generatedMusic && !endingSong && !isCameraOnForcedPos)
 				moveCameraSection();
-
-			if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.data.camZooms)
-			{
-				FlxG.camera.zoom += 0.015 * camZoomingMult;
-				camHUD.zoom += 0.03 * camZoomingMult;
-			}
 
 			if (SONG.notes[curSection].changeBPM)
 			{

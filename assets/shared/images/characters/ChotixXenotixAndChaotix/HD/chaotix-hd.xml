@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="chaotix-hd.png">
+	<!-- Created with Adobe Animate version 23.0.0.407 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="ChaotixDown0000" x="0" y="0" width="589" height="527" frameX="0" frameY="-6" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0001" x="0" y="0" width="589" height="527" frameX="0" frameY="-6" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0002" x="589" y="0" width="584" height="529" frameX="-2" frameY="-4" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0003" x="1173" y="0" width="580" height="533" frameX="-5" frameY="0" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0004" x="1173" y="0" width="580" height="533" frameX="-5" frameY="0" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0005" x="1173" y="0" width="580" height="533" frameX="-5" frameY="0" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0006" x="1173" y="0" width="580" height="533" frameX="-5" frameY="0" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0007" x="1173" y="0" width="580" height="533" frameX="-5" frameY="0" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0008" x="1173" y="0" width="580" height="533" frameX="-5" frameY="0" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0009" x="1173" y="0" width="580" height="533" frameX="-5" frameY="0" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0010" x="1173" y="0" width="580" height="533" frameX="-5" frameY="0" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0011" x="1173" y="0" width="580" height="533" frameX="-5" frameY="0" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0012" x="1173" y="0" width="580" height="533" frameX="-5" frameY="0" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixDown0013" x="1173" y="0" width="580" height="533" frameX="-5" frameY="0" frameWidth="589" frameHeight="533"/>
+	<SubTexture name="ChaotixIdle0000" x="1753" y="0" width="422" height="663" frameX="-16" frameY="-2" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0001" x="1753" y="0" width="422" height="663" frameX="-16" frameY="-2" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0002" x="2175" y="0" width="424" height="665" frameX="-12" frameY="0" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0003" x="2175" y="0" width="424" height="665" frameX="-12" frameY="0" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0004" x="2599" y="0" width="426" height="665" frameX="-8" frameY="0" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0005" x="2599" y="0" width="426" height="665" frameX="-8" frameY="0" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0006" x="3025" y="0" width="430" height="663" frameX="-1" frameY="-2" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0007" x="3025" y="0" width="430" height="663" frameX="-1" frameY="-2" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0008" x="3455" y="0" width="431" height="663" frameX="0" frameY="-2" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0009" x="3455" y="0" width="431" height="663" frameX="0" frameY="-2" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0010" x="0" y="665" width="430" height="664" frameX="0" frameY="-1" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0011" x="0" y="665" width="430" height="664" frameX="0" frameY="-1" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0012" x="0" y="665" width="430" height="664" frameX="0" frameY="-1" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixIdle0013" x="0" y="665" width="430" height="664" frameX="0" frameY="-1" frameWidth="438" frameHeight="665"/>
+	<SubTexture name="ChaotixLeft0000" x="430" y="665" width="510" height="635" frameX="0" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0001" x="430" y="665" width="510" height="635" frameX="0" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0002" x="940" y="665" width="509" height="635" frameX="-6" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0003" x="1449" y="665" width="512" height="635" frameX="-7" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0004" x="1449" y="665" width="512" height="635" frameX="-7" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0005" x="1449" y="665" width="512" height="635" frameX="-7" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0006" x="1449" y="665" width="512" height="635" frameX="-7" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0007" x="1449" y="665" width="512" height="635" frameX="-7" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0008" x="1449" y="665" width="512" height="635" frameX="-7" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0009" x="1449" y="665" width="512" height="635" frameX="-7" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0010" x="1449" y="665" width="512" height="635" frameX="-7" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0011" x="1449" y="665" width="512" height="635" frameX="-7" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0012" x="1449" y="665" width="512" height="635" frameX="-7" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixLeft0013" x="1449" y="665" width="512" height="635" frameX="-7" frameY="0" frameWidth="519" frameHeight="635"/>
+	<SubTexture name="ChaotixRight0000" x="1961" y="665" width="593" height="573"/>
+	<SubTexture name="ChaotixRight0001" x="1961" y="665" width="593" height="573"/>
+	<SubTexture name="ChaotixRight0002" x="2554" y="665" width="588" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixRight0003" x="3142" y="665" width="583" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixRight0004" x="3142" y="665" width="583" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixRight0005" x="3142" y="665" width="583" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixRight0006" x="3142" y="665" width="583" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixRight0007" x="3142" y="665" width="583" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixRight0008" x="3142" y="665" width="583" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixRight0009" x="3142" y="665" width="583" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixRight0010" x="3142" y="665" width="583" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixRight0011" x="3142" y="665" width="583" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixRight0012" x="3142" y="665" width="583" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixRight0013" x="3142" y="665" width="583" height="573" frameX="0" frameY="0" frameWidth="593" frameHeight="573"/>
+	<SubTexture name="ChaotixUp0000" x="0" y="1329" width="590" height="704" frameX="0" frameY="0" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0001" x="0" y="1329" width="590" height="704" frameX="0" frameY="0" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0002" x="590" y="1329" width="587" height="695" frameX="-9" frameY="-9" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0003" x="1177" y="1329" width="585" height="691" frameX="-12" frameY="-13" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0004" x="1177" y="1329" width="585" height="691" frameX="-12" frameY="-13" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0005" x="1177" y="1329" width="585" height="691" frameX="-12" frameY="-13" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0006" x="1177" y="1329" width="585" height="691" frameX="-12" frameY="-13" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0007" x="1177" y="1329" width="585" height="691" frameX="-12" frameY="-13" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0008" x="1177" y="1329" width="585" height="691" frameX="-12" frameY="-13" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0009" x="1177" y="1329" width="585" height="691" frameX="-12" frameY="-13" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0010" x="1177" y="1329" width="585" height="691" frameX="-12" frameY="-13" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0011" x="1177" y="1329" width="585" height="691" frameX="-12" frameY="-13" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0012" x="1177" y="1329" width="585" height="691" frameX="-12" frameY="-13" frameWidth="597" frameHeight="704"/>
+	<SubTexture name="ChaotixUp0013" x="1177" y="1329" width="585" height="691" frameX="-12" frameY="-13" frameWidth="597" frameHeight="704"/>
+</TextureAtlas>

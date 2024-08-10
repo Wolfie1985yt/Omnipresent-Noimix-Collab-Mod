@@ -26,7 +26,7 @@ function goodNoteHit(id, direction, noteType, isSustainNote, gfNote)
 		local frameName = getProperty('boyfriend.animation.frameName')
 		frameName = string.sub(frameName, 1, string.len(frameName) - 3)
 		bfRows[strumTime] = {frameName, getProperty('boyfriend.offset.x'), getProperty('boyfriend.offset.y')}
-		runTimer('bfstr'..strumTime)
+		runTimer('bfghost',0.01)
 	end
 	end
 	if getPropertyFromGroup('notes', id, 'gfNote') or noteType == 'GF and BF' then
@@ -38,7 +38,7 @@ function goodNoteHit(id, direction, noteType, isSustainNote, gfNote)
 			local frameName = getProperty('gf.animation.frameName')
 			frameName = string.sub(frameName, 1, string.len(frameName) - 3)
 			gfRows[strumTime] = {frameName, getProperty('gf.offset.x'), getProperty('gf.offset.y')}
-			runTimer('gfstr'..strumTime)
+			runTimer('gfghost',0.01)
 		end
 	end
 end
@@ -54,7 +54,7 @@ function opponentNoteHit(id, direction, noteType, isSustainNote, gfSection)
 		frameName = getProperty('dad.animation.frameName')
 		frameName = string.sub(frameName, 1, string.len(frameName) - 3)
 		ddRows[strumTime] = {frameName, getProperty('dad.offset.x'), getProperty('dad.offset.y')}
-		runTimer('ddstr'..strumTime)
+		runTimer('dadghost',0.01)
 	end
 	if gfNote or noteType == 'DAD and GF' or getPropertyFromGroup('notes', i, 'gfNote') or noteType == 'DAD and GF' then
 		if not isSustainNote then
@@ -65,7 +65,7 @@ function opponentNoteHit(id, direction, noteType, isSustainNote, gfSection)
 			frameName = getProperty('gf.animation.frameName')
 			frameName = string.sub(frameName, 1, string.len(frameName) - 3)
 			gfRows[strumTime] = {frameName, getProperty('gf.offset.x'), getProperty('gf.offset.y')}
-			runTimer('gfstr'..strumTime)
+			runTimer('gfghost',0.01)
 		end
 	end
 end
@@ -96,19 +96,19 @@ function ghostTrail(char, noteData, reactivate)
 	doTweenAlpha(ghost, ghost, 0, 0.75, 'linear')
 
 	local stage = string.lower(curStage)
-	if stage == 'who' or stage == 'voting' or stage == 'nuzzus' or stage == 'idk' then
-		--erm
-	elseif stage == 'cargo' or stage == 'finalem' then
-        setPropertyFromClass('flixel.FlxG', 'camera.zoom', getPropertyFromClass('flixel.FlxG', 'camera.zoom')+0.015)
-        setProperty('camHUD.zoom', getProperty('camHUD.zoom')+0.015)
-	else
-        setPropertyFromClass('flixel.FlxG', 'camera.zoom', getPropertyFromClass('flixel.FlxG', 'camera.zoom')+0.015)
-        setProperty('camHUD.zoom', getProperty('camHUD.zoom')+0.03)
-	end
 end
 
 function onTimerCompleted(tag, loops, loopsLeft)
 	-- debugPrint(tag)
+	if tag == 'bfghost' then
+		runTimer('bfstr'..strumTime)
+	end
+	if tag == 'gfghost' then
+		runTimer('gfstr'..strumTime)
+	end
+	if tag == 'dadghost' then
+		runTimer('ddstr'..strumTime)
+	end
 	if string.match(tag, 'bfstr') then
 		bfRows[string.sub(tag, 6, string.len(tag))] = nil
 	elseif string.match(tag, 'ddstr') then

@@ -181,6 +181,9 @@ class Omni extends BaseStage
 	var monitorCounter:Int = 0;
 	var monitorAnims:Array<String> = ["fatal", "nmi", "needle", "starved", "idle"];
 
+	var vignette:FlxSprite;
+	var phillyGlow:Bool = false;
+
 	public function preload(graphic:String) {
         var newthing:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image(graphic, 'shared'));
         newthing.screenCenter();
@@ -282,12 +285,16 @@ class Omni extends BaseStage
 		preload('characters/Fleetway/Fleetway_Super_Sonic');
 		preload('characters/BF/HD/encoreBF');
 		preload('characters/BF/HD/encoreBF-majin');
+		preload('characters/BF/HD/encoreBF-redTint');
+		preload('characters/BF/HD/encoreBF-blackTint');
+		preload('characters/BF/HD/encoreBF-redBlackTint');
 		preload('characters/BF/HD/needle-bf-encore');
 		preload('characters/BF/HD/Sonic');
 		preload('characters/BF/Pixel/bf-encore-pixel');
 		preload('characters/BF/Pixel/fatal-bf');
 		preload('characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix');
 		preload('characters/Coldsteel/coldsteel_assets');
+		preload('characters/Coldsteel/coldsteel_guitar');
 		preload('characters/Eggman/eggman-encore');
 		preload('characters/FakerAndExe/faker_encore');
 		preload('characters/FakerAndExe/faker-exe-encore');
@@ -311,6 +318,7 @@ class Omni extends BaseStage
 		preload('characters/BF/HD/BF_Requital');
 		preload('characters/BF/Pixel/pixel-normal');
 		preload('characters/FakerAndExe/faker_pixel');
+		preload('characters/ChotixXenotixAndChaotix/HD/chaotix-hd');
 		
 		tailsdoll_floor = new FlxSprite(-700, -100);
 		tailsdoll_floor.loadGraphic(Paths.image('bgs/tails-doll/bg'));
@@ -1090,23 +1098,24 @@ class Omni extends BaseStage
 		sanic_bg.visible = false;
 		add(sanic_bg);
 		
-		coldsteel_whiteFuck = new FlxSprite().makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.WHITE);
+		coldsteel_whiteFuck = new FlxSprite().makeGraphic(FlxG.width * 6, FlxG.height * 3, FlxColor.WHITE);
 		coldsteel_whiteFuck.visible = false;
+		coldsteel_whiteFuck.x -= 300;
 		add(coldsteel_whiteFuck);
 		
 		if (!lowQuality) {
-			coldsteel_shadow = new FlxSprite(-600, 100);
+			coldsteel_shadow = new FlxSprite(-900, 100);
 			coldsteel_shadow.loadGraphic(Paths.image('bgs/void/shadow'));
 			coldsteel_shadow.scrollFactor.set(1, 1);
-			coldsteel_shadow.scale.set(2, 1);
+			coldsteel_shadow.scale.set(4, 1);
 			coldsteel_shadow.visible = false;
 			coldsteel_shadow.antialiasing = ClientPrefs.data.antialiasing;
 			add(coldsteel_shadow);
 		} else {
-			coldsteel_shadow = new FlxSprite(-600, 100);
+			coldsteel_shadow = new FlxSprite(-900, 100);
 			coldsteel_shadow.loadGraphic(Paths.image('blank'));
 			coldsteel_shadow.scrollFactor.set(1, 1);
-			coldsteel_shadow.scale.set(2, 1);
+			coldsteel_shadow.scale.set(4, 1);
 			coldsteel_shadow.visible = false;
 			coldsteel_shadow.antialiasing = ClientPrefs.data.antialiasing;
 			add(coldsteel_shadow);
@@ -1476,6 +1485,8 @@ class Omni extends BaseStage
 		preload('icons/icon-fakerpixel');
 		preload('icons/icon-taildoll');
 		preload('icons/icon-bf-3d');
+		preload('icons/icon-hog');
+		preload('icons/icon-chaotix-hd');
 		
 		//Other
 		preload('noteSplashes/noteSplashes-Bloodsplash');
@@ -1761,6 +1772,16 @@ class Omni extends BaseStage
 			daJumpscare.cameras = [camOther];
 			add(daJumpscare);
 		}
+		
+		vignette = new FlxSprite(0, 0);
+		vignette.loadGraphic(Paths.image('WhiteVG'));
+		vignette.scrollFactor.set(0, 0);
+		vignette.scale.set(1, 1);
+		vignette.visible = false;
+		vignette.cameras = [camOther];
+		vignette.antialiasing = ClientPrefs.data.antialiasing;
+		vignette.screenCenter();
+		add(vignette);
 	
 		ring = new FlxSprite(0, 0);
 		ring.frames = Paths.getSparrowAtlas('bgs/digitalized/ring');
@@ -2451,6 +2472,7 @@ class Omni extends BaseStage
 	
 	override function beatHit()
 	{
+		super.beatHit();
 		if (curBeat % 2 == 0) 
 		{
 			if (fucklesBeats)
@@ -2462,6 +2484,10 @@ class Omni extends BaseStage
 				fucklesKnuxBg.animation.play('idle');
 				fucklesVectorBg.animation.play('idle');
 			}
+		}
+		if (phillyGlow) {
+			vignette.alpha = 1;
+			FlxTween.tween(vignette, {alpha: 0}, 0.3875, {ease: FlxEase.linear});
 		}
 	}
 	
@@ -2521,6 +2547,8 @@ class Omni extends BaseStage
 				switch(lightId)
 				{
 					case 0:
+						phillyGlow = false;
+						
 						coldsteel_whiteFuck.visible = true;
 						coldsteel_shadow.visible = true;
 						
@@ -2536,6 +2564,7 @@ class Omni extends BaseStage
 							blammedLightsBlack.visible = false;
 							phillyGlowGradient.visible = false;
 							phillyGlowParticles.visible = false;
+							vignette.visible = false;
 							curLightEvent = -1;
 
 							for (who in chars)
@@ -2545,6 +2574,7 @@ class Omni extends BaseStage
 						}
 
 					case 1: //turn on
+						phillyGlow = true;
 						curLightEvent = FlxG.random.int(0, phillyLightsColors.length-1, [curLightEvent]);
 						var color:FlxColor = phillyLightsColors[curLightEvent];
 
@@ -2564,6 +2594,7 @@ class Omni extends BaseStage
 							blammedLightsBlack.alpha = 1;
 							phillyGlowGradient.visible = true;
 							phillyGlowParticles.visible = true;
+							vignette.visible = true;
 						}
 						else if(ClientPrefs.data.flashing)
 						{
@@ -2585,10 +2616,12 @@ class Omni extends BaseStage
 							particle.color = color;
 						});
 						phillyGlowGradient.color = color;
+						vignette.color = color;
 
 						color.brightness *= 0.5;
 
 					case 2: // spawn particles
+						phillyGlow = true;
 						if(!ClientPrefs.data.lowQuality)
 						{
 							var particlesNum:Int = FlxG.random.int(8, 12);
