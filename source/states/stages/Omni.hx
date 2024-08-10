@@ -1709,7 +1709,7 @@ class Omni extends BaseStage
 			sunkyTransition.scrollFactor.set(1, 1);
 			sunkyTransition.antialiasing = true;
 			sunkyTransition.cameras = [camHUD];
-			sunkyTransition.visible = true;
+			sunkyTransition.visible = false;
 			add(sunkyTransition);
 		} else {
 			sunkyTransition = new FlxSprite(0, 0);
@@ -1718,7 +1718,7 @@ class Omni extends BaseStage
 			sunkyTransition.scrollFactor.set(1, 1);
 			sunkyTransition.antialiasing = true;
 			sunkyTransition.cameras = [camHUD];
-			sunkyTransition.visible = true;
+			sunkyTransition.visible = false;
 			sunkyTransition.screenCenter();
 			add(sunkyTransition);
 		}
