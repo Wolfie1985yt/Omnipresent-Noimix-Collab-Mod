@@ -19,6 +19,35 @@ local traceDad = true;
 local gfMoment = true;
 
 function onCreate()
+	addCharacterToList('wechBeast', 'dad');
+	addCharacterToList('Fleetway', 'dad');
+	addCharacterToList('Satanos', 'dad');
+	addCharacterToList('lordxEncore', 'dad');
+	addCharacterToList('sonicexe', 'dad');
+	addCharacterToList('BEAST-Enc', 'dad');
+	addCharacterToList('Sonic', 'gf');
+	addCharacterToList('fleetway-anims3', 'dad');
+	addCharacterToList('wechBeast-flipped', 'dad');
+	addCharacterToList('wechBeast-flipped', 'gf');
+	addCharacterToList('bf-encore', 'bf');
+	addCharacterToList('bf-encore-black', 'bf');
+	addCharacterToList('bf-encore-red', 'bf');
+	addCharacterToList('Eggman-Encore', 'dad');
+	
+	addLuaScript('mods/custom_events/badapplelol');
+	addLuaScript('mods/custom_events/badapplelolFlash');
+	addLuaScript('mods/custom_events/Better Cinematics');
+	addLuaScript('mods/custom_events/Cam Zoom');
+	addLuaScript('mods/custom_events/Flash Camera red');
+	addLuaScript('mods/custom_events/Flash Camera');
+	addLuaScript('mods/custom_events/phasestatic');
+	addLuaScript('mods/custom_events/ScreenRot');
+	addLuaScript('mods/custom_events/sonicBarsNotes');
+	addLuaScript('mods/custom_events/Toggle FlxTrail');
+	addLuaScript('mods/custom_notetypes/ALL');
+	addLuaScript('mods/custom_notetypes/DAD and GF');
+	addLuaScript('mods/custom_notetypes/GF and BF');
+
 	setProperty('cpuControlled',true);
 
 	makeLuaSprite('flashingshit', '', 0, 0);
@@ -29,15 +58,6 @@ function onCreate()
 	setProperty('flashingshit.scale.y',2)
 	setProperty('flashingshit.alpha',0)
 	setObjectCamera('flashingshit', 'other')
-
-	addCharacterToList('wechBeast', 'dad');
-	addCharacterToList('wechBeast-flipped', 'dad');
-	addCharacterToList('wechBeast-flipped', 'gf');
-	addCharacterToList('bf-encore', 'bf');
-	addCharacterToList('bf-encore-black', 'bf');
-	addCharacterToList('Eggman-Encore', 'dad');
-	addCharacterToList('Satanos', 'dad');
-	addCharacterToList('lordxEncore', 'dad');
 
 	precacheSong('omnipresent/Inst');
 	precacheSong('omnipresent/Voices-Opponent');
@@ -72,6 +92,16 @@ function onCreate()
 	setObjectCamera('simplejump','camHUD');
 	screenCenter('simplejump');
 	addLuaSprite('simplejump', false);
+end
+function onSongStart()
+	setProperty('gf.alpha',1);
+	setProperty('dad.alpha',1);
+	setProperty('boyfriend.alpha',1);
+end
+function onStartCountdown()
+	setProperty('gfGroup.alpha',0.0000001);
+	setProperty('dadGroup.alpha',0.0000001);
+	setProperty('boyfriendGroup.alpha',0.0000001);
 end
 function onStepHit()
 	if curStep == 6607 then
@@ -966,20 +996,6 @@ function onTimerCompleted(tag)
 		setProperty('boyfriend.idleSuffix','')
 	end
 end
-function onEvent(n, v1, v2)
-	if n == 'Change Character' and curStep >= 12239 and curStep <= 12780 then
-		triggerEvent('Flash Camera', 0.6, '');
-		setProperty('boyfriendGroup.color', 000000);
-		setProperty('dadGroup.color', 000000);
-		setProperty('gfGroup.color', 000000);
-		setProperty('iconP1.color', 000000);
-		setProperty('iconP2.color', 000000);
-		setProperty('healthBar.color', 000000);
-		setProperty('healthBarP1.color', 000000);
-		setProperty('healthBarP2.color', 000000);
-		setProperty('true-fatal.color', 000000);
-	end
-end
 function onBeatHit()
 	if curBeat > 1999 and curBeat < 2064 then
 		triggerEvent('Philly Glow', 1, '');
@@ -1224,9 +1240,21 @@ function onNoteMiss()
 		end
 	end
 end
-function onEvent(name)
+function onEvent(name, value1, value2)
 	if name == 'Change Character' then
-		setProperty('health', health - 0.000000001);
+		setProperty('health', getProperty('health') - 0.000001);
 		setProperty('boyfriend.visible',true);
+	end
+	if name == 'Change Character' and curStep >= 12239 and curStep <= 12780 then
+		triggerEvent('Flash Camera', 0.6, '');
+		setProperty('boyfriendGroup.color', 000000);
+		setProperty('dadGroup.color', 000000);
+		setProperty('gfGroup.color', 000000);
+		setProperty('iconP1.color', 000000);
+		setProperty('iconP2.color', 000000);
+		setProperty('healthBar.color', 000000);
+		setProperty('healthBarP1.color', 000000);
+		setProperty('healthBarP2.color', 000000);
+		setProperty('true-fatal.color', 000000);
 	end
 end

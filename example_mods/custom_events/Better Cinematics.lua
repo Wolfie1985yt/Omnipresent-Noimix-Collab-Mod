@@ -6,14 +6,14 @@ function onCreatePost()
 
 ------------------------------------------------------------------------
 	--THE TOP BAR--
-	makeLuaSprite('UpperBar', 'empty', -110, -360)
+	makeLuaSprite('UpperBar', 'blank', -110, -360)
 	makeGraphic('UpperBar', 1500, 350, '000000')
 	setObjectCamera('UpperBar', 'HUD')
 	addLuaSprite('UpperBar', false)
 
 
 	--THE BOTTOM BAR--
-	makeLuaSprite('LowerBar', 'empty', -110, 730)
+	makeLuaSprite('LowerBar', 'blank', -110, 730)
 	makeGraphic('LowerBar', 1500, 350, '000000')
 	setObjectCamera('LowerBar', 'HUD')
 	addLuaSprite('LowerBar', false)

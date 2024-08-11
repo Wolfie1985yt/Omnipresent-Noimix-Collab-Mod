@@ -34,9 +34,9 @@ local doIdle = true
 local specialAnim = false
 function onCreate()
     if currentModDirectory ~= nil and currentModDirectory ~= '' then
-        json = require("assets/shared/data/omnipresent/jsonlua")
+        json = require("mods/scripts/jsonlua")
     else
-        json = require("assets/shared/data/omnipresent/jsonlua")
+        json = require("mods/scripts/jsonlua")
     end
 
     local charJson = json.parse(getTextFromFile('characters/'..char2parse..'.json'))
