@@ -20,7 +20,7 @@ local gfMoment = true;
 
 function onCreate()
 	addCharacterToList('wechBeast', 'dad');
-	addCharacterToList('Fleetway', 'dad');
+	addCharacterToList('fleetway', 'dad');
 	addCharacterToList('Satanos', 'dad');
 	addCharacterToList('lordxEncore', 'dad');
 	addCharacterToList('sonicexe', 'dad');
@@ -97,11 +97,19 @@ function onSongStart()
 	setProperty('gf.alpha',1);
 	setProperty('dad.alpha',1);
 	setProperty('boyfriend.alpha',1);
+	setProperty('defaultCamZoom',0.7);
 end
 function onStartCountdown()
-	setProperty('gfGroup.alpha',0.0000001);
-	setProperty('dadGroup.alpha',0.0000001);
-	setProperty('boyfriendGroup.alpha',0.0000001);
+	setProperty('gfGroup.alpha',0.00001);
+	setProperty('dadGroup.alpha',0.00001);
+	setProperty('boyfriendGroup.alpha',0.00001);
+	runTimer('preload',0.1);
+	runTimer('preload',0.2);
+	runTimer('preload',0.3);
+	runTimer('preload',0.4);
+	runTimer('preload',0.5);
+	runTimer('preload',0.6);
+	runTimer('reset-preload',0.7);
 end
 function onStepHit()
 	if curStep == 6607 then
@@ -770,8 +778,22 @@ function onStepHit()
 	if curStep == 12480 then --finale moment
 		setProperty('dadGroup.x',380);
 		setProperty('dadGroup.y',480);
-		setProperty('gfGroup.x',1200);
-		setProperty('gfGroup.y',80);
+		setProperty('gfGroup.x',1225);
+		setProperty('gfGroup.y',150);
+	end
+	if curStep == 12560 then --second bf ending
+
+	end
+	if curStep == 12624 then --third bf ending
+	
+	end
+	if curStep == 12686 then --fourth bf ending
+	
+	end
+	if curStep == 12734 then --gf addition
+		setProperty('gfGroup.x',750);
+		setProperty('gfGroup.y',-95);
+		setproperty('gf.alpha',0.3);
 	end
 
 	--character/screen fades
@@ -994,6 +1016,185 @@ function onTimerCompleted(tag)
 	end
 	if tag == 'bf-idle' then
 		setProperty('boyfriend.idleSuffix','')
+	end
+	if tag == 'reset-preload' and not getPropertyFromClass('states.PlatState','chartingMode') then
+		triggerEvent('Change Character', 'dad', 'tailsdoll');
+		triggerEvent('Change Character', 'bf', 'bf-john9doe-3d');
+		triggerEvent('Change Character', 'gf', 'gf');
+	end
+	if tag == 'preload' and not getPropertyFromClass('states.PlatState','chartingMode') then
+		triggerEvent('Change Character', 'dad', 'xterion-first');
+		triggerEvent('Change Character', 'dad', 'bf-john9doe-3d-xterion');
+		triggerEvent('Change Character', 'dad', 'tailsdoll');
+		triggerEvent('Change Character', 'dad', 'bf-john9doe-3d');
+		triggerEvent('Change Character', 'dad', 'xterion-second');
+		triggerEvent('Change Character', 'dad', 'Needlemouse');
+		triggerEvent('Change Character', 'dad', 'bf-needle-encore');
+		triggerEvent('Change Character', 'dad', 'Tails-Encore');
+		triggerEvent('Change Character', 'dad', 'bf-encore');
+		triggerEvent('Change Character', 'dad', 'gf');
+		triggerEvent('Change Character', 'dad', 'fleetway');
+		triggerEvent('Change Character', 'dad', 'sonic');
+		triggerEvent('Change Character', 'dad', 'fleetway-anims3');
+		triggerEvent('Change Character', 'dad', 'Chaotix');
+		triggerEvent('Change Character', 'dad', 'bf-encore-pixel-small');
+		triggerEvent('Change Character', 'dad', 'Knuckles-Encore');
+		triggerEvent('Change Character', 'dad', 'bf-encore-flipped');
+		triggerEvent('Change Character', 'dad', 'chaotix-hd');
+		triggerEvent('Change Character', 'dad', 'wechBeast');
+		triggerEvent('Change Character', 'dad', 'bf-encore-red');
+		triggerEvent('Change Character', 'dad', 'wechBeast-flipped');
+		triggerEvent('Change Character', 'dad', 'Satanos');
+		triggerEvent('Change Character', 'dad', 'Eggman-Encore');
+		triggerEvent('Change Character', 'dad', 'sonicexe');
+		triggerEvent('Change Character', 'dad', 'lordxEncore');
+		triggerEvent('Change Character', 'dad', 'fatal-sonic');
+		triggerEvent('Change Character', 'dad', 'bf-encore-pixel');
+		triggerEvent('Change Character', 'dad', 'ycr-cherribun');
+		triggerEvent('Change Character', 'dad', 'BEAST-Enc');
+		triggerEvent('Change Character', 'dad', 'Encore-right');
+		triggerEvent('Change Character', 'dad', 'majin');
+		triggerEvent('Change Character', 'dad', 'bf-encore-majin');
+		triggerEvent('Change Character', 'dad', 'sunky');
+		triggerEvent('Change Character', 'dad', 'sanic');
+		triggerEvent('Change Character', 'dad', 'coldsteel');
+		triggerEvent('Change Character', 'dad', 'coldsteel_guitar');
+		triggerEvent('Change Character', 'dad', 'faker-encore');
+		triggerEvent('Change Character', 'dad', 'hog');
+		triggerEvent('Change Character', 'dad', 'bf-encore-black');
+		triggerEvent('Change Character', 'dad', 'exe-encore');
+		triggerEvent('Change Character', 'dad', 'scorched');
+		triggerEvent('Change Character', 'dad', 'ycr-mad-cherribun');
+		triggerEvent('Change Character', 'dad', 'bf-encore-small');
+		triggerEvent('Change Character', 'dad', 'majin-flipped');
+		triggerEvent('Change Character', 'dad', 'tailsdoll-flipped');
+		triggerEvent('Change Character', 'dad', 'sanic-flipped');
+		triggerEvent('Change Character', 'dad', 'Tails-Encore-flipped');
+		triggerEvent('Change Character', 'dad', 'true-fatal');
+		triggerEvent('Change Character', 'dad', 'wechBeast-flipped');
+		triggerEvent('Change Character', 'dad', 'coldsteel-flipped');
+		triggerEvent('Change Character', 'dad', 'scorched-flipped');
+		triggerEvent('Change Character', 'dad', 'Needlemouse-flipped');
+		triggerEvent('Change Character', 'dad', 'bf-needle-encore-small');
+		triggerEvent('Change Character', 'dad', 'bf-encore-pixel-smaller');
+		triggerEvent('Change Character', 'dad', 'bf-pixel-normal');
+		triggerEvent('Change Character', 'dad', 'faker_pixel');
+		
+		
+
+				triggerEvent('Change Character', 'gf', 'xterion-first');
+		triggerEvent('Change Character', 'gf', 'bf-john9doe-3d-xterion');
+		triggerEvent('Change Character', 'gf', 'tailsdoll');
+		triggerEvent('Change Character', 'gf', 'bf-john9doe-3d');
+		triggerEvent('Change Character', 'gf', 'xterion-second');
+		triggerEvent('Change Character', 'gf', 'Needlemouse');
+		triggerEvent('Change Character', 'gf', 'bf-needle-encore');
+		triggerEvent('Change Character', 'gf', 'Tails-Encore');
+		triggerEvent('Change Character', 'gf', 'bf-encore');
+		triggerEvent('Change Character', 'gf', 'gf');
+		triggerEvent('Change Character', 'gf', 'fleetway');
+		triggerEvent('Change Character', 'gf', 'sonic');
+		triggerEvent('Change Character', 'gf', 'fleetway-anims3');
+		triggerEvent('Change Character', 'gf', 'Chaotix');
+		triggerEvent('Change Character', 'gf', 'bf-encore-pixel-small');
+		triggerEvent('Change Character', 'gf', 'Knuckles-Encore');
+		triggerEvent('Change Character', 'gf', 'bf-encore-flipped');
+		triggerEvent('Change Character', 'gf', 'chaotix-hd');
+		triggerEvent('Change Character', 'gf', 'wechBeast');
+		triggerEvent('Change Character', 'gf', 'bf-encore-red');
+		triggerEvent('Change Character', 'gf', 'wechBeast-flipped');
+		triggerEvent('Change Character', 'gf', 'Satanos');
+		triggerEvent('Change Character', 'gf', 'Eggman-Encore');
+		triggerEvent('Change Character', 'gf', 'sonicexe');
+		triggerEvent('Change Character', 'gf', 'lordxEncore');
+		triggerEvent('Change Character', 'gf', 'fatal-sonic');
+		triggerEvent('Change Character', 'gf', 'bf-encore-pixel');
+		triggerEvent('Change Character', 'gf', 'ycr-cherribun');
+		triggerEvent('Change Character', 'gf', 'BEAST-Enc');
+		triggerEvent('Change Character', 'gf', 'Encore-right');
+		triggerEvent('Change Character', 'gf', 'majin');
+		triggerEvent('Change Character', 'gf', 'bf-encore-majin');
+		triggerEvent('Change Character', 'gf', 'sunky');
+		triggerEvent('Change Character', 'gf', 'sanic');
+		triggerEvent('Change Character', 'gf', 'coldsteel');
+		triggerEvent('Change Character', 'gf', 'coldsteel_guitar');
+		triggerEvent('Change Character', 'gf', 'faker-encore');
+		triggerEvent('Change Character', 'gf', 'hog');
+		triggerEvent('Change Character', 'gf', 'bf-encore-black');
+		triggerEvent('Change Character', 'gf', 'exe-encore');
+		triggerEvent('Change Character', 'gf', 'scorched');
+		triggerEvent('Change Character', 'gf', 'ycr-mad-cherribun');
+		triggerEvent('Change Character', 'gf', 'bf-encore-small');
+		triggerEvent('Change Character', 'gf', 'majin-flipped');
+		triggerEvent('Change Character', 'gf', 'tailsdoll-flipped');
+		triggerEvent('Change Character', 'gf', 'sanic-flipped');
+		triggerEvent('Change Character', 'gf', 'Tails-Encore-flipped');
+		triggerEvent('Change Character', 'gf', 'true-fatal');
+		triggerEvent('Change Character', 'gf', 'wechBeast-flipped');
+		triggerEvent('Change Character', 'gf', 'coldsteel-flipped');
+		triggerEvent('Change Character', 'gf', 'scorched-flipped');
+		triggerEvent('Change Character', 'gf', 'Needlemouse-flipped');
+		triggerEvent('Change Character', 'gf', 'bf-needle-encore-small');
+		triggerEvent('Change Character', 'gf', 'bf-encore-pixel-smaller');
+		triggerEvent('Change Character', 'gf', 'bf-pixel-normal');
+		triggerEvent('Change Character', 'gf', 'faker_pixel');
+		
+		triggerEvent('Change Character', 'bf', 'xterion-first');
+		triggerEvent('Change Character', 'bf', 'bf-john9doe-3d-xterion');
+		triggerEvent('Change Character', 'bf', 'tailsdoll');
+		triggerEvent('Change Character', 'bf', 'bf-john9doe-3d');
+		triggerEvent('Change Character', 'bf', 'xterion-second');
+		triggerEvent('Change Character', 'bf', 'Needlemouse');
+		triggerEvent('Change Character', 'bf', 'bf-needle-encore');
+		triggerEvent('Change Character', 'bf', 'Tails-Encore');
+		triggerEvent('Change Character', 'bf', 'bf-encore');
+		triggerEvent('Change Character', 'bf', 'bf');
+		triggerEvent('Change Character', 'bf', 'fleetway');
+		triggerEvent('Change Character', 'bf', 'sonic');
+		triggerEvent('Change Character', 'bf', 'fleetway-anims3');
+		triggerEvent('Change Character', 'bf', 'Chaotix');
+		triggerEvent('Change Character', 'bf', 'bf-encore-pixel-small');
+		triggerEvent('Change Character', 'bf', 'Knuckles-Encore');
+		triggerEvent('Change Character', 'bf', 'bf-encore-flipped');
+		triggerEvent('Change Character', 'bf', 'chaotix-hd');
+		triggerEvent('Change Character', 'bf', 'wechBeast');
+		triggerEvent('Change Character', 'bf', 'bf-encore-red');
+		triggerEvent('Change Character', 'bf', 'wechBeast-flipped');
+		triggerEvent('Change Character', 'bf', 'Satanos');
+		triggerEvent('Change Character', 'bf', 'Eggman-Encore');
+		triggerEvent('Change Character', 'bf', 'sonicexe');
+		triggerEvent('Change Character', 'bf', 'lordxEncore');
+		triggerEvent('Change Character', 'bf', 'fatal-sonic');
+		triggerEvent('Change Character', 'bf', 'bf-encore-pixel');
+		triggerEvent('Change Character', 'bf', 'ycr-cherribun');
+		triggerEvent('Change Character', 'bf', 'BEAST-Enc');
+		triggerEvent('Change Character', 'bf', 'Encore-right');
+		triggerEvent('Change Character', 'bf', 'majin');
+		triggerEvent('Change Character', 'bf', 'bf-encore-majin');
+		triggerEvent('Change Character', 'bf', 'sunky');
+		triggerEvent('Change Character', 'bf', 'sanic');
+		triggerEvent('Change Character', 'bf', 'coldsteel');
+		triggerEvent('Change Character', 'bf', 'coldsteel_guitar');
+		triggerEvent('Change Character', 'bf', 'faker-encore');
+		triggerEvent('Change Character', 'bf', 'hog');
+		triggerEvent('Change Character', 'bf', 'bf-encore-black');
+		triggerEvent('Change Character', 'bf', 'exe-encore');
+		triggerEvent('Change Character', 'bf', 'scorched');
+		triggerEvent('Change Character', 'bf', 'ycr-mad-cherribun');
+		triggerEvent('Change Character', 'bf', 'bf-encore-small');
+		triggerEvent('Change Character', 'bf', 'majin-flipped');
+		triggerEvent('Change Character', 'bf', 'tailsdoll-flipped');
+		triggerEvent('Change Character', 'bf', 'sanic-flipped');
+		triggerEvent('Change Character', 'bf', 'Tails-Encore-flipped');
+		triggerEvent('Change Character', 'bf', 'true-fatal');
+		triggerEvent('Change Character', 'bf', 'wechBeast-flipped');
+		triggerEvent('Change Character', 'bf', 'coldsteel-flipped');
+		triggerEvent('Change Character', 'bf', 'scorched-flipped');
+		triggerEvent('Change Character', 'bf', 'Needlemouse-flipped');
+		triggerEvent('Change Character', 'bf', 'bf-needle-encore-small');
+		triggerEvent('Change Character', 'bf', 'bf-encore-pixel-smaller');
+		triggerEvent('Change Character', 'bf', 'bf-pixel-normal');
+		triggerEvent('Change Character', 'bf', 'faker_pixel');
 	end
 end
 function onBeatHit()

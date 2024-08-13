@@ -291,6 +291,11 @@ class PlayState extends MusicBeatState
 
 		Paths.clearStoredMemory();
 
+		if (!chartingMode) {
+			ClientPrefs.data.doTheThing = false;
+			ClientPrefs.saveSettings();
+		}
+
 		startCallback = startCountdown;
 		endCallback = endSong;
 
@@ -989,6 +994,12 @@ class PlayState extends MusicBeatState
 			}
 
 			startedCountdown = true;
+			
+			if (!chartingMode) {
+				ClientPrefs.data.doTheThing = true;
+				ClientPrefs.saveSettings();
+			}
+				
 			Conductor.songPosition = -Conductor.crochet * 5;
 			setOnScripts('startedCountdown', true);
 			callOnScripts('onCountdownStarted', null);
@@ -2377,7 +2388,7 @@ class PlayState extends MusicBeatState
 							}
 
 							var lastAlpha:Float = boyfriend.alpha;
-							boyfriend.alpha = 0.00001;
+							boyfriend.alpha = 0;
 							boyfriend = boyfriendMap.get(value2);
 							boyfriend.alpha = lastAlpha;
 							iconP1.changeIcon(boyfriend.healthIcon);
@@ -2392,7 +2403,7 @@ class PlayState extends MusicBeatState
 
 							var wasGf:Bool = dad.curCharacter.startsWith('gf-') || dad.curCharacter == 'gf';
 							var lastAlpha:Float = dad.alpha;
-							dad.alpha = 0.00001;
+							dad.alpha = 0;
 							dad = dadMap.get(value2);
 							if(!dad.curCharacter.startsWith('gf-') && dad.curCharacter != 'gf') {
 								if(wasGf && gf != null) {
@@ -2416,7 +2427,7 @@ class PlayState extends MusicBeatState
 								}
 
 								var lastAlpha:Float = gf.alpha;
-								gf.alpha = 0.00001;
+								gf.alpha = 0;
 								gf = gfMap.get(value2);
 								gf.alpha = lastAlpha;
 							}

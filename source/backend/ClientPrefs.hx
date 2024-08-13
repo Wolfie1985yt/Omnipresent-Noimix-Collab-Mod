@@ -23,6 +23,7 @@ import states.TitleState;
 	public var omnipresentBeat:Bool = false;
 	public var cacheOnGPU:Bool = false;
 	public var smartCache:Bool = #if !switch false #else true #end;
+	public var doTheThing:Bool = false;
 	public var framerate:Int = 60;
 	public var camZooms:Bool = true;
 	public var hideHud:Bool = false;
