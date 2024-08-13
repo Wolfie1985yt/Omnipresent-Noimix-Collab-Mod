@@ -782,10 +782,12 @@ function onStepHit()
 		setProperty('gfGroup.y',150);
 	end
 	if curStep == 12560 then --second bf ending
-
+		setProperty('boyfriendGroup.x',780);
+		setProperty('boyfriendGroup.y',-125);
 	end
 	if curStep == 12624 then --third bf ending
-	
+		setProperty('boyfriendGroup.x',800);
+		setProperty('boyfriendGroup.y',-105);
 	end
 	if curStep == 12686 then --fourth bf ending
 	
@@ -1017,12 +1019,12 @@ function onTimerCompleted(tag)
 	if tag == 'bf-idle' then
 		setProperty('boyfriend.idleSuffix','')
 	end
-	if tag == 'reset-preload' and not getPropertyFromClass('states.PlatState','chartingMode') then
+	if tag == 'reset-preload' and getPropertyFromClass('states.PlayState','chartingMode') == false then
 		triggerEvent('Change Character', 'dad', 'tailsdoll');
 		triggerEvent('Change Character', 'bf', 'bf-john9doe-3d');
 		triggerEvent('Change Character', 'gf', 'gf');
 	end
-	if tag == 'preload' and not getPropertyFromClass('states.PlatState','chartingMode') then
+	if tag == 'preload' and getPropertyFromClass('states.PlayState','chartingMode') == false then
 		triggerEvent('Change Character', 'dad', 'xterion-first');
 		triggerEvent('Change Character', 'dad', 'bf-john9doe-3d-xterion');
 		triggerEvent('Change Character', 'dad', 'tailsdoll');
