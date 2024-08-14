@@ -68,13 +68,14 @@
 		}
 	],
 	"vocals_file": "",
-	"no_antialiasing": true,
+	"no_antialiasing": false,
 	"image": "characters/BF/HD/Sonic",
 	"position": [
 		0,
 		350
 	],
 	"healthicon": "sonic-rr",
+	
 	"flip_x": false,
 	"healthbar_colors": [
 		0,

@@ -2388,7 +2388,13 @@ class PlayState extends MusicBeatState
 							}
 
 							var lastAlpha:Float = boyfriend.alpha;
-							boyfriend.alpha = 0;
+							
+							if (value2 == 'bf-needle-encore' || value2 == 'bf-encore' || value2 == 'bf-encore-red' || value2 == 'bf-encore-majin' || value2 == 'bf-encore-black' || value2 == 'Encore-right') {
+								boyfriend.alpha = 0.00001;
+							} else {
+								boyfriend.alpha = 0.00001;
+								boyfriend.alpha = 0;
+							}
 							boyfriend = boyfriendMap.get(value2);
 							boyfriend.alpha = lastAlpha;
 							iconP1.changeIcon(boyfriend.healthIcon);
@@ -2403,7 +2409,12 @@ class PlayState extends MusicBeatState
 
 							var wasGf:Bool = dad.curCharacter.startsWith('gf-') || dad.curCharacter == 'gf';
 							var lastAlpha:Float = dad.alpha;
-							dad.alpha = 0;
+							if (value2 == 'BEAST-Enc' || value2 == 'coldsteel' || value2 == 'coldsteel_guitar' || value2 == 'Eggman-Encore' || value2 == 'Tails-Encore' || value2 == 'xterion-first' || value2 == 'Needlemouse' || value2 == 'fleetway' || value2 == 'fleetway-anims3' || value2 == 'majin' || value2 == 'lordxEncore' || value2 == 'fatal-sonic' || value2 == 'ycr-cherribun' || value2 == 'ycr-mad-cherribun' || value2 == 'Satanos' || value2 == 'wechBeast' || value2 == 'hog' || value2 == 'exe-encore' || value2 == 'scorched') {
+								dad.alpha = 0.00001;
+							} else {
+								dad.alpha = 0.00001;
+								dad.alpha = 0;
+							}
 							dad = dadMap.get(value2);
 							if(!dad.curCharacter.startsWith('gf-') && dad.curCharacter != 'gf') {
 								if(wasGf && gf != null) {
@@ -2427,7 +2438,12 @@ class PlayState extends MusicBeatState
 								}
 
 								var lastAlpha:Float = gf.alpha;
-								gf.alpha = 0;
+								if (value2 == 'sonic') {
+									gf.alpha = 0.00001;
+								} else {
+									gf.alpha = 0.00001;
+									gf.alpha = 0;
+								}
 								gf = gfMap.get(value2);
 								gf.alpha = lastAlpha;
 							}
