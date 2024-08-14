@@ -49,8 +49,6 @@ function onCreate()
 	addLuaScript('mods/custom_notetypes/DAD and GF');
 	addLuaScript('mods/custom_notetypes/GF and BF');
 
-	setProperty('cpuControlled',true);
-
 	makeLuaSprite('flashingshit', '', 0, 0);
 	makeGraphic('flashingshit',1920,1080,'000000')
 	addLuaSprite('flashingshit', true);
@@ -67,7 +65,7 @@ function onCreate()
 	setProperty('flashingshit2.scale.x',2)
 	setProperty('flashingshit2.scale.y',2)
 	setProperty('flashingshit2.alpha',0)
-	setObjectCamera('flashingshit', 'hud')
+	setObjectCamera('flashingshit', 'camHUD')
 
 	precacheSong('omnipresent/Inst');
 	precacheSong('omnipresent/Voices-Opponent');
@@ -124,11 +122,22 @@ end
 function onUpdate(elapsed)
 	if curStep == 6607 then
 		setProperty('simplejump.visible',true);
-		setProperty('simplejump.alpha',0);
-		doTweenAlpha('jump1', 'simplejump', 1, 0.3875, 'linear');
+		setProperty('simplejump.alpha',0.00001);
+		doTweenAlpha('jump1', 'simplejump', 1, 0.38, 'linear');
 	end
 	if curStep == 6640 then
 		removeLuaSprite('simplejump');
+	end
+	if curStep == 5345 then
+		setProperty('simplejump.visible',true);
+		setProperty('alpha.visible',0.00001);
+	end
+	if curStep == 5346 then
+		setProperty('simplejump.visible',false);
+	end
+	if curStep == 3232 then
+		runTimer('ringStart',0.1);
+		runTimer('ringFinish',0.2);
 	end
 	if curStep == 16 then --wolfie credits
 		makeLuaSprite('CreditsBG',nil,-292,200)
@@ -891,18 +900,18 @@ function onUpdate(elapsed)
 	end
 	if curStep == 12207 then
 		doTweenAlpha('hudAlpha', 'camHUD', 0, 1.29, 'linear');
-		doTweenAlpha('flashingshitAlpha', 'flashingshit', 1, 0.3225, 'linear');
+		doTweenAlpha('flashingshitAlpha', 'flashingshit2', 1, 0.3225, 'linear');
 	end
 	if curStep == 12224 then
 		doTweenAlpha('hudAlpha', 'camHUD', 1, 1.29, 'linear');
-		doTweenAlpha('flashingshitAlpha', 'flashingshit', 0, 1.29, 'linear');
+		doTweenAlpha('flashingshitAlpha', 'flashingshit2', 0, 1.29, 'linear');
 	end
 	if curStep == 12752 then
 		doTweenAlpha('hudAlpha', 'camHUD', 0, 1.55, 'linear');
-		doTweenAlpha('flashingshitAlpha', 'flashingshit', 1, 1.55, 'linear');
+		doTweenAlpha('flashingshitAlpha', 'flashingshit2', 1, 1.55, 'linear');
 	end
 	if curStep == 12816 then
-		doTweenAlpha('flashingshitAlpha', 'flashingshit', 0, 6.2, 'linear');
+		doTweenAlpha('flashingshitAlpha', 'flashingshit2', 0, 6.2, 'linear');
 	end
 	if curStep == 12848 then
 		doTweenAlpha('hudAlpha', 'camHUD', 1, 3.1, 'linear');

@@ -2845,6 +2845,10 @@ class Omni extends BaseStage
 				tails_grass.visible = true;
 				tails_floor.visible = true;
 				hogOverlay.visible = true;
+				faker_overlay.visible = true;
+			
+			case 3232:
+				redRingTransition();
 			
 			case 594, 9842: //deactivate lag shit
 				needleSky.visible = false;
@@ -2860,6 +2864,7 @@ class Omni extends BaseStage
 				tails_grass.visible = false;
 				tails_floor.visible = false;
 				hogOverlay.visible = false;
+				faker_overlay.visible = false;
 			
 			case 10322: //more lag shit
 				majin_bush2.visible = true;
@@ -3467,7 +3472,6 @@ class Omni extends BaseStage
 				faker_trees2.visible = true;
 				faker_ground2.visible = true;
 				faker_bg2.visible = true;
-				faker_overlay.visible = true;
 				scorchedBg.visible = true;
 				scorchedMotain.visible = true;
 				scorchedWaterFalls.visible = true;
@@ -3501,7 +3505,6 @@ class Omni extends BaseStage
 				faker_trees2.visible = false;
 				faker_ground2.visible = false;
 				faker_bg2.visible = false;
-				faker_overlay.visible = false;
 				scorchedBg.visible = false;
 				scorchedMotain.visible = false;
 				scorchedWaterFalls.visible = false;

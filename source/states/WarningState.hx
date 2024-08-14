@@ -27,7 +27,7 @@ class WarningState extends MusicBeatState
 		warnText = new FlxText(0, 0, FlxG.width,
 			" Hey, you are seeing this message because your PC doesnt meet the mod requirements!\n
 			 This Mod requires at least 16GB of RAM, or a really good GPU (4 or more GB of VRAM).\n
-			 According to the mod, you have about " + RAMAgain + "GB of usable RAM.\n
+			 According to the mod, you have about " + RAMAgain + "GB of RAM.\n
 			 There is a setting in the options called Smart Caching, which you can use if you have a good GPU to decrease lag.\n
 			 You can still try to play but no guarantees!\n
 			 You've been warned!",
