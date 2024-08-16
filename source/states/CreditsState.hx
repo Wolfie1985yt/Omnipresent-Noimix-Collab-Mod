@@ -84,7 +84,7 @@ class CreditsState extends MusicBeatState
 			['MajinCrast',			'MajinCrast',		'Artist of Restoration of Sonic.EXE',						'https://www.youtube.com/channel/UCZEIlnS1W2WOvK1A0A2p4wQ',										'000986'],
 			['Noveni',				'noveni',			'Artist of EXETernal',										'https://twitter.com/NoveniNine',																'd99e7c'],
 			['Puffywuffy',			'face',				'Artist',													'',																								'878787'],
-			['Raven',				'raven',			'Owner of Faker and Former Director of VS Sonic.EXE',		'https://x.com/_revie03?lang=en',																'aaaaaa'],
+			['Raven',				'raven',			'Owner of Faker and Former Director of VS Sonic.EXE',		'https://twitter.com/corven_03',																'aaaaaa'],
 			['ScorchVx',			'scorch',			'Artist / Owner of Grimeware',								'https://twitter.com/ScorchVx?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor',			'ffffff'],
 			['ShutUpJoJo',			'jojo',				'Original Owner of Needlemouse and Artist of VS Sonic.EXE',	'https://x.com/shutupjojo_',																	'565656'],
 			['Stankfield',			'stankfield',		'Original Sonic.EXE mod Artist',							'https://twitter.com/stankfield',																'8100dd'],
