@@ -9,8 +9,7 @@ haxelib install flixel
 haxelib install flixel-addons
 haxelib install flixel-ui
 haxelib install flixel-tools
-haxelib install SScript
-haxelib install hxCodec 2.5.1
+haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc 70e7f5f3e76d526ac6fb8f0e6665efe7dfda589d
 haxelib install tjson
 haxelib set SScript 8.1.6
 haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev

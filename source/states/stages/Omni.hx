@@ -7,18 +7,13 @@ import openfl.Assets;
 import sys.io.Process;
 import objects.Character;
 import states.PlayState as PlayState;
-
-#if (VIDEOS_ALLOWED && !mobile)
-import vlc.MP4Handler as VideoHandler;
-#end
-#if mobile
-import vlc.MP4Handler;
-#end
+import hxvlc.flixel.FlxVideoSprite;
 
 class Omni extends BaseStage
 {
-	// If you're moving your stage from PlayState to a stage file,
-	// you might have to rename some variables if they're missing, for example: camZooming -> game.camZooming
+	var gpuCache:Bool = false;
+	var lowQuality:Bool = false;
+	var ringStarted:Bool = false;
 
 	//For Philly Glow events
 	var blammedLightsBlack:FlxSprite;
@@ -26,9 +21,6 @@ class Omni extends BaseStage
 	var phillyGlowParticles:FlxTypedGroup<PhillyGlowParticle>;
 	var curLightEvent:Int = -1;
 	var phillyLightsColors:Array<FlxColor>;
-
-	var gpuCache:Bool = false;
-	var lowQuality:Bool = false;
 
 	var sunkyTransition:FlxSprite;
 	var daJumpscare:FlxSprite;
@@ -40,7 +32,6 @@ class Omni extends BaseStage
 	
 	var needleSky:BGSprite;
 	var needleMoutains:BGSprite;
-	var needleRuins:BGSprite;
 	var needleBuildings:BGSprite;
 	var conkCreet:BGSprite;
 	var needleFg:FlxSprite;
@@ -90,8 +81,6 @@ class Omni extends BaseStage
 	
 	var satanos_sky:FlxSprite;
 	var satanos_trees:FlxSprite;
-	var satanos_palm:FlxSprite;
-	var satanos_sadpalm:FlxSprite;
 	var satanos_floor:FlxSprite;
 	var satanos_rock:FlxSprite;
 	
@@ -100,7 +89,6 @@ class Omni extends BaseStage
 	
 	var sonic_sky:FlxSprite;
 	var sonic_water:FlxSprite;
-	var sonic_mountains:FlxSprite;
 	var sonic_waterfall:FlxSprite;
 	var sonic_ground:FlxSprite;
 
@@ -109,9 +97,7 @@ class Omni extends BaseStage
 	var lordx_floor:BGSprite;
 	var lordx_eyeflower:BGSprite;
 	var lordx_notknuckles:BGSprite;
-	var lordx_smallflower:BGSprite;
 	var lordx_bfsmallflower:BGSprite;
-	var lordx_smallflower2:BGSprite;
 	var lordx_tree:BGSprite;
 	
 	var domain:FlxSprite;
@@ -133,8 +119,12 @@ class Omni extends BaseStage
 	var majin_fgmajin2:BGSprite;
 	
 	var sunky_bg:BGSprite;
-	var sunky_balls:BGSprite;
+	var sunky_balls:FlxSprite;
 	var sunky_stage:BGSprite;
+	var sunky_speakers:FlxSprite;
+	var sunky_milk:FlxSprite;
+	var sunky_cereal:FlxSprite;
+	var sunkyMoment:Bool = false;
 	
 	var sanic_bg:BGSprite;
 	
@@ -223,6 +213,7 @@ class Omni extends BaseStage
 	var char41:FlxSprite;
 	var char42:FlxSprite;
 
+	var video:FlxVideoSprite;
 
 	var monitorCounter:Int = 0;
 	var theThing:Int = 1;
@@ -238,18 +229,15 @@ class Omni extends BaseStage
     }
 	
 	public function preloadVideo(graphic:String) {
-        #if desktop
-		var videoPreloader:VideoHandler = new VideoHandler();
-		videoPreloader.play(Paths.video(graphic));
-        videoPreloader.dispose();
-		videoPreloader.stop();
-		videoPreloader.volume = 0;
-		trace('Video Successfully Preloaded: assets/videos/' + graphic + '.mp4');		
-		#else
-		var videoPreloader:MP4Sprite = new MP4Sprite(0,0);
-		videoPreloader.destroy();
-		videoPreloader.alpha = 0;
-		#end
+		video = new FlxVideoSprite(0, 0);
+		video.updateHitbox();
+		video.screenCenter();
+		video.load(Paths.video(graphic));
+		add(video);
+		video.play();
+		video.pause();
+		video.destroy();
+		trace("Video Preloaded Successfully: " + graphic + ".mp4");
     }
 
 	override function create()
@@ -457,10 +445,13 @@ class Omni extends BaseStage
 		preload('bgs/hog/blast/Rocks');
 		preload('bgs/hog/blast/Sunset');
 		preload('bgs/hog/blast/Waterfalls');
-		preload('bgs/sunky/ball');
-		preload('bgs/sunky/stage');
+		preload('bgs/sunky/hang');
+		preload('bgs/sunky/floor');
 		preload('bgs/sunky/sunkTransition');
 		preload('bgs/sunky/sunky BG');
+		preload('bgs/sunky/milk');
+		preload('bgs/sunky/ceral');
+		preload('bgs/sunky/speakers');
 		preload('bgs/tails-doll/bg');
 		preload('bgs/too-slow-encore/ground');
 		preload('bgs/too-slow-encore/mountains');
@@ -532,26 +523,16 @@ class Omni extends BaseStage
 		add(needleMoutains);
 		
 		if (!lowQuality) {
-			needleRuins = new BGSprite('bgs/needlemouse/ruins', -775, -310, 1, 0.9);
-			needleRuins.setGraphicSize(Std.int(needleRuins.width * 1.4));
-			needleRuins.visible = false;
-			add(needleRuins);
-
-			needleBuildings = new BGSprite('bgs/needlemouse/buildings', -1000, -100, 1, 0.9);
+			needleBuildings = new BGSprite('bgs/needlemouse/buildings', -974, -27, 1, 0.9);
 			needleBuildings.visible = false;
 			add(needleBuildings);
 		} else {
-			needleRuins = new BGSprite('blank', -775, -310, 1, 0.9);
-			needleRuins.setGraphicSize(Std.int(needleRuins.width * 1.4));
-			needleRuins.visible = false;
-			add(needleRuins);
-
-			needleBuildings = new BGSprite('blank', -1000, -100, 1, 0.9);
+			needleBuildings = new BGSprite('blank', -744, 367, 1, 0.9);
 			needleBuildings.visible = false;
 			add(needleBuildings);
 		}
 
-		conkCreet = new BGSprite('bgs/needlemouse/CONK_CREET', -775, -310, 1, 0.9);
+		conkCreet = new BGSprite('bgs/needlemouse/CONK_CREET', -775, 841, 1, 0.9);
 		conkCreet.setGraphicSize(Std.int(conkCreet.width * 1.4));
 		conkCreet.visible = false;
 		add(conkCreet);
@@ -559,7 +540,7 @@ class Omni extends BaseStage
 		tails_sky = new FlxSprite(-450, -1000);
 		tails_sky.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_sky'));
 		tails_sky.scrollFactor.set(1, 1);
-		tails_sky.scale.set(1.2, 1.2);
+		tails_sky.scale.set(1.6, 1.2);
 		tails_sky.antialiasing = true;
 		tails_sky.visible = false;
 		add(tails_sky);
@@ -619,6 +600,7 @@ class Omni extends BaseStage
 		wall.animation.addByPrefix('a', 'Wall instance 1');
 		wall.animation.play('a');
 		wall.antialiasing = true;
+		wall.scale.y = 1.5;
 		wall.scrollFactor.set(1.1, 1.1);
 		wall.alpha = 0.000001;
 		add(wall);
@@ -726,8 +708,8 @@ class Omni extends BaseStage
 	
 		fucklesAmyBg = new FlxSprite(1195, 630);
 		fucklesAmyBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_amy');
-		fucklesAmyBg.animation.addByPrefix('idle', 'amy bobbing', 24);
-		fucklesAmyBg.animation.addByPrefix('fear', 'amy fear', 24, true);
+		fucklesAmyBg.animation.addByPrefix('idle', 'amy bobbing', 24, false);
+		fucklesAmyBg.animation.addByPrefix('fear', 'amy fear', 24, false);
 		fucklesAmyBg.scale.x = 6;
 		fucklesAmyBg.scale.y = 6;
 		fucklesAmyBg.visible = false;
@@ -735,8 +717,8 @@ class Omni extends BaseStage
 
 		fucklesCharmyBg = new FlxSprite(1000, 500);
 		fucklesCharmyBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_charmy');
-		fucklesCharmyBg.animation.addByPrefix('idle', 'charmy bobbing', 24);
-		fucklesCharmyBg.animation.addByPrefix('fear', 'charmy fear', 24, true);
+		fucklesCharmyBg.animation.addByPrefix('idle', 'charmy bobbing', 24, false);
+		fucklesCharmyBg.animation.addByPrefix('fear', 'charmy fear', 24, false);
 		fucklesCharmyBg.scale.x = 6;
 		fucklesCharmyBg.scale.y = 6;
 		fucklesCharmyBg.visible = false;
@@ -744,8 +726,8 @@ class Omni extends BaseStage
 			
 		fucklesMightyBg = new FlxSprite(590, 650);
 		fucklesMightyBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_mighty');
-		fucklesMightyBg.animation.addByPrefix('idle', 'mighty bobbing', 24);
-		fucklesMightyBg.animation.addByPrefix('fear', 'mighty fear', 24, true);
+		fucklesMightyBg.animation.addByPrefix('idle', 'mighty bobbing', 24, false);
+		fucklesMightyBg.animation.addByPrefix('fear', 'mighty fear', 24, false);
 		fucklesMightyBg.scale.x = 6;
 		fucklesMightyBg.scale.y = 6;
 		fucklesMightyBg.visible = false;
@@ -753,8 +735,8 @@ class Omni extends BaseStage
 			
 		fucklesEspioBg = new FlxSprite(1400, 660);
 		fucklesEspioBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_espio');
-		fucklesEspioBg.animation.addByPrefix('idle', 'espio bobbing', 24);
-		fucklesEspioBg.animation.addByPrefix('fear', 'espio fear', 24, true);
+		fucklesEspioBg.animation.addByPrefix('idle', 'espio bobbing', 24, false);
+		fucklesEspioBg.animation.addByPrefix('fear', 'espio fear', 24, false);
 		fucklesEspioBg.scale.x = 6;
 		fucklesEspioBg.scale.y = 6;
 		fucklesEspioBg.visible = false;
@@ -762,8 +744,8 @@ class Omni extends BaseStage
 		
 		fucklesKnuxBg = new FlxSprite(-60, 645);
 		fucklesKnuxBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_knuckles');
-		fucklesKnuxBg.animation.addByPrefix('idle', 'knuckles bobbing', 24);
-		fucklesKnuxBg.animation.addByPrefix('fear', 'knuckles fear', 24, true);
+		fucklesKnuxBg.animation.addByPrefix('idle', 'knuckles bobbing', 24, false);
+		fucklesKnuxBg.animation.addByPrefix('fear', 'knuckles fear', 24, false);
 		fucklesKnuxBg.scale.x = 6;
 		fucklesKnuxBg.scale.y = 6;
 		fucklesKnuxBg.visible = false;
@@ -771,8 +753,8 @@ class Omni extends BaseStage
 	
 		fucklesVectorBg = new FlxSprite(-250, 615);
 		fucklesVectorBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_vector');
-		fucklesVectorBg.animation.addByPrefix('idle', 'vector bobbing', 24);
-		fucklesVectorBg.animation.addByPrefix('fear', 'vector fear', 24, true);
+		fucklesVectorBg.animation.addByPrefix('idle', 'vector bobbing', 24, false);
+		fucklesVectorBg.animation.addByPrefix('fear', 'vector fear', 24, false);
 		fucklesVectorBg.scale.x = 6;
 		fucklesVectorBg.scale.y = 6;
 		fucklesVectorBg.visible = false;
@@ -802,14 +784,14 @@ class Omni extends BaseStage
 		#end
 		
 		if (!lowQuality) {
-			knuckles_city1 = new FlxSprite(-930, -800);
+			knuckles_city1 = new FlxSprite(-930, -700);
 			knuckles_city1.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/kn_city1'));
 			knuckles_city1.scrollFactor.set(0.9, 0.9);
 			knuckles_city1.scale.set(2, 1.6);
 			knuckles_city1.visible = false;
 			add(knuckles_city1);
 		
-			knuckles_city2 = new FlxSprite(-930, -800);
+			knuckles_city2 = new FlxSprite(-930, -760);
 			knuckles_city2.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/kn_city2'));
 			knuckles_city2.scrollFactor.set(1.07, 1);
 			knuckles_city2.scale.set(2, 1.6);
@@ -838,7 +820,7 @@ class Omni extends BaseStage
 		knuckles_floor.visible = false;
 		add(knuckles_floor);
 		
-		wechidna_sky = new FlxSprite(-820, -950);
+		wechidna_sky = new FlxSprite(-820, -1250);
 		wechidna_sky.loadGraphic(Paths.image('bgs/Wechidna/sky'));
 		wechidna_sky.scrollFactor.set(0.1, 0.1);
 		wechidna_sky.scale.set(1, 1);
@@ -846,7 +828,7 @@ class Omni extends BaseStage
 		wechidna_sky.antialiasing = ClientPrefs.data.antialiasing;
 		add(wechidna_sky);
 		
-		wechidna_building1 = new FlxSprite(-600, -900);
+		wechidna_building1 = new FlxSprite(-800, -200);
 		wechidna_building1.loadGraphic(Paths.image('bgs/Wechidna/building'));
 		wechidna_building1.scrollFactor.set(0.3, 0.3);
 		wechidna_building1.scale.set(1, 1);
@@ -862,7 +844,7 @@ class Omni extends BaseStage
 		wechidna_building2.antialiasing = ClientPrefs.data.antialiasing;
 		add(wechidna_building2);
 		
-		wechidna_floor = new FlxSprite(0, 0);
+		wechidna_floor = new FlxSprite(0, 1480);
 		wechidna_floor.loadGraphic(Paths.image('bgs/Wechidna/floor'));
 		wechidna_floor.scrollFactor.set(1, 1);
 		wechidna_floor.scale.set(1, 1);
@@ -870,7 +852,7 @@ class Omni extends BaseStage
 		wechidna_floor.antialiasing = ClientPrefs.data.antialiasing;
 		add(wechidna_floor);
 		
-		wechidna_trees = new FlxSprite(0, 0);
+		wechidna_trees = new FlxSprite(70, 230);
 		wechidna_trees.loadGraphic(Paths.image('bgs/Wechidna/bg-trees'));
 		wechidna_trees.scrollFactor.set(1, 1);
 		wechidna_trees.scale.set(1, 1);
@@ -879,7 +861,7 @@ class Omni extends BaseStage
 		add(wechidna_trees);
 		
 		if (!lowQuality) {
-			wechidna_grass = new FlxSprite(0, 0);
+			wechidna_grass = new FlxSprite(560, 1050);
 			wechidna_grass.loadGraphic(Paths.image('bgs/Wechidna/bg-grass'));
 			wechidna_grass.scrollFactor.set(1, 1);
 			wechidna_grass.scale.set(1, 1);
@@ -887,7 +869,7 @@ class Omni extends BaseStage
 			wechidna_grass.antialiasing = ClientPrefs.data.antialiasing;
 			add(wechidna_grass);
 
-			wechidna_thing = new FlxSprite(0, 0);
+			wechidna_thing = new FlxSprite(30, 1570);
 			wechidna_thing.loadGraphic(Paths.image('bgs/Wechidna/bg-smth'));
 			wechidna_thing.scrollFactor.set(1, 1);
 			wechidna_thing.scale.set(1, 1);
@@ -920,48 +902,13 @@ class Omni extends BaseStage
 		satanos_sky.antialiasing = ClientPrefs.data.antialiasing;
 		add(satanos_sky);
 		
-		satanos_trees = new FlxSprite(-950, -820);
+		satanos_trees = new FlxSprite(-950, -220);
 		satanos_trees.loadGraphic(Paths.image('bgs/satanos-bg/Trees'));
 		satanos_trees.scrollFactor.set(1.2, 0.9);
 		satanos_trees.scale.set(1.2, 1.2);
 		satanos_trees.visible = false;
 		satanos_trees.antialiasing = ClientPrefs.data.antialiasing;
 		add(satanos_trees);
-		
-		
-		if (!lowQuality) {
-			satanos_palm = new FlxSprite(-950, -820);
-			satanos_palm.loadGraphic(Paths.image('bgs/satanos-bg/Palm'));
-			satanos_palm.scrollFactor.set(1, 1);
-			satanos_palm.scale.set(1.2, 1.2);
-			satanos_palm.visible = false;
-			satanos_palm.antialiasing = ClientPrefs.data.antialiasing;
-			add(satanos_palm);
-		
-			satanos_sadpalm = new FlxSprite(-950, -820);
-			satanos_sadpalm.loadGraphic(Paths.image('bgs/satanos-bg/Sadpalm'));
-			satanos_sadpalm.scrollFactor.set(1, 1);
-			satanos_sadpalm.scale.set(1.2, 1.2);
-			satanos_sadpalm.visible = false;
-			satanos_sadpalm.antialiasing = ClientPrefs.data.antialiasing;
-			add(satanos_sadpalm);
-		} else {
-			satanos_palm = new FlxSprite(-950, -820);
-			satanos_palm.loadGraphic(Paths.image('blank'));
-			satanos_palm.scrollFactor.set(1, 1);
-			satanos_palm.scale.set(1.2, 1.2);
-			satanos_palm.visible = false;
-			satanos_palm.antialiasing = ClientPrefs.data.antialiasing;
-			add(satanos_palm);
-		
-			satanos_sadpalm = new FlxSprite(-950, -820);
-			satanos_sadpalm.loadGraphic(Paths.image('blank'));
-			satanos_sadpalm.scrollFactor.set(1, 1);
-			satanos_sadpalm.scale.set(1.2, 1.2);
-			satanos_sadpalm.visible = false;
-			satanos_sadpalm.antialiasing = ClientPrefs.data.antialiasing;
-			add(satanos_sadpalm);
-		}
 			
 		satanos_floor = new FlxSprite(-950, -820);
 		satanos_floor.loadGraphic(Paths.image('bgs/satanos-bg/gamemasters'));
@@ -980,21 +927,13 @@ class Omni extends BaseStage
 		add(sonic_sky);
 		
 		if (!lowQuality) {
-			sonic_water = new FlxSprite(-620, -700);
+			sonic_water = new FlxSprite(-620, 200);
 			sonic_water.loadGraphic(Paths.image('bgs/too-slow-encore/water'));
 			sonic_water.scrollFactor.set(0.5, 0.8);
 			sonic_water.scale.set(1, 1);
 			sonic_water.visible = false;
 			sonic_water.antialiasing = ClientPrefs.data.antialiasing;
 			add(sonic_water);
-		
-			sonic_mountains = new FlxSprite(-650, -700);
-			sonic_mountains.loadGraphic(Paths.image('bgs/too-slow-encore/mountains'));
-			sonic_mountains.scrollFactor.set(0.6, 0.85);
-			sonic_mountains.scale.set(1, 1);
-			sonic_mountains.visible = false;
-			sonic_mountains.antialiasing = ClientPrefs.data.antialiasing;
-			add(sonic_mountains);
 		
 			sonic_waterfall = new FlxSprite(-650, -700);
 			sonic_waterfall.loadGraphic(Paths.image('bgs/too-slow-encore/waterfall'));
@@ -1011,14 +950,6 @@ class Omni extends BaseStage
 			sonic_water.visible = false;
 			sonic_water.antialiasing = ClientPrefs.data.antialiasing;
 			add(sonic_water);
-		
-			sonic_mountains = new FlxSprite(-650, -700);
-			sonic_mountains.loadGraphic(Paths.image('blank'));
-			sonic_mountains.scrollFactor.set(0.6, 0.85);
-			sonic_mountains.scale.set(1, 1);
-			sonic_mountains.visible = false;
-			sonic_mountains.antialiasing = ClientPrefs.data.antialiasing;
-			add(sonic_mountains);
 		
 			sonic_waterfall = new FlxSprite(-650, -700);
 			sonic_waterfall.loadGraphic(Paths.image('blank'));
@@ -1042,12 +973,12 @@ class Omni extends BaseStage
 		lordx_sky.visible = false;
 		add(lordx_sky);
 					
-		lordx_hills = new BGSprite('bgs/LordXStage/hills1', -1440, -806 + 200, 1.0, 1.0);
+		lordx_hills = new BGSprite('bgs/LordXStage/hills1', -1340, -606 + 200, 1.0, 1.0);
 		lordx_hills.setGraphicSize(Std.int(lordx_hills.width * 0.5));
 		lordx_hills.visible = false;
 		add(lordx_hills);
 
-		lordx_floor = new BGSprite('bgs/LordXStage/floor', -1400, -496, 1.0, 1.0);
+		lordx_floor = new BGSprite('bgs/LordXStage/floor', -1450, 426, 1.0, 1.0);
 		lordx_floor.setGraphicSize(Std.int(lordx_floor.width * 0.55));
 		lordx_floor.visible = false;
 		add(lordx_floor);
@@ -1062,23 +993,13 @@ class Omni extends BaseStage
 			lordx_notknuckles.setGraphicSize(Std.int(lordx_notknuckles.width * 0.5));
 			lordx_notknuckles.visible = false;
 			add(lordx_notknuckles);
-
-			lordx_smallflower = new BGSprite('bgs/LordXStage/smallflower', -1500, -506, 1.0, 1.0);
-			lordx_smallflower.setGraphicSize(Std.int(lordx_smallflower.width * 0.6));
-			lordx_smallflower.visible = false;
-			add(lordx_smallflower);
 				
-			lordx_bfsmallflower = new BGSprite('bgs/LordXStage/smallflower', -1500 + 300, -506 - 50, 1.0, 1.0);
+			lordx_bfsmallflower = new BGSprite('bgs/LordXStage/smallflower', -100 + 200, 406 - 50, 1.0, 1.0);
 			lordx_bfsmallflower.setGraphicSize(Std.int(lordx_bfsmallflower.width * 0.6));
 			lordx_bfsmallflower.visible = false;
 			add(lordx_bfsmallflower);
 
-			lordx_smallflower2 = new BGSprite('bgs/LordXStage/smallflowe2', -1500, -506 - 50, 1.0, 1.0);
-			lordx_smallflower2.setGraphicSize(Std.int(lordx_smallflower2.width * 0.6));
-			lordx_smallflower2.visible = false;
-			add(lordx_smallflower2);
-
-			lordx_tree = new BGSprite('bgs/LordXStage/tree', -1900 + 650 - 100, -1006 + 350, 1.0, 1.0);
+			lordx_tree = new BGSprite('bgs/LordXStage/tree', 150 + 1000 - 100, -1006 + 400, 1.0, 1.0);
 			lordx_tree.setGraphicSize(Std.int(lordx_tree.width * .7));
 			lordx_tree.visible = false;
 			add(lordx_tree);
@@ -1092,23 +1013,13 @@ class Omni extends BaseStage
 			lordx_notknuckles.setGraphicSize(Std.int(lordx_notknuckles.width * 0.5));
 			lordx_notknuckles.visible = false;
 			add(lordx_notknuckles);
-
-			lordx_smallflower = new BGSprite('blank', -1500, -506, 1.0, 1.0);
-			lordx_smallflower.setGraphicSize(Std.int(lordx_smallflower.width * 0.6));
-			lordx_smallflower.visible = false;
-			add(lordx_smallflower);
-				
-			lordx_bfsmallflower = new BGSprite('blank', -1500 + 300, -506 - 50, 1.0, 1.0);
+	
+			lordx_bfsmallflower = new BGSprite('blank', -100 + 300, -6 - 50, 1.0, 1.0);
 			lordx_bfsmallflower.setGraphicSize(Std.int(lordx_bfsmallflower.width * 0.6));
 			lordx_bfsmallflower.visible = false;
 			add(lordx_bfsmallflower);
 
-			lordx_smallflower2 = new BGSprite('blank', -1500, -506 - 50, 1.0, 1.0);
-			lordx_smallflower2.setGraphicSize(Std.int(lordx_smallflower2.width * 0.6));
-			lordx_smallflower2.visible = false;
-			add(lordx_smallflower2);
-
-			lordx_tree = new BGSprite('blank', -1900 + 650 - 100, -1006 + 350, 1.0, 1.0);
+			lordx_tree = new BGSprite('blank', -1000 + 950 - 100, -1006 + 350, 1.0, 1.0);
 			lordx_tree.setGraphicSize(Std.int(lordx_tree.width * .7));
 			lordx_tree.visible = false;
 			add(lordx_tree);
@@ -1149,10 +1060,10 @@ class Omni extends BaseStage
 			add(domain);
 		}
 		
-		xeno_sky = new FlxSprite(-750, -1100);
+		xeno_sky = new FlxSprite(-450, -1100);
 		xeno_sky.loadGraphic(Paths.image('bgs/triple-trouble-encore/xeno/xeno_sky'));
 		xeno_sky.scrollFactor.set(1, 1);
-		xeno_sky.scale.set(1.7, 1.55);
+		xeno_sky.scale.set(2, 1.55);
 		xeno_sky.visible = false;
 		xeno_sky.flipX = true;
 		xeno_sky.antialiasing = ClientPrefs.data.antialiasing;
@@ -1251,26 +1162,64 @@ class Omni extends BaseStage
 		majin_floor.visible = false;
 		add(majin_floor);		
 
-		sunky_bg = new BGSprite('bgs/sunky/sunky BG', -300, -500, 0.9, 0.9);
+		sunky_bg = new BGSprite('bgs/sunky/sunky BG', 50, -500, 0.9, 0.9);
 		sunky_bg.visible = false;
+		sunky_bg.scale.x = 2;
 		add(sunky_bg);
-			
+		
+		sunky_milk = new FlxSprite(1210, 10);
+		sunky_milk.loadGraphic(Paths.image('bgs/sunky/milk'));
+		sunky_milk.scrollFactor.set(0.7, 0.7);
+		sunky_milk.scale.set(1, 1);
+		sunky_milk.visible = false;
+		sunky_milk.angle = 0;
+		sunky_milk.antialiasing = ClientPrefs.data.antialiasing;
+		add(sunky_milk);
+		
+		sunky_cereal = new FlxSprite(350, 0);
+		sunky_cereal.loadGraphic(Paths.image('bgs/sunky/ceral'));
+		sunky_cereal.scrollFactor.set(0.7, 0.7);
+		sunky_cereal.scale.set(1, 1);
+		sunky_cereal.visible = false;
+		sunky_cereal.angle = 0;
+		sunky_cereal.antialiasing = ClientPrefs.data.antialiasing;
+		add(sunky_cereal);
+
 		if (!lowQuality) {
-			sunky_balls = new BGSprite('bgs/sunky/ball', 20, -500, 0.9, 0.9);
-			sunky_balls.screenCenter(X);
+			sunky_balls = new FlxSprite(270, -350);
+			sunky_balls.frames = Paths.getSparrowAtlas('bgs/sunky/hang');
+			sunky_balls.animation.addByPrefix('spin', 'hang', 12);
+			sunky_balls.animation.play('spin');
+			sunky_balls.scrollFactor.set(0.9, 0.9);
 			sunky_balls.visible = false;
+			sunky_balls.screenCenter(X);
+			sunky_balls.x += 400;
 			add(sunky_balls);
 		} else {
-			sunky_balls = new BGSprite('blank', 20, -500, 0.9, 0.9);
-			sunky_balls.screenCenter(X);
+			sunky_balls = new FlxSprite(20, -300);
+			sunky_balls.frames = Paths.getSparrowAtlas('blank');
+			sunky_balls.animation.addByPrefix('spin', 'fun', 12);
+			sunky_balls.animation.play('spin');
+			sunky_balls.scrollFactor.set(0.9, 0.9);
 			sunky_balls.visible = false;
+			sunky_balls.screenCenter(X);
 			add(sunky_balls);
 		}
 
-		sunky_stage = new BGSprite('bgs/sunky/stage', 125, -500, 1.0, 1.0);
-		sunky_stage.setGraphicSize(Std.int(sunky_stage.width * 1.1));
+		sunky_stage = new BGSprite('bgs/sunky/floor', -595, 570, 1.0, 1.0);
 		sunky_stage.visible = false;
+		sunky_stage.scale.x = 1.2;
+		sunky_stage.scale.y = 1.5;
 		add(sunky_stage);
+		
+		sunky_speakers = new FlxSprite(37, -70);
+		sunky_speakers.frames = Paths.getSparrowAtlas('bgs/sunky/speakers');
+		sunky_speakers.animation.addByPrefix('idle', 'speakers', 24, false);
+		sunky_speakers.scale.x = 1.2;
+		sunky_speakers.scale.y = 1.2;
+		sunky_speakers.visible = false;
+		sunky_speakers.antialiasing = ClientPrefs.data.antialiasing;
+		add(sunky_speakers);
 
 		sanic_bg = new BGSprite('bgs/sanic/sanicbg', -370, -130, 1.0, 1.0);
 		sanic_bg.setGraphicSize(Std.int(sanic_bg.width * 1.2));
@@ -1319,7 +1268,7 @@ class Omni extends BaseStage
 		add(faker_eclipse);
 		
 		if (!lowQuality) {
-			faker_moutains = new FlxSprite(-1080, -750);
+			faker_moutains = new FlxSprite(-1080, -220);
 			faker_moutains.loadGraphic(Paths.image('bgs/faker-encore/moutainsP1'));
 			faker_moutains.scrollFactor.set(0.7, 0.55);
 			faker_moutains.scale.set(0.87, 0.87);
@@ -1327,7 +1276,7 @@ class Omni extends BaseStage
 			faker_moutains.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_moutains);
 			
-			faker_mound = new FlxSprite(-600, -300);
+			faker_mound = new FlxSprite(-375, 180);
 			faker_mound.loadGraphic(Paths.image('bgs/faker-encore/moundP1'));
 			faker_mound.scrollFactor.set(0.8, 0.8);
 			faker_mound.scale.set(1.2, 1.2);
@@ -1335,7 +1284,7 @@ class Omni extends BaseStage
 			faker_mound.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_mound);
 		
-			faker_rings = new FlxSprite(-600, -300);
+			faker_rings = new FlxSprite(-320, -200);
 			faker_rings.loadGraphic(Paths.image('bgs/faker-encore/ringsP1'));
 			faker_rings.scrollFactor.set(0.8, 0.8);
 			faker_rings.scale.set(1.2, 1.2);
@@ -1343,7 +1292,7 @@ class Omni extends BaseStage
 			faker_rings.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_rings);
 		
-			faker_trees = new FlxSprite(-400, -400);
+			faker_trees = new FlxSprite(-200, -500);
 			faker_trees.loadGraphic(Paths.image('bgs/faker-encore/treesP1'));
 			faker_trees.scrollFactor.set(0.9, 1);
 			faker_trees.scale.set(1.5, 1.5);
@@ -1351,7 +1300,7 @@ class Omni extends BaseStage
 			faker_trees.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_trees);
 		} else {
-			faker_moutains = new FlxSprite(-1080, -750);
+			faker_moutains = new FlxSprite(-1080, -250);
 			faker_moutains.loadGraphic(Paths.image('blank'));
 			faker_moutains.scrollFactor.set(0.7, 0.55);
 			faker_moutains.scale.set(0.87, 0.87);
@@ -1384,7 +1333,7 @@ class Omni extends BaseStage
 			add(faker_trees);
 		}
 		
-		faker_ground = new FlxSprite(-600, -400);
+		faker_ground = new FlxSprite(-600, 90);
 		faker_ground.loadGraphic(Paths.image('bgs/faker-encore/groundP1'));
 		faker_ground.scrollFactor.set(1, 1);
 		faker_ground.scale.set(1.5, 1.5);
@@ -1392,7 +1341,7 @@ class Omni extends BaseStage
 		faker_ground.antialiasing = ClientPrefs.data.antialiasing;
 		add(faker_ground);
 		
-		faker_bg = new FlxSprite(-700, -400);
+		faker_bg = new FlxSprite(-700, 370);
 		faker_bg.loadGraphic(Paths.image('bgs/faker-encore/bgP1'));
 		faker_bg.scrollFactor.set(1, 1);
 		faker_bg.scale.set(1.5, 1.5);
@@ -1473,7 +1422,7 @@ class Omni extends BaseStage
 		add(faker_eclipse2);
 		
 		if (!lowQuality) {
-			faker_moutains2 = new FlxSprite(-1080, -750);
+			faker_moutains2 = new FlxSprite(-1080, -220);
 			faker_moutains2.loadGraphic(Paths.image('bgs/faker-encore/moutainsP2'));
 			faker_moutains2.scrollFactor.set(0.7, 0.55);
 			faker_moutains2.scale.set(0.87, 0.87);
@@ -1481,7 +1430,7 @@ class Omni extends BaseStage
 			faker_moutains2.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_moutains2);
 			
-			faker_mound2 = new FlxSprite(-600, -300);
+			faker_mound2 = new FlxSprite(-375, 180);
 			faker_mound2.loadGraphic(Paths.image('bgs/faker-encore/moundP2'));
 			faker_mound2.scrollFactor.set(0.8, 0.8);
 			faker_mound2.scale.set(1.2, 1.2);
@@ -1489,7 +1438,7 @@ class Omni extends BaseStage
 			faker_mound2.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_mound2);
 			
-			faker_rings2 = new FlxSprite(-600, -300);
+			faker_rings2 = new FlxSprite(-320, -200);
 			faker_rings2.loadGraphic(Paths.image('bgs/faker-encore/ringsP2'));
 			faker_rings2.scrollFactor.set(0.8, 0.8);
 			faker_rings2.scale.set(1.2, 1.2);
@@ -1497,7 +1446,7 @@ class Omni extends BaseStage
 			faker_rings2.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_rings2);
 			
-			faker_trees2 = new FlxSprite(-400, -400);
+			faker_trees2 = new FlxSprite(-200, -500);
 			faker_trees2.loadGraphic(Paths.image('bgs/faker-encore/treesP2'));
 			faker_trees2.scrollFactor.set(0.9, 1);
 			faker_trees2.scale.set(1.5, 1.5);
@@ -1538,7 +1487,7 @@ class Omni extends BaseStage
 			add(faker_trees2);
 		}
 		
-		faker_ground2 = new FlxSprite(-600, -400);
+		faker_ground2 = new FlxSprite(-600, 90);
 		faker_ground2.loadGraphic(Paths.image('bgs/faker-encore/groundP2'));
 		faker_ground2.scrollFactor.set(1, 1);
 		faker_ground2.scale.set(1.5, 1.5);
@@ -1546,7 +1495,7 @@ class Omni extends BaseStage
 		faker_ground2.antialiasing = ClientPrefs.data.antialiasing;
 		add(faker_ground2);
 		
-		faker_bg2 = new FlxSprite(-700, -400);
+		faker_bg2 = new FlxSprite(-700, 370);
 		faker_bg2.loadGraphic(Paths.image('bgs/faker-encore/bgP2'));
 		faker_bg2.scrollFactor.set(1, 1);
 		faker_bg2.scale.set(1.5, 1.5);
@@ -1697,6 +1646,10 @@ class Omni extends BaseStage
 		preload('icons/icon-bf-3d');
 		preload('icons/icon-hog');
 		preload('icons/icon-chaotix-hd');
+		preload('icons/icon-gf');
+		preload('icons/icon-sonic-rr');
+		preload('icons/icon-face');
+		preload('characters/BF/HD/BOYFRIEND');
 		
 		//Other
 		preload('noteSplashes/noteSplashes-Bloodsplash');
@@ -1773,7 +1726,7 @@ class Omni extends BaseStage
 		}
 		
 		if (!lowQuality) {
-			needleFg = new FlxSprite(-690, -80).loadGraphic(Paths.image('bgs/needlemouse/fg'));
+			needleFg = new FlxSprite(-690, 560).loadGraphic(Paths.image('bgs/needlemouse/fg'));
 			needleFg.setGraphicSize(Std.int(needleFg.width * 1.1));
 			needleFg.scrollFactor.set(1, 0.9);
 			needleFg.visible = false;
@@ -1787,14 +1740,14 @@ class Omni extends BaseStage
 			tails_fg.visible = false;
 			add(tails_fg);
 
-			wechidna_treesFG = new FlxSprite(-200, 0);
+			wechidna_treesFG = new FlxSprite(-300, 400);
 			wechidna_treesFG.loadGraphic(Paths.image('bgs/Wechidna/fg-trees'));
 			wechidna_treesFG.scrollFactor.set(0.8, 1);
 			wechidna_treesFG.scale.set(1, 1);
 			wechidna_treesFG.visible = false;
 			add(wechidna_treesFG);
 
-			wechidna_thingFG = new FlxSprite(-250, -125);
+			wechidna_thingFG = new FlxSprite(-210, 1725);
 			wechidna_thingFG.loadGraphic(Paths.image('bgs/Wechidna/fg-smth'));
 			wechidna_thingFG.scrollFactor.set(0.7, 0.9);
 			wechidna_thingFG.scale.set(1, 1);
@@ -1802,7 +1755,7 @@ class Omni extends BaseStage
 			wechidna_thingFG.antialiasing = ClientPrefs.data.antialiasing;
 			add(wechidna_thingFG);
 			
-			wechidna_grassFG = new FlxSprite(-360, -240);
+			wechidna_grassFG = new FlxSprite(-390, 940);
 			wechidna_grassFG.loadGraphic(Paths.image('bgs/Wechidna/fg-grass'));
 			wechidna_grassFG.scrollFactor.set(0.6, 0.8);
 			wechidna_grassFG.scale.set(1, 1);
@@ -1810,7 +1763,7 @@ class Omni extends BaseStage
 			wechidna_grassFG.antialiasing = ClientPrefs.data.antialiasing;
 			add(wechidna_grassFG);
 			
-			satanos_rock = new FlxSprite(-850, -820);
+			satanos_rock = new FlxSprite(930, 500);
 			satanos_rock.loadGraphic(Paths.image('bgs/satanos-bg/FRock'));
 			satanos_rock.scrollFactor.set(0.8, 0.9);
 			satanos_rock.scale.set(1.2, 1.2);
@@ -1841,7 +1794,7 @@ class Omni extends BaseStage
 			hogRocks.visible = false;
 			add(hogRocks);
 		} else {
-			needleFg = new FlxSprite(-690, -80).loadGraphic(Paths.image('blank'));
+			needleFg = new FlxSprite(-690, 780).loadGraphic(Paths.image('blank'));
 			needleFg.setGraphicSize(Std.int(needleFg.width * 1.1));
 			needleFg.scrollFactor.set(1, 0.9);
 			needleFg.visible = false;
@@ -1878,7 +1831,7 @@ class Omni extends BaseStage
 			wechidna_grassFG.antialiasing = ClientPrefs.data.antialiasing;
 			add(wechidna_grassFG);
 		
-			satanos_rock = new FlxSprite(-850, -820);
+			satanos_rock = new FlxSprite(2350, 1020);
 			satanos_rock.loadGraphic(Paths.image('blank'));
 			satanos_rock.scrollFactor.set(0.8, 0.9);
 			satanos_rock.scale.set(1.2, 1.2);
@@ -2426,415 +2379,62 @@ class Omni extends BaseStage
 				doTheThing();
 			}
 		}
-	}
-			
-
-	public function doTheThing()
-	{
-		char1.alpha = 1;
-		char2.alpha = 1;
-		char3.alpha = 1;
-		char4.alpha = 1;
-		char5.alpha = 1;
-		char6.alpha = 1;
-		char7.alpha = 1;
-		char8.alpha = 1;
-		char9.alpha = 1;
-		char10.alpha = 1;
-		char11.alpha = 1;
-		char12.alpha = 1;
-		char13.alpha = 1;
-		char14.alpha = 1;
-		char15.alpha = 1;
-		char16.alpha = 1;
-		char17.alpha = 1;
-		char18.alpha = 1;
-		char19.alpha = 1;
-		char20.alpha = 1;
-		char21.alpha = 1;
-		char22.alpha = 1;
-		char24.alpha = 1;
-		char25.alpha = 1;
-		char26.alpha = 1;
-		char27.alpha = 1;
-		char28.alpha = 1;
-		char29.alpha = 1;
-		char30.alpha = 1;
-		char31.alpha = 1;
-		char32.alpha = 1;
-		char33.alpha = 1;
-		char34.alpha = 1;
-		char35.alpha = 1;
-		char36.alpha = 1;
-		char37.alpha = 1;
-		char38.alpha = 1;
-		char39.alpha = 1;
-		char40.alpha = 1;
-		char41.alpha = 1;
-		char42.alpha = 1;
-	
-		char1.alpha = 0;
-		char2.alpha = 0;
-		char3.alpha = 0;
-		char4.alpha = 0.00001;
-		char5.alpha = 0;
-		char6.alpha = 0;
-		char7.alpha = 0;
-		char8.alpha = 0;
-		char9.alpha = 0;
-		char10.alpha = 0;
-		char11.alpha = 0;
-		char12.alpha = 0;
-		char13.alpha = 0;
-		char14.alpha = 0;
-		char15.alpha = 0;
-		char16.alpha = 0;
-		char17.alpha = 0;
-		char18.alpha = 0;
-		char19.alpha = 0.00001;
-		char20.alpha = 0.00001;
-		char21.alpha = 0.00001;
-		char22.alpha = 0;
-		char24.alpha = 0;
-		char25.alpha = 0.00001;
-		char26.alpha = 0.00001;
-		char27.alpha = 0.00001;
-		char28.alpha = 0;
-		char29.alpha = 0;
-		char30.alpha = 0;
-		char31.alpha = 0;
-		char32.alpha = 0.00001;
-		char33.alpha = 0;
-		char34.alpha = 0;
-		char35.alpha = 0.00001;
-		char36.alpha = 0;
-		char37.alpha = 0;
-		char38.alpha = 0;
-		char39.alpha = 0;
-		char40.alpha = 0;
-		char41.alpha = 0.00001;
-		char42.alpha = 0;
-
-		sunkyTransition.visible = true;
-		daJumpscare.visible = true;
-		ring.visible = true;
-		circle.visible = true;
-		sunkyTransition.visible = false;
-		daJumpscare.visible = false;
-		ring.visible = false;
-		circle.visible = false;
-			
-		tailsdoll_floor.visible = true;
-		tailsdoll_floor.visible = false;
-		
-		xterion_floor.visible = true;
-		xterion_floor.visible = false;
-		
-		needleSky.visible = true;
-		needleMoutains.visible = true;
-		needleRuins.visible = true;
-		needleBuildings.visible = true;
-		conkCreet.visible = true;
-		needleFg.visible = true;
-		needleSky.visible = false;
-		needleMoutains.visible = false;
-		needleRuins.visible = false;
-		needleBuildings.visible = false;
-		conkCreet.visible = false;
-		needleFg.visible = false;
-		
-		tails_sky.visible = true;
-		tails_fg.visible = true;
-		tails_trees1.visible = true;
-		tails_trees2.visible = true;
-		tails_grass.visible = true;
-		tails_floor.visible = true;
-		tails_sky.visible = false;
-		tails_fg.visible = false;
-		tails_trees1.visible = false;
-		tails_trees2.visible = false;
-		tails_grass.visible = false;
-		tails_floor.visible = false;
-		
-		wall.visible = true;
-		floor.visible = true;
-		fleetwaybgshit.visible = true;
-		emeraldbeamyellow.visible = true;
-		emeralds.visible = true;
-		thechamber.visible = true;
-		pebles.visible = true;
-		wall.visible = false;
-		floor.visible = false;
-		fleetwaybgshit.visible = false;
-		emeraldbeamyellow.visible = false;
-		emeralds.visible = false;
-		thechamber.visible = false;
-		pebles.visible = false;
-					
-		fucklesBGPixel.visible = true;
-		fucklesFGPixel.visible = true;
-		fucklesAmyBg.visible = true;
-		fucklesVectorBg.visible = true;
-		fucklesKnuxBg.visible = true;
-		fucklesEspioBg.visible = true;
-		fucklesCharmyBg.visible = true;
-		fucklesMightyBg.visible = true;
-		whiteFuck.visible = true;
-		fucklesBGPixel.visible = false;
-		fucklesFGPixel.visible = false;
-		fucklesAmyBg.visible = false;
-		fucklesVectorBg.visible = false;
-		fucklesKnuxBg.visible = false;
-		fucklesEspioBg.visible = false;
-		fucklesCharmyBg.visible = false;
-		fucklesMightyBg.visible = false;
-		whiteFuck.visible = false;
-		
-		knuckles_bg.visible = true;
-		knuckles_city1.visible = true;
-		knuckles_city2.visible = true;
-		knuckles_floor.visible = true;
-		knuckles_bg.visible = false;
-		knuckles_city1.visible = false;
-		knuckles_city2.visible = false;
-		knuckles_floor.visible = false;
-		
-		wechidna_sky.visible = true;
-		wechidna_building1.visible = true;
-		wechidna_building2.visible = true;
-		wechidna_floor.visible = true;
-		wechidna_trees.visible = true;
-		wechidna_grass.visible = true;
-		wechidna_thing.visible = true;
-		wechidna_treesFG.visible = true;
-		wechidna_thingFG.visible = true;
-		wechidna_grassFG.visible = true;
-		wechidna_sky.visible = false;
-		wechidna_building1.visible = false;
-		wechidna_building2.visible = false;
-		wechidna_floor.visible = false;
-		wechidna_trees.visible = false;
-		wechidna_grass.visible = false;
-		wechidna_thing.visible = false;
-		wechidna_treesFG.visible = false;
-		wechidna_thingFG.visible = false;
-		wechidna_grassFG.visible = false;
-		
-		satanos_sky.visible = true;
-		satanos_trees.visible = true;
-		satanos_palm.visible = true;
-		satanos_sadpalm.visible = true;
-		satanos_floor.visible = true;
-		satanos_rock.visible = true;
-		satanos_sky.visible = false;
-		satanos_trees.visible = false;
-		satanos_palm.visible = false;
-		satanos_sadpalm.visible = false;
-		satanos_floor.visible = false;
-		satanos_rock.visible = false;
-		
-		sonic_sky.visible = true;
-		sonic_water.visible = true;
-		sonic_mountains.visible = true;
-		sonic_waterfall.visible = true;
-		sonic_ground.visible = true;
-		sonic_sky.visible = false;
-		sonic_water.visible = false;
-		sonic_mountains.visible = false;
-		sonic_waterfall.visible = false;
-		sonic_ground.visible = false;
-		
-		lordx_sky.visible = true;
-		lordx_hills.visible = true;
-		lordx_floor.visible = true;
-		lordx_eyeflower.visible = true;
-		lordx_notknuckles.visible = true;
-		lordx_smallflower.visible = true;
-		lordx_bfsmallflower.visible = true;
-		lordx_smallflower2.visible = true;
-		lordx_tree.visible = true;
-		lordx_sky.visible = false;
-		lordx_hills.visible = false;
-		lordx_floor.visible = false;
-		lordx_eyeflower.visible = false;
-		lordx_notknuckles.visible = false;
-		lordx_smallflower.visible = false;
-		lordx_bfsmallflower.visible = false;
-		lordx_smallflower2.visible = false;
-		lordx_tree.visible = false;
-		
-		domain.visible = true;
-		domain2.visible = true;
-		domain.visible = false;
-		domain2.visible = false;
-					
-		xeno_sky.visible = true;
-		xeno_fg.visible = true;
-		xeno_trees2.visible = true;
-		xeno_trees1.visible = true;
-		xeno_floor.visible = true;
-		xeno_sky.visible = false;
-		xeno_fg.visible = false;
-		xeno_trees2.visible = false;
-		xeno_trees1.visible = false;
-		xeno_floor.visible = false;
-					
-		majin_sky.visible = true;
-		majin_bush.visible = true;
-		majin_pillars2.visible = true;
-		majin_bush2.visible = true;
-		majin_pillars1.visible = true;
-		majin_floor.visible = true;
-		majin_fgmajin.visible = true;
-		majin_fgmajin2.visible = true;
-		majin_sky.visible = false;
-		majin_bush.visible = false;
-		majin_pillars2.visible = false;
-		majin_bush2.visible = false;
-		majin_pillars1.visible = false;
-		majin_floor.visible = false;
-		majin_fgmajin.visible = false;
-		majin_fgmajin2.visible = false;
-			
-		sunky_bg.visible = true;
-		sunky_balls.visible = true;
-		sunky_stage.visible = true;
-		sunky_bg.visible = false;
-		sunky_balls.visible = false;
-		sunky_stage.visible = false;
-		
-		sanic_bg.visible = true;
-		sanic_bg.visible = false;
-		
-		coldsteel_whiteFuck.visible = true;
-		coldsteel_shadow.visible = true;
-		coldsteel_whiteFuck.visible = false;
-		coldsteel_shadow.visible = false;
-		
-		faker_sky.visible = true;
-		faker_eclipse.visible = true;
-		faker_moutains.visible = true;
-		faker_mound.visible = true;
-		faker_rings.visible = true;
-		faker_trees.visible = true;
-		faker_ground.visible = true;
-		faker_bg.visible = true;
-		faker_sky.visible = false;
-		faker_eclipse.visible = false;
-		faker_moutains.visible = false;
-		faker_mound.visible = false;
-		faker_rings.visible = false;
-		faker_trees.visible = false;
-		faker_ground.visible = false;
-		faker_bg.visible = false;
-		
-		hogBg.visible = true;
-		hogMotain.visible = true;
-		hogWaterFalls.visible = true;
-		hogFloor.visible = true;
-		hogLoops.visible = true;
-		hogTrees.visible = true;
-		hogRocks.visible = true;
-		hogOverlay.visible = true;
-		hogBg.visible = false;
-		hogMotain.visible = false;
-		hogWaterFalls.visible = false;
-		hogFloor.visible = false;
-		hogLoops.visible = false;
-		hogTrees.visible = false;
-		hogRocks.visible = false;
-		hogOverlay.visible = false;
-		
-		faker_sky2.visible = true;
-		faker_eclipse2.visible = true;
-		faker_moutains2.visible = true;
-		faker_mound2.visible = true;
-		faker_rings2.visible = true;
-		faker_trees2.visible = true;
-		faker_ground2.visible = true;
-		faker_bg2.visible = true;
-		faker_overlay.visible = true;
-		faker_sky2.visible = false;
-		faker_eclipse2.visible = false;
-		faker_moutains2.visible = false;
-		faker_mound2.visible = false;
-		faker_rings2.visible = false;
-		faker_trees2.visible = false;
-		faker_ground2.visible = false;
-		faker_bg2.visible = false;
-		faker_overlay.visible = false;
-		
-		scorchedBg.visible = true;
-		scorchedMotain.visible = true;
-		scorchedWaterFalls.visible = true;
-		scorchedFloor.visible = true;
-		scorchedMonitor.visible = true;
-		scorchedHills.visible = true;
-		scorchedTrees.visible = true;
-		scorchedRocks.visible = true;
-		scorchedBg.visible = false;
-		scorchedMotain.visible = false;
-		scorchedWaterFalls.visible = false;
-		scorchedFloor.visible = false;
-		scorchedMonitor.visible = false;
-		scorchedHills.visible = false;
-		scorchedTrees.visible = false;
-		scorchedRocks.visible = false;
-		
-		vignette.visible = true;
-		vignette.visible = false;
-		
-		if (theThing == 3) {
-			trace("The thing done thrice");
-			tailsdoll_floor.visible = true;
-			ring.visible = true;
-			wall.visible = true;
-			floor.visible = true;
-			fleetwaybgshit.visible = true;
-			emeraldbeamyellow.visible = true;
-			emeralds.visible = true;
-			thechamber.visible = true;
-			pebles.visible = true;
-		}
-		
-		if (theThing == 2) {
-			theThing = 3;
-			doTheThing();
-			trace("The thing done twice");
-		}
-		
-		if (theThing == 1) {
-			theThing = 2;
-			doTheThing();
-			trace("The thing done once");
-		}
-	}
-
-	// Steps, Beats and Sections:
-	//    curStep, curDecStep
-	//    curBeat, curDecBeat
-	//    curSection
-	override function stepHit()
-	{
-		if(curStep % 32 == 0 && scorchedMonitor!=null && scorchedMonitor.visible && scorchedMonitor.alive){
-			monitorCounter++;
-			if(monitorCounter >= monitorAnims.length)monitorCounter=0;
-			scorchedMonitor.animation.play(monitorAnims[monitorCounter], true);
+		if (curStep % 8 == 0) 
+		{
+			if (fucklesBeats)
+			{
+				fucklesEspioBg.animation.play('idle');
+				fucklesMightyBg.animation.play('idle');
+				fucklesCharmyBg.animation.play('idle');
+				fucklesAmyBg.animation.play('idle');
+				fucklesKnuxBg.animation.play('idle');
+				fucklesVectorBg.animation.play('idle');
+			}
 		}
 		switch (curStep)
-		{
-			case 1:
-				doTheThing();
-				
+		{	
 			case 136, 400, 592, 848, 944, 10224, 10320: //xterion
 				redRingTransition();
 				tailsdoll_floor.visible = false;
 				xterion_floor.visible = true;
 				
+			case 849: //preload exe, scorched
+				faker_sky2.visible = true;
+				faker_eclipse2.visible = true;
+				faker_moutains2.visible = true;
+				faker_mound2.visible = true;
+				faker_rings2.visible = true;
+				faker_trees2.visible = true;
+				faker_ground2.visible = true;
+				faker_bg2.visible = true;
+				scorchedBg.visible = true;
+				scorchedMotain.visible = true;
+				scorchedWaterFalls.visible = true;
+				scorchedFloor.visible = true;
+				scorchedMonitor.visible = true;
+				scorchedHills.visible = true;
+				scorchedTrees.visible = true;
+				
+			case 850: //preload remove
+				faker_sky2.visible = false;
+				faker_eclipse2.visible = false;
+				faker_moutains2.visible = false;
+				faker_mound2.visible = false;
+				faker_rings2.visible = false;
+				faker_trees2.visible = false;
+				faker_ground2.visible = false;
+				faker_bg2.visible = false;
+				scorchedBg.visible = false;
+				scorchedMotain.visible = false;
+				scorchedWaterFalls.visible = false;
+				scorchedFloor.visible = false;
+				scorchedMonitor.visible = false;
+				scorchedHills.visible = false;
+				scorchedTrees.visible = false;
+				
 			case 593, 9841: //needlemouse and tails lag prevention
 				needleSky.visible = true;
 				needleMoutains.visible = true;
-				needleRuins.visible = true;
 				needleBuildings.visible = true;
 				conkCreet.visible = true;
 				needleFg.visible = true;
@@ -2846,6 +2446,8 @@ class Omni extends BaseStage
 				tails_floor.visible = true;
 				hogOverlay.visible = true;
 				faker_overlay.visible = true;
+				scorchedRocks.visible = true;
+				hogRocks.visible = true;
 			
 			case 3232:
 				redRingTransition();
@@ -2853,7 +2455,6 @@ class Omni extends BaseStage
 			case 594, 9842: //deactivate lag shit
 				needleSky.visible = false;
 				needleMoutains.visible = false;
-				needleRuins.visible = false;
 				needleBuildings.visible = false;
 				conkCreet.visible = false;
 				needleFg.visible = false;
@@ -2865,6 +2466,8 @@ class Omni extends BaseStage
 				tails_floor.visible = false;
 				hogOverlay.visible = false;
 				faker_overlay.visible = false;
+				scorchedRocks.visible = false;
+				hogRocks.visible = false;
 			
 			case 10322: //more lag shit
 				majin_bush2.visible = true;
@@ -2876,8 +2479,6 @@ class Omni extends BaseStage
 				majin_fgmajin2.visible = true;
 				satanos_sky.visible = true;
 				satanos_trees.visible = true;
-				satanos_palm.visible = true;
-				satanos_sadpalm.visible = true;
 				satanos_floor.visible = true;
 				satanos_rock.visible = true;
 				lordx_sky.visible = true;
@@ -2885,11 +2486,12 @@ class Omni extends BaseStage
 				lordx_floor.visible = true;
 				lordx_eyeflower.visible = true;
 				lordx_notknuckles.visible = true;
-				lordx_smallflower.visible = true;
 				lordx_bfsmallflower.visible = true;
-				lordx_smallflower2.visible = true;
 				lordx_tree.visible = true;
 				sunky_bg.visible = true;
+				sunky_milk.visible = true;
+				sunky_cereal.visible = true;
+				sunky_speakers.visible = true;
 				sunky_balls.visible = true;
 				sunky_stage.visible = true;
 				sanic_bg.visible = true;
@@ -2908,8 +2510,6 @@ class Omni extends BaseStage
 				majin_fgmajin2.visible = false;
 				satanos_sky.visible = false;
 				satanos_trees.visible = false;
-				satanos_palm.visible = false;
-				satanos_sadpalm.visible = false;
 				satanos_floor.visible = false;
 				satanos_rock.visible = false;
 				lordx_sky.visible = false;
@@ -2917,11 +2517,12 @@ class Omni extends BaseStage
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
-				lordx_smallflower.visible = false;
 				lordx_bfsmallflower.visible = false;
-				lordx_smallflower2.visible = false;
 				lordx_tree.visible = false;
 				sunky_bg.visible = false;
+				sunky_milk.visible = false;
+				sunky_cereal.visible = false;
+				sunky_speakers.visible = false;
 				sunky_balls.visible = false;
 				sunky_stage.visible = false;
 				sanic_bg.visible = false;
@@ -2946,7 +2547,6 @@ class Omni extends BaseStage
 				tails_floor.visible = false;
 				needleSky.visible = true;
 				needleMoutains.visible = true;
-				needleRuins.visible = true;
 				needleBuildings.visible = true;
 				conkCreet.visible = true;
 				needleFg.visible = true;
@@ -2961,7 +2561,6 @@ class Omni extends BaseStage
 				tails_floor.visible = true;
 				needleSky.visible = false;
 				needleMoutains.visible = false;
-				needleRuins.visible = false;
 				needleBuildings.visible = false;
 				conkCreet.visible = false;
 				needleFg.visible = false;
@@ -3111,28 +2710,20 @@ class Omni extends BaseStage
 			case 3521: //preload satanos
 				satanos_sky.visible = true;
 				satanos_trees.visible = true;
-				satanos_palm.visible = true;
-				satanos_sadpalm.visible = true;
 				satanos_floor.visible = true;
 				satanos_rock.visible = true;
 				satanos_sky.visible = false;
 				satanos_trees.visible = false;
-				satanos_palm.visible = false;
-				satanos_sadpalm.visible = false;
 				satanos_floor.visible = false;
 				satanos_rock.visible = false;
 				satanos_sky.visible = true;
 				satanos_trees.visible = true;
-				satanos_palm.visible = true;
-				satanos_sadpalm.visible = true;
 				satanos_floor.visible = true;
 				satanos_rock.visible = true;
 				
 			case 3522: //remove satanos
 				satanos_sky.visible = false;
 				satanos_trees.visible = false;
-				satanos_palm.visible = false;
-				satanos_sadpalm.visible = false;
 				satanos_floor.visible = false;
 				satanos_rock.visible = false;
 				
@@ -3144,8 +2735,6 @@ class Omni extends BaseStage
 				knuckles_floor.visible = false;
 				satanos_sky.visible = true;
 				satanos_trees.visible = true;
-				satanos_palm.visible = true;
-				satanos_sadpalm.visible = true;
 				satanos_floor.visible = true;
 				satanos_rock.visible = true;
 				
@@ -3153,8 +2742,6 @@ class Omni extends BaseStage
 				redRingTransition();
 				satanos_sky.visible = false;
 				satanos_trees.visible = false;
-				satanos_palm.visible = false;
-				satanos_sadpalm.visible = false;
 				satanos_floor.visible = false;
 				satanos_rock.visible = false;
 				
@@ -3191,14 +2778,12 @@ class Omni extends BaseStage
 			case 5473: //Preload sonic.exe, lordx, fatal
 				sonic_sky.visible = true;
 				sonic_water.visible = true;
-				sonic_mountains.visible = true;
 				sonic_waterfall.visible = true;
 				sonic_ground.visible = true;
 				
 			case 5474: //remove preload shit
 				sonic_sky.visible = false;
 				sonic_water.visible = false;
-				sonic_mountains.visible = false;
 				sonic_waterfall.visible = false;
 				sonic_ground.visible = false;
 				
@@ -3208,9 +2793,7 @@ class Omni extends BaseStage
 				lordx_floor.visible = true;
 				lordx_eyeflower.visible = true;
 				lordx_notknuckles.visible = true;
-				lordx_smallflower.visible = true;
 				lordx_bfsmallflower.visible = true;
-				lordx_smallflower2.visible = true;
 				lordx_tree.visible = true;
 				domain.visible = true;
 				domain2.visible = true;
@@ -3221,9 +2804,7 @@ class Omni extends BaseStage
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
-				lordx_smallflower.visible = false;
 				lordx_bfsmallflower.visible = false;
-				lordx_smallflower2.visible = false;
 				lordx_tree.visible = false;
 				domain.visible = false;
 				domain2.visible = false;
@@ -3234,7 +2815,6 @@ class Omni extends BaseStage
 				domain2.visible = false;
 				sonic_sky.visible = true;
 				sonic_water.visible = true;
-				sonic_mountains.visible = true;
 				sonic_waterfall.visible = true;
 				sonic_ground.visible = true;
 				lordx_sky.visible = false;
@@ -3242,9 +2822,7 @@ class Omni extends BaseStage
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
-				lordx_smallflower.visible = false;
 				lordx_bfsmallflower.visible = false;
-				lordx_smallflower2.visible = false;
 				lordx_tree.visible = false;
 
 			case 5840, 6160, 6384, 6464, 11520, 11600: //lordx
@@ -3253,7 +2831,6 @@ class Omni extends BaseStage
 				domain2.visible = false;
 				sonic_sky.visible = false;
 				sonic_water.visible = false;
-				sonic_mountains.visible = false;
 				sonic_waterfall.visible = false;
 				sonic_ground.visible = false;
 				lordx_sky.visible = true;
@@ -3261,9 +2838,7 @@ class Omni extends BaseStage
 				lordx_floor.visible = true;
 				lordx_eyeflower.visible = true;
 				lordx_notknuckles.visible = true;
-				lordx_smallflower.visible = true;
 				lordx_bfsmallflower.visible = true;
-				lordx_smallflower2.visible = true;
 				lordx_tree.visible = true;
 				majin_bush2.visible = false;
 				majin_bush.visible = false;
@@ -3284,7 +2859,6 @@ class Omni extends BaseStage
 				domain2.visible = true;
 				sonic_sky.visible = false;
 				sonic_water.visible = false;
-				sonic_mountains.visible = false;
 				sonic_waterfall.visible = false;
 				sonic_ground.visible = false;
 				lordx_sky.visible = false;
@@ -3292,9 +2866,7 @@ class Omni extends BaseStage
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
-				lordx_smallflower.visible = false;
 				lordx_bfsmallflower.visible = false;
-				lordx_smallflower2.visible = false;
 				lordx_tree.visible = false;
 
 			case 6417: //Preload xeno, majin, sunky, sanic, coldsteel
@@ -3311,6 +2883,9 @@ class Omni extends BaseStage
 				majin_fgmajin.visible = true;
 				majin_fgmajin2.visible = true;
 				sunky_bg.visible = true;
+				sunky_milk.visible = true;
+				sunky_cereal.visible = true;
+				sunky_speakers.visible = true;
 				sunky_balls.visible = true;
 				sunky_stage.visible = true;
 				sanic_bg.visible = true;
@@ -3332,6 +2907,9 @@ class Omni extends BaseStage
 				majin_fgmajin.visible = false;
 				majin_fgmajin2.visible = false;
 				sunky_bg.visible = false;
+				sunky_milk.visible = false;
+				sunky_cereal.visible = false;
+				sunky_speakers.visible = false;
 				sunky_balls.visible = false;
 				sunky_stage.visible = false;
 				sanic_bg.visible = false;
@@ -3350,9 +2928,7 @@ class Omni extends BaseStage
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
-				lordx_smallflower.visible = false;
 				lordx_bfsmallflower.visible = false;
-				lordx_smallflower2.visible = false;
 				lordx_tree.visible = false;
 				
 			case 6640, 6896, 6928, 7056, 11440, 11568, 12224: //xeno
@@ -3378,9 +2954,7 @@ class Omni extends BaseStage
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
-				lordx_smallflower.visible = false;
 				lordx_bfsmallflower.visible = false;
-				lordx_smallflower2.visible = false;
 				lordx_tree.visible = false;
 				
 			case 6768, 6912, 6944, 11504, 11616: //majin
@@ -3404,17 +2978,8 @@ class Omni extends BaseStage
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
-				lordx_smallflower.visible = false;
 				lordx_bfsmallflower.visible = false;
-				lordx_smallflower2.visible = false;
 				lordx_tree.visible = false;
-			
-			case 7160:
-				sunkyTransition.visible = true;
-				sunkyTransition.animation.play('b', true);
-			
-			case 7169:
-				sunkyTransition.destroy();
 			
 			case 7168, 7296, 7482, 8314, 8384, 11696: //sunky
 				redRingTransition();
@@ -3423,7 +2988,11 @@ class Omni extends BaseStage
 				xeno_trees2.visible = false;
 				xeno_trees1.visible = false;
 				xeno_floor.visible = false;
+				sunkyMoment = true;
 				sunky_bg.visible = true;
+				sunky_milk.visible = true;
+				sunky_cereal.visible = true;
+				sunky_speakers.visible = true;
 				sunky_balls.visible = true;
 				sunky_stage.visible = true;
 				sanic_bg.visible = false;
@@ -3435,7 +3004,11 @@ class Omni extends BaseStage
 				coldsteel_whiteFuck.visible = false;
 				coldsteel_shadow.visible = false;
 				sanic_bg.visible = true;
+				sunkyMoment = false;
 				sunky_bg.visible = false;
+				sunky_milk.visible = false;
+				sunky_cereal.visible = false;
+				sunky_speakers.visible = false;
 				sunky_balls.visible = false;
 				sunky_stage.visible = false;
 				
@@ -3445,10 +3018,13 @@ class Omni extends BaseStage
 				coldsteel_shadow.visible = true;
 				sanic_bg.visible = false;
 				sunky_bg.visible = false;
+				sunky_milk.visible = false;
+				sunky_cereal.visible = false;
+				sunky_speakers.visible = false;
 				sunky_balls.visible = false;
 				sunky_stage.visible = false;
 				
-			case 7696: //preload faker, hog, exe, scorched
+			case 7696: //preload faker, hog
 				faker_sky.visible = true;
 				faker_eclipse.visible = true;
 				faker_moutains.visible = true;
@@ -3463,23 +3039,6 @@ class Omni extends BaseStage
 				hogLoops.visible = true;
 				hogTrees.visible = true;
 				hogFloor.visible = true;
-				hogRocks.visible = true;
-				faker_sky2.visible = true;
-				faker_eclipse2.visible = true;
-				faker_moutains2.visible = true;
-				faker_mound2.visible = true;
-				faker_rings2.visible = true;
-				faker_trees2.visible = true;
-				faker_ground2.visible = true;
-				faker_bg2.visible = true;
-				scorchedBg.visible = true;
-				scorchedMotain.visible = true;
-				scorchedWaterFalls.visible = true;
-				scorchedFloor.visible = true;
-				scorchedMonitor.visible = true;
-				scorchedHills.visible = true;
-				scorchedTrees.visible = true;
-				scorchedRocks.visible = true;
 				
 			case 7706: //remove preload shit
 				faker_sky.visible = false;
@@ -3624,7 +3183,405 @@ class Omni extends BaseStage
 				knuckles_city1.visible = false;
 				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
-				
+		
+			case 12240:
+				circle.visible = true;
+				circle.screenCenter(X);
+				circle.screenCenter(Y);
+				circle.alpha = 0.8;
+				circle.x += 400;
+				circle.y += 120;
+		}
+	}
+			
+
+	public function doTheThing()
+	{
+		char1.alpha = 1;
+		char2.alpha = 1;
+		char3.alpha = 1;
+		char4.alpha = 1;
+		char5.alpha = 1;
+		char6.alpha = 1;
+		char7.alpha = 1;
+		char8.alpha = 1;
+		char9.alpha = 1;
+		char10.alpha = 1;
+		char11.alpha = 1;
+		char12.alpha = 1;
+		char13.alpha = 1;
+		char14.alpha = 1;
+		char15.alpha = 1;
+		char16.alpha = 1;
+		char17.alpha = 1;
+		char18.alpha = 1;
+		char19.alpha = 1;
+		char20.alpha = 1;
+		char21.alpha = 1;
+		char22.alpha = 1;
+		char24.alpha = 1;
+		char25.alpha = 1;
+		char26.alpha = 1;
+		char27.alpha = 1;
+		char28.alpha = 1;
+		char29.alpha = 1;
+		char30.alpha = 1;
+		char31.alpha = 1;
+		char32.alpha = 1;
+		char33.alpha = 1;
+		char34.alpha = 1;
+		char35.alpha = 1;
+		char36.alpha = 1;
+		char37.alpha = 1;
+		char38.alpha = 1;
+		char39.alpha = 1;
+		char40.alpha = 1;
+		char41.alpha = 1;
+		char42.alpha = 1;
+	
+		char1.alpha = 0;
+		char2.alpha = 0;
+		char3.alpha = 0;
+		char4.alpha = 0.00001;
+		char5.alpha = 0;
+		char6.alpha = 0;
+		char7.alpha = 0;
+		char8.alpha = 0;
+		char9.alpha = 0;
+		char10.alpha = 0;
+		char11.alpha = 0;
+		char12.alpha = 0;
+		char13.alpha = 0;
+		char14.alpha = 0;
+		char15.alpha = 0;
+		char16.alpha = 0;
+		char17.alpha = 0;
+		char18.alpha = 0;
+		char19.alpha = 0.00001;
+		char20.alpha = 0.00001;
+		char21.alpha = 0.00001;
+		char22.alpha = 0;
+		char24.alpha = 0;
+		char25.alpha = 0.00001;
+		char26.alpha = 0.00001;
+		char27.alpha = 0.00001;
+		char28.alpha = 0;
+		char29.alpha = 0;
+		char30.alpha = 0;
+		char31.alpha = 0;
+		char32.alpha = 0.00001;
+		char33.alpha = 0;
+		char34.alpha = 0;
+		char35.alpha = 0.00001;
+		char36.alpha = 0;
+		char37.alpha = 0;
+		char38.alpha = 0;
+		char39.alpha = 0;
+		char40.alpha = 0;
+		char41.alpha = 0.00001;
+		char42.alpha = 0;
+
+		sunkyTransition.visible = true;
+		daJumpscare.visible = true;
+		ring.visible = true;
+		circle.visible = true;
+		sunkyTransition.visible = false;
+		daJumpscare.visible = false;
+		ring.visible = false;
+		circle.visible = false;
+			
+		tailsdoll_floor.visible = true;
+		tailsdoll_floor.visible = false;
+		
+		xterion_floor.visible = true;
+		xterion_floor.visible = false;
+		
+		needleSky.visible = true;
+		needleMoutains.visible = true;
+		needleBuildings.visible = true;
+		conkCreet.visible = true;
+		needleFg.visible = true;
+		needleSky.visible = false;
+		needleMoutains.visible = false;
+		needleBuildings.visible = false;
+		conkCreet.visible = false;
+		needleFg.visible = false;
+		
+		tails_sky.visible = true;
+		tails_fg.visible = true;
+		tails_trees1.visible = true;
+		tails_trees2.visible = true;
+		tails_grass.visible = true;
+		tails_floor.visible = true;
+		tails_sky.visible = false;
+		tails_fg.visible = false;
+		tails_trees1.visible = false;
+		tails_trees2.visible = false;
+		tails_grass.visible = false;
+		tails_floor.visible = false;
+		
+		wall.visible = true;
+		floor.visible = true;
+		fleetwaybgshit.visible = true;
+		emeraldbeamyellow.visible = true;
+		emeralds.visible = true;
+		thechamber.visible = true;
+		pebles.visible = true;
+		wall.visible = false;
+		floor.visible = false;
+		fleetwaybgshit.visible = false;
+		emeraldbeamyellow.visible = false;
+		emeralds.visible = false;
+		thechamber.visible = false;
+		pebles.visible = false;
+					
+		fucklesBGPixel.visible = true;
+		fucklesFGPixel.visible = true;
+		fucklesAmyBg.visible = true;
+		fucklesVectorBg.visible = true;
+		fucklesKnuxBg.visible = true;
+		fucklesEspioBg.visible = true;
+		fucklesCharmyBg.visible = true;
+		fucklesMightyBg.visible = true;
+		whiteFuck.visible = true;
+		fucklesBGPixel.visible = false;
+		fucklesFGPixel.visible = false;
+		fucklesAmyBg.visible = false;
+		fucklesVectorBg.visible = false;
+		fucklesKnuxBg.visible = false;
+		fucklesEspioBg.visible = false;
+		fucklesCharmyBg.visible = false;
+		fucklesMightyBg.visible = false;
+		whiteFuck.visible = false;
+		
+		knuckles_bg.visible = true;
+		knuckles_city1.visible = true;
+		knuckles_city2.visible = true;
+		knuckles_floor.visible = true;
+		knuckles_bg.visible = false;
+		knuckles_city1.visible = false;
+		knuckles_city2.visible = false;
+		knuckles_floor.visible = false;
+		
+		wechidna_sky.visible = true;
+		wechidna_building1.visible = true;
+		wechidna_building2.visible = true;
+		wechidna_floor.visible = true;
+		wechidna_trees.visible = true;
+		wechidna_grass.visible = true;
+		wechidna_thing.visible = true;
+		wechidna_treesFG.visible = true;
+		wechidna_thingFG.visible = true;
+		wechidna_grassFG.visible = true;
+		wechidna_sky.visible = false;
+		wechidna_building1.visible = false;
+		wechidna_building2.visible = false;
+		wechidna_floor.visible = false;
+		wechidna_trees.visible = false;
+		wechidna_grass.visible = false;
+		wechidna_thing.visible = false;
+		wechidna_treesFG.visible = false;
+		wechidna_thingFG.visible = false;
+		wechidna_grassFG.visible = false;
+		
+		satanos_sky.visible = true;
+		satanos_trees.visible = true;
+		satanos_floor.visible = true;
+		satanos_rock.visible = true;
+		satanos_sky.visible = false;
+		satanos_trees.visible = false;
+		satanos_floor.visible = false;
+		satanos_rock.visible = false;
+		
+		sonic_sky.visible = true;
+		sonic_water.visible = true;
+		sonic_waterfall.visible = true;
+		sonic_ground.visible = true;
+		sonic_sky.visible = false;
+		sonic_water.visible = false;
+		sonic_waterfall.visible = false;
+		sonic_ground.visible = false;
+		
+		lordx_sky.visible = true;
+		lordx_hills.visible = true;
+		lordx_floor.visible = true;
+		lordx_eyeflower.visible = true;
+		lordx_notknuckles.visible = true;
+		lordx_bfsmallflower.visible = true;
+		lordx_tree.visible = true;
+		lordx_sky.visible = false;
+		lordx_hills.visible = false;
+		lordx_floor.visible = false;
+		lordx_eyeflower.visible = false;
+		lordx_notknuckles.visible = false;
+		lordx_bfsmallflower.visible = false;
+		lordx_tree.visible = false;
+		
+		domain.visible = true;
+		domain2.visible = true;
+		domain.visible = false;
+		domain2.visible = false;
+					
+		xeno_sky.visible = true;
+		xeno_fg.visible = true;
+		xeno_trees2.visible = true;
+		xeno_trees1.visible = true;
+		xeno_floor.visible = true;
+		xeno_sky.visible = false;
+		xeno_fg.visible = false;
+		xeno_trees2.visible = false;
+		xeno_trees1.visible = false;
+		xeno_floor.visible = false;
+					
+		majin_sky.visible = true;
+		majin_bush.visible = true;
+		majin_pillars2.visible = true;
+		majin_bush2.visible = true;
+		majin_pillars1.visible = true;
+		majin_floor.visible = true;
+		majin_fgmajin.visible = true;
+		majin_fgmajin2.visible = true;
+		majin_sky.visible = false;
+		majin_bush.visible = false;
+		majin_pillars2.visible = false;
+		majin_bush2.visible = false;
+		majin_pillars1.visible = false;
+		majin_floor.visible = false;
+		majin_fgmajin.visible = false;
+		majin_fgmajin2.visible = false;
+			
+		sunky_bg.visible = true;
+		sunky_milk.visible = true;
+		sunky_cereal.visible = true;
+		sunky_speakers.visible = true;
+		sunky_balls.visible = true;
+		sunky_stage.visible = true;
+		sunky_bg.visible = false;
+		sunky_milk.visible = false;
+		sunky_cereal.visible = false;
+		sunky_speakers.visible = false;
+		sunky_balls.visible = false;
+		sunky_stage.visible = false;
+		
+		sanic_bg.visible = true;
+		sanic_bg.visible = false;
+		
+		coldsteel_whiteFuck.visible = true;
+		coldsteel_shadow.visible = true;
+		coldsteel_whiteFuck.visible = false;
+		coldsteel_shadow.visible = false;
+		
+		faker_sky.visible = true;
+		faker_eclipse.visible = true;
+		faker_moutains.visible = true;
+		faker_mound.visible = true;
+		faker_rings.visible = true;
+		faker_trees.visible = true;
+		faker_ground.visible = true;
+		faker_bg.visible = true;
+		faker_sky.visible = false;
+		faker_eclipse.visible = false;
+		faker_moutains.visible = false;
+		faker_mound.visible = false;
+		faker_rings.visible = false;
+		faker_trees.visible = false;
+		faker_ground.visible = false;
+		faker_bg.visible = false;
+		
+		hogBg.visible = true;
+		hogMotain.visible = true;
+		hogWaterFalls.visible = true;
+		hogFloor.visible = true;
+		hogLoops.visible = true;
+		hogTrees.visible = true;
+		hogRocks.visible = true;
+		hogOverlay.visible = true;
+		hogBg.visible = false;
+		hogMotain.visible = false;
+		hogWaterFalls.visible = false;
+		hogFloor.visible = false;
+		hogLoops.visible = false;
+		hogTrees.visible = false;
+		hogRocks.visible = false;
+		hogOverlay.visible = false;
+		
+		faker_sky2.visible = true;
+		faker_eclipse2.visible = true;
+		faker_moutains2.visible = true;
+		faker_mound2.visible = true;
+		faker_rings2.visible = true;
+		faker_trees2.visible = true;
+		faker_ground2.visible = true;
+		faker_bg2.visible = true;
+		faker_overlay.visible = true;
+		faker_sky2.visible = false;
+		faker_eclipse2.visible = false;
+		faker_moutains2.visible = false;
+		faker_mound2.visible = false;
+		faker_rings2.visible = false;
+		faker_trees2.visible = false;
+		faker_ground2.visible = false;
+		faker_bg2.visible = false;
+		faker_overlay.visible = false;
+		
+		scorchedBg.visible = true;
+		scorchedMotain.visible = true;
+		scorchedWaterFalls.visible = true;
+		scorchedFloor.visible = true;
+		scorchedMonitor.visible = true;
+		scorchedHills.visible = true;
+		scorchedTrees.visible = true;
+		scorchedRocks.visible = true;
+		scorchedBg.visible = false;
+		scorchedMotain.visible = false;
+		scorchedWaterFalls.visible = false;
+		scorchedFloor.visible = false;
+		scorchedMonitor.visible = false;
+		scorchedHills.visible = false;
+		scorchedTrees.visible = false;
+		scorchedRocks.visible = false;
+		
+		vignette.visible = true;
+		vignette.visible = false;
+		
+		if (theThing == 3) {
+			trace("The thing done thrice");
+			tailsdoll_floor.visible = true;
+			ring.visible = true;
+			wall.visible = true;
+			floor.visible = true;
+			fleetwaybgshit.visible = true;
+			emeraldbeamyellow.visible = true;
+			emeralds.visible = true;
+			thechamber.visible = true;
+			pebles.visible = true;
+		}
+		
+		if (theThing == 2) {
+			theThing = 3;
+			doTheThing();
+			trace("The thing done twice");
+		}
+		
+		if (theThing == 1) {
+			theThing = 2;
+			doTheThing();
+			trace("The thing done once");
+		}
+	}
+	
+	override function stepHit()
+	{
+		if(curStep % 32 == 0 && scorchedMonitor != null && scorchedMonitor.visible && scorchedMonitor.alive) {
+			monitorCounter++;
+			if(monitorCounter >= monitorAnims.length)monitorCounter=0;
+			scorchedMonitor.animation.play(monitorAnims[monitorCounter], true);
+		}
+		switch(curStep)
+		{
+			case 1:
+				doTheThing();
+		
 			case 10321: //Destroy Tailsdoll
 				tailsdoll_floor.destroy();
 				
@@ -3634,7 +3591,6 @@ class Omni extends BaseStage
 			case 10545: //Destroy Needlemouse
 				needleSky.destroy();
 				needleMoutains.destroy();
-				needleRuins.destroy();
 				needleBuildings.destroy();
 				conkCreet.destroy();
 				needleFg.destroy();
@@ -3686,15 +3642,12 @@ class Omni extends BaseStage
 			case 11249: //Destroy Satanos
 				satanos_sky.destroy();
 				satanos_trees.destroy();
-				satanos_palm.destroy();
-				satanos_sadpalm.destroy();
 				satanos_floor.destroy();
 				satanos_rock.destroy();
 				
 			case 11585: //Destroy Sonic.exe
 				sonic_sky.destroy();
 				sonic_water.destroy();
-				sonic_mountains.destroy();
 				sonic_waterfall.destroy();
 				sonic_ground.destroy();
 
@@ -3715,9 +3668,7 @@ class Omni extends BaseStage
 				lordx_floor.destroy();
 				lordx_eyeflower.destroy();
 				lordx_notknuckles.destroy();
-				lordx_smallflower.destroy();
 				lordx_bfsmallflower.destroy();
-				lordx_smallflower2.destroy();
 				lordx_tree.destroy();
 				
 			case 11697: //Destroy Majin
@@ -3730,7 +3681,11 @@ class Omni extends BaseStage
 				majin_fgmajin2.destroy();
 				
 			case 11729: //Destroy Sunky
+				sunkyMoment = false;
 				sunky_bg.destroy();
+				sunky_milk.destroy();
+				sunky_cereal.destroy();
+				sunky_speakers.destroy();
 				sunky_balls.destroy();
 				sunky_stage.destroy();
 				
@@ -3785,15 +3740,14 @@ class Omni extends BaseStage
 				scorchedHills.destroy();
 				scorchedTrees.destroy();
 				scorchedRocks.destroy();
-		
-			case 12240:
-				circle.visible = true;
-				circle.screenCenter(X);
-				circle.screenCenter(Y);
-				circle.alpha = 0.8;
-				circle.x += 400;
-				circle.y += 120;
-		
+				
+			case 7160:
+				sunkyTransition.visible = true;
+				sunkyTransition.animation.play('b', true);
+			
+			case 7169:
+				sunkyTransition.destroy();
+				
 			case 12228:
 				FlxTween.tween(xeno_sky, {alpha: 0}, 0.87, {ease: FlxEase.linear});
 				FlxTween.tween(xeno_fg, {alpha: 0}, 0.87, {ease: FlxEase.linear});
@@ -3808,63 +3762,41 @@ class Omni extends BaseStage
 			case 6624:
 				daJumpscare.visible = true;
 				daJumpscare.animation.play('jump',true);
-			}
+		}
 	}
 	
 	public function redRingTransition()
 	{
-		ring.alpha = 1;
-		ring.animation.play('anim');
-		new FlxTimer().start(0.2, function(tmr:FlxTimer)
-		{
-			ring.alpha = 0.00001;
-			ring.animation.play('idle');
-			trace('ring finished');
-		});
+		if (!ringStarted) {
+			ringStarted = true;
+			ring.alpha = 1;
+			ring.animation.play('anim');
+			new FlxTimer().start(0.2, function(tmr:FlxTimer)
+			{
+				ring.alpha = 0.00001;
+				ring.animation.play('idle');
+				trace('ring finished');
+				ringStarted = false;
+			});
+		}
 	}
 	
 	override function beatHit()
 	{
-		super.beatHit();
-		if (curBeat % 2 == 0) 
-		{
-			if (fucklesBeats)
-			{
-				fucklesEspioBg.animation.play('idle');
-				fucklesMightyBg.animation.play('idle');
-				fucklesCharmyBg.animation.play('idle');
-				fucklesAmyBg.animation.play('idle');
-				fucklesKnuxBg.animation.play('idle');
-				fucklesVectorBg.animation.play('idle');
-			}
-		}
 		if (phillyGlow) {
 			vignette.alpha = 1;
 			FlxTween.tween(vignette, {alpha: 0}, 0.28, {ease: FlxEase.linear});
 		}
-	}
-	
-	override function sectionHit()
-	{
-		// Code here
-	}
-
-	// Substates for pausing/resuming tweens and timers
-	override function closeSubState()
-	{
-		if(paused)
-		{
-			//timer.active = true;
-			//tween.active = true;
+		if (sunkyMoment) {
+			sunky_speakers.animation.play('idle');
 		}
-	}
-
-	override function openSubState(SubState:flixel.FlxSubState)
-	{
-		if(paused)
-		{
-			//timer.active = false;
-			//tween.active = false;
+		if (curBeat % 1 == 0 && sunkyMoment) {
+			sunky_cereal.angle = -50;
+			sunky_milk.angle = 45;
+		}
+		if (curBeat % 2 == 0 && sunkyMoment) {
+			sunky_cereal.angle = 30;
+			sunky_milk.angle = -25;
 		}
 	}
 

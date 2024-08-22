@@ -495,14 +495,14 @@ function onUpdate(elapsed)
 	if curStep == 7168 or curStep == 7296 or curStep == 7482 or curStep == 8314 or curStep == 8384 or curStep == 11696 then --sunky
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
-		xx = 970;
+		xx = 950;
 		yy = 325;
-		xx2 = 1250;
+		xx2 = 1380;
 		yy2 = 325;
-		setProperty('boyfriendGroup.x',1325);
-		setProperty('boyfriendGroup.y',-75);
-		setProperty('dadGroup.x',370);
-		setProperty('dadGroup.y',-100);
+		setProperty('boyfriendGroup.x',1430);
+		setProperty('boyfriendGroup.y',-115);
+		setProperty('dadGroup.x',340);
+		setProperty('dadGroup.y',-110);
 		setProperty('gfGroup.x',790);
 		setProperty('gfGroup.y',0);
 		setProperty('defaultCamZoom',0.77);
@@ -1480,10 +1480,17 @@ function onNoteMiss()
 		end
 	end
 end
+function getIconColor()
+	return getColorFromHex(rgbToHex(getProperty("dad.healthColorArray")))
+end
+function rgbToHex(array)
+	return string.format('%.2x%.2x%.2x', math.min(array[1]+50,255), math.min(array[2]+50,255), math.min(array[3]+50,255))
+end
 function onEvent(name, value1, value2)
 	if name == 'Change Character' then
 		setProperty('health', getProperty('health') - 0.000001);
 		setProperty('boyfriend.visible',true);
+		setTimeBarColors(getIconColor());
 	end
 	if name == 'Change Character' and curStep >= 12239 and curStep <= 12780 then
 		triggerEvent('Flash Camera', 0.6, '');
