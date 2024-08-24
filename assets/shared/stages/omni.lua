@@ -35,6 +35,10 @@ function onCreate()
 	addCharacterToList('bf-encore-red', 'bf');
 	addCharacterToList('Eggman-Encore', 'dad');
 	
+	precacheMusic('tea-time');
+	precacheSound('unpause');
+	precacheSound('pause');
+	
 	addLuaScript('mods/custom_events/badapplelol');
 	addLuaScript('mods/custom_events/badapplelolFlash');
 	addLuaScript('mods/custom_events/Better Cinematics');
@@ -1380,6 +1384,15 @@ function onTimerCompleted(tag)
 		triggerEvent('Change Character', 'bf', 'bf-pixel-normal');
 		triggerEvent('Change Character', 'bf', 'faker_pixel');
 		preload = false;
+	end
+	if tag == 'middle1' then
+		noteTweenX('MiddleXBF1', 5, 525, 0.7, 'easeInOut');
+	end
+	if tag == 'middle2' then
+		noteTweenX('MiddleXBF2', 6, 635, 0.7, 'easeInOut');
+	end
+	if tag == 'middle3' then
+		noteTweenX('MiddleXBF3', 7, 745, 0.7, 'easeInOut');
 	end
 end
 function onBeatHit()

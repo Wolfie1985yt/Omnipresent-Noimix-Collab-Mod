@@ -1,0 +1,11 @@
+Value1:
+1 = hide bf notes
+2 = unhide bf notes
+3 = hide opponent notes
+4 = unhide opponent notes
+5 = hide healthbar
+6 = unhide healthbar
+7 = swap opponent notes with bf
+8 = unswap/un-middlescroll
+9 = middlescroll
+Value2 = time

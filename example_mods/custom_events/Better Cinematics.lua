@@ -1,4 +1,4 @@
-local HudPieces = {'healthBarBG','healthBar','iconP1','iconP2','timeBar','timeBarBG'}
+local HudPieces = {''}
 local index = 1
 function onCreatePost()
 
@@ -38,7 +38,7 @@ function onEvent(name, value1, value2)
 	
 	end
 
-	if Speed and Distance > 0 then	
+	if Speed > 0 then	
 
 	doTweenY('Cinematics1', 'UpperBar', UpperBar + Distance, Speed, 'QuadOut')
 	doTweenY('Cinematics2', 'LowerBar', LowerBar - Distance, Speed, 'QuadOut')
@@ -57,7 +57,7 @@ function onEvent(name, value1, value2)
 
 --FOR DOWNSCROLL ENTRANCE--
 ------------------------------------------------------------------------
-	if downscroll and Speed and Distance > 0 then	
+	if downscroll and Speed > 0 then	
 
 	doTweenY('Cinematics1', 'UpperBar', UpperBar + Distance, Speed, 'QuadOut')
 	doTweenY('Cinematics2', 'LowerBar', LowerBar - Distance, Speed, 'QuadOut')
@@ -72,17 +72,10 @@ function onEvent(name, value1, value2)
 			end
 		end
 	end
-
-
---FOR EXIT--
-------------------------------------------------------------------------
-	if Distance <= 0 then		
-
-	doTweenY('Cinematics1', 'UpperBar', UpperBar, Speed, 'QuadIn')
-	doTweenY('Cinematics2', 'LowerBar', LowerBar, Speed, 'QuadIn')
-
+	
+	if Distance <= 0 then
 		for Alphas = 1,8 do
-		doTweenAlpha('Alpha'..Alphas, HudPieces[index], 1, Speed + 0.1)
+		doTweenAlpha('Alpha'..Alphas, HudPieces[index], 1, Speed - 0.1)
 		index = index + 1
     				
 			if index > #HudPieces then
@@ -90,7 +83,6 @@ function onEvent(name, value1, value2)
 				
 			end
 		end
-		
-	end	
+	end
 end
 
