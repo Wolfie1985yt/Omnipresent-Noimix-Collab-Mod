@@ -14,6 +14,7 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.util.FlxSort;
 import flixel.util.FlxStringUtil;
 import flixel.util.FlxSave;
+import flixel.math.FlxRandom;
 import flixel.input.keyboard.FlxKey;
 import flixel.animation.FlxAnimationController;
 import lime.utils.Assets;
@@ -2199,6 +2200,39 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	function doPopup(type:Int)
+	{
+		var popup = new FatalPopup(0, 0, type);
+		var popuppos:Array<Int> = [errorRandom.int(0, Std.int(FlxG.width - popup.width)), errorRandom.int(0, Std.int(FlxG.height - popup.height))];
+		popup.x = popuppos[0];
+		popup.y = popuppos[1];
+		popup.cameras = [camOther];
+		add(popup);
+	}
+
+	function managePopups(){
+		if(FlxG.mouse.justPressed){
+			trace("click :)");
+			for(idx in 0...FatalPopup.popups.length){
+				var realIdx = (FatalPopup.popups.length - 1) - idx;
+				var popup = FatalPopup.popups[realIdx];
+				var hitShit:Bool=false;
+				for(camera in popup.cameras){
+					@:privateAccess
+					var hitOK = popup.clickDetector.overlapsPoint(FlxG.mouse.getWorldPosition(camera, popup.clickDetector._point), true, camera);
+					if (hitOK){
+						popup.close();
+						hitShit=true;
+						break;
+					}
+				}
+				if(hitShit)break;
+			}
+		}
+	}
+
+	var errorRandom:FlxRandom = new FlxRandom(666);
+
 	public function triggerEvent(eventName:String, value1:String, value2:String, strumTime:Float) {
 		var flValue1:Null<Float> = Std.parseFloat(value1);
 		var flValue2:Null<Float> = Std.parseFloat(value2);
@@ -2242,6 +2276,22 @@ class PlayState extends MusicBeatState
 				if(ClientPrefs.data.camZooms && FlxG.camera.zoom < 1.35) {
 					if(flValue1 == null) flValue1 = 0.03;
 					camHUD.zoom += flValue1;
+				}
+
+			case 'Clear Popups':
+				while(FatalPopup.popups.length>0)
+					FatalPopup.popups[0].close();
+
+			case 'Fatality Popup':
+				var value:Int = Std.parseInt(value1);
+				if (Math.isNaN(value) || value<1)
+					value = 1;
+
+				var type:Int = Std.parseInt(value2);
+				if (Math.isNaN(type) || type<1)
+					type = 1;
+				for(idx in 0...value){
+					doPopup(type);
 				}
 
 			case 'Play Animation':

@@ -1609,6 +1609,7 @@ class Omni extends BaseStage
 		preload('hpR-dark');
 		preload('tbR-dark');
 		preload('noteSkins/NOTE_assets');
+		preload('error_popups');
 		
 		//Icons
 		preload('icons/icon-xterion-first');

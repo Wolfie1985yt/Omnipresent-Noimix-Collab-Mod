@@ -1385,15 +1385,6 @@ function onTimerCompleted(tag)
 		triggerEvent('Change Character', 'bf', 'faker_pixel');
 		preload = false;
 	end
-	if tag == 'middle1' then
-		noteTweenX('MiddleXBF1', 5, 525, 0.7, 'easeInOut');
-	end
-	if tag == 'middle2' then
-		noteTweenX('MiddleXBF2', 6, 635, 0.7, 'easeInOut');
-	end
-	if tag == 'middle3' then
-		noteTweenX('MiddleXBF3', 7, 745, 0.7, 'easeInOut');
-	end
 end
 function onBeatHit()
 	if curBeat > 1999 and curBeat < 2064 then

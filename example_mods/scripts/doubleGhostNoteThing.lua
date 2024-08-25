@@ -42,7 +42,7 @@ function goodNoteHit(id, direction, noteType, isSustainNote, gfNote)
 		end
 	end
 end
-
+	
 function opponentNoteHit(id, direction, noteType, isSustainNote, gfSection)
 	local strumTime = ''
 	local frameName = ''
@@ -96,6 +96,15 @@ function ghostTrail(char, noteData, reactivate)
 	doTweenAlpha(ghost, ghost, 0, 0.75, 'linear')
 
 	local stage = string.lower(curStage)
+end
+
+function onEvent(name, value1, value2)
+	if name == 'Change Character' and value1 == 'dad' or name == 'Change Character' and value1 == 'bf' then
+		setProperty('boyfriendGhost.alpha',0);
+		setProperty('dadGhost.alpha',0);
+		removeLuaSprite('dadGhost');
+		removeLuaSprite('boyfriendGhost');
+	end
 end
 
 function onTimerCompleted(tag, loops, loopsLeft)

@@ -1,0 +1,3 @@
+Value 1: Fade Speed
+Value 2: Color
+Value 1 = 0 will end the event
