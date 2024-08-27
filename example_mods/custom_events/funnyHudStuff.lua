@@ -38,7 +38,7 @@ function onEvent(name, value1, value2)
 			doTweenAlpha('healthBarBGTween', 'healthBarBG', 1, value2, 'easeIn');
 			doTweenAlpha('scoreTween', 'scoreTxt', 1, value2, 'easeIn');
 		end
-		if value1 == '7' then --swap notes
+		if value1 == '7' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --swap notes
 			noteTweenX('XDAD1', 0, 732, 0.1, 'quartInOut');
 			noteTweenX('XDAD2', 1, 844, 0.1, 'quartInOut');
 			noteTweenX('XDAD3', 2, 956, 0.1, 'quartInOut');
@@ -48,7 +48,7 @@ function onEvent(name, value1, value2)
 			noteTweenX('XBF3', 6, 316, 0.1, 'quartInOut');
 			noteTweenX('XBF4', 7, 428, 0.1, 'quartInOut');
 		end
-		if value1 == '8' then --reswap notes
+		if value1 == '8' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --reswap notes
 			noteTweenX('XBF1', 4, 732, 0.1, 'quartInOut');
 			noteTweenX('XBF2', 5, 844, 0.1, 'quartInOut');
 			noteTweenX('XBF3', 6, 956, 0.1, 'quartInOut');
@@ -58,22 +58,43 @@ function onEvent(name, value1, value2)
 			noteTweenX('XDAD3', 2, 316, 0.1, 'quartInOut');
 			noteTweenX('XDAD4', 3, 428, 0.1, 'quartInOut');
 		end
-		if value1 == '9' then --middle
-			noteTweenX('MiddleXBF0', 4, 425, 2, 'quartInOut');
+		if value1 == '9' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --middle
+			noteTweenX('MiddleXBF0', 4, 422, 2, 'quartInOut');
 			runTimer('middle1',0.1);
 			runTimer('middle2',0.2);
 			runTimer('middle3',0.3);
+		end
+		if value1 == '10' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --middle opp
+			noteTweenX('MiddleXDAD0', 3, 752, 0.5, 'quartInOut');
+			runTimer('middle4',0.05);
+			runTimer('middle5',0.1);
+			runTimer('middle6',0.15);
+		end
+		if value1 == '11' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --move back
+			noteTweenX('XDAD1', 0, 92, value2, 'quartInOut');
+			noteTweenX('XDAD2', 1, 204, value2, 'quartInOut');
+			noteTweenX('XDAD3', 2, 316, value2, 'quartInOut');
+			noteTweenX('XDAD4', 3, 428, value2, 'quartInOut');
 		end
 	end
 end
 function onTimerCompleted(tag)
 	if tag == 'middle1' then
-		noteTweenX('MiddleXBF1', 5, 535, 2, 'quartInOut');
+		noteTweenX('MiddleXBF1', 5, 532, 2, 'quartInOut');
 	end
 	if tag == 'middle2' then
-		noteTweenX('MiddleXBF2', 6, 645, 2, 'quartInOut');
+		noteTweenX('MiddleXBF2', 6, 642, 2, 'quartInOut');
 	end
 	if tag == 'middle3' then
-		noteTweenX('MiddleXBF3', 7, 755, 2, 'quartInOut');
+		noteTweenX('MiddleXBF3', 7, 752, 2, 'quartInOut');
+	end
+	if tag == 'middle4' then
+		noteTweenX('MiddleXDAD1', 2, 642, 0.5, 'quartInOut');
+	end
+	if tag == 'middle5' then
+		noteTweenX('MiddleXDAD2', 1, 532, 0.5, 'quartInOut');
+	end
+	if tag == 'middle6' then
+		noteTweenX('MiddleXDAD3', 0, 422, 0.5, 'quartInOut');
 	end
 end

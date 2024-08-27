@@ -26,24 +26,17 @@ class StoryMenuState extends MusicBeatState
 	var ezbg:FlxSprite;
 	var bg:FlxSprite;
 	var SelectedSongExe:Int = 0;
-	var SelectedSongAlt:Int = 0;
 	var oneclickpls:Bool = true;
 	var bfIDLELAWL:StoryModeMenuBFidle;
 	var bfALTIDLELAWL:StoryModeMenuBFidle;
 	var redBOX:FlxSprite;
 	var selection:Int = 1;
-	var songArrayExe = ['too-slow', 'you-cant-run', 'triple-trouble', 'final-escape', 'face-off'];
-	var songArrayAlt = ['coulrophobia', 'broken-heart', 'tribal', 'goddess'];
-	var AltSelected:Bool = false;
+	var songArrayExe = ['omnipresent'];
 	var WeekSelected:String = 'exe';
 	var staticscreen:FlxSprite;
-	var staticscreenAlt:FlxSprite;
 	var portrait:FlxSprite;
-	var portraitAlt:FlxSprite;
 	var greyBOX:FlxSprite;
-	var greyALTBOX:FlxSprite;
 	var yellowBOX:FlxSprite;
-	var yellowALTBOX:FlxSprite;
 	var lock:FlxSprite;
 	private var camGame:FlxCamera;
 	var blackScreen:FlxSprite;
@@ -52,9 +45,6 @@ class StoryMenuState extends MusicBeatState
 	var hitboxOne:FlxSprite;
 	var hitboxTwo:FlxSprite;
 	var hitboxThree:FlxSprite;
-	var hitboxOneALT:FlxSprite;
-	var hitboxTwoALT:FlxSprite;
-	var hitboxThreeALT:FlxSprite;
 	
 	var lerpScore:Int = 0;
 	var lerpRating:Float = 0;
@@ -112,7 +102,7 @@ class StoryMenuState extends MusicBeatState
 		bfIDLELAWL.screenCenter(X);
 		add(bfIDLELAWL);
 
-		portrait = new FlxSprite(150, 79).loadGraphic(Paths.image('story-mode/exe/too-slow'));
+		portrait = new FlxSprite(150, 79).loadGraphic(Paths.image('story-mode/exe/omnipresent'));
 		portrait.setGraphicSize(Std.int(portrait.width * 0.275));
 		portrait.antialiasing = true;
 		portrait.updateHitbox();
@@ -179,18 +169,16 @@ class StoryMenuState extends MusicBeatState
 
 	function ScoreUPD()
 	{
-		if (!AltSelected) {
-			#if !switch
-			intendedScore = Highscore.getScore(songArrayExe[SelectedSongExe], 2);
-			intendedRating = Highscore.getRating(songArrayExe[SelectedSongExe], 2);
-			#end
-			scoreText.text = 'SCORE: ' + lerpScore;
-			scoreText.screenCenter(X);
-			if (selection == 1)
-				scoreText.alpha = 1;
-			else
-				scoreText.alpha = 0;
-		}
+		#if !switch
+		intendedScore = Highscore.getScore(songArrayExe[SelectedSongExe], 2);
+		intendedRating = Highscore.getRating(songArrayExe[SelectedSongExe], 2);
+		#end
+		scoreText.text = 'SCORE: ' + lerpScore;
+		scoreText.screenCenter(X);
+		if (selection == 1)
+			scoreText.alpha = 1;
+		else
+			scoreText.alpha = 0;
 	}
 
 	override public function update(elapsed:Float)

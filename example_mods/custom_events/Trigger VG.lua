@@ -8,8 +8,10 @@ function onEvent(name, value1, value2)
 		setProperty('VG3.alpha',0.7);
 		doTweenAlpha('VG3Tween', 'VG3', 0, 0.4, 'linear');
 	end
-	if name == 'Trigger VG' and value1 == 0 then
+	if name == 'Trigger VG' and value1 == '0' then
 		beat = 0;
+		cancelTween('VG3Color');
+		cancelTween('VG3Tween');
 		setProperty('VG3.alpha',0);
 	end
 end

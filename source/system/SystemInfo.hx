@@ -1,3 +1,4 @@
+#if windows
 package system;
 
 import sys.io.Process;
@@ -20,3 +21,4 @@ class SystemInfo {
 		return totalRAM;
 	}
 }
+#end

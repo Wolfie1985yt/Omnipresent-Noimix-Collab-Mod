@@ -1,7 +1,4 @@
---by sloow
-
-local scale = 1
-local loading = false
+local loading = false;
 
 function onCreate()
 	if getPropertyFromClass('states.PlayState','chartingMode') == false then
@@ -14,19 +11,27 @@ function onCreate()
 		setProperty('black.alpha',1)
 		setObjectCamera('black', 'other')
 	
-		makeLuaSprite('circle', 'StartScreens/Circle-omnipresent', 0, 0) -- creating the image
+		makeLuaSprite('circle', 'StartScreens/Circle-omnipresent', 0, 0)
 		setObjectCamera('circle', 'other')
-		scaleObject('circle', scale, scale)
+		scaleObject('circle', 1, 1)
 		addLuaSprite('circle')
 		setProperty('circle.alpha',0)
 		runTimer('start', 0.5)
 		runTimer('bye', 1.9)
 	
-		makeLuaSprite('text', 'StartScreens/Text-omnipresent', 0, 0) -- creating the image
-		setObjectCamera('text', 'other')
-		scaleObject('text', scale, scale)
-		setProperty('text.alpha',0)
-		addLuaSprite('text')
+		if getRandomInt(1,2) == 1 then
+			makeLuaSprite('text', 'StartScreens/Text1-omnipresent', 0, 0)
+			setObjectCamera('text', 'other')
+			scaleObject('text', 1, 1)
+			setProperty('text.alpha',0)
+			addLuaSprite('text')
+		else
+			makeLuaSprite('text', 'StartScreens/Text2-omnipresent', 0, 0)
+			setObjectCamera('text', 'other')
+			scaleObject('text', 1, 1)
+			setProperty('text.alpha',0)
+			addLuaSprite('text')
+		end
 		
 		makeLuaSprite('red', '', 0, 0);
 		makeGraphic('red',1920,1080,'FF0000')
@@ -48,7 +53,7 @@ function onCreate()
 	end
 end
 
-function onStartCountdown() -- cotidoun
+function onStartCountdown()
     if loading == false and getPropertyFromClass('states.PlayState','chartingMode') == false then
         return Function_Stop
     elseif loading == true and getPropertyFromClass('states.PlayState','chartingMode') == false then
@@ -71,7 +76,7 @@ function onSongStart()
 		doTweenAlpha('startstuff5', 'red', 1, 1.56, 'linear')
 	end
 end
-function onTweenCompleted(tag) --this is for delete the loading screen
+function onTweenCompleted(tag)
 	if tag == 'startstuff5' then
 		setProperty('white.alpha',1);
 		doTweenAlpha('startstuff6', 'white', 0, 0.5, 'linear')

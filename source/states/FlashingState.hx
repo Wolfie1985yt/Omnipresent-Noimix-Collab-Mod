@@ -21,12 +21,16 @@ class FlashingState extends MusicBeatState
 	{
 		super.create();
 
+		#if windows
 		RAM = SystemInfo.getTotalRAM();
 		
-		if (RAM < 15) {
+		if (RAM < 7) {
 			Incompatible = true;
 		}
-		trace('Total RAM on Device: ' + RAM + ' GB, Max Needed: 15 GB');
+		trace('Total RAM on Device: ' + RAM + ' GB, Max Needed: 7 GB');
+		#else
+			Incompatible = true;
+		#end
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);

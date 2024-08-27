@@ -1,5 +1,6 @@
 local speed = 0;
 local color = 'FFFFFF';
+local stop = true;
 function onEvent(name, value1, value2)
 	if name == 'VG Pulse' then
 		if value1 == '0' then
@@ -7,13 +8,23 @@ function onEvent(name, value1, value2)
 			cancelTimer('Second');
 			doTweenAlpha('VG3Tween', 'VG2', 0, speed);
 			speed = 0;
+			stop = true;
+			cancelTween('VG2Color');
+			cancelTween('VG2Tween');
 		else
+			stop = false;
 			speed = value1;
 			color = value2;
 			doTweenColor('VG2Color', 'VG2', color, 0.00001, 'linear');
 			doTweenAlpha('VG3Tween', 'VG2', 0.7, speed, 'linear');
+			setProperty('VG2.alpha',0);
 			runTimer('First',speed);
 		end
+	end
+end
+function onUpdate()
+	if stop == true then
+		setProperty('VG2.alpha',0);
 	end
 end
 function onTimerCompleted(tag)

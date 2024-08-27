@@ -81,7 +81,9 @@ class ChartingState extends MusicBeatState
 		['Set Property', "Value 1: Variable name\nValue 2: New value"],
 		['Play Sound', "Value 1: Sound file name\nValue 2: Volume (Default: 1), ranges from 0 to 1"],
 		['Fatality Popup', "Fatality Popup WOo.\nValue 1: Amount of popups\nValue 2: Type (1, 2 or 3)\nType 2 ignores the hard cap of 10 popups\nand are also a bit bigger\nType 3 is the same but alot bigger"],
-		['Clear Popups', "Removes all fatality popups"]
+		['Clear Popups', "Removes all fatality popups"],
+		['WechJump', "Spoopy jumpscare"],
+		['Fatal Static', "Fatal Error static stuff, what did you expect?"]
 	];
 
 	var _file:FileReference;

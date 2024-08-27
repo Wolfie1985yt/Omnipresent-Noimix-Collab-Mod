@@ -481,7 +481,11 @@ class PlayState extends MusicBeatState
 		add(noteGroup);
 
 		healthBarBG = new AttachedSprite('hpR-dark');
-		healthBarBG.y = FlxG.height * 0.89;
+		if (ClientPrefs.data.downScroll) {
+		healthBarBG.y = FlxG.height * 0.11;
+		} else {
+			healthBarBG.y = FlxG.height * 0.89;
+		}
 		healthBarBG.setGraphicSize(Std.int(healthBarBG.width * bgSize));
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
@@ -508,11 +512,10 @@ class PlayState extends MusicBeatState
 		timeBar.visible = showTime;
 		
 		timeBarBGBG = new AttachedSprite('tbR-dark');
-		timeBarBGBG.color = 0xFFFFFFFF;
 		timeBarBGBG.y = timeTxt.y + (timeTxt.height / 4);
 		timeBarBGBG.scrollFactor.set();
 		timeBarBGBG.alpha = 0;
-		timeBarBGBG.xAdd = -16;
+		timeBarBGBG.xAdd = -15;
 		timeBarBGBG.yAdd = -0.5;
 		timeBarBGBG.sprTracker = timeBar;
 		timeBarBGBG.scale.x += 0.025;
@@ -1838,6 +1841,14 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		healthBarBG.alpha = healthBar.alpha;
+		timeBarBGBG.alpha = timeBar.alpha;
+	
+		if (curStep <= 12220 && curStep >= 0 || curStep >= 12776 && curStep <= 13104) {
+			timeBarBGBG.color = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
+			healthBarBG.color = FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]);
+		}
+
 		if (destroyShaders) {
 			destroyShaders = false;
 			camGame.setFilters([]);
@@ -1882,6 +1893,14 @@ class PlayState extends MusicBeatState
 				openChartEditor();
 			else if (controls.justPressed('debug_2'))
 				openCharacterEditor();
+			if (controls.justPressed('debug_3'))
+			{
+				PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
+				PlayState.changedDifficulty = true;
+				PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
+				PlayState.instance.botplayTxt.alpha = 1;
+				PlayState.instance.botplaySine = 0;
+			}
 		}
 
 		if (healthBar.bounds.max != null && health > healthBar.bounds.max)
@@ -2230,7 +2249,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 	}
-
+	
 	var errorRandom:FlxRandom = new FlxRandom(666);
 
 	public function triggerEvent(eventName:String, value1:String, value2:String, strumTime:Float) {
@@ -2273,10 +2292,8 @@ class PlayState extends MusicBeatState
 				gfSpeed = Math.round(flValue1);
 
 			case 'Add Camera Zoom':
-				if(ClientPrefs.data.camZooms && FlxG.camera.zoom < 1.35) {
-					if(flValue1 == null) flValue1 = 0.03;
-					camHUD.zoom += flValue1;
-				}
+				if(flValue1 == null) flValue1 = 0.03;
+				camHUD.zoom += flValue1;
 
 			case 'Clear Popups':
 				while(FatalPopup.popups.length>0)
@@ -2293,6 +2310,39 @@ class PlayState extends MusicBeatState
 				for(idx in 0...value){
 					doPopup(type);
 				}
+
+			case 'Fatal Static':
+				var daStatix:BGSprite;
+				daStatix = new BGSprite('statix', 0, 0, 1.0, 1.0, ['statixx'], true);
+				daStatix.scale.x = 2;
+				daStatix.scale.y = 2;
+				daStatix.screenCenter(X);
+				daStatix.screenCenter(Y);
+				daStatix.antialiasing = false;
+				daStatix.cameras = [camHUD];
+				daStatix.visible = true;
+				new FlxTimer().start(0.20, function(tmr:FlxTimer)
+				{
+					remove(daStatix);
+				});
+
+			case 'WechJump':
+				var doP3JumpTD:FlxSprite = new FlxSprite().loadGraphic(Paths.image('wechidna'));
+				doP3JumpTD.screenCenter();
+				doP3JumpTD.cameras = [camHUD];
+				doP3JumpTD.scale.x = 1.25;
+				doP3JumpTD.scale.y = 1.25;
+				FlxG.camera.shake(0.005, 0.10);
+				doP3JumpTD.screenCenter(X);
+				doP3JumpTD.screenCenter(Y);
+				add(doP3JumpTD);
+
+				FlxTween.tween(doP3JumpTD, {alpha: 0}, 0.5, {});
+
+				new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+					remove(doP3JumpTD);
+				});
 
 			case 'Play Animation':
 				//trace('Anim to play: ' + value1);

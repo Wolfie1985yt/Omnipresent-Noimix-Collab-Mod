@@ -131,6 +131,8 @@ class Omni extends BaseStage
 	var coldsteel_whiteFuck:FlxSprite;
 	var coldsteel_shadow:FlxSprite;
 	
+	var guitar:FlxSprite;
+	
 	var faker_sky:FlxSprite;
 	var faker_eclipse:FlxSprite;
 	var faker_moutains:FlxSprite;
@@ -158,6 +160,7 @@ class Omni extends BaseStage
 	var faker_ground2:FlxSprite;
 	var faker_bg2:FlxSprite;
 	var faker_overlay:FlxSprite;
+	var exeDie:FlxSprite;
 	
 	var scorchedBg:BGSprite;
 	var scorchedMotain:BGSprite;
@@ -601,6 +604,7 @@ class Omni extends BaseStage
 		wall.animation.play('a');
 		wall.antialiasing = true;
 		wall.scale.y = 1.5;
+		wall.scale.x = 1.5;
 		wall.scrollFactor.set(1.1, 1.1);
 		wall.alpha = 0.000001;
 		add(wall);
@@ -1590,6 +1594,7 @@ class Omni extends BaseStage
 		add(circle);
 		
 		//Create Post Shit
+		preload('exedeath');
 		preload('bgs/faker-encore/fakerpixel');
 		preload('bgs/triple-trouble-encore/eggman/egg_bg');
 		preload('epicjump');
@@ -1653,6 +1658,9 @@ class Omni extends BaseStage
 		preload('characters/BF/HD/BOYFRIEND');
 		
 		//Other
+		preload('wechidna');
+		preload('statix');
+		preload('guitar');
 		preload('noteSplashes/noteSplashes-Bloodsplash');
 		preload('healthBar');
 		preload('timeBar');
@@ -1771,6 +1779,15 @@ class Omni extends BaseStage
 			satanos_rock.visible = false;
 			satanos_rock.antialiasing = ClientPrefs.data.antialiasing;
 			add(satanos_rock);
+			
+			guitar = new FlxSprite(360, -1000);
+			guitar.loadGraphic(Paths.image('guitar'));
+			guitar.scrollFactor.set(1, 1);
+			guitar.visible = false;
+			guitar.scale.x = 0.5;
+			guitar.scale.y = 0.5;
+			guitar.antialiasing = ClientPrefs.data.antialiasing;
+			add(guitar);
 			
 			xeno_fg = new FlxSprite(-800, -1100);
 			xeno_fg.loadGraphic(Paths.image('bgs/triple-trouble-encore/xeno/xeno_fg'));
@@ -1924,7 +1941,7 @@ class Omni extends BaseStage
 			daJumpscare.updateHitbox();
 			daJumpscare.screenCenter();
 			daJumpscare.y += 370;
-			daJumpscare.visible = false;
+			daJumpscare.alpha = 0.0000001;
 			daJumpscare.cameras = [camOther];
 			add(daJumpscare);
 		} else {
@@ -1936,7 +1953,6 @@ class Omni extends BaseStage
 			daJumpscare.updateHitbox();
 			daJumpscare.screenCenter();
 			daJumpscare.y += 370;
-			daJumpscare.visible = false;
 			daJumpscare.cameras = [camOther];
 			add(daJumpscare);
 		}
@@ -1950,6 +1966,28 @@ class Omni extends BaseStage
 		vignette.antialiasing = ClientPrefs.data.antialiasing;
 		vignette.screenCenter();
 		add(vignette);
+		
+		exeDie = new FlxSprite(100, 200);
+		exeDie.frames = Paths.getSparrowAtlas('exedeath');
+		exeDie.animation.addByIndices('frame1', 'DieLmao', [1], "", 12, false);
+		exeDie.animation.addByIndices('frame2', 'DieLmao', [3], "", 12, false);
+		exeDie.animation.addByIndices('frame3', 'DieLmao', [4], "", 12, false);
+		exeDie.animation.addByIndices('frame4', 'DieLmao', [5], "", 12, false);
+		exeDie.animation.addByIndices('frame5', 'DieLmao', [6], "", 12, false);
+		exeDie.animation.addByIndices('frame5', 'DieLmao', [7], "", 12, false);
+		exeDie.animation.addByIndices('frame6', 'DieLmao', [8], "", 12, false);
+		exeDie.animation.addByIndices('frame7', 'DieLmao', [9], "", 12, false);
+		exeDie.animation.addByIndices('frame8', 'DieLmao', [10], "", 12, false);
+		exeDie.animation.play('frame1');
+		exeDie.scale.x = 1.8;
+		exeDie.scale.y = 1.8;
+		exeDie.antialiasing = ClientPrefs.data.antialiasing;
+		exeDie.scrollFactor.set(1, 1);
+		exeDie.screenCenter(X);
+		exeDie.screenCenter(Y);
+		exeDie.visible = false;
+		exeDie.cameras = [camOther];
+		add(exeDie);
 	
 		ring = new FlxSprite(0, 0);
 		ring.frames = Paths.getSparrowAtlas('bgs/digitalized/ring');
@@ -2394,6 +2432,28 @@ class Omni extends BaseStage
 		}
 		switch (curStep)
 		{	
+			//Exe flash shit
+			case 9061:
+				exeDie.visible = true;
+				exeDie.animation.play('frame1', true);
+			case 9063:
+				exeDie.visible = true;
+				exeDie.animation.play('frame2', true);
+			case 9065:
+				exeDie.visible = true;
+				exeDie.animation.play('frame3', true);
+			case 9067:
+				exeDie.visible = true;
+				exeDie.animation.play('frame6', true);
+			case 9069:
+				exeDie.visible = true;
+				exeDie.animation.play('frame7', true);
+			case 9071:
+				exeDie.visible = true;
+				exeDie.animation.play('frame8', true);
+			case 9060, 9062, 9064, 9066, 9068, 9070:
+				exeDie.visible = false;
+
 			case 136, 400, 592, 848, 944, 10224, 10320: //xterion
 				redRingTransition();
 				tailsdoll_floor.visible = false;
@@ -2447,7 +2507,6 @@ class Omni extends BaseStage
 				tails_floor.visible = true;
 				hogOverlay.visible = true;
 				faker_overlay.visible = true;
-				scorchedRocks.visible = true;
 				hogRocks.visible = true;
 			
 			case 3232:
@@ -2467,41 +2526,9 @@ class Omni extends BaseStage
 				tails_floor.visible = false;
 				hogOverlay.visible = false;
 				faker_overlay.visible = false;
-				scorchedRocks.visible = false;
 				hogRocks.visible = false;
-			
-			case 10322: //more lag shit
-				majin_bush2.visible = true;
-				majin_bush.visible = true;
-				majin_floor.visible = true;
-				majin_pillars1.visible = true;
-				majin_pillars2.visible = true;
-				majin_fgmajin.visible = true;
-				majin_fgmajin2.visible = true;
-				satanos_sky.visible = true;
-				satanos_trees.visible = true;
-				satanos_floor.visible = true;
-				satanos_rock.visible = true;
-				lordx_sky.visible = true;
-				lordx_hills.visible = true;
-				lordx_floor.visible = true;
-				lordx_eyeflower.visible = true;
-				lordx_notknuckles.visible = true;
-				lordx_bfsmallflower.visible = true;
-				lordx_tree.visible = true;
-				sunky_bg.visible = true;
-				sunky_milk.visible = true;
-				sunky_cereal.visible = true;
-				sunky_speakers.visible = true;
-				sunky_balls.visible = true;
-				sunky_stage.visible = true;
-				sanic_bg.visible = true;
-				knuckles_bg.visible = true;
-				knuckles_city1.visible = true;
-				knuckles_city2.visible = true;
-				knuckles_floor.visible = true;
 				
-			case 10323, 10324, 10325, 10326, 10327, 10328, 10329, 10330: //im sick of this
+			case 10322, 10323, 10324, 10325, 10326, 10327, 10328, 10329, 10330: //im sick of this
 				majin_bush2.visible = false;
 				majin_bush.visible = false;
 				majin_floor.visible = false;
@@ -2767,7 +2794,6 @@ class Omni extends BaseStage
 				xeno_trees2.visible = false;
 				xeno_trees1.visible = false;
 				xeno_floor.visible = false;
-				daJumpscare.visible = false;
 				majin_bush2.visible = false;
 				majin_bush.visible = false;
 				majin_floor.visible = false;
@@ -2892,6 +2918,7 @@ class Omni extends BaseStage
 				sanic_bg.visible = true;
 				sunkyTransition.visible = true;
 				coldsteel_whiteFuck.visible = true;
+				guitar.visible = true;
 				coldsteel_shadow.visible = true;
 				
 			case 6418: //remove preload shit
@@ -2916,6 +2943,7 @@ class Omni extends BaseStage
 				sanic_bg.visible = false;
 				sunkyTransition.visible = false;
 				coldsteel_whiteFuck.visible = false;
+				guitar.visible = false;
 				coldsteel_shadow.visible = false;
 
 			case 6608: //ycr-normal
@@ -2931,6 +2959,9 @@ class Omni extends BaseStage
 				lordx_notknuckles.visible = false;
 				lordx_bfsmallflower.visible = false;
 				lordx_tree.visible = false;
+				
+			case 6641:
+				daJumpscare.destroy();
 				
 			case 6640, 6896, 6928, 7056, 11440, 11568, 12224: //xeno
 				redRingTransition();
@@ -3057,22 +3088,6 @@ class Omni extends BaseStage
 				hogTrees.visible = false;
 				hogFloor.visible = false;
 				hogRocks.visible = false;
-				faker_sky2.visible = false;
-				faker_eclipse2.visible = false;
-				faker_moutains2.visible = false;
-				faker_mound2.visible = false;
-				faker_rings2.visible = false;
-				faker_trees2.visible = false;
-				faker_ground2.visible = false;
-				faker_bg2.visible = false;
-				scorchedBg.visible = false;
-				scorchedMotain.visible = false;
-				scorchedWaterFalls.visible = false;
-				scorchedFloor.visible = false;
-				scorchedMonitor.visible = false;
-				scorchedHills.visible = false;
-				scorchedTrees.visible = false;
-				scorchedRocks.visible = false;
 				
 			case 8528, 8784, 8912: //faker
 				redRingTransition();
@@ -3287,7 +3302,6 @@ class Omni extends BaseStage
 		ring.visible = true;
 		circle.visible = true;
 		sunkyTransition.visible = false;
-		daJumpscare.visible = false;
 		ring.visible = false;
 		circle.visible = false;
 			
@@ -3422,6 +3436,9 @@ class Omni extends BaseStage
 		domain2.visible = true;
 		domain.visible = false;
 		domain2.visible = false;
+		
+		exeDie.visible = true;
+		exeDie.visible = false;
 					
 		xeno_sky.visible = true;
 		xeno_fg.visible = true;
@@ -3469,8 +3486,10 @@ class Omni extends BaseStage
 		
 		coldsteel_whiteFuck.visible = true;
 		coldsteel_shadow.visible = true;
+		guitar.visible = true;
 		coldsteel_whiteFuck.visible = false;
 		coldsteel_shadow.visible = false;
+		guitar.visible = false;
 		
 		faker_sky.visible = true;
 		faker_eclipse.visible = true;
@@ -3582,9 +3601,48 @@ class Omni extends BaseStage
 		{
 			case 1:
 				doTheThing();
+
+			case 7990: //coldsteel guitar
+				guitar.visible = true;
+				FlxTween.tween(guitar, {y: 200}, 0.48, {ease: FlxEase.cubeIn});
+				
+			case 7994: //Destroy guitar
+				guitar.destroy();
+
+			case 9072: //Destroy Exe flash shit
+				exeDie.destroy();
 		
 			case 10321: //Destroy Tailsdoll
 				tailsdoll_floor.destroy();
+				majin_bush2.visible = true;
+				majin_bush.visible = true;
+				majin_floor.visible = true;
+				majin_pillars1.visible = true;
+				majin_pillars2.visible = true;
+				majin_fgmajin.visible = true;
+				majin_fgmajin2.visible = true;
+				satanos_sky.visible = true;
+				satanos_trees.visible = true;
+				satanos_floor.visible = true;
+				satanos_rock.visible = true;
+				lordx_sky.visible = true;
+				lordx_hills.visible = true;
+				lordx_floor.visible = true;
+				lordx_eyeflower.visible = true;
+				lordx_notknuckles.visible = true;
+				lordx_bfsmallflower.visible = true;
+				lordx_tree.visible = true;
+				sunky_bg.visible = true;
+				sunky_milk.visible = true;
+				sunky_cereal.visible = true;
+				sunky_speakers.visible = true;
+				sunky_balls.visible = true;
+				sunky_stage.visible = true;
+				sanic_bg.visible = true;
+				knuckles_bg.visible = true;
+				knuckles_city1.visible = true;
+				knuckles_city2.visible = true;
+				knuckles_floor.visible = true;
 				
 			case 10417: //Destroy Xterion
 				xterion_floor.destroy();
@@ -3761,7 +3819,7 @@ class Omni extends BaseStage
 				circle.destroy();
 
 			case 6624:
-				daJumpscare.visible = true;
+				daJumpscare.alpha = 1;
 				daJumpscare.animation.play('jump',true);
 		}
 	}

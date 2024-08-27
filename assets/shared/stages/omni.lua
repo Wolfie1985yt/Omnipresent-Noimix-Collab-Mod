@@ -17,7 +17,9 @@ local finalMoment = false;
 local fakerpixelMoment = false;
 local traceBF = true;
 local traceDad = true;
+local fleetwayMoment = false;
 local gfMoment = true;
+local timeColor = 'FFFFFF';
 
 function onCreate()
 	addCharacterToList('wechBeast', 'dad');
@@ -55,12 +57,12 @@ function onCreate()
 
 	makeLuaSprite('flashingshit', '', 0, 0);
 	makeGraphic('flashingshit',1920,1080,'000000')
-	addLuaSprite('flashingshit', true);
+	addLuaSprite('flashingshit', false);
 	setLuaSpriteScrollFactor('flashingshit',0,0)
 	setProperty('flashingshit.scale.x',2)
 	setProperty('flashingshit.scale.y',2)
 	setProperty('flashingshit.alpha',0)
-	setObjectCamera('flashingshit', 'other')
+	setObjectCamera('flashingshit', 'camHUD')
 
 	makeLuaSprite('flashingshit2', '', 0, 0);
 	makeGraphic('flashingshit2',1920,1080,'000000')
@@ -69,7 +71,7 @@ function onCreate()
 	setProperty('flashingshit2.scale.x',2)
 	setProperty('flashingshit2.scale.y',2)
 	setProperty('flashingshit2.alpha',0)
-	setObjectCamera('flashingshit', 'camHUD')
+	setObjectCamera('flashingshit2', 'camOther')
 
 	precacheSong('omnipresent/Inst');
 	precacheSong('omnipresent/Voices-Opponent');
@@ -110,6 +112,7 @@ function onSongStart()
 	setProperty('dad.alpha',1);
 	setProperty('boyfriend.alpha',1);
 	setProperty('defaultCamZoom',0.7);
+	setTimeBarColors(string.format('%02x%02x%02x', unpack(getProperty('dad.healthColorArray'))));
 end
 function onStartCountdown()
 	setProperty('gfGroup.alpha',0.00001);
@@ -124,6 +127,19 @@ function onStartCountdown()
 	runTimer('reset-preload',0.7);
 end
 function onUpdate(elapsed)
+	if fleetwayMoment == true then
+		xx3 = 300;
+		yy3 = 400;
+	else
+		xx3 = xx2;
+		yy3 = yy2;
+	end
+	if curStep >= 12255 then
+		setProperty('iconP1.alpha',0);
+		setProperty('iconP2.alpha',0);
+		setProperty('healthBar.alpha',0);
+		setProperty('healthBarBG.alpha',0);
+	end
 	if curStep == 6607 then
 		setProperty('simplejump.visible',true);
 		setProperty('simplejump.alpha',0.00001);
@@ -319,6 +335,23 @@ function onUpdate(elapsed)
 		setProperty('gfGroup.x',2460);
 		setProperty('gfGroup.y',500);
 	end
+	if curStep == 2304 or curStep == 2305 or curStep == 2306 then
+		fleetwayMoment = true;
+		xx = 300;
+		yy = 400;
+		xx2 = 300;
+		yy2 = 400;
+		xx3 = 300;
+		yy3 = 400;
+		triggerEvent('Camera Follow Pos',xx,yy)
+	end
+	if curStep == 2320 then
+		fleetwayMoment = false;
+		xx2 = 2150; 
+		yy2 = 870;
+		xx3 = xx2;
+		yy3 = xx3;
+	end
 	if curStep == 3360 or curStep == 3520 or curStep == 3680 or curStep == 4064 or curStep == 4192 or curStep == 11056 then --knuckles
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
@@ -419,8 +452,8 @@ function onUpdate(elapsed)
 		setProperty('boyfriendGroup.y',275);
 		setProperty('dadGroup.x',75);
 		setProperty('dadGroup.y',20);
-		setProperty('gfGroup.x',400);
-		setProperty('gfGroup.y',175);
+		setProperty('gfGroup.x',-400);
+		setProperty('gfGroup.y',275);
 		setProperty('defaultCamZoom', 0.9);
 	end
 	if curStep == 5968 or curStep == 6224 or curStep == 6416 or curStep == 11456 or curStep == 11584 then --fatal error
@@ -833,11 +866,11 @@ function onUpdate(elapsed)
 		setProperty('flashingshit.alpha',0);
 	end
 	if curStep == 7680 then
-		setProperty('flashingshit2.alpha',1);
+		setProperty('flashingshit.alpha',1);
 	end
 	if curStep == 7712 then
 		triggerEvent('Flash Camera',0.6);
-		setProperty('flashingshit2.alpha',0);
+		setProperty('flashingshit.alpha',0);
 	end
 
 	--character/screen fades
@@ -862,6 +895,9 @@ function onUpdate(elapsed)
 	if curStep == 688 or curStep == 3544 or curStep == 8960 then
 		setProperty('gf.alpha',0.7);
 		triggerEvent('Flash Camera', 0.6, '');
+	end
+	if curStep == 8960 then
+		xx = 330;
 	end
 	if curStep == 4192 or curStep == 1808 or curStep == 4496 or curStep == 5056 or curStep == 5088 or curStep == 5184 or curStep == 6504 or curStep == 7072 or curStep == 9840 then
 		setProperty('gf.alpha',0.7);
@@ -902,9 +938,18 @@ function onUpdate(elapsed)
 	if curStep == 9840 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 1.55, 'linear');
 	end
-	if curStep == 12207 then
-		doTweenAlpha('hudAlpha', 'camHUD', 0, 1.29, 'linear');
-		doTweenAlpha('flashingshitAlpha', 'flashingshit2', 1, 0.3225, 'linear');
+	if curStep == 9040 then
+		doTweenAlpha('hudAlpha', 'camHUD', 0, 1.55, 'linear');
+		doTweenAlpha('hudAlpha', 'camGame', 0, 1.55, 'linear');
+		doTweenAlpha('flashingshitAlpha', 'flashingshit2', 1, 1.55, 'linear');
+	end
+	if curStep == 9060 then
+		setProperty('flashingshit2.alpha',0);
+		setProperty('camHUD.alpha',0);
+	end
+	if curStep == 9072 then
+		setProperty('camGame.alpha',1);
+		setProperty('camHUD.alpha',1);
 	end
 	if curStep == 12224 then
 		doTweenAlpha('hudAlpha', 'camHUD', 1, 1.29, 'linear');
@@ -1032,8 +1077,6 @@ function onUpdate(elapsed)
 	if curStep == 12944 then
 		setProperty('defaultCamZoom',1.65);
 	end
-	xx3 = xx2;
-	yy3 = yy2;
 	if finalMoment == true and curStep <= 12495 then
 		setProperty('defaultCamZoom',1);
 		setProperty('cameraSpeed',200);
@@ -1391,6 +1434,9 @@ function onBeatHit()
 		triggerEvent('Philly Glow', 1, '');
 		triggerEvent('Philly Glow', 2, '');
 	end
+	if curBeat % 2 == 0 and curStep >= 12496 and curStep <= 12751 then
+		triggerEvent('Add Camera Zoom', 0.06, 0);
+	end
 end
 function opponentNoteHit(membersIndex, notedata, noteType, isSustainNote)
 	if curStep >= 12815 then
@@ -1484,17 +1530,10 @@ function onNoteMiss()
 		end
 	end
 end
-function getIconColor()
-	return getColorFromHex(rgbToHex(getProperty("dad.healthColorArray")))
-end
-function rgbToHex(array)
-	return string.format('%.2x%.2x%.2x', math.min(array[1]+50,255), math.min(array[2]+50,255), math.min(array[3]+50,255))
-end
 function onEvent(name, value1, value2)
 	if name == 'Change Character' then
 		setProperty('health', getProperty('health') - 0.000001);
-		setProperty('boyfriend.visible',true);
-		setTimeBarColors(getIconColor());
+		setTimeBarColors(string.format('%02x%02x%02x', unpack(getProperty('dad.healthColorArray'))));
 	end
 	if name == 'Change Character' and curStep >= 12239 and curStep <= 12780 then
 		triggerEvent('Flash Camera', 0.6, '');
