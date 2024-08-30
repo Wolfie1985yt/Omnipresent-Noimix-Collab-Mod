@@ -654,8 +654,8 @@ class EditorPlayState extends MusicBeatSubstate
 		}
 		comboSpr.x = xThing + 50;
 		/*
-			trace(combo);
-			trace(seperatedScore);
+			//trace(combo);
+			//trace(seperatedScore);
 			*/
 
 		coolText.text = Std.string(seperatedScore);
@@ -713,7 +713,7 @@ class EditorPlayState extends MusicBeatSubstate
 
 		if (plrInputNotes.length != 0) { // slightly faster than doing `> 0` lol
 			var funnyNote:Note = plrInputNotes[0]; // front note
-			// trace('✡⚐🕆☼ 💣⚐💣');
+			//trace('✡⚐🕆☼ 💣⚐💣');
 
 			if (plrInputNotes.length > 1) {
 				var doubleNote:Note = plrInputNotes[1];

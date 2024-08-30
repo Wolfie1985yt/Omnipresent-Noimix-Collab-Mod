@@ -346,7 +346,7 @@ class CharacterEditorState extends MusicBeatState
 				}
 				/*hideGhostButton.active = true;
 				hideGhostButton.alpha = 1;*/
-				trace('created ghost image');
+				//trace('created ghost image');
 			}
 		});
 
@@ -554,7 +554,7 @@ class CharacterEditorState extends MusicBeatState
 			reloadAnimList();
 			@:arrayAccess curAnim = Std.int(Math.max(0, character.animationsArray.indexOf(addedAnim)));
 			character.playAnim(addedAnim.anim, true);
-			trace('Added/Updated animation: ' + animationInputText.text);
+			//trace('Added/Updated animation: ' + animationInputText.text);
 		});
 
 		var removeButton:FlxButton = new FlxButton(180, animationIndicesInputText.y + 60, "Remove", function() {
@@ -577,7 +577,7 @@ class CharacterEditorState extends MusicBeatState
 						updateTextColors();
 					}
 					reloadAnimList();
-					trace('Removed animation: ' + animationInputText.text);
+					//trace('Removed animation: ' + animationInputText.text);
 					break;
 				}
 		});

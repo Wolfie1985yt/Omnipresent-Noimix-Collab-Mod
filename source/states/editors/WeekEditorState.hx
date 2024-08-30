@@ -478,7 +478,7 @@ class WeekEditorState extends MusicBeatState
 				if(loadedWeek.weekCharacters != null && loadedWeek.weekName != null) //Make sure it's really a week
 				{
 					var cutName:String = _file.name.substr(0, _file.name.length - 5);
-					trace("Successfully loaded file: " + cutName);
+					//trace("Successfully loaded file: " + cutName);
 					loadError = false;
 
 					weekFileName = cutName;
@@ -491,7 +491,7 @@ class WeekEditorState extends MusicBeatState
 		loadedWeek = null;
 		_file = null;
 		#else
-		trace("File couldn't be loaded! You aren't on Desktop, are you?");
+		//trace("File couldn't be loaded! You aren't on Desktop, are you?");
 		#end
 	}
 
@@ -504,7 +504,7 @@ class WeekEditorState extends MusicBeatState
 		_file.removeEventListener(Event.CANCEL, onLoadCancel);
 		_file.removeEventListener(IOErrorEvent.IO_ERROR, onLoadError);
 		_file = null;
-		trace("Cancelled file loading.");
+		//trace("Cancelled file loading.");
 	}
 
 	/**
@@ -516,7 +516,7 @@ class WeekEditorState extends MusicBeatState
 		_file.removeEventListener(Event.CANCEL, onLoadCancel);
 		_file.removeEventListener(IOErrorEvent.IO_ERROR, onLoadError);
 		_file = null;
-		trace("Problem loading file");
+		//trace("Problem loading file");
 	}
 
 	public static function saveWeek(weekFile:WeekFile) {
@@ -765,7 +765,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
-		trace(weekFile.songs[curSelected]);
+		//trace(weekFile.songs[curSelected]);
 		iconInputText.text = weekFile.songs[curSelected][1];
 		bgColorStepperR.value = Math.round(weekFile.songs[curSelected][2][0]);
 		bgColorStepperG.value = Math.round(weekFile.songs[curSelected][2][1]);

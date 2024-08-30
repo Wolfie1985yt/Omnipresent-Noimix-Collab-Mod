@@ -1,72 +1,62 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				1,
-				-14
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				-12,
+				4
+			],
 			"anim": "idle",
-			"indices": [],
-			"name": "chaotix fake idle"
+			"fps": 24,
+			"name": "chaotix fake idle",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-5,
-				-13
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				6,
+				40
+			],
 			"anim": "singUP",
-			"indices": [],
-			"name": "chaotix fake up"
+			"fps": 24,
+			"name": "chaotix fake up",
+			"indices": []
 		},
 		{
-			"offsets": [
-				1,
-				-14
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				-6,
+				4
+			],
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "chaotix fake right"
+			"fps": 24,
+			"name": "chaotix fake right",
+			"indices": []
 		},
 		{
-			"offsets": [
-				1,
-				-14
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				19,
+				4
+			],
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "chaotix fake left"
+			"fps": 24,
+			"name": "chaotix fake left",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-11,
-				-14
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				19,
+				-38
+			],
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "chaotix fake down"
-		},
-		{
-			"offsets": [
-				379,
-				496
-			],
-			"loop": false,
 			"fps": 24,
-			"anim": "transformation",
-			"indices": [],
-			"name": "chaotix beast transformation"
+			"name": "chaotix fake down",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": true,
 	"image": "characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix",
 	"position": [
@@ -85,5 +75,6 @@
 		-500
 	],
 	"sing_duration": 4,
-	"scale": 6
+	"scale": 6,
+	"_editor_isPlayer": false
 }

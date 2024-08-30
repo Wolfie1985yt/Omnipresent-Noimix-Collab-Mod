@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="FNF': Omnipresent Noimix" file="Omnipresent" packageName="com.wolfie.omnipresent" package="com.wolfie.omnipresent" main="Main" version="1.0" company="Wolfie_1985" />
+	<app title="FNF': Omnipresent Noimix" file="Omnipresent" packageName="com.wolfie2.omnipresent" package="com.wolfie2.omnipresent" main="Main" version="1.0" company="Wolfie_1986" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
@@ -57,9 +57,6 @@
 	<classpath name="source" />
 
 	<!-- __________________________ Game Assets & Etc. __________________________ -->
-	
-	<!-- Turn on Crash Handler -->
-	<define name="CRASH_HANDLER" if="desktop release" />
 
 	<!-- Assets -->
 	<assets path="assets/fonts" />
@@ -148,10 +145,6 @@
 	
 	<!--Disable deprecated warnings-->
 	<haxedef name='no-deprecation-warnings' />
-
-	<!--Macro fixes-->
-	<haxeflag name="--macro" value="allowPackage('flash')" />
-	<haxeflag name="--macro" value="include('my.pack')" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 

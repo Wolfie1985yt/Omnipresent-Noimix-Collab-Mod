@@ -31,7 +31,6 @@ class PauseSubState extends MusicBeatSubstate
 	var menuItems:Array<String>;
 	var curSelected:Int = 0;
 	var pauseMusic:FlxSound;
-	var top:FlxSprite;
 	var panel:FlxSprite;
 	var exit3:FlxSprite;
 	var exit2:FlxSprite;
@@ -55,12 +54,6 @@ class PauseSubState extends MusicBeatSubstate
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
 		FlxG.sound.list.add(pauseMusic);
 		FlxG.sound.play(Paths.sound('pause', 'shared'), 0.7);
-
-		top = new FlxSprite(-800, 0).loadGraphic(Paths.image('pauseStuff/pauseTop'));
-		top.antialiasing = ClientPrefs.data.antialiasing;
-		top.scrollFactor.set();
-		top.screenCenter();
-		add(top);
 		
 		panel = new FlxSprite(800, 0).loadGraphic(Paths.image('pauseStuff/bottomPanel'));
 		panel.antialiasing = ClientPrefs.data.antialiasing;
@@ -191,7 +184,6 @@ class PauseSubState extends MusicBeatSubstate
 
 	function TweenIn():Void
 	{
-		FlxTween.tween(top, {x: 0}, 0.25, { ease: FlxEase.expoInOut });
 		FlxTween.tween(panel, {x: 0}, 0.25, { ease: FlxEase.expoInOut });
 		FlxTween.tween(exit3, {x: 715}, 0.25, { ease: FlxEase.expoInOut });
 		FlxTween.tween(exit2, {x: 715}, 0.25, { ease: FlxEase.expoInOut });

@@ -95,7 +95,7 @@ class LoadingState extends MusicBeatState
 	}
 	
 	function checkLibrary(library:String) {
-		trace(Assets.hasLibrary(library));
+		//trace(Assets.hasLibrary(library));
 		if (Assets.getLibrary(library) == null)
 		{
 			@:privateAccess
@@ -156,7 +156,7 @@ class LoadingState extends MusicBeatState
 		if(weekDir != null && weekDir.length > 0 && weekDir != '') directory = weekDir;
 
 		Paths.setCurrentLevel(directory);
-		trace('Setting asset folder to ' + directory);
+		//trace('Setting asset folder to ' + directory);
 
 		/*#if NO_PRELOAD_ALL
 		var loaded:Bool = false;
@@ -176,7 +176,7 @@ class LoadingState extends MusicBeatState
 	/*#if NO_PRELOAD_ALL
 	static function isSoundLoaded(path:String):Bool
 	{
-		trace(path);
+		//trace(path);
 		return Assets.cache.hasSound(path);
 	}
 	

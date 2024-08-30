@@ -63,7 +63,6 @@ class MainMenuState extends MusicBeatState
 	var ArrowDownSel:FlxSprite;
 	var FGup:FlxSprite;
 	var FGdown:FlxSprite;
-	var PressAlt:FlxSprite;
 	var InCustomCursor:Bool = false;
 	
 	public var offButtonsThing:Bool = false;
@@ -163,12 +162,6 @@ class MainMenuState extends MusicBeatState
 		ArrowDownSel.screenCenter();
 		add(ArrowDownSel);
 		ArrowDownSel.alpha = 0;
-		
-		PressAlt = new FlxSprite(949, 676).loadGraphic(Paths.image('mainmenu/press-alt'));
-		PressAlt.antialiasing = ClientPrefs.data.antialiasing;
-		PressAlt.scrollFactor.set();
-		PressAlt.alpha = 0;
-		add(PressAlt);
 		
 		//ETC
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -310,7 +303,7 @@ class MainMenuState extends MusicBeatState
 					holdTime = 0;
 				}
 			
-			if ((controls.ACCEPT) || (FlxG.mouse.overlaps(Buttons) && (FlxG.mouse.justReleased) || (FlxG.mouse.justPressedMiddle) && !FlxG.mouse.overlaps(PressAlt))) {
+			if ((controls.ACCEPT) || (FlxG.mouse.overlaps(Buttons) && (FlxG.mouse.justReleased) || (FlxG.mouse.justPressedMiddle))) {
 					#if desktop
 					lockMouseSelection = true;
 					#end

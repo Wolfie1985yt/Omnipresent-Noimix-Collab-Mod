@@ -1,5 +1,5 @@
-#if windows
 package system;
+#if windows
 
 import sys.io.Process;
 
@@ -16,7 +16,7 @@ class SystemInfo {
         }
         var totalRAM:Float = Std.parseFloat(trimmedOutput) / (1024 * 1024 * 1024); // Convert from bytes to GB
         if (Math.isNaN(totalRAM)) {
-            trace("Failed to parse total RAM.");
+            //trace("Failed to parse total RAM.");
 		}
 		return totalRAM;
 	}

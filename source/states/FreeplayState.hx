@@ -46,7 +46,7 @@ class FreeplayState extends MusicBeatState
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
 	
-	var omniBeaten:Bool = ClientPrefs.data.omnipresentBeat;
+	public var omniBeaten:Bool = ClientPrefs.data.omnipresentBeat;
 	var select:Bool = false;
 	var loading:Bool = false;
 	
@@ -123,7 +123,11 @@ class FreeplayState extends MusicBeatState
 		charText = new FlxText(0 , 25, 0, "", 32); 
 		charText.setFormat(Paths.font("sonic-cd-menu-font.ttf"), charText.size, FlxColor.WHITE, CENTER);
 		charText.screenCenter(X);
-		charText.text = '???';
+		if (omniBeaten) {
+			charText.text = 'fucked';
+		} else {
+			charText.text = '???';
+		}
 		charText.screenCenter(X);
 		add(charText);
 
@@ -160,7 +164,7 @@ class FreeplayState extends MusicBeatState
 
         scoreText.text = 'Score: ' + lerpScore;
 
-        if (controls.ACCEPT && select && !loading) {
+        if (controls.ACCEPT && select && !loading && omniBeaten) {
             FlxG.sound.play(Paths.sound('confirmMenu'));
             loading = true;
             PlayState.SONG = backend.Song.loadFromJson('omnipresent' + '-hard', 'omnipresent');
@@ -169,6 +173,9 @@ class FreeplayState extends MusicBeatState
             PlayState.isStoryMode = false;
 			new FlxTimer().start(1, function(tmr:FlxTimer) { LoadingState.loadAndSwitchState(new PlayState()); });
         }
+		if (controls.ACCEPT && select && !loading && !omniBeaten) {
+			FlxG.sound.play(Paths.sound('deniedMOMENT'), 1);
+		}
         if (controls.ACCEPT && !select && !loading) {
             FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 			select = true;

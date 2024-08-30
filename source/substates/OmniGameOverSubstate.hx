@@ -52,7 +52,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 		opponentName = playStateInstance.dad.curCharacter;
 		gfName = playStateInstance.gf.curCharacter;
     
-		trace(playStateInstance.dad.curCharacter);
+		//trace(playStateInstance.dad.curCharacter);
 
 		PlayState.instance.setOnLuas('inGameOver', true);
 

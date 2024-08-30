@@ -243,7 +243,7 @@ class Note extends FlxSprite
 			}
 		}
 
-		// trace(prevNote);
+		//trace(prevNote);
 
 		if(prevNote != null)
 			prevNote.nextNote = this;

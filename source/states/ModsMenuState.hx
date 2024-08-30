@@ -107,7 +107,7 @@ class ModsMenuState extends MusicBeatState
 			var modFolder = Paths.mods();
 			if(!FileSystem.exists(modFolder))
 			{
-				trace('created missing folder');
+				//trace('created missing folder');
 				FileSystem.createDirectory(modFolder);
 			}
 			CoolUtil.openFolder(modFolder);
@@ -551,7 +551,7 @@ class ModsMenuState extends MusicBeatState
 				modsList = Mods.parseList();
 				if(modsList.all.length > 0)
 				{
-					trace('mod(s) found! reloading');
+					//trace('mod(s) found! reloading');
 					reload();
 				}
 			}
@@ -716,7 +716,7 @@ class ModsMenuState extends MusicBeatState
 		{
 			if(mod == null)
 			{
-				trace('Mod #$i is null, maybe it was ' + modsList.all[i]);
+				//trace('Mod #$i is null, maybe it was ' + modsList.all[i]);
 				continue;
 			}
 
@@ -737,7 +737,7 @@ class ModsMenuState extends MusicBeatState
 		if(position >= modsList.all.length) position = 0;
 		else if(position < 0) position = modsList.all.length-1;
 
-		trace('Moved mod $mod to position $position');
+		//trace('Moved mod $mod to position $position');
 		var id:Int = modsList.all.indexOf(mod);
 		if(position == id) return;
 
@@ -839,7 +839,7 @@ class ModItem extends FlxSpriteGroup
 				#if windows
 				lime.app.Application.current.window.alert(errorMsg, errorTitle);
 				#end
-				trace('$errorTitle - $errorMsg');
+				//trace('$errorTitle - $errorMsg');
 			}
 		}
 

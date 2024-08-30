@@ -11,11 +11,6 @@ function onCreate()
 		setProperty('black.alpha',1)
 		setObjectCamera('black', 'other')
 	
-		makeLuaSprite('circle', 'StartScreens/Circle-omnipresent', 0, 0)
-		setObjectCamera('circle', 'other')
-		scaleObject('circle', 1, 1)
-		addLuaSprite('circle')
-		setProperty('circle.alpha',0)
 		runTimer('start', 0.5)
 		runTimer('bye', 1.9)
 	
@@ -63,7 +58,6 @@ end
 
 function onTimerCompleted(tag, loops, loopsLeft) -- penis
 	if tag == 'start' then
-        doTweenAlpha('startstuff3', 'circle', 1, 0.8, 'linear')
         doTweenAlpha('startstuff4', 'text', 1, 0.8, 'linear')
 	end
     if tag == 'bye' then
@@ -81,7 +75,6 @@ function onTweenCompleted(tag)
 		setProperty('white.alpha',1);
 		doTweenAlpha('startstuff6', 'white', 0, 0.5, 'linear')
 		removeLuaSprite('red');
-		removeLuaSprite('circle')
 		removeLuaSprite('text')
 		removeLuaSprite('black')
 	end

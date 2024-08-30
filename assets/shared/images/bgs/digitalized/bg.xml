@@ -1,4 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<TextureAtlas imagePath="bg.png">
-<SubTexture name="static0000" x="0" y="0" width="2500" height="1080" frameX="0" frameY="0" frameWidth="2500" frameHeight="1080" />
-</TextureAtlas>

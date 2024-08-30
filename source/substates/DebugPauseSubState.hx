@@ -232,7 +232,7 @@ class DebugPauseSubState extends MusicBeatSubstate
 						return;
 					}					
 				}catch(e:Dynamic){
-					trace('ERROR! $e');
+					//trace('ERROR! $e');
 
 					var errorStr:String = e.toString();
 					if(errorStr.startsWith('[file_contents,assets/data/')) errorStr = 'Missing file: ' + errorStr.substring(27, errorStr.length-1); //Missing chart

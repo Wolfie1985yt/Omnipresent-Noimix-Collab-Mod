@@ -36,9 +36,9 @@ class WarningState extends MusicBeatState
 			32); 
 			#else
 			
-			!mac" Hey, you are seeing this message because you are using the Mac version of the mod!\n
+			" Hey, you are seeing this message because you are using the Mac version of the mod!\n
 			 This Mod requires at least 8GB of RAM, or a really good GPU (4 or more GB of VRAM).\n
-			 Idk how to check your RAM on Mac, so you should probably check if you have 8 or more GB of RAMn
+			 Idk how to check your RAM on Mac, so you should probably check if you have 8 or more GB of RAM.\n
 			 There is a setting in the options called Smart Caching, which you can use if you have a good GPU to decrease lag.\n
 			 You can still try to play but no guarantees!\n
 			 You've been warned!",

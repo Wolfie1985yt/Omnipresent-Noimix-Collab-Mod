@@ -52,7 +52,7 @@ class VideoSprite extends FlxSpriteGroup {
 			videoSprite.bitmap.onEndReached.add(function() {
 				if(alreadyDestroyed) return;
 	
-				trace('Video destroyed');
+				//trace('Video destroyed');
 				if(cover != null)
 				{
 					remove(cover);
@@ -71,7 +71,7 @@ class VideoSprite extends FlxSpriteGroup {
 			#if hxvlc
 			var wd:Int = videoSprite.bitmap.formatWidth;
 			var hg:Int = videoSprite.bitmap.formatHeight;
-			trace('Video Resolution: ${wd}x${hg}');
+			//trace('Video Resolution: ${wd}x${hg}');
 			videoSprite.scale.set(FlxG.width / wd, FlxG.height / hg);
 			#end
 			*/
@@ -93,7 +93,7 @@ class VideoSprite extends FlxSpriteGroup {
 			return;
 		}
 
-		trace('Video destroyed');
+		//trace('Video destroyed');
 		if(cover != null)
 		{
 			remove(cover);
@@ -128,7 +128,7 @@ class VideoSprite extends FlxSpriteGroup {
 				finishCallback = null;
 				videoSprite.bitmap.onEndReached.dispatch();
 				PlayState.instance.remove(this);
-				trace('Skipped video');
+				//trace('Skipped video');
 				return;
 			}
 		}

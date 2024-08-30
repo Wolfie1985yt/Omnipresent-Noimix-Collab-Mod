@@ -1,83 +1,84 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				31,
 				239
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 42,
-			"name": "YcrUP",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "YcrUP"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				184,
 				132
 			],
-			"anim": "singLEFT",
+			"loop": false,
 			"fps": 38,
-			"name": "YcrLEFT",
-			"indices": []
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "YcrLEFT"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				81,
 				54
 			],
-			"anim": "singDOWN",
+			"loop": false,
 			"fps": 40,
-			"name": "YcrDOWN",
-			"indices": []
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "YcrDOWN"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				42,
 				127
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 26,
-			"name": "YcrIDLE",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "YcrIDLE"
+		},
+		{
+			"offsets": [
+				47,
+				176
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "laugh",
+			"indices": [],
+			"name": "YcrLAUGH"
 		},
 		{
 			"loop": false,
-			"offsets": [
-				17,
-				199
-			],
-			"anim": "laugh",
-			"fps": 24,
-			"name": "YcrLAUGH",
-			"indices": []
-		},
-		{
 			"offsets": [
 				180,
 				440
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "scream",
-			"indices": [],
-			"name": "YcrAHH"
+			"fps": 24,
+			"name": "YcrAHH",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-36,
 				99
 			],
-			"loop": false,
-			"fps": 35,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "YcrRIGHT"
+			"fps": 35,
+			"name": "YcrRIGHT",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
 	"image": "characters/XenoAndGrimbo/HD/YCR-Cherribun",
 	"position": [
@@ -96,5 +97,6 @@
 		-250
 	],
 	"sing_duration": 6.1,
-	"scale": 1
+	"scale": 1,
+	"_editor_isPlayer": false
 }

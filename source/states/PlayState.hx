@@ -912,17 +912,14 @@ class PlayState extends MusicBeatState
 		var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 		var introImagesArray:Array<String> = switch(stageUI) {
 			case "pixel": ['${stageUI}UI/ready-pixel', '${stageUI}UI/set-pixel', '${stageUI}UI/date-pixel'];
-			case "normal": ["ready", "set" ,"go"];
-			default: ['${stageUI}UI/ready', '${stageUI}UI/set', '${stageUI}UI/go'];
+			case "normal": ["blank", "blank" ,"blank"];
+			default: ['${stageUI}UI/blank', '${stageUI}UI/blank', '${stageUI}UI/blank'];
 		}
 		introAssets.set(stageUI, introImagesArray);
 		var introAlts:Array<String> = introAssets.get(stageUI);
 		for (asset in introAlts) Paths.image(asset);
 
-		Paths.sound('intro3' + introSoundsSuffix);
-		Paths.sound('intro2' + introSoundsSuffix);
-		Paths.sound('intro1' + introSoundsSuffix);
-		Paths.sound('introGo' + introSoundsSuffix);
+		Paths.sound('intro');
 	}
 
 	public function startCountdown()
@@ -981,8 +978,8 @@ class PlayState extends MusicBeatState
 				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 				var introImagesArray:Array<String> = switch(stageUI) {
 					case "pixel": ['${stageUI}UI/ready-pixel', '${stageUI}UI/set-pixel', '${stageUI}UI/date-pixel'];
-					case "normal": ["ready", "set" ,"go"];
-					default: ['${stageUI}UI/ready', '${stageUI}UI/set', '${stageUI}UI/go'];
+					case "normal": ["blank", "blank" ,"blank"];
+					default: ['${stageUI}UI/blank', '${stageUI}UI/blank', '${stageUI}UI/blank'];
 				}
 				introAssets.set(stageUI, introImagesArray);
 
@@ -993,19 +990,19 @@ class PlayState extends MusicBeatState
 				switch (swagCounter)
 				{
 					case 0:
-						FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
+						FlxG.sound.play(Paths.sound('intro'), 0.6);
 						tick = THREE;
 					case 1:
 						countdownReady = createCountdownSprite(introAlts[0], antialias);
-						FlxG.sound.play(Paths.sound('intro2' + introSoundsSuffix), 0.6);
+						FlxG.sound.play(Paths.sound('intro'), 0.6);
 						tick = TWO;
 					case 2:
 						countdownSet = createCountdownSprite(introAlts[1], antialias);
-						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
+						FlxG.sound.play(Paths.sound('intro'), 0.6);
 						tick = ONE;
 					case 3:
 						countdownGo = createCountdownSprite(introAlts[2], antialias);
-						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
+						FlxG.sound.play(Paths.sound('intro'), 0.6);
 						tick = GO;
 					case 4:
 						tick = START;
@@ -1293,9 +1290,9 @@ class PlayState extends MusicBeatState
 					}
 					#end
 					
-					trace('text1: ' + texti1);
-					trace('text2: ' + texti2);
-					trace('text3: ' + texti3);
+					//trace('text1: ' + texti1);
+					//trace('text2: ' + texti2);
+					//trace('text3: ' + texti3);
 					
 					creditoText1 = new FlxText(0, -1000, 0, texti1, 28);
 					creditoText1.cameras = [camOther];
@@ -1948,7 +1945,7 @@ class PlayState extends MusicBeatState
 		if (!ClientPrefs.data.noReset && controls.RESET && canReset && !inCutscene && startedCountdown && !endingSong)
 		{
 			health = 0;
-			trace("RESET = True");
+			//trace("RESET = True");
 		}
 		doDeathCheck();
 
@@ -2231,7 +2228,7 @@ class PlayState extends MusicBeatState
 
 	function managePopups(){
 		if(FlxG.mouse.justPressed){
-			trace("click :)");
+			//trace("click :)");
 			for(idx in 0...FatalPopup.popups.length){
 				var realIdx = (FatalPopup.popups.length - 1) - idx;
 				var popup = FatalPopup.popups[realIdx];
@@ -2312,19 +2309,6 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'Fatal Static':
-				var daStatix:BGSprite;
-				daStatix = new BGSprite('statix', 0, 0, 1.0, 1.0, ['statixx'], true);
-				daStatix.scale.x = 2;
-				daStatix.scale.y = 2;
-				daStatix.screenCenter(X);
-				daStatix.screenCenter(Y);
-				daStatix.antialiasing = false;
-				daStatix.cameras = [camHUD];
-				daStatix.visible = true;
-				new FlxTimer().start(0.20, function(tmr:FlxTimer)
-				{
-					remove(daStatix);
-				});
 
 			case 'WechJump':
 				var doP3JumpTD:FlxSprite = new FlxSprite().loadGraphic(Paths.image('wechidna'));
@@ -2712,8 +2696,8 @@ class PlayState extends MusicBeatState
 				{
 					var difficulty:String = Difficulty.getFilePath();
 
-					trace('LOADING NEXT SONG');
-					trace(Paths.formatToSongPath(PlayState.storyPlaylist[0]) + difficulty);
+					//trace('LOADING NEXT SONG');
+					//trace(Paths.formatToSongPath(PlayState.storyPlaylist[0]) + difficulty);
 
 					FlxTransitionableState.skipNextTransIn = true;
 					FlxTransitionableState.skipNextTransOut = true;
@@ -2727,7 +2711,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				trace('WENT BACK TO FREEPLAY??');
+				//trace('WENT BACK TO FREEPLAY??');
 				Mods.loadTopMod();
 				#if DISCORD_ALLOWED DiscordClient.resetClientID(); #end
 
@@ -2842,7 +2826,7 @@ class PlayState extends MusicBeatState
 		rating.y -= ClientPrefs.data.comboOffset[1];
 		rating.antialiasing = antialias;
 
-		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'combo' + uiSuffix));
+		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image('blank'));
 		comboSpr.screenCenter();
 		comboSpr.x = placement;
 		comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;

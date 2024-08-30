@@ -30,7 +30,6 @@ class Omni extends BaseStage
 	
 	var xterion_floor:FlxSprite;
 	
-	var needleSky:BGSprite;
 	var needleMoutains:BGSprite;
 	var needleBuildings:BGSprite;
 	var conkCreet:BGSprite;
@@ -40,16 +39,12 @@ class Omni extends BaseStage
 	var tails_fg:FlxSprite;
 	var tails_trees1:FlxSprite;
 	var tails_trees2:FlxSprite;
-	var tails_grass:FlxSprite;
 	var tails_floor:FlxSprite;
 	
-	var wall:FlxSprite;
-	var floor:FlxSprite;
 	var fleetwaybgshit:FlxSprite;
 	var emeraldbeamyellow:FlxSprite;
 	var emeralds:FlxSprite;
 	var thechamber:FlxSprite;
-	var pebles:FlxSprite;
 	var chamberFront:FlxSprite;
 
 	var fucklesBGPixel:BGSprite;
@@ -64,7 +59,6 @@ class Omni extends BaseStage
 	var whiteFuck:FlxSprite;
 	
 	var knuckles_bg:FlxSprite;
-	var knuckles_city1:FlxSprite;
 	var knuckles_city2:FlxSprite;
 	var knuckles_floor:FlxSprite;
 	
@@ -72,9 +66,6 @@ class Omni extends BaseStage
 	var wechidna_building1:FlxSprite;
 	var wechidna_building2:FlxSprite;
 	var wechidna_floor:FlxSprite;
-	var wechidna_trees:FlxSprite;
-	var wechidna_grass:FlxSprite;
-	var wechidna_thing:FlxSprite;
 	var wechidna_treesFG:FlxSprite;
 	var wechidna_thingFG:FlxSprite;
 	var wechidna_grassFG:FlxSprite;
@@ -87,13 +78,10 @@ class Omni extends BaseStage
 	var eggman_bg:FlxSprite;
 	var eggman_eys:FlxSprite;
 	
-	var sonic_sky:FlxSprite;
-	var sonic_water:FlxSprite;
-	var sonic_waterfall:FlxSprite;
+	var sonic_bg:FlxSprite;
 	var sonic_ground:FlxSprite;
 
 	var lordx_sky:BGSprite;
-	var lordx_hills:BGSprite;
 	var lordx_floor:BGSprite;
 	var lordx_eyeflower:BGSprite;
 	var lordx_notknuckles:BGSprite;
@@ -103,10 +91,7 @@ class Omni extends BaseStage
 	var domain:FlxSprite;
 	var domain2:FlxSprite;
 	
-	var xeno_sky:FlxSprite;
 	var xeno_fg:FlxSprite;
-	var xeno_trees2:FlxSprite;
-	var xeno_trees1:FlxSprite;
 	var xeno_floor:FlxSprite;
 
 	var majin_sky:BGSprite;
@@ -136,10 +121,7 @@ class Omni extends BaseStage
 	var faker_sky:FlxSprite;
 	var faker_eclipse:FlxSprite;
 	var faker_moutains:FlxSprite;
-	var faker_mound:FlxSprite;
 	var faker_rings:FlxSprite;
-	var faker_trees:FlxSprite;
-	var faker_ground:FlxSprite;
 	var faker_bg:FlxSprite;
 	
 	var hogBg:BGSprite;
@@ -154,10 +136,7 @@ class Omni extends BaseStage
 	var faker_sky2:FlxSprite;
 	var faker_eclipse2:FlxSprite;
 	var faker_moutains2:FlxSprite;
-	var faker_mound2:FlxSprite;
 	var faker_rings2:FlxSprite;
-	var faker_trees2:FlxSprite;
-	var faker_ground2:FlxSprite;
 	var faker_bg2:FlxSprite;
 	var faker_overlay:FlxSprite;
 	var exeDie:FlxSprite;
@@ -184,11 +163,9 @@ class Omni extends BaseStage
 	var char8:FlxSprite;
 	var char9:FlxSprite;
 	var char10:FlxSprite;
-	var char11:FlxSprite;
 	var char12:FlxSprite;
 	var char13:FlxSprite;
 	var char14:FlxSprite;
-	var char15:FlxSprite;
 	var char16:FlxSprite;
 	var char17:FlxSprite;
 	var char18:FlxSprite;
@@ -240,14 +217,14 @@ class Omni extends BaseStage
 		video.play();
 		video.pause();
 		video.destroy();
-		trace("Video Preloaded Successfully: " + graphic + ".mp4");
+		//trace("Video Preloaded Successfully: " + graphic + ".mp4");
     }
 
 	override function create()
 	{
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Loading the Song", null);
+		DiscordClient.changePresence("Loading Assets 0%", null);
 		#end
 
 		Paths.clearStoredMemory();
@@ -258,171 +235,156 @@ class Omni extends BaseStage
 		if (ClientPrefs.data.smartCache && !lowQuality) {
 			gpuCache = true;
 		}
-		
-		if (gpuCache) {
+		//Gpu stuff
+		if (gpuCache)
+		{
 			ClientPrefs.data.cacheOnGPU = true;
 			backend.ClientPrefs.saveSettings();
-		}
 			
-		preload('bgs/digitalized/ring');
-		preload('bgs/Chamber/Emerald Beam Charged');
-		preload('bgs/Chamber/Emeralds');
-		preload('bgs/Chamber/FleetwayBGshit');
-		preload('bgs/Chamber/Floor');
-		preload('bgs/Chamber/pebles');
-		preload('bgs/Chamber/The Chamber');
-		preload('bgs/Chamber/Wall');
-		preload('bgs/LordXStage/floor');
-		preload('bgs/LordXStage/hills1');
-		preload('bgs/LordXStage/NotKnuckles_Assets');
-		preload('bgs/LordXStage/sky');
-		preload('bgs/LordXStage/WeirdAssFlower_Assets');
-		preload('bgs/LordXStage/smallflower');
-		preload('bgs/LordXStage/smallflowe2');
-		preload('bgs/LordXStage/tree');
-		preload('bgs/Wechidna/bg-building');
-		preload('bgs/Wechidna/bg-grass');
-		preload('bgs/Wechidna/bg-smth');
-		preload('bgs/Wechidna/bg-trees');
-		preload('bgs/Wechidna/building');
-		preload('bgs/Wechidna/fg-grass');
-		preload('bgs/Wechidna/fg-smth');
-		preload('bgs/Wechidna/fg-trees');
-		preload('bgs/Wechidna/floor');
-		preload('bgs/Wechidna/sky');
-		preload('bgs/needlemouse/buildings');
-		preload('bgs/needlemouse/CONK_CREET');
-		preload('bgs/needlemouse/mountains');
-		preload('bgs/needlemouse/ruins');
-		preload('bgs/needlemouse/sky');
-		preload('bgs/too-slow-encore/ground');
-		preload('bgs/too-slow-encore/mountains');
-		preload('bgs/too-slow-encore/sky');
-		preload('bgs/too-slow-encore/water');
-		preload('bgs/too-slow-encore/waterfall');
-		preload('bgs/triple-trouble-encore/tails/ts_fg');
-		preload('bgs/triple-trouble-encore/tails/ts_floor');
-		preload('bgs/triple-trouble-encore/tails/ts_grass2');
-		preload('bgs/triple-trouble-encore/tails/ts_sky');
-		preload('bgs/triple-trouble-encore/tails/ts_trees1');
-		preload('bgs/triple-trouble-encore/tails/ts_trees2');
-		preload('characters/Wechidna/wechBeast');
+			preload('characters/BF/HD/needle-bf-encore');
+			preload('characters/FakerAndExe/faker-exe-encore');
+			preload('characters/Fleetway/Fleetway_Super_Sonic');
+			preload('characters/Fleetway/fleetway1');
+			preload('characters/HogAndScorched/scorched');
+			preload('characters/LordX/lordxEncore');
+			preload('characters/Majin/SonicFunAssets');
+			preload('characters/Sanic/sanic');
+			preload('characters/Satanos/Satanos');
+			preload('characters/Tails/tails-encore');
+			preload('characters/Wechidna/wechBeast');
+			preload('characters/XenoAndGrimbo/HD/Beast');
+			preload('characters/XenoAndGrimbo/HD/sonicexe');
+			preload('bgs/Chamber/Emeralds');
+			preload('bgs/Chamber/FleetwayBGshit');
+			preload('bgs/faker-encore/moutainsP1');
+			preload('bgs/faker-encore/moutainsP2');
+			preload('bgs/faker-encore/skyP1');
+			preload('bgs/faker-encore/skyP2');
+			preload('bgs/FunInfiniteStage/overlay');
+			preload('bgs/FunInfiniteStage/floor BG');
+			preload('bgs/FunInfiniteStage/Bush2');
+			preload('bgs/FunInfiniteStage/Majin Boppers Front');
+			preload('bgs/FunInfiniteStage/Majin Boppers Back');
+			preload('bgs/hog/HillsandHills');
+			preload('bgs/hog/overlay');
+			preload('bgs/hog/Waterfalls');
+			preload('bgs/hog/bg');
+			preload('bgs/hog/blast/Waterfalls');
+			preload('bgs/hog/blast/Sunset');
+			preload('bgs/hog/blast/Hills');
+			preload('bgs/LordXStage/NotKnuckles_Assets');
+			preload('bgs/LordXStage/sky');
+			preload('bgs/LordXStage/WeirdAssFlower_Assets');
+			preload('bgs/needlemouse/mountains');
+			preload('bgs/satanos-bg/gamemasters');
+			preload('bgs/satanos-bg/Sky');
+			preload('bgs/satanos-bg/Trees');
+			preload('bgs/sunky/hang');
+			preload('bgs/sunky/sunky BG');
+			preload('bgs/too-slow-encore/ground');
+			preload('bgs/triple-trouble-encore/knuckles/kn_bg');
+			preload('bgs/triple-trouble-encore/tails/ts_trees1');
+			preload('bgs/triple-trouble-encore/tails/ts_floor');
+			preload('bgs/triple-trouble-encore/xeno/xeno_floor');
+			preload('bgs/Wechidna/floor');
+			preload('bgs/Wechidna/building');
+			preload('bgs/Wechidna/bg-building');
+			preload('philly/particle');
+		}
 		
 		
-		//Characters
 		if (gpuCache) {
 			ClientPrefs.data.cacheOnGPU = false;
 			backend.ClientPrefs.saveSettings();
 		}
-	
-		preload('characters/BF/3D/bf-3d');
-		preload('characters/TailsDoll/3D/Tails_Doll');
-		preload('characters/XTerion/3D/xterion-first');
-		preload('characters/LordX/lordxEncore');
-		preload('characters/Tails/tails-encore');
-		preload('characters/Fleetway/Fleetway_Super_Sonic');
-		preload('characters/BF/HD/encoreBF');
-		preload('characters/BF/HD/encoreBF-majin');
-		preload('characters/BF/HD/encoreBF-redTint');
-		preload('characters/BF/HD/encoreBF-blackTint');
-		preload('characters/BF/HD/needle-bf-encore');
+			
+		//Characters
+		preload('characters/Wechidna/wechBeast');
 		preload('characters/BF/HD/Sonic');
-		preload('characters/BF/Pixel/bf-encore-pixel');
-		preload('characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix');
+		preload('characters/Fleetway/Fleetway_Super_Sonic');
+		preload('characters/Fleetway/fleetway1');
+		preload('characters/HogAndScorched/scorched');
+		preload('characters/Satanos/Satanos');
+		preload('characters/TailsDoll/3D/Tails_Doll');
+		preload('characters/NeedlemouseSarahShadowmouseLutherSunter/Needlemouse');
+		preload('characters/BF/HD/needle-bf-encore');
+		preload('characters/Sanic/sanic');
+		preload('characters/LordX/lordxEncore');
+		preload('characters/Majin/SonicFunAssets');
+		preload('characters/XenoAndGrimbo/HD/Beast');
+		preload('characters/XenoAndGrimbo/HD/sonicexe');
+		preload('characters/FakerAndExe/faker-exe-encore');
+		preload('characters/FakerAndExe/faker_encore');
 		preload('characters/Coldsteel/coldsteel_assets');
 		preload('characters/Coldsteel/coldsteel_guitar');
 		preload('characters/Eggman/eggman-encore');
-		preload('characters/FakerAndExe/faker_encore');
-		preload('characters/FakerAndExe/faker-exe-encore');
+		preload('characters/Tails/tails-encore');
+		preload('characters/BF/HD/BF_Requital');
+		preload('characters/BF/HD/encoreBF');
+		preload('characters/BF/HD/encoreBF-blackTint');
+		preload('characters/BF/HD/encoreBF-majin');
+		preload('characters/BF/HD/encoreBF-redTint');
+		preload('characters/BF/3D/bf-3d');
+		preload('characters/Knuckles/knux-encore');
+		preload('characters/Sunky/Sunky');
+		preload('characters/XTerion/3D/xterion-first');
+		preload('characters/ChotixXenotixAndChaotix/HD/chaotix-hd');
+		preload('characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix');
 		preload('characters/FatalAndCritical/fatal-error-sonic');
 		preload('characters/FatalAndCritical/true-fatal');
-		preload('characters/Fleetway/fleetway1');
-		preload('characters/HogAndScorched/Hog');
-		preload('characters/HogAndScorched/scorched');
-		preload('characters/Knuckles/knux-encore');
-		preload('characters/Majin/SonicFunAssets');
-		preload('characters/NeedlemouseSarahShadowmouseLutherSunter/Needlemouse');
-		preload('characters/Sanic/sanic');
-		preload('characters/Satanos/Satanos');
-		preload('characters/Sunky/Sunky');
-		preload('characters/XenoAndGrimbo/HD/Beast');
-		preload('characters/XenoAndGrimbo/HD/sonicexe');
-		preload('characters/XenoAndGrimbo/HD/YCR-Mad-Cherribun');
-		preload('characters/XenoAndGrimbo/HD/YCR-Cherribun');
-		preload('characters/BF/HD/BF_Requital');
+		preload('characters/BF/Pixel/bf-encore-pixel');
 		preload('characters/BF/Pixel/pixel-normal');
 		preload('characters/FakerAndExe/faker_pixel');
-		preload('characters/ChotixXenotixAndChaotix/HD/chaotix-hd');
-		preload('characters/Wechidna/wechBeast');
 		
-		//Stage stuff
+		#if DISCORD_ALLOWED
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Loading Assets 20%", null);
+		#end
+		
+		//Stages
 		preload('bgs/Chamber/Emerald Beam Charged');
 		preload('bgs/Chamber/Emeralds');
 		preload('bgs/Chamber/FleetwayBGshit');
-		preload('bgs/Chamber/Floor');
-		preload('bgs/Chamber/pebles');
 		preload('bgs/Chamber/The Chamber');
-		preload('bgs/Chamber/Wall');
+		preload('bgs/LordXStage/floor');
+		preload('bgs/LordXStage/NotKnuckles_Assets');
+		preload('bgs/LordXStage/sky');
+		preload('bgs/LordXStage/smallflower');
+		preload('bgs/LordXStage/tree');
+		preload('bgs/LordXStage/WeirdAssFlower_Assets');
+		preload('bgs/satanos-bg/FRock');
+		preload('bgs/satanos-bg/gamemasters');
+		preload('bgs/satanos-bg/Sky');
+		preload('bgs/satanos-bg/Trees');
+		preload('bgs/triple-trouble-encore/xeno/xeno_floor');
+		preload('bgs/triple-trouble-encore/xeno/xeno_fg');
+		preload('bgs/triple-trouble-encore/knuckles/kn_bg');
+		preload('bgs/triple-trouble-encore/knuckles/kn_city2');
+		preload('bgs/triple-trouble-encore/knuckles/kn_floor');
+		preload('bgs/triple-trouble-encore/tails/ts_fg');
+		preload('bgs/triple-trouble-encore/tails/ts_floor');
+		preload('bgs/triple-trouble-encore/tails/ts_sky');
+		preload('bgs/triple-trouble-encore/tails/ts_trees1');
+		preload('bgs/triple-trouble-encore/tails/ts_trees2');
+		preload('bgs/Wechidna/floor');
 		preload('bgs/Wechidna/bg-building');
-		preload('bgs/Wechidna/bg-grass');
-		preload('bgs/Wechidna/bg-smth');
-		preload('bgs/Wechidna/bg-trees');
 		preload('bgs/Wechidna/building');
 		preload('bgs/Wechidna/fg-grass');
 		preload('bgs/Wechidna/fg-smth');
 		preload('bgs/Wechidna/fg-trees');
-		preload('bgs/Wechidna/floor');
 		preload('bgs/Wechidna/sky');
 		preload('bgs/faker-encore/bgP1');
 		preload('bgs/faker-encore/bgP2');
 		preload('bgs/faker-encore/eclipiceP1');
 		preload('bgs/faker-encore/eclipiceP2');
-		preload('bgs/faker-encore/fakerpixel');
-		preload('bgs/faker-encore/groundP1');
-		preload('bgs/faker-encore/groundP2');
-		preload('bgs/faker-encore/jover');
-		preload('bgs/faker-encore/moundP1');
-		preload('bgs/faker-encore/moundP2');
 		preload('bgs/faker-encore/moutainsP1');
 		preload('bgs/faker-encore/moutainsP2');
 		preload('bgs/faker-encore/ringsP1');
 		preload('bgs/faker-encore/ringsP2');
 		preload('bgs/faker-encore/skyP1');
 		preload('bgs/faker-encore/skyP2');
-		preload('bgs/faker-encore/treesP1');
-		preload('bgs/faker-encore/treesP2');
-		preload('bgs/satanos-bg/FRock');
-		preload('bgs/satanos-bg/gamemasters');
-		preload('bgs/satanos-bg/Palm');
-		preload('bgs/satanos-bg/Sadpalm');
-		preload('bgs/satanos-bg/Sky');
-		preload('bgs/satanos-bg/Trees');
-		preload('bgs/LordXStage/floor');
-		preload('bgs/LordXStage/hills1');
-		preload('bgs/LordXStage/NotKnuckles_Assets');
-		preload('bgs/LordXStage/sky');
-		preload('bgs/LordXStage/smallflowe2');
-		preload('bgs/LordXStage/smallflower');
-		preload('bgs/LordXStage/tree');
-		preload('bgs/LordXStage/WeirdAssFlower_Assets');
-		preload('bgs/needlemouse/buildings');
-		preload('bgs/needlemouse/CONK_CREET');
-		preload('bgs/needlemouse/fg');
-		preload('bgs/needlemouse/mountains');
-		preload('bgs/needlemouse/ruins');
-		preload('bgs/needlemouse/sky');
-		preload('bgs/triple-trouble-encore/tails/ts_fg');
-		preload('bgs/triple-trouble-encore/tails/ts_floor');
-		preload('bgs/triple-trouble-encore/tails/ts_grass2');
-		preload('bgs/triple-trouble-encore/tails/ts_sky');
-		preload('bgs/triple-trouble-encore/tails/ts_trees1');
-		preload('bgs/triple-trouble-encore/tails/ts_trees2');
-		preload('bgs/triple-trouble-encore/xeno/xeno_fg');
-		preload('bgs/triple-trouble-encore/xeno/xeno_floor');
-		preload('bgs/triple-trouble-encore/xeno/xeno_sky');
-		preload('bgs/triple-trouble-encore/xeno/xeno_trees1');
-		preload('bgs/triple-trouble-encore/xeno/xeno_trees2');
-		preload('bgs/fatal/truefatalstage');
+		preload('bgs/faker-encore/jover');
+		preload('bgs/faker-encore/fakerpixel');
 		preload('bgs/FunInfiniteStage/Bush 1');
 		preload('bgs/FunInfiniteStage/Bush2');
 		preload('bgs/FunInfiniteStage/floor BG');
@@ -448,40 +410,151 @@ class Omni extends BaseStage
 		preload('bgs/hog/blast/Rocks');
 		preload('bgs/hog/blast/Sunset');
 		preload('bgs/hog/blast/Waterfalls');
-		preload('bgs/sunky/hang');
+		preload('bgs/too-slow-encore/ground');
+		preload('bgs/sunky/ceral');
 		preload('bgs/sunky/floor');
+		preload('bgs/sunky/hang');
+		preload('bgs/sunky/milk');
+		preload('bgs/sunky/speakers');
 		preload('bgs/sunky/sunkTransition');
 		preload('bgs/sunky/sunky BG');
-		preload('bgs/sunky/milk');
-		preload('bgs/sunky/ceral');
-		preload('bgs/sunky/speakers');
-		preload('bgs/tails-doll/bg');
-		preload('bgs/too-slow-encore/ground');
-		preload('bgs/too-slow-encore/mountains');
-		preload('bgs/too-slow-encore/sky');
-		preload('bgs/too-slow-encore/water');
-		preload('bgs/too-slow-encore/waterfall');
+		preload('bgs/needlemouse/buildings');
+		preload('bgs/needlemouse/CONK_CREET');
+		preload('bgs/needlemouse/fg');
+		preload('bgs/needlemouse/mountains');
 		preload('bgs/triple-trouble-encore/eggman/egg_bg');
 		preload('bgs/triple-trouble-encore/eggman/egg_eys');
-		preload('bgs/triple-trouble-encore/knuckles/kn_bg');
-		preload('bgs/triple-trouble-encore/knuckles/kn_city1');
-		preload('bgs/triple-trouble-encore/knuckles/kn_city2');
-		preload('bgs/triple-trouble-encore/knuckles/kn_floor');
 		preload('bgs/sanic/sanicbg');
 		preload('bgs/digitalized/bg');
 		preload('bgs/digitalized/ring');
+		preload('bgs/tails-doll/bg');
+		preload('bgs/void/shadow');
 		preload('bgs/fatal/domain');
 		preload('bgs/fatal/domain2');
-		preload('bgs/void/shadow');
+		preload('bgs/chaotix/horizonFg');
+		preload('bgs/chaotix/horizonsky');
 		preload('bgs/chaotix/BG_amy');
 		preload('bgs/chaotix/BG_charmy');
 		preload('bgs/chaotix/BG_espio');
 		preload('bgs/chaotix/BG_knuckles');
 		preload('bgs/chaotix/BG_mighty');
 		preload('bgs/chaotix/BG_vector');
-		preload('bgs/chaotix/horizonFg');
-		preload('bgs/chaotix/horizonsky');
+		
+		#if DISCORD_ALLOWED
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Loading Assets 40%", null);
+		#end
+		
+		//Other used stuff
+		preload('Phase3Static');
+		preload('sonicJUMPSCARE');
+		preload('epicjump');
+		preload('wechidna');
+		preload('exedeath');
+		preload('WhiteVG');
+		preload('bad');
+		preload('blank');
+		preload('box');
 		preload('circleshit');
+		preload('error_popups');
+		preload('good');
+		preload('guitar');
+		preload('healthBar');
+		preload('num0');
+		preload('num1');
+		preload('num2');
+		preload('num3');
+		preload('num4');
+		preload('num5');
+		preload('num6');
+		preload('num7');
+		preload('num8');
+		preload('num9');
+		preload('shit');
+		preload('sick');
+		preload('noteSplashes/noteSplashes-Bloodsplash');
+		preload('StartScreens/Text1-omnipresent');
+		preload('StartScreens/Text2-omnipresent');
+		preload('characters/GF_assets');
+		preload('healthBar');
+		preload('hpR-dark');
+		preload('timeBar');
+		preload('tbR-dark');
+		
+		//Icons
+		preload('icons/icon-xterion-first');
+		preload('icons/icon-needlemouse');
+		preload('icons/icon-bf-needlemouse');
+		preload('icons/icon-tails-encore');
+		preload('icons/icon-bunfriend');
+		preload('icons/icon-fleetway');
+		preload('icons/icon-chaotix-pixel');
+		preload('icons/icon-pixel-bunfriend');
+		preload('icons/icon-knuckles-encore');
+		preload('icons/icon-wechBeast');
+		preload('icons/icon-satanos');
+		preload('icons/icon-egg-encore');
+		preload('icons/icon-sonicexe');
+		preload('icons/icon-lordx-encore');
+		preload('icons/icon-fatal-sonic');
+		preload('icons/icon-ycr');
+		preload('icons/icon-BEAST');
+		preload('icons/icon-majin');
+		preload('icons/icon-sunky');
+		preload('icons/icon-sanic');
+		preload('icons/icon-fatal-glitched');
+		preload('icons/icon-bunfriend-needlemouse');
+		preload('icons/icon-true-fatal');
+		preload('icons/icon-ycrep4');
+		preload('icons/icon-ycr-pissy');
+		preload('icons/icon-coldsteel');
+		preload('icons/icon-exe-enc');
+		preload('icons/icon-faker-enc');
+		preload('icons/icon-scorched');
+		preload('icons/icon-bfpixel');
+		preload('icons/icon-fakerpixel');
+		preload('icons/icon-taildoll');
+		preload('icons/icon-bf-3d');
+		preload('icons/icon-hog');
+		preload('icons/icon-chaotix-hd');
+		preload('icons/icon-gf');
+		preload('icons/icon-sonic-rr');
+		preload('icons/icon-face');
+		
+		#if DISCORD_ALLOWED
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Loading Assets 60%", null);
+		#end
+		
+		//Videos
+		preloadVideo('bfhair');
+		preloadVideo('bitchless');
+		preloadVideo('EGGMAN NO');
+		preloadVideo('Fatal Error Singing');
+		preloadVideo('fleetgeta');
+		preloadVideo('forkliftcertified');
+		preloadVideo('gettrolled');
+		preloadVideo('Googoogaagaa');
+		preloadVideo('he has a point');
+		preloadVideo('HogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHog');
+		preloadVideo('hogToaster');
+		preloadVideo('howitfeelstochew5gum');
+		preloadVideo("HUEHUEHUE'D");
+		preloadVideo('i am wechidn-asdfl;');
+		preloadVideo('imbouttocuuuuuuuuuuuuuuuuuuu');
+		preloadVideo('its his mic fr');
+		preloadVideo('Mother I have shidded the bed.');
+		preloadVideo('MWAHAHAHA');
+		preloadVideo('myfinger');
+		preloadVideo('no_ice_cream');
+		preloadVideo('omg sonic');
+		preloadVideo('tune this out bitch');
+		preloadVideo('Scorched Yes');
+		preloadVideo('sonic_jacking_off');
+		preloadVideo('Sunky Chad');
+		preloadVideo('test1');
+		preloadVideo('what');
+		preloadVideo('YEAAAAAAAAAAAAAAAAAAAAAAAAA');
 
 		char41 = new FlxSprite(0, 0);
 		char41.loadGraphic(Paths.image('characters/Wechidna/wechBeast'));
@@ -500,25 +573,22 @@ class Omni extends BaseStage
 		tailsdoll_floor.antialiasing = true;
 		tailsdoll_floor.visible = true;
 		add(tailsdoll_floor);
-		
-		#if DISCORD_ALLOWED
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Loading the Song.", null);
-		#end
 
 		phillyLightsColors = [0xFF31A2FD, 0xFF31FD8C, 0xFFFB33F5, 0xFFFD4531, 0xFFFBA633];
 		
 		xterion_floor = new FlxSprite(-400, 100);
-		xterion_floor.frames = Paths.getSparrowAtlas("bgs/digitalized/bg");
-		xterion_floor.animation.addByPrefix('idle', 'static', 12, true);
-		xterion_floor.animation.play('idle');
+		xterion_floor.loadGraphic(Paths.image("bgs/digitalized/bg"));
 		xterion_floor.antialiasing = ClientPrefs.data.antialiasing;
 		xterion_floor.visible = false;
 		add(xterion_floor);
 
-		needleSky = new BGSprite('bgs/needlemouse/sky', -725, -200, 0.7, 0.9);
-		needleSky.visible = false;
-		add(needleSky);
+		tails_sky = new FlxSprite(-450, -1000);
+		tails_sky.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_sky'));
+		tails_sky.scrollFactor.set(1, 1);
+		tails_sky.scale.set(1.6, 1.2);
+		tails_sky.antialiasing = true;
+		tails_sky.visible = false;
+		add(tails_sky);
 		
 		needleMoutains = new BGSprite('bgs/needlemouse/mountains', -700, -175, 0.8, 0.9);
 		needleMoutains.setGraphicSize(Std.int(needleMoutains.width * 1.1));
@@ -557,14 +627,6 @@ class Omni extends BaseStage
 		add(tails_trees1);
 		
 		if (!lowQuality) {
-			tails_grass = new FlxSprite(-500, -900);
-			tails_grass.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_grass2'));
-			tails_grass.scrollFactor.set(0.85, 0.9);
-			tails_grass.scale.set(0.95, 0.95);
-			tails_grass.antialiasing = true;
-			tails_grass.visible = false;
-			add(tails_grass);
-		
 			tails_trees2 = new FlxSprite(-500, -800);
 			tails_trees2.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_trees2'));
 			tails_trees2.scrollFactor.set(0.9, 1);
@@ -573,14 +635,6 @@ class Omni extends BaseStage
 			tails_trees2.visible = false;
 			add(tails_trees2);
 		} else {
-			tails_grass = new FlxSprite(-500, -900);
-			tails_grass.loadGraphic(Paths.image('blank'));
-			tails_grass.scrollFactor.set(0.85, 0.9);
-			tails_grass.scale.set(0.95, 0.95);
-			tails_grass.antialiasing = true;
-			tails_grass.visible = false;
-			add(tails_grass);
-		
 			tails_trees2 = new FlxSprite(-500, -800);
 			tails_trees2.loadGraphic(Paths.image('blank'));
 			tails_trees2.scrollFactor.set(0.9, 1);
@@ -597,43 +651,17 @@ class Omni extends BaseStage
 		tails_floor.antialiasing = true;
 		tails_floor.visible = false;
 		add(tails_floor);
-
-		wall = new FlxSprite(-2379.05, -1211.1);
-		wall.frames = Paths.getSparrowAtlas('bgs/Chamber/Wall');
-		wall.animation.addByPrefix('a', 'Wall instance 1');
-		wall.animation.play('a');
-		wall.antialiasing = true;
-		wall.scale.y = 1.5;
-		wall.scale.x = 1.5;
-		wall.scrollFactor.set(1.1, 1.1);
-		wall.alpha = 0.000001;
-		add(wall);
-
-		floor = new FlxSprite(-2349, 1000);
-		floor.antialiasing = true;
-		floor.frames = Paths.getSparrowAtlas('bgs/Chamber/Floor');
-		floor.animation.addByPrefix('b', 'floor yellow');
-		floor.setGraphicSize(Std.int(floor.width * 1.15));
-		floor.animation.play('b', true);
-		floor.scrollFactor.set(1.1, 1);
-		floor.antialiasing = true;
-		floor.alpha = 0.000001;
-		add(floor);
-
+		
 		if (!lowQuality) {
 			fleetwaybgshit = new FlxSprite(-2629.05, -1344.05);
-			fleetwaybgshit.frames = Paths.getSparrowAtlas('bgs/Chamber/FleetwayBGshit');
-			fleetwaybgshit.animation.addByPrefix('b', 'BGyellow');
-			fleetwaybgshit.animation.play('b', true);
+			fleetwaybgshit.loadGraphic(Paths.image('bgs/Chamber/FleetwayBGshit'));
 			fleetwaybgshit.antialiasing = true;
 			fleetwaybgshit.scrollFactor.set(1.1, 1);
 			fleetwaybgshit.alpha = 0.000001;
 			add(fleetwaybgshit);
 		} else {
 			fleetwaybgshit = new FlxSprite(-2629.05, -1344.05);
-			fleetwaybgshit.frames = Paths.getSparrowAtlas('blank');
-			fleetwaybgshit.animation.addByPrefix('b', 'fun');
-			fleetwaybgshit.animation.play('b', true);
+			fleetwaybgshit.loadGraphic(Paths.image('blank'));
 			fleetwaybgshit.antialiasing = true;
 			fleetwaybgshit.scrollFactor.set(1.1, 1);
 			fleetwaybgshit.alpha = 0.000001;
@@ -671,34 +699,12 @@ class Omni extends BaseStage
 			add(emeralds);
 		}
 			
-		thechamber = new FlxSprite(-225.05, 463.9);
-		thechamber.frames = Paths.getSparrowAtlas('bgs/Chamber/The Chamber');
-		thechamber.animation.addByIndices('b', 'Chamber Sonic Fall', [25], "", 24, false);
+		thechamber = new FlxSprite(-465.05, 813.9);
+		thechamber.loadGraphic(Paths.image('bgs/Chamber/The Chamber'));
 		thechamber.scrollFactor.set(1.1, 1);
 		thechamber.antialiasing = true;
 		thechamber.alpha = 0.000001;
-		thechamber.animation.play('b');
 		add(thechamber);
-
-		if (!lowQuality) {
-			pebles = new FlxSprite(-562.15 + 100, 1043.3);
-			pebles.frames = Paths.getSparrowAtlas('bgs/Chamber/pebles');
-			pebles.animation.addByPrefix('b', 'pebles instance 1', 24, false);
-			pebles.animation.play('b', true);
-			pebles.scrollFactor.set(1.1, 1);
-			pebles.antialiasing = true;
-			pebles.alpha = 0.000001;
-			add(pebles);
-		} else {
-			pebles = new FlxSprite(-562.15 + 100, 1043.3);
-			pebles.frames = Paths.getSparrowAtlas('blank');
-			pebles.animation.addByPrefix('b', 'fun', 24, false);
-			pebles.animation.play('b', true);
-			pebles.scrollFactor.set(1.1, 1);
-			pebles.antialiasing = true;
-			pebles.visible = false;
-			add(pebles);
-		}
 
 		fucklesBGPixel = new BGSprite('bgs/chaotix/horizonsky', -1450, -725, 1.2, 0.9);
 		fucklesBGPixel.visible = false;
@@ -782,33 +788,14 @@ class Omni extends BaseStage
 		knuckles_bg.visible = false;
 		add(knuckles_bg);
 		
-		#if DISCORD_ALLOWED
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Loading the Song..", null);
-		#end
-		
 		if (!lowQuality) {
-			knuckles_city1 = new FlxSprite(-930, -700);
-			knuckles_city1.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/kn_city1'));
-			knuckles_city1.scrollFactor.set(0.9, 0.9);
-			knuckles_city1.scale.set(2, 1.6);
-			knuckles_city1.visible = false;
-			add(knuckles_city1);
-		
-			knuckles_city2 = new FlxSprite(-930, -760);
+			knuckles_city2 = new FlxSprite(-930, -860);
 			knuckles_city2.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/kn_city2'));
 			knuckles_city2.scrollFactor.set(1.07, 1);
 			knuckles_city2.scale.set(2, 1.6);
 			knuckles_city2.visible = false;
 			add(knuckles_city2);
 		} else {
-			knuckles_city1 = new FlxSprite(-930, -800);
-			knuckles_city1.loadGraphic(Paths.image('blank'));
-			knuckles_city1.scrollFactor.set(0.9, 0.9);
-			knuckles_city1.scale.set(2, 1.6);
-			knuckles_city1.visible = false;
-			add(knuckles_city1);
-		
 			knuckles_city2 = new FlxSprite(-930, -800);
 			knuckles_city2.loadGraphic(Paths.image('blank'));
 			knuckles_city2.scrollFactor.set(1.07, 1);
@@ -848,55 +835,13 @@ class Omni extends BaseStage
 		wechidna_building2.antialiasing = ClientPrefs.data.antialiasing;
 		add(wechidna_building2);
 		
-		wechidna_floor = new FlxSprite(0, 1480);
+		wechidna_floor = new FlxSprite(0, 0);
 		wechidna_floor.loadGraphic(Paths.image('bgs/Wechidna/floor'));
 		wechidna_floor.scrollFactor.set(1, 1);
 		wechidna_floor.scale.set(1, 1);
 		wechidna_floor.visible = false;
 		wechidna_floor.antialiasing = ClientPrefs.data.antialiasing;
 		add(wechidna_floor);
-		
-		wechidna_trees = new FlxSprite(70, 230);
-		wechidna_trees.loadGraphic(Paths.image('bgs/Wechidna/bg-trees'));
-		wechidna_trees.scrollFactor.set(1, 1);
-		wechidna_trees.scale.set(1, 1);
-		wechidna_trees.visible = false;
-		wechidna_trees.antialiasing = ClientPrefs.data.antialiasing;
-		add(wechidna_trees);
-		
-		if (!lowQuality) {
-			wechidna_grass = new FlxSprite(560, 1050);
-			wechidna_grass.loadGraphic(Paths.image('bgs/Wechidna/bg-grass'));
-			wechidna_grass.scrollFactor.set(1, 1);
-			wechidna_grass.scale.set(1, 1);
-			wechidna_grass.visible = false;
-			wechidna_grass.antialiasing = ClientPrefs.data.antialiasing;
-			add(wechidna_grass);
-
-			wechidna_thing = new FlxSprite(30, 1570);
-			wechidna_thing.loadGraphic(Paths.image('bgs/Wechidna/bg-smth'));
-			wechidna_thing.scrollFactor.set(1, 1);
-			wechidna_thing.scale.set(1, 1);
-			wechidna_thing.visible = false;
-			wechidna_thing.antialiasing = ClientPrefs.data.antialiasing;
-			add(wechidna_thing);
-		} else {
-			wechidna_grass = new FlxSprite(0, 0);
-			wechidna_grass.loadGraphic(Paths.image('blank'));
-			wechidna_grass.scrollFactor.set(1, 1);
-			wechidna_grass.scale.set(1, 1);
-			wechidna_grass.visible = false;
-			wechidna_grass.antialiasing = ClientPrefs.data.antialiasing;
-			add(wechidna_grass);
-
-			wechidna_thing = new FlxSprite(0, 0);
-			wechidna_thing.loadGraphic(Paths.image('blank'));
-			wechidna_thing.scrollFactor.set(1, 1);
-			wechidna_thing.scale.set(1, 1);
-			wechidna_thing.visible = false;
-			wechidna_thing.antialiasing = ClientPrefs.data.antialiasing;
-			add(wechidna_thing);
-		}
 		
 		satanos_sky = new FlxSprite(-600, -200);
 		satanos_sky.loadGraphic(Paths.image('bgs/satanos-bg/Sky'));
@@ -922,47 +867,13 @@ class Omni extends BaseStage
 		satanos_floor.antialiasing = ClientPrefs.data.antialiasing;
 		add(satanos_floor);
 		
-		sonic_sky = new FlxSprite(-620, -700);
-		sonic_sky.loadGraphic(Paths.image('bgs/too-slow-encore/sky'));
-		sonic_sky.scrollFactor.set(0.3, 0.75);
-		sonic_sky.scale.set(1, 1);
-		sonic_sky.visible = false;
-		sonic_sky.antialiasing = ClientPrefs.data.antialiasing;
-		add(sonic_sky);
-		
-		if (!lowQuality) {
-			sonic_water = new FlxSprite(-620, 200);
-			sonic_water.loadGraphic(Paths.image('bgs/too-slow-encore/water'));
-			sonic_water.scrollFactor.set(0.5, 0.8);
-			sonic_water.scale.set(1, 1);
-			sonic_water.visible = false;
-			sonic_water.antialiasing = ClientPrefs.data.antialiasing;
-			add(sonic_water);
-		
-			sonic_waterfall = new FlxSprite(-650, -700);
-			sonic_waterfall.loadGraphic(Paths.image('bgs/too-slow-encore/waterfall'));
-			sonic_waterfall.scrollFactor.set(0.8, 0.9);
-			sonic_waterfall.scale.set(1, 1);
-			sonic_waterfall.visible = false;
-			sonic_waterfall.antialiasing = ClientPrefs.data.antialiasing;
-			add(sonic_waterfall);
-		} else {
-			sonic_water = new FlxSprite(-620, -700);
-			sonic_water.loadGraphic(Paths.image('blank'));
-			sonic_water.scrollFactor.set(0.5, 0.8);
-			sonic_water.scale.set(1, 1);
-			sonic_water.visible = false;
-			sonic_water.antialiasing = ClientPrefs.data.antialiasing;
-			add(sonic_water);
-		
-			sonic_waterfall = new FlxSprite(-650, -700);
-			sonic_waterfall.loadGraphic(Paths.image('blank'));
-			sonic_waterfall.scrollFactor.set(0.8, 0.9);
-			sonic_waterfall.scale.set(1, 1);
-			sonic_waterfall.visible = false;
-			sonic_waterfall.antialiasing = ClientPrefs.data.antialiasing;
-			add(sonic_waterfall);
-		}
+		sonic_bg = new FlxSprite(-520, -700);
+		sonic_bg.loadGraphic(Paths.image('bgs/too-slow-encore/bg'));
+		sonic_bg.scrollFactor.set(0.3, 0.75);
+		sonic_bg.scale.set(1, 1);
+		sonic_bg.visible = false;
+		sonic_bg.antialiasing = ClientPrefs.data.antialiasing;
+		add(sonic_bg);
 		
 		sonic_ground = new FlxSprite(-650, -700);
 		sonic_ground.loadGraphic(Paths.image('bgs/too-slow-encore/ground'));
@@ -972,15 +883,10 @@ class Omni extends BaseStage
 		sonic_ground.antialiasing = ClientPrefs.data.antialiasing;
 		add(sonic_ground);
 
-		lordx_sky = new BGSprite('bgs/LordXStage/sky', -1900, -1006, 1.0, 1.0);
+		lordx_sky = new BGSprite('bgs/LordXStage/sky', -1900, -906, 1.0, 1.0);
 		lordx_sky.setGraphicSize(Std.int(lordx_sky.width * 0.5));
 		lordx_sky.visible = false;
 		add(lordx_sky);
-					
-		lordx_hills = new BGSprite('bgs/LordXStage/hills1', -1340, -606 + 200, 1.0, 1.0);
-		lordx_hills.setGraphicSize(Std.int(lordx_hills.width * 0.5));
-		lordx_hills.visible = false;
-		add(lordx_hills);
 
 		lordx_floor = new BGSprite('bgs/LordXStage/floor', -1450, 426, 1.0, 1.0);
 		lordx_floor.setGraphicSize(Std.int(lordx_floor.width * 0.55));
@@ -1004,7 +910,7 @@ class Omni extends BaseStage
 			add(lordx_bfsmallflower);
 
 			lordx_tree = new BGSprite('bgs/LordXStage/tree', 150 + 1000 - 100, -1006 + 400, 1.0, 1.0);
-			lordx_tree.setGraphicSize(Std.int(lordx_tree.width * .7));
+			lordx_tree.setGraphicSize(Std.int(lordx_tree.width * 0.7));
 			lordx_tree.visible = false;
 			add(lordx_tree);
 		} else {
@@ -1024,7 +930,7 @@ class Omni extends BaseStage
 			add(lordx_bfsmallflower);
 
 			lordx_tree = new BGSprite('blank', -1000 + 950 - 100, -1006 + 350, 1.0, 1.0);
-			lordx_tree.setGraphicSize(Std.int(lordx_tree.width * .7));
+			lordx_tree.setGraphicSize(Std.int(lordx_tree.width * 0.7));
 			lordx_tree.visible = false;
 			add(lordx_tree);
 		}
@@ -1064,52 +970,6 @@ class Omni extends BaseStage
 			add(domain);
 		}
 		
-		xeno_sky = new FlxSprite(-450, -1100);
-		xeno_sky.loadGraphic(Paths.image('bgs/triple-trouble-encore/xeno/xeno_sky'));
-		xeno_sky.scrollFactor.set(1, 1);
-		xeno_sky.scale.set(2, 1.55);
-		xeno_sky.visible = false;
-		xeno_sky.flipX = true;
-		xeno_sky.antialiasing = ClientPrefs.data.antialiasing;
-		add(xeno_sky);
-		
-		if (!lowQuality) {
-			xeno_trees2 = new FlxSprite(-800, -1100);
-			xeno_trees2.loadGraphic(Paths.image('bgs/triple-trouble-encore/xeno/xeno_trees2'));
-			xeno_trees2.scrollFactor.set(1.2, 1.2);
-			xeno_trees2.scale.set(1, 1);
-			xeno_trees2.visible = false;
-			xeno_trees2.flipX = true;
-			xeno_trees2.antialiasing = ClientPrefs.data.antialiasing;
-			add(xeno_trees2);
-			
-			xeno_trees1 = new FlxSprite(-800, -1100);
-			xeno_trees1.loadGraphic(Paths.image('bgs/triple-trouble-encore/xeno/xeno_trees1'));
-			xeno_trees1.scrollFactor.set(1.1, 1.1);
-			xeno_trees1.scale.set(1, 1);
-			xeno_trees1.visible = false;
-			xeno_trees1.flipX = true;
-			xeno_trees1.antialiasing = ClientPrefs.data.antialiasing;
-			add(xeno_trees1);
-		} else {
-			xeno_trees2 = new FlxSprite(-800, -1100);
-			xeno_trees2.loadGraphic(Paths.image('blank'));
-			xeno_trees2.scrollFactor.set(1.2, 1.2);
-			xeno_trees2.scale.set(1, 1);
-			xeno_trees2.visible = false;
-			xeno_trees2.flipX = true;
-			xeno_trees2.antialiasing = ClientPrefs.data.antialiasing;
-			add(xeno_trees2);
-		
-			xeno_trees1 = new FlxSprite(-800, -1100);
-			xeno_trees1.loadGraphic(Paths.image('blank'));
-			xeno_trees1.scrollFactor.set(1.1, 1.1);
-			xeno_trees1.scale.set(1, 1);
-			xeno_trees1.visible = false;
-			xeno_trees1.flipX = true;
-			xeno_trees1.antialiasing = ClientPrefs.data.antialiasing;
-			add(xeno_trees1);
-		}
 		xeno_floor = new FlxSprite(-800, -1100);
 		xeno_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/xeno/xeno_floor'));
 		xeno_floor.scrollFactor.set(1, 1);
@@ -1159,7 +1019,7 @@ class Omni extends BaseStage
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Loading the Song...", null);
+		DiscordClient.changePresence("Loading Assets 90%", null);
 		#end
 		
 		majin_floor = new BGSprite('bgs/FunInfiniteStage/floor BG', -340, 660, 1.0, 1.0);
@@ -1279,30 +1139,14 @@ class Omni extends BaseStage
 			faker_moutains.visible = false;
 			faker_moutains.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_moutains);
-			
-			faker_mound = new FlxSprite(-375, 180);
-			faker_mound.loadGraphic(Paths.image('bgs/faker-encore/moundP1'));
-			faker_mound.scrollFactor.set(0.8, 0.8);
-			faker_mound.scale.set(1.2, 1.2);
-			faker_mound.visible = false;
-			faker_mound.antialiasing = ClientPrefs.data.antialiasing;
-			add(faker_mound);
 		
-			faker_rings = new FlxSprite(-320, -200);
+			faker_rings = new FlxSprite(-360, -160);
 			faker_rings.loadGraphic(Paths.image('bgs/faker-encore/ringsP1'));
 			faker_rings.scrollFactor.set(0.8, 0.8);
 			faker_rings.scale.set(1.2, 1.2);
 			faker_rings.visible = false;
 			faker_rings.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_rings);
-		
-			faker_trees = new FlxSprite(-200, -500);
-			faker_trees.loadGraphic(Paths.image('bgs/faker-encore/treesP1'));
-			faker_trees.scrollFactor.set(0.9, 1);
-			faker_trees.scale.set(1.5, 1.5);
-			faker_trees.visible = false;
-			faker_trees.antialiasing = ClientPrefs.data.antialiasing;
-			add(faker_trees);
 		} else {
 			faker_moutains = new FlxSprite(-1080, -250);
 			faker_moutains.loadGraphic(Paths.image('blank'));
@@ -1311,14 +1155,6 @@ class Omni extends BaseStage
 			faker_moutains.visible = false;
 			faker_moutains.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_moutains);
-			
-			faker_mound = new FlxSprite(-600, -300);
-			faker_mound.loadGraphic(Paths.image('blank'));
-			faker_mound.scrollFactor.set(0.8, 0.8);
-			faker_mound.scale.set(1.2, 1.2);
-			faker_mound.visible = false;
-			faker_mound.antialiasing = ClientPrefs.data.antialiasing;
-			add(faker_mound);
 		
 			faker_rings = new FlxSprite(-600, -300);
 			faker_rings.loadGraphic(Paths.image('blank'));
@@ -1327,25 +1163,9 @@ class Omni extends BaseStage
 			faker_rings.visible = false;
 			faker_rings.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_rings);
-		
-			faker_trees = new FlxSprite(-400, -400);
-			faker_trees.loadGraphic(Paths.image('blank'));
-			faker_trees.scrollFactor.set(0.9, 1);
-			faker_trees.scale.set(1.5, 1.5);
-			faker_trees.visible = false;
-			faker_trees.antialiasing = ClientPrefs.data.antialiasing;
-			add(faker_trees);
 		}
 		
-		faker_ground = new FlxSprite(-600, 90);
-		faker_ground.loadGraphic(Paths.image('bgs/faker-encore/groundP1'));
-		faker_ground.scrollFactor.set(1, 1);
-		faker_ground.scale.set(1.5, 1.5);
-		faker_ground.visible = false;
-		faker_ground.antialiasing = ClientPrefs.data.antialiasing;
-		add(faker_ground);
-		
-		faker_bg = new FlxSprite(-700, 370);
+		faker_bg = new FlxSprite(-700, -400);
 		faker_bg.loadGraphic(Paths.image('bgs/faker-encore/bgP1'));
 		faker_bg.scrollFactor.set(1, 1);
 		faker_bg.scale.set(1.5, 1.5);
@@ -1434,29 +1254,13 @@ class Omni extends BaseStage
 			faker_moutains2.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_moutains2);
 			
-			faker_mound2 = new FlxSprite(-375, 180);
-			faker_mound2.loadGraphic(Paths.image('bgs/faker-encore/moundP2'));
-			faker_mound2.scrollFactor.set(0.8, 0.8);
-			faker_mound2.scale.set(1.2, 1.2);
-			faker_mound2.visible = false;
-			faker_mound2.antialiasing = ClientPrefs.data.antialiasing;
-			add(faker_mound2);
-			
-			faker_rings2 = new FlxSprite(-320, -200);
+			faker_rings2 = new FlxSprite(-360, -160);
 			faker_rings2.loadGraphic(Paths.image('bgs/faker-encore/ringsP2'));
 			faker_rings2.scrollFactor.set(0.8, 0.8);
 			faker_rings2.scale.set(1.2, 1.2);
 			faker_rings2.visible = false;
 			faker_rings2.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_rings2);
-			
-			faker_trees2 = new FlxSprite(-200, -500);
-			faker_trees2.loadGraphic(Paths.image('bgs/faker-encore/treesP2'));
-			faker_trees2.scrollFactor.set(0.9, 1);
-			faker_trees2.scale.set(1.5, 1.5);
-			faker_trees2.visible = false;
-			faker_trees2.antialiasing = ClientPrefs.data.antialiasing;
-			add(faker_trees2);
 		} else {
 			faker_moutains2 = new FlxSprite(-1080, -750);
 			faker_moutains2.loadGraphic(Paths.image('blank'));
@@ -1466,14 +1270,6 @@ class Omni extends BaseStage
 			faker_moutains2.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_moutains2);
 			
-			faker_mound2 = new FlxSprite(-600, -300);
-			faker_mound2.loadGraphic(Paths.image('blank'));
-			faker_mound2.scrollFactor.set(0.8, 0.8);
-			faker_mound2.scale.set(1.2, 1.2);
-			faker_mound2.visible = false;
-			faker_mound2.antialiasing = ClientPrefs.data.antialiasing;
-			add(faker_mound2);
-			
 			faker_rings2 = new FlxSprite(-600, -300);
 			faker_rings2.loadGraphic(Paths.image('blank'));
 			faker_rings2.scrollFactor.set(0.8, 0.8);
@@ -1481,25 +1277,9 @@ class Omni extends BaseStage
 			faker_rings2.visible = false;
 			faker_rings2.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_rings2);
-			
-			faker_trees2 = new FlxSprite(-400, -400);
-			faker_trees2.loadGraphic(Paths.image('blank'));
-			faker_trees2.scrollFactor.set(0.9, 1);
-			faker_trees2.scale.set(1.5, 1.5);
-			faker_trees2.visible = false;
-			faker_trees2.antialiasing = ClientPrefs.data.antialiasing;
-			add(faker_trees2);
 		}
 		
-		faker_ground2 = new FlxSprite(-600, 90);
-		faker_ground2.loadGraphic(Paths.image('bgs/faker-encore/groundP2'));
-		faker_ground2.scrollFactor.set(1, 1);
-		faker_ground2.scale.set(1.5, 1.5);
-		faker_ground2.visible = false;
-		faker_ground2.antialiasing = ClientPrefs.data.antialiasing;
-		add(faker_ground2);
-		
-		faker_bg2 = new FlxSprite(-700, 370);
+		faker_bg2 = new FlxSprite(-700, -400);
 		faker_bg2.loadGraphic(Paths.image('bgs/faker-encore/bgP2'));
 		faker_bg2.scrollFactor.set(1, 1);
 		faker_bg2.scale.set(1.5, 1.5);
@@ -1592,139 +1372,6 @@ class Omni extends BaseStage
 		circle.screenCenter(X);
 		circle.screenCenter(Y);
 		add(circle);
-		
-		//Create Post Shit
-		preload('exedeath');
-		preload('bgs/faker-encore/fakerpixel');
-		preload('bgs/triple-trouble-encore/eggman/egg_bg');
-		preload('epicjump');
-		preload('characters/GF_assets');
-		preload('bgs/needlemouse/fg');
-		preload('bgs/satanos-bg/FRock');
-		preload('bgs/triple-trouble-encore/xeno/xeno_fg');
-		preload('bgs/FunInfiniteStage/majin FG1');
-		preload('bgs/FunInfiniteStage/majin FG2');
-		preload('bgs/hog/rocks');
-		preload('bgs/hog/overlay');
-		preload('bgs/sunky/sunkTransition');
-		preload('bgs/faker-encore/jover');
-		preload('bgs/hog/blast/Rocks');
-		preload('sonicJUMPSCARE');
-		preload('WhiteVG');
-		preload('hpR-dark');
-		preload('tbR-dark');
-		preload('noteSkins/NOTE_assets');
-		preload('error_popups');
-		
-		//Icons
-		preload('icons/icon-xterion-first');
-		preload('icons/icon-needlemouse');
-		preload('icons/icon-bf-needlemouse');
-		preload('icons/icon-tails-encore');
-		preload('icons/icon-bunfriend');
-		preload('icons/icon-fleetway');
-		preload('icons/icon-chaotix-pixel');
-		preload('icons/icon-pixel-bunfriend');
-		preload('icons/icon-knuckles-encore');
-		preload('icons/icon-wechBeast');
-		preload('icons/icon-satanos');
-		preload('icons/icon-egg-encore');
-		preload('icons/icon-sonicexe');
-		preload('icons/icon-lordx-encore');
-		preload('icons/icon-fatal-sonic');
-		preload('icons/icon-ycr');
-		preload('icons/icon-BEAST');
-		preload('icons/icon-majin');
-		preload('icons/icon-sunky');
-		preload('icons/icon-sanic');
-		preload('icons/icon-fatal-glitched');
-		preload('icons/icon-bunfriend-needlemouse');
-		preload('icons/icon-true-fatal');
-		preload('icons/icon-ycrep4');
-		preload('icons/icon-ycr-pissy');
-		preload('icons/icon-coldsteel');
-		preload('icons/icon-exe-enc');
-		preload('icons/icon-faker-enc');
-		preload('icons/icon-scorched');
-		preload('icons/icon-bfpixel');
-		preload('icons/icon-fakerpixel');
-		preload('icons/icon-taildoll');
-		preload('icons/icon-bf-3d');
-		preload('icons/icon-hog');
-		preload('icons/icon-chaotix-hd');
-		preload('icons/icon-gf');
-		preload('icons/icon-sonic-rr');
-		preload('icons/icon-face');
-		preload('characters/BF/HD/BOYFRIEND');
-		
-		//Other
-		preload('wechidna');
-		preload('statix');
-		preload('guitar');
-		preload('noteSplashes/noteSplashes-Bloodsplash');
-		preload('healthBar');
-		preload('timeBar');
-		preload('ready');
-		preload('set');
-		preload('go');
-		preload('StartScreens/Circle-omnipresent');
-		preload('StartScreens/Text-omnipresent');
-		preload('sick');
-		preload('good');
-		preload('bad');
-		preload('shit');
-		preload('num0');
-		preload('num1');
-		preload('num2');
-		preload('num3');
-		preload('num4');
-		preload('num5');
-		preload('num6');
-		preload('num7');
-		preload('num8');
-		preload('num9');
-		preload('combo');
-		preload('pauseStuff/pauseTop');
-		preload('pauseStuff/bottomPanel');
-		preload('pauseStuff/graybut');
-		preload('pauseStuff/blackbut');
-		preload('pauseStuff/Exittomenu');
-		preload('pauseStuff/RestartSong');
-		preload('pauseStuff/Resume');
-		preload('box');
-		preload('blank');
-		preload('philly/gradient');
-		preload('philly/particle');
-		
-		//Videos
-		preloadVideo('bfhair');
-		preloadVideo('bitchless');
-		preloadVideo('EGGMAN NO');
-		preloadVideo('Fatal Error Singing');
-		preloadVideo('fleetgeta');
-		preloadVideo('forkliftcertified');
-		preloadVideo('gettrolled');
-		preloadVideo('Googoogaagaa');
-		preloadVideo('he has a point');
-		preloadVideo('HogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHog');
-		preloadVideo('hogToaster');
-		preloadVideo('howitfeelstochew5gum');
-		preloadVideo("HUEHUEHUE'D");
-		preloadVideo('i am wechidn-asdfl;');
-		preloadVideo('imbouttocuuuuuuuuuuuuuuuuuuu');
-		preloadVideo('its his mic fr');
-		preloadVideo('Mother I have shidded the bed.');
-		preloadVideo('MWAHAHAHA');
-		preloadVideo('myfinger');
-		preloadVideo('no_ice_cream');
-		preloadVideo('omg sonic');
-		preloadVideo('tune this out bitch');
-		preloadVideo('Scorched Yes');
-		preloadVideo('sonic_jacking_off');
-		preloadVideo('Sunky Chad');
-		preloadVideo('test1');
-		preloadVideo('what');
-		preloadVideo('YEAAAAAAAAAAAAAAAAAAAAAAAAA');
 	}
 	
 	override function createPost()
@@ -2002,6 +1649,11 @@ class Omni extends BaseStage
 		ring.cameras = [camHUD];
 		ring.antialiasing = ClientPrefs.data.antialiasing;
 		add(ring);
+
+		#if DISCORD_ALLOWED
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Loading Assets 99%", null);
+		#end
 	
 		char1 = new FlxSprite(0, 0);
 		char1.loadGraphic(Paths.image('characters/BF/3D/bf-3d'));
@@ -2103,16 +1755,6 @@ class Omni extends BaseStage
 		char10.screenCenter(Y);
 		add(char10);
 	
-		char11 = new FlxSprite(0, 0);
-		char11.loadGraphic(Paths.image('characters/BF/HD/encoreBF-redBlackTint'));
-		char11.scrollFactor.set(1, 1);
-		char11.scale.set(1, 1);
-		char11.antialiasing = true;
-		char11.alpha = 0.00001;
-		char11.screenCenter(X);
-		char11.screenCenter(Y);
-		add(char11);
-	
 		char12 = new FlxSprite(0, 0);
 		char12.loadGraphic(Paths.image('characters/BF/HD/needle-bf-encore'));
 		char12.scrollFactor.set(1, 1);
@@ -2142,16 +1784,6 @@ class Omni extends BaseStage
 		char14.screenCenter(X);
 		char14.screenCenter(Y);
 		add(char14);
-	
-		char15 = new FlxSprite(0, 0);
-		char15.loadGraphic(Paths.image('characters/BF/Pixel/fatal-bf'));
-		char15.scrollFactor.set(1, 1);
-		char15.scale.set(1, 1);
-		char15.antialiasing = true;
-		char15.alpha = 0.00001;
-		char15.screenCenter(X);
-		char15.screenCenter(Y);
-		add(char15);
 	
 		char16 = new FlxSprite(0, 0);
 		char16.loadGraphic(Paths.image('characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix'));
@@ -2403,6 +2035,45 @@ class Omni extends BaseStage
 		char42.screenCenter(Y);
 		add(char42);
 		
+		char1.destroy();
+		char2.destroy();
+		char3.destroy();
+		char4.destroy();
+		char5.destroy();
+		char6.destroy();
+		char7.destroy();
+		char8.destroy();
+		char9.destroy();
+		char10.destroy();
+		char12.destroy();
+		char13.destroy();
+		char14.destroy();
+		char16.destroy();
+		char17.destroy();
+		char18.destroy();
+		char19.destroy();
+		char20.destroy();
+		char21.destroy();
+		char22.destroy();
+		char24.destroy();
+		char25.destroy();
+		char26.destroy();
+		char27.destroy();
+		char28.destroy();
+		char29.destroy();
+		char30.destroy();
+		char31.destroy();
+		char32.destroy();
+		char33.destroy();
+		char34.destroy();
+		char35.destroy();
+		char36.destroy();
+		char37.destroy();
+		char38.destroy();
+		char39.destroy();
+		char40.destroy();
+		char42.destroy();
+		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Starting Song...", null);
@@ -2463,10 +2134,7 @@ class Omni extends BaseStage
 				faker_sky2.visible = true;
 				faker_eclipse2.visible = true;
 				faker_moutains2.visible = true;
-				faker_mound2.visible = true;
 				faker_rings2.visible = true;
-				faker_trees2.visible = true;
-				faker_ground2.visible = true;
 				faker_bg2.visible = true;
 				scorchedBg.visible = true;
 				scorchedMotain.visible = true;
@@ -2480,10 +2148,7 @@ class Omni extends BaseStage
 				faker_sky2.visible = false;
 				faker_eclipse2.visible = false;
 				faker_moutains2.visible = false;
-				faker_mound2.visible = false;
 				faker_rings2.visible = false;
-				faker_trees2.visible = false;
-				faker_ground2.visible = false;
 				faker_bg2.visible = false;
 				scorchedBg.visible = false;
 				scorchedMotain.visible = false;
@@ -2494,7 +2159,6 @@ class Omni extends BaseStage
 				scorchedTrees.visible = false;
 				
 			case 593, 9841: //needlemouse and tails lag prevention
-				needleSky.visible = true;
 				needleMoutains.visible = true;
 				needleBuildings.visible = true;
 				conkCreet.visible = true;
@@ -2503,7 +2167,6 @@ class Omni extends BaseStage
 				tails_fg.visible = true;
 				tails_trees1.visible = true;
 				tails_trees2.visible = true;
-				tails_grass.visible = true;
 				tails_floor.visible = true;
 				hogOverlay.visible = true;
 				faker_overlay.visible = true;
@@ -2513,7 +2176,6 @@ class Omni extends BaseStage
 				redRingTransition();
 			
 			case 594, 9842: //deactivate lag shit
-				needleSky.visible = false;
 				needleMoutains.visible = false;
 				needleBuildings.visible = false;
 				conkCreet.visible = false;
@@ -2522,7 +2184,6 @@ class Omni extends BaseStage
 				tails_fg.visible = false;
 				tails_trees1.visible = false;
 				tails_trees2.visible = false;
-				tails_grass.visible = false;
 				tails_floor.visible = false;
 				hogOverlay.visible = false;
 				faker_overlay.visible = false;
@@ -2541,7 +2202,6 @@ class Omni extends BaseStage
 				satanos_floor.visible = false;
 				satanos_rock.visible = false;
 				lordx_sky.visible = false;
-				lordx_hills.visible = false;
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
@@ -2555,7 +2215,6 @@ class Omni extends BaseStage
 				sunky_stage.visible = false;
 				sanic_bg.visible = false;
 				knuckles_bg.visible = false;
-				knuckles_city1.visible = false;
 				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 			
@@ -2571,9 +2230,7 @@ class Omni extends BaseStage
 				tails_fg.visible = false;
 				tails_trees1.visible = false;
 				tails_trees2.visible = false;
-				tails_grass.visible = false;
 				tails_floor.visible = false;
-				needleSky.visible = true;
 				needleMoutains.visible = true;
 				needleBuildings.visible = true;
 				conkCreet.visible = true;
@@ -2585,9 +2242,7 @@ class Omni extends BaseStage
 				tails_fg.visible = true;
 				tails_trees1.visible = true;
 				tails_trees2.visible = true;
-				tails_grass.visible = true;
 				tails_floor.visible = true;
-				needleSky.visible = false;
 				needleMoutains.visible = false;
 				needleBuildings.visible = false;
 				conkCreet.visible = false;
@@ -2595,31 +2250,24 @@ class Omni extends BaseStage
 				
 			case 2064, 10672: //fleetway
 				redRingTransition();
-				wall.alpha = 1;
-				floor.alpha = 1;
 				fleetwaybgshit.alpha = 1;
 				emeraldbeamyellow.alpha = 1;
 				emeralds.alpha = 1;
 				thechamber.alpha = 1;
-				pebles.alpha = 1;
 				tails_sky.visible = false;
 				tails_fg.visible = false;
 				tails_trees1.visible = false;
 				tails_trees2.visible = false;
-				tails_grass.visible = false;
 				tails_floor.visible = false;
 				dadGroup.scrollFactor.set(1.1, 1);
 				boyfriendGroup.scrollFactor.set(1.1, 1);
 				gfGroup.scrollFactor.set(1.1, 1);
 
 			case 3217: //Chaotix init
-				wall.alpha = 0.000001;
-				floor.alpha = 0.000001;
 				fleetwaybgshit.alpha = 0.000001;
 				emeraldbeamyellow.alpha = 0.000001;
 				emeralds.alpha = 0.000001;
 				thechamber.alpha = 0.000001;
-				pebles.alpha = 0.000001;
 				fucklesBGPixel.visible = true;
 				fucklesFGPixel.visible = true;
 				fucklesAmyBg.visible = true;
@@ -2634,32 +2282,24 @@ class Omni extends BaseStage
 		
 			case 3222: //preload knuckles, wechidna
 				knuckles_bg.visible = true;
-				knuckles_city1.visible = true;
 				knuckles_city2.visible = true;
 				knuckles_floor.visible = true;
 				wechidna_sky.visible = true;
 				wechidna_building1.visible = true;
 				wechidna_building2.visible = true;
 				wechidna_floor.visible = true;
-				wechidna_trees.visible = true;
-				wechidna_grass.visible = true;
-				wechidna_thing.visible = true;
 				wechidna_treesFG.visible = true;
 				wechidna_thingFG.visible = true;
 				wechidna_grassFG.visible = true;
 				
 			case 3231: //remove preload stuff
 				knuckles_bg.visible = false;
-				knuckles_city1.visible = false;
 				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 				wechidna_sky.visible = false;
 				wechidna_building1.visible = false;
 				wechidna_building2.visible = false;
 				wechidna_floor.visible = false;
-				wechidna_trees.visible = false;
-				wechidna_grass.visible = false;
-				wechidna_thing.visible = false;
 				wechidna_treesFG.visible = false;
 				wechidna_thingFG.visible = false;
 				wechidna_grassFG.visible = false;
@@ -2667,7 +2307,6 @@ class Omni extends BaseStage
 			case 3360, 3520, 3680, 4064, 4192, 11056: //knuckles
 				redRingTransition();
 				knuckles_bg.visible = true;
-				knuckles_city1.visible = true;
 				knuckles_city2.visible = true;
 				knuckles_floor.visible = true;
 				fucklesBGPixel.visible = false;
@@ -2682,9 +2321,6 @@ class Omni extends BaseStage
 				wechidna_building1.visible = false;
 				wechidna_building2.visible = false;
 				wechidna_floor.visible = false;
-				wechidna_trees.visible = false;
-				wechidna_grass.visible = false;
-				wechidna_thing.visible = false;
 				wechidna_treesFG.visible = false;
 				wechidna_thingFG.visible = false;
 				wechidna_grassFG.visible = false;
@@ -2695,7 +2331,6 @@ class Omni extends BaseStage
 			case 3408, 3648, 3712: //chaotix
 				redRingTransition();
 				knuckles_bg.visible = false;
-				knuckles_city1.visible = false;
 				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 				fucklesBGPixel.visible = true;
@@ -2713,14 +2348,10 @@ class Omni extends BaseStage
 				wechidna_building1.visible = true;
 				wechidna_building2.visible = true;
 				wechidna_floor.visible = true;
-				wechidna_trees.visible = true;
-				wechidna_grass.visible = true;
-				wechidna_thing.visible = true;
 				wechidna_treesFG.visible = true;
 				wechidna_thingFG.visible = true;
 				wechidna_grassFG.visible = true;
 				knuckles_bg.visible = false;
-				knuckles_city1.visible = false;
 				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 				fucklesBGPixel.visible = false;
@@ -2758,7 +2389,6 @@ class Omni extends BaseStage
 			case 4256, 4768, 5056, 5184, 5424, 11184: //satanos
 				redRingTransition();
 				knuckles_bg.visible = false;
-				knuckles_city1.visible = false;
 				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 				satanos_sky.visible = true;
@@ -2774,10 +2404,7 @@ class Omni extends BaseStage
 				satanos_rock.visible = false;
 				
 			case 5345: //preload xeno, majin
-				xeno_sky.visible = true;
 				xeno_fg.visible = true;
-				xeno_trees2.visible = true;
-				xeno_trees1.visible = true;
 				xeno_floor.visible = true;
 				daJumpscare.visible = true;
 				majin_bush2.visible = true;
@@ -2789,10 +2416,7 @@ class Omni extends BaseStage
 				majin_fgmajin2.visible = true;
 				
 			case 5346: //remove preload shit
-				xeno_sky.visible = false;
 				xeno_fg.visible = false;
-				xeno_trees2.visible = false;
-				xeno_trees1.visible = false;
 				xeno_floor.visible = false;
 				majin_bush2.visible = false;
 				majin_bush.visible = false;
@@ -2803,20 +2427,15 @@ class Omni extends BaseStage
 				majin_fgmajin2.visible = false;
 				
 			case 5473: //Preload sonic.exe, lordx, fatal
-				sonic_sky.visible = true;
-				sonic_water.visible = true;
-				sonic_waterfall.visible = true;
+				sonic_bg.visible = true;
 				sonic_ground.visible = true;
 				
 			case 5474: //remove preload shit
-				sonic_sky.visible = false;
-				sonic_water.visible = false;
-				sonic_waterfall.visible = false;
+				sonic_bg.visible = false;
 				sonic_ground.visible = false;
 				
 			case 5585: //preload lordx, fatal
 				lordx_sky.visible = true;
-				lordx_hills.visible = true;
 				lordx_floor.visible = true;
 				lordx_eyeflower.visible = true;
 				lordx_notknuckles.visible = true;
@@ -2827,7 +2446,6 @@ class Omni extends BaseStage
 				
 			case 5586: //remove preload shit
 				lordx_sky.visible = false;
-				lordx_hills.visible = false;
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
@@ -2840,12 +2458,9 @@ class Omni extends BaseStage
 				redRingTransition();
 				domain.visible = false;
 				domain2.visible = false;
-				sonic_sky.visible = true;
-				sonic_water.visible = true;
-				sonic_waterfall.visible = true;
+				sonic_bg.visible = true;
 				sonic_ground.visible = true;
 				lordx_sky.visible = false;
-				lordx_hills.visible = false;
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
@@ -2856,12 +2471,8 @@ class Omni extends BaseStage
 				redRingTransition();
 				domain.visible = false;
 				domain2.visible = false;
-				sonic_sky.visible = false;
-				sonic_water.visible = false;
-				sonic_waterfall.visible = false;
 				sonic_ground.visible = false;
 				lordx_sky.visible = true;
-				lordx_hills.visible = true;
 				lordx_floor.visible = true;
 				lordx_eyeflower.visible = true;
 				lordx_notknuckles.visible = true;
@@ -2877,19 +2488,13 @@ class Omni extends BaseStage
 				
 			case 5968, 6224, 6416, 11456, 11584: //fatal
 				redRingTransition();
-				xeno_sky.visible = false;
 				xeno_fg.visible = false;
-				xeno_trees2.visible = false;
-				xeno_trees1.visible = false;
 				xeno_floor.visible = false;
 				domain.visible = true;
 				domain2.visible = true;
-				sonic_sky.visible = false;
-				sonic_water.visible = false;
-				sonic_waterfall.visible = false;
+				sonic_bg.visible = false;
 				sonic_ground.visible = false;
 				lordx_sky.visible = false;
-				lordx_hills.visible = false;
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
@@ -2897,10 +2502,7 @@ class Omni extends BaseStage
 				lordx_tree.visible = false;
 
 			case 6417: //Preload xeno, majin, sunky, sanic, coldsteel
-				xeno_sky.visible = true;
 				xeno_fg.visible = true;
-				xeno_trees2.visible = true;
-				xeno_trees1.visible = true;
 				xeno_floor.visible = true;
 				majin_bush2.visible = true;
 				majin_bush.visible = true;
@@ -2922,10 +2524,7 @@ class Omni extends BaseStage
 				coldsteel_shadow.visible = true;
 				
 			case 6418: //remove preload shit
-				xeno_sky.visible = false;
 				xeno_fg.visible = false;
-				xeno_trees2.visible = false;
-				xeno_trees1.visible = false;
 				xeno_floor.visible = false;
 				majin_bush2.visible = false;
 				majin_bush.visible = false;
@@ -2949,11 +2548,9 @@ class Omni extends BaseStage
 			case 6608: //ycr-normal
 				redRingTransition();
 				knuckles_bg.visible = true;
-				knuckles_city1.visible = true;
 				knuckles_city2.visible = true;
 				knuckles_floor.visible = true;
 				lordx_sky.visible = false;
-				lordx_hills.visible = false;
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
@@ -2965,13 +2562,9 @@ class Omni extends BaseStage
 				
 			case 6640, 6896, 6928, 7056, 11440, 11568, 12224: //xeno
 				redRingTransition();
-				xeno_sky.visible = true;
 				xeno_fg.visible = true;
-				xeno_trees2.visible = true;
-				xeno_trees1.visible = true;
 				xeno_floor.visible = true;
 				knuckles_bg.visible = false;
-				knuckles_city1.visible = false;
 				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 				majin_bush2.visible = false;
@@ -2982,7 +2575,6 @@ class Omni extends BaseStage
 				majin_fgmajin.visible = false;
 				majin_fgmajin2.visible = false;
 				lordx_sky.visible = false;
-				lordx_hills.visible = false;
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
@@ -2993,10 +2585,7 @@ class Omni extends BaseStage
 				redRingTransition();
 				domain.visible = false;
 				domain2.visible = false;
-				xeno_sky.visible = false;
 				xeno_fg.visible = false;
-				xeno_trees2.visible = false;
-				xeno_trees1.visible = false;
 				xeno_floor.visible = false;
 				majin_bush2.visible = true;
 				majin_bush.visible = true;
@@ -3006,7 +2595,6 @@ class Omni extends BaseStage
 				majin_fgmajin.visible = true;
 				majin_fgmajin2.visible = true;
 				lordx_sky.visible = false;
-				lordx_hills.visible = false;
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
 				lordx_notknuckles.visible = false;
@@ -3015,10 +2603,7 @@ class Omni extends BaseStage
 			
 			case 7168, 7296, 7482, 8314, 8384, 11696: //sunky
 				redRingTransition();
-				xeno_sky.visible = false;
 				xeno_fg.visible = false;
-				xeno_trees2.visible = false;
-				xeno_trees1.visible = false;
 				xeno_floor.visible = false;
 				sunkyMoment = true;
 				sunky_bg.visible = true;
@@ -3060,10 +2645,7 @@ class Omni extends BaseStage
 				faker_sky.visible = true;
 				faker_eclipse.visible = true;
 				faker_moutains.visible = true;
-				faker_mound.visible = true;
 				faker_rings.visible = true;
-				faker_trees.visible = true;
-				faker_ground.visible = true;
 				faker_bg.visible = true;
 				hogBg.visible = true;
 				hogMotain.visible = true;
@@ -3076,10 +2658,7 @@ class Omni extends BaseStage
 				faker_sky.visible = false;
 				faker_eclipse.visible = false;
 				faker_moutains.visible = false;
-				faker_mound.visible = false;
 				faker_rings.visible = false;
-				faker_trees.visible = false;
-				faker_ground.visible = false;
 				faker_bg.visible = false;
 				hogBg.visible = false;
 				hogMotain.visible = false;
@@ -3096,10 +2675,7 @@ class Omni extends BaseStage
 				faker_sky.visible = true;
 				faker_eclipse.visible = true;
 				faker_moutains.visible = true;
-				faker_mound.visible = true;
 				faker_rings.visible = true;
-				faker_trees.visible = true;
-				faker_ground.visible = true;
 				faker_bg.visible = true;
 				hogBg.visible = false;
 				hogMotain.visible = false;
@@ -3115,10 +2691,7 @@ class Omni extends BaseStage
 				faker_sky.visible = false;
 				faker_eclipse.visible = false;
 				faker_moutains.visible = false;
-				faker_mound.visible = false;
 				faker_rings.visible = false;
-				faker_trees.visible = false;
-				faker_ground.visible = false;
 				faker_bg.visible = false;
 				hogBg.visible = true;
 				hogMotain.visible = true;
@@ -3134,10 +2707,7 @@ class Omni extends BaseStage
 				faker_sky2.visible = true;
 				faker_eclipse2.visible = true;
 				faker_moutains2.visible = true;
-				faker_mound2.visible = true;
 				faker_rings2.visible = true;
-				faker_trees2.visible = true;
-				faker_ground2.visible = true;
 				faker_bg2.visible = true;
 				faker_overlay.visible = true;
 				hogBg.visible = false;
@@ -3170,10 +2740,7 @@ class Omni extends BaseStage
 				faker_sky2.visible = false;
 				faker_eclipse2.visible = false;
 				faker_moutains2.visible = false;
-				faker_mound2.visible = false;
 				faker_rings2.visible = false;
-				faker_trees2.visible = false;
-				faker_ground2.visible = false;
 				faker_bg2.visible = false;
 				faker_overlay.visible = false;
 			
@@ -3182,21 +2749,16 @@ class Omni extends BaseStage
 				faker_sky2.visible = false;
 				faker_eclipse2.visible = false;
 				faker_moutains2.visible = false;
-				faker_mound2.visible = false;
 				faker_rings2.visible = false;
-				faker_trees2.visible = false;
-				faker_ground2.visible = false;
 				faker_bg2.visible = false;
 				faker_overlay.visible = false;
 				knuckles_bg.visible = true;
-				knuckles_city1.visible = true;
 				knuckles_city2.visible = true;
 				knuckles_floor.visible = true;
 				
 			case 10161: //Back to Tailsdoll
 				redRingTransition();
 				knuckles_bg.visible = false;
-				knuckles_city1.visible = false;
 				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 		
@@ -3223,11 +2785,9 @@ class Omni extends BaseStage
 		char8.alpha = 1;
 		char9.alpha = 1;
 		char10.alpha = 1;
-		char11.alpha = 1;
 		char12.alpha = 1;
 		char13.alpha = 1;
 		char14.alpha = 1;
-		char15.alpha = 1;
 		char16.alpha = 1;
 		char17.alpha = 1;
 		char18.alpha = 1;
@@ -3265,11 +2825,9 @@ class Omni extends BaseStage
 		char8.alpha = 0;
 		char9.alpha = 0;
 		char10.alpha = 0;
-		char11.alpha = 0;
 		char12.alpha = 0;
 		char13.alpha = 0;
 		char14.alpha = 0;
-		char15.alpha = 0;
 		char16.alpha = 0;
 		char17.alpha = 0;
 		char18.alpha = 0;
@@ -3311,12 +2869,10 @@ class Omni extends BaseStage
 		xterion_floor.visible = true;
 		xterion_floor.visible = false;
 		
-		needleSky.visible = true;
 		needleMoutains.visible = true;
 		needleBuildings.visible = true;
 		conkCreet.visible = true;
 		needleFg.visible = true;
-		needleSky.visible = false;
 		needleMoutains.visible = false;
 		needleBuildings.visible = false;
 		conkCreet.visible = false;
@@ -3326,29 +2882,21 @@ class Omni extends BaseStage
 		tails_fg.visible = true;
 		tails_trees1.visible = true;
 		tails_trees2.visible = true;
-		tails_grass.visible = true;
 		tails_floor.visible = true;
 		tails_sky.visible = false;
 		tails_fg.visible = false;
 		tails_trees1.visible = false;
 		tails_trees2.visible = false;
-		tails_grass.visible = false;
 		tails_floor.visible = false;
 		
-		wall.visible = true;
-		floor.visible = true;
 		fleetwaybgshit.visible = true;
 		emeraldbeamyellow.visible = true;
 		emeralds.visible = true;
 		thechamber.visible = true;
-		pebles.visible = true;
-		wall.visible = false;
-		floor.visible = false;
 		fleetwaybgshit.visible = false;
 		emeraldbeamyellow.visible = false;
 		emeralds.visible = false;
 		thechamber.visible = false;
-		pebles.visible = false;
 					
 		fucklesBGPixel.visible = true;
 		fucklesFGPixel.visible = true;
@@ -3370,11 +2918,9 @@ class Omni extends BaseStage
 		whiteFuck.visible = false;
 		
 		knuckles_bg.visible = true;
-		knuckles_city1.visible = true;
 		knuckles_city2.visible = true;
 		knuckles_floor.visible = true;
 		knuckles_bg.visible = false;
-		knuckles_city1.visible = false;
 		knuckles_city2.visible = false;
 		knuckles_floor.visible = false;
 		
@@ -3382,9 +2928,6 @@ class Omni extends BaseStage
 		wechidna_building1.visible = true;
 		wechidna_building2.visible = true;
 		wechidna_floor.visible = true;
-		wechidna_trees.visible = true;
-		wechidna_grass.visible = true;
-		wechidna_thing.visible = true;
 		wechidna_treesFG.visible = true;
 		wechidna_thingFG.visible = true;
 		wechidna_grassFG.visible = true;
@@ -3392,9 +2935,6 @@ class Omni extends BaseStage
 		wechidna_building1.visible = false;
 		wechidna_building2.visible = false;
 		wechidna_floor.visible = false;
-		wechidna_trees.visible = false;
-		wechidna_grass.visible = false;
-		wechidna_thing.visible = false;
 		wechidna_treesFG.visible = false;
 		wechidna_thingFG.visible = false;
 		wechidna_grassFG.visible = false;
@@ -3408,24 +2948,18 @@ class Omni extends BaseStage
 		satanos_floor.visible = false;
 		satanos_rock.visible = false;
 		
-		sonic_sky.visible = true;
-		sonic_water.visible = true;
-		sonic_waterfall.visible = true;
+		sonic_bg.visible = true;
 		sonic_ground.visible = true;
-		sonic_sky.visible = false;
-		sonic_water.visible = false;
-		sonic_waterfall.visible = false;
+		sonic_bg.visible = false;
 		sonic_ground.visible = false;
 		
 		lordx_sky.visible = true;
-		lordx_hills.visible = true;
 		lordx_floor.visible = true;
 		lordx_eyeflower.visible = true;
 		lordx_notknuckles.visible = true;
 		lordx_bfsmallflower.visible = true;
 		lordx_tree.visible = true;
 		lordx_sky.visible = false;
-		lordx_hills.visible = false;
 		lordx_floor.visible = false;
 		lordx_eyeflower.visible = false;
 		lordx_notknuckles.visible = false;
@@ -3440,15 +2974,9 @@ class Omni extends BaseStage
 		exeDie.visible = true;
 		exeDie.visible = false;
 					
-		xeno_sky.visible = true;
 		xeno_fg.visible = true;
-		xeno_trees2.visible = true;
-		xeno_trees1.visible = true;
 		xeno_floor.visible = true;
-		xeno_sky.visible = false;
 		xeno_fg.visible = false;
-		xeno_trees2.visible = false;
-		xeno_trees1.visible = false;
 		xeno_floor.visible = false;
 					
 		majin_sky.visible = true;
@@ -3494,18 +3022,12 @@ class Omni extends BaseStage
 		faker_sky.visible = true;
 		faker_eclipse.visible = true;
 		faker_moutains.visible = true;
-		faker_mound.visible = true;
 		faker_rings.visible = true;
-		faker_trees.visible = true;
-		faker_ground.visible = true;
 		faker_bg.visible = true;
 		faker_sky.visible = false;
 		faker_eclipse.visible = false;
 		faker_moutains.visible = false;
-		faker_mound.visible = false;
 		faker_rings.visible = false;
-		faker_trees.visible = false;
-		faker_ground.visible = false;
 		faker_bg.visible = false;
 		
 		hogBg.visible = true;
@@ -3528,19 +3050,13 @@ class Omni extends BaseStage
 		faker_sky2.visible = true;
 		faker_eclipse2.visible = true;
 		faker_moutains2.visible = true;
-		faker_mound2.visible = true;
 		faker_rings2.visible = true;
-		faker_trees2.visible = true;
-		faker_ground2.visible = true;
 		faker_bg2.visible = true;
 		faker_overlay.visible = true;
 		faker_sky2.visible = false;
 		faker_eclipse2.visible = false;
 		faker_moutains2.visible = false;
-		faker_mound2.visible = false;
 		faker_rings2.visible = false;
-		faker_trees2.visible = false;
-		faker_ground2.visible = false;
 		faker_bg2.visible = false;
 		faker_overlay.visible = false;
 		
@@ -3565,28 +3081,25 @@ class Omni extends BaseStage
 		vignette.visible = false;
 		
 		if (theThing == 3) {
-			trace("The thing done thrice");
+			//trace("The thing done thrice");
 			tailsdoll_floor.visible = true;
 			ring.visible = true;
-			wall.visible = true;
-			floor.visible = true;
 			fleetwaybgshit.visible = true;
 			emeraldbeamyellow.visible = true;
 			emeralds.visible = true;
 			thechamber.visible = true;
-			pebles.visible = true;
 		}
 		
 		if (theThing == 2) {
 			theThing = 3;
 			doTheThing();
-			trace("The thing done twice");
+			//trace("The thing done twice");
 		}
 		
 		if (theThing == 1) {
 			theThing = 2;
 			doTheThing();
-			trace("The thing done once");
+			//trace("The thing done once");
 		}
 	}
 	
@@ -3626,7 +3139,6 @@ class Omni extends BaseStage
 				satanos_floor.visible = true;
 				satanos_rock.visible = true;
 				lordx_sky.visible = true;
-				lordx_hills.visible = true;
 				lordx_floor.visible = true;
 				lordx_eyeflower.visible = true;
 				lordx_notknuckles.visible = true;
@@ -3640,7 +3152,6 @@ class Omni extends BaseStage
 				sunky_stage.visible = true;
 				sanic_bg.visible = true;
 				knuckles_bg.visible = true;
-				knuckles_city1.visible = true;
 				knuckles_city2.visible = true;
 				knuckles_floor.visible = true;
 				
@@ -3648,7 +3159,6 @@ class Omni extends BaseStage
 				xterion_floor.destroy();
 			
 			case 10545: //Destroy Needlemouse
-				needleSky.destroy();
 				needleMoutains.destroy();
 				needleBuildings.destroy();
 				conkCreet.destroy();
@@ -3659,17 +3169,13 @@ class Omni extends BaseStage
 				tails_fg.destroy();
 				tails_trees1.destroy();
 				tails_trees2.destroy();
-				tails_grass.destroy();
 				tails_floor.destroy();
 				
 			case 10929: //Destroy Fleetway
-				wall.destroy();
-				floor.destroy();
 				fleetwaybgshit.destroy();
 				emeraldbeamyellow.destroy();
 				emeralds.destroy();
 				thechamber.destroy();
-				pebles.destroy();
 			
 			case 11057: //Destroy Chaotix/Wechidna
 				fucklesBeats = false;
@@ -3685,16 +3191,12 @@ class Omni extends BaseStage
 				wechidna_building1.destroy();
 				wechidna_building2.destroy();
 				wechidna_floor.destroy();
-				wechidna_trees.destroy();
-				wechidna_grass.destroy();
-				wechidna_thing.destroy();
 				wechidna_treesFG.destroy();
 				wechidna_thingFG.destroy();
 				wechidna_grassFG.destroy();
 				
 			case 11185: //Destroy Knuckles/YCR
 				knuckles_bg.destroy();
-				knuckles_city1.destroy();
 				knuckles_city2.destroy();
 				knuckles_floor.destroy();
 				
@@ -3705,16 +3207,11 @@ class Omni extends BaseStage
 				satanos_rock.destroy();
 				
 			case 11585: //Destroy Sonic.exe
-				sonic_sky.destroy();
-				sonic_water.destroy();
-				sonic_waterfall.destroy();
+				sonic_bg.destroy();
 				sonic_ground.destroy();
 
 			case 12248: //Destroy Xeno
-				xeno_sky.destroy();
 				xeno_fg.destroy();
-				xeno_trees2.destroy();
-				xeno_trees1.destroy();
 				xeno_floor.destroy();
 				
 			case 11601: //Destroy Fatal
@@ -3723,7 +3220,6 @@ class Omni extends BaseStage
 				
 			case 11617: //Destroy LordX
 				lordx_sky.destroy();
-				lordx_hills.destroy();
 				lordx_floor.destroy();
 				lordx_eyeflower.destroy();
 				lordx_notknuckles.destroy();
@@ -3759,10 +3255,7 @@ class Omni extends BaseStage
 				faker_sky2.destroy();
 				faker_eclipse2.destroy();
 				faker_moutains2.destroy();
-				faker_mound2.destroy();
 				faker_rings2.destroy();
-				faker_trees2.destroy();
-				faker_ground2.destroy();
 				faker_bg2.destroy();
 				faker_overlay.destroy();
 				hogBg.destroy();
@@ -3776,10 +3269,7 @@ class Omni extends BaseStage
 				faker_sky.destroy();
 				faker_eclipse.destroy();
 				faker_moutains.destroy();
-				faker_mound.destroy();
 				faker_rings.destroy();
-				faker_trees.destroy();
-				faker_ground.destroy();
 				faker_bg.destroy();
 				
 			case 12225: //Destroy Scorched
@@ -3808,10 +3298,7 @@ class Omni extends BaseStage
 				sunkyTransition.destroy();
 				
 			case 12228:
-				FlxTween.tween(xeno_sky, {alpha: 0}, 0.87, {ease: FlxEase.linear});
 				FlxTween.tween(xeno_fg, {alpha: 0}, 0.87, {ease: FlxEase.linear});
-				FlxTween.tween(xeno_trees1, {alpha: 0}, 0.87, {ease: FlxEase.linear});
-				FlxTween.tween(xeno_trees2, {alpha: 0}, 0.87, {ease: FlxEase.linear});
 				FlxTween.tween(xeno_floor, {alpha: 0}, 0.87, {ease: FlxEase.linear});
 
 			case 12788:
@@ -3834,7 +3321,7 @@ class Omni extends BaseStage
 			{
 				ring.alpha = 0.00001;
 				ring.animation.play('idle');
-				trace('ring finished');
+				//trace('ring finished');
 				ringStarted = false;
 			});
 		}

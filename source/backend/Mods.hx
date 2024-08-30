@@ -137,7 +137,7 @@ class Mods
 				#end
 				if(rawJson != null && rawJson.length > 0) return tjson.TJSON.parse(rawJson);
 			} catch(e:Dynamic) {
-				trace(e);
+				//trace(e);
 			}
 		}
 		#end
@@ -164,7 +164,7 @@ class Mods
 					list.disabled.push(dat[0]);
 			}
 		} catch(e) {
-			trace(e);
+			//trace(e);
 		}
 		#end
 		return list;
@@ -188,7 +188,7 @@ class Mods
 				}
 			}
 		} catch(e) {
-			trace(e);
+			//trace(e);
 		}
 		
 		// Scan for folders that aren't on modsList.txt yet

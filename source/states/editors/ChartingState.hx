@@ -1462,7 +1462,7 @@ class ChartingState extends MusicBeatState
 		//trace(_song.notes.length);
 		if(_song.notes.length <= 1) //First load ever
 		{
-			trace('first load ever!!');
+			//trace('first load ever!!');
 			while(curTime < FlxG.sound.music.length)
 			{
 				addSection();
@@ -3116,7 +3116,7 @@ class ChartingState extends MusicBeatState
 		}
 		catch(e)
 		{
-			trace('ERROR! $e');
+			//trace('ERROR! $e');
 
 			var errorStr:String = e.toString();
 			if(errorStr.startsWith('[file_contents,assets/data/')) errorStr = 'Missing file: ' + errorStr.substring(27, errorStr.length-1); //Missing chart

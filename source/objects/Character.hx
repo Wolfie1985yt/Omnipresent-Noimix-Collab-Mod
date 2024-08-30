@@ -118,7 +118,7 @@ class Character extends FlxSprite
 				}
 				catch(e:Dynamic)
 				{
-					trace('Error loading character file of "$character": $e');
+					//trace('Error loading character file of "$character": $e');
 				}
 		}
 

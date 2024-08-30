@@ -27,9 +27,7 @@ class FlashingState extends MusicBeatState
 		if (RAM < 7) {
 			Incompatible = true;
 		}
-		trace('Total RAM on Device: ' + RAM + ' GB, Max Needed: 7 GB');
-		#else
-			Incompatible = true;
+		//trace('Total RAM on Device: ' + RAM + ' GB, Max Needed: 7 GB');
 		#end
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);

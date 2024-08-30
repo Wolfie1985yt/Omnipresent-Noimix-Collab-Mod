@@ -20,6 +20,31 @@ local traceDad = true;
 local fleetwayMoment = false;
 local gfMoment = true;
 local timeColor = 'FFFFFF';
+local loading = false;
+local vgspeed = 0;
+local color = 'FFFFFF';
+local stop = true;
+local beat = 0;
+local color2 = 'FFFFFF';
+local fps = 0;
+local framecount = 39;
+local HudPieces = {''};
+local index = 1;
+local hasSpawned = false;
+local hasSpawned2 = false;
+
+function getIconColor(chr)
+	return getColorFromHex(rgbToHex(getProperty(chr .. ".healthColorArray")))
+end
+
+function rgbToHex(array)
+	return string.format('%.2x%.2x%.2x', math.min(array[1]+50,255), math.min(array[2]+50,255), math.min(array[3]+50,255))
+end
+
+local gfRows = {}
+local bfRows = {}
+local ddRows = {}
+local mmRows = {}
 
 function onCreate()
 	addCharacterToList('wechBeast', 'dad');
@@ -40,20 +65,27 @@ function onCreate()
 	precacheMusic('tea-time');
 	precacheSound('unpause');
 	precacheSound('pause');
+
+    makeLuaSprite('whitebg', '', -2000, -1000)
+    setScrollFactor('whitebg', 0, 0)
+    makeGraphic('whitebg', 3920, 3080, value2)
+	setProperty('whitebg.alpha',0.00001);
 	
-	addLuaScript('mods/custom_events/badapplelol');
-	addLuaScript('mods/custom_events/badapplelolFlash');
-	addLuaScript('mods/custom_events/Better Cinematics');
-	addLuaScript('mods/custom_events/Cam Zoom');
-	addLuaScript('mods/custom_events/Flash Camera red');
-	addLuaScript('mods/custom_events/Flash Camera');
-	addLuaScript('mods/custom_events/phasestatic');
-	addLuaScript('mods/custom_events/ScreenRot');
-	addLuaScript('mods/custom_events/sonicBarsNotes');
-	addLuaScript('mods/custom_events/Toggle FlxTrail');
-	addLuaScript('mods/custom_notetypes/ALL');
-	addLuaScript('mods/custom_notetypes/DAD and GF');
-	addLuaScript('mods/custom_notetypes/GF and BF');
+	makeLuaSprite('VG2', 'WhiteVG', 0, 0);
+	setScrollFactor('VG2', 0, 0);
+	screenCenter('VG2');
+	addLuaSprite('VG2', false);
+	screenCenter('VG2');
+	setObjectCamera('VG2', 'camOther');
+	setProperty('VG2.alpha', 0.00001);
+
+	makeLuaSprite('VG3', 'WhiteVG', 0, 0);
+	setScrollFactor('VG3', 0, 0);
+	screenCenter('VG3');
+	addLuaSprite('VG3', false);
+	screenCenter('VG3');
+	setObjectCamera('VG3', 'camOther');
+	setProperty('VG3.alpha', 0.00001);
 
 	makeLuaSprite('flashingshit', '', 0, 0);
 	makeGraphic('flashingshit',1920,1080,'000000')
@@ -63,6 +95,15 @@ function onCreate()
 	setProperty('flashingshit.scale.y',2)
 	setProperty('flashingshit.alpha',0)
 	setObjectCamera('flashingshit', 'camHUD')
+	
+	makeLuaSprite('flashingshit3', '', 0, 0);
+	makeGraphic('flashingshit3',1920,1080,'FFFFFF')
+	addLuaSprite('flashingshit3', false);
+	setLuaSpriteScrollFactor('flashingshit3',0,0)
+	setProperty('flashingshit3.scale.x',2)
+	setProperty('flashingshit3.scale.y',2)
+	setProperty('flashingshit3.alpha',0.0000001)
+	setObjectCamera('flashingshit3', 'camOther')
 
 	makeLuaSprite('flashingshit2', '', 0, 0);
 	makeGraphic('flashingshit2',1920,1080,'000000')
@@ -106,8 +147,100 @@ function onCreate()
 	setObjectCamera('simplejump','camHUD');
 	screenCenter('simplejump');
 	addLuaSprite('simplejump', false);
+	
+	if getPropertyFromClass('states.PlayState','chartingMode') == false then
+		makeLuaSprite('black', '', 0, 0);
+		makeGraphic('black',1920,1080,'000000')
+		addLuaSprite('black');
+		setLuaSpriteScrollFactor('black',0,0)
+		setProperty('black.scale.x',2)
+		setProperty('black.scale.y',2)
+		setProperty('black.alpha',1)
+		setObjectCamera('black', 'other')
+	
+		runTimer('start', 0.5)
+		runTimer('bye', 1.9)
+	
+		if getRandomInt(1,2) == 1 then
+			makeLuaSprite('text', 'StartScreens/Text1-omnipresent', 0, 0)
+			setObjectCamera('text', 'other')
+			scaleObject('text', 1, 1)
+			setProperty('text.alpha',0)
+			addLuaSprite('text')
+		else
+			makeLuaSprite('text', 'StartScreens/Text2-omnipresent', 0, 0)
+			setObjectCamera('text', 'other')
+			scaleObject('text', 1, 1)
+			setProperty('text.alpha',0)
+			addLuaSprite('text')
+		end
+		
+		makeLuaSprite('red', '', 0, 0);
+		makeGraphic('red',1920,1080,'FF0000')
+		addLuaSprite('red');
+		setLuaSpriteScrollFactor('red',0,0)
+		setProperty('red.scale.x',2)
+		setProperty('red.scale.y',2)
+		setProperty('red.alpha',0)
+		setObjectCamera('red', 'other')
+		
+		makeLuaSprite('white', '', 0, 0);
+		makeGraphic('white',1920,1080,'FFFFFF')
+		addLuaSprite('white');
+		setLuaSpriteScrollFactor('white',0,0)
+		setProperty('white.scale.x',2)
+		setProperty('white.scale.y',2)
+		setProperty('white.alpha',0)
+		setObjectCamera('white', 'other')
+	end
+	if getPropertyFromClass('states.PlayState','chartingMode') == false then
+		makeLuaSprite('flash', '', 0, 0);
+		makeGraphic('flash',1920,1080,'FFFFFF')
+		addLuaSprite('flash', false);
+		setLuaSpriteScrollFactor('flash',0,0)
+		setProperty('flash.scale.x',2)
+		setProperty('flash.scale.y',2)
+		setObjectCamera('flash', 'HUD')
+		setProperty('flash.alpha',0);
+	end
+	if getPropertyFromClass('states.PlayState','chartingMode') == false then
+		makeLuaSprite('flashred', '', 0, 0);
+		makeGraphic('flashred',1920,1080,'FF0000')
+		addLuaSprite('flashred', false);
+		setLuaSpriteScrollFactor('flashred',0,0)
+		setProperty('flashred.scale.x',2)
+		setProperty('flashred.scale.y',2)
+		setObjectCamera('flashred', 'HUD')
+		setProperty('flashred.alpha',0);
+	end
+end
+function onCreatePost()
+	--THE TOP BAR--
+	makeLuaSprite('UpperBar', 'blank', -110, -360)
+	makeGraphic('UpperBar', 1500, 350, '000000')
+	setObjectCamera('UpperBar', 'HUD')
+	addLuaSprite('UpperBar', false)
+
+	--THE BOTTOM BAR--
+	makeLuaSprite('LowerBar', 'blank', -110, 730)
+	makeGraphic('LowerBar', 1500, 350, '000000')
+	setObjectCamera('LowerBar', 'HUD')
+	addLuaSprite('LowerBar', false)
+	
+	UpperBar = getProperty('UpperBar.y')
+	LowerBar = getProperty('LowerBar.y')
 end
 function onSongStart()
+	triggerEvent('phasestatic', 1.56, 1);
+	setProperty('staticstuff.alpha',0);
+	if value2 == '' then
+		doTweenAlpha('startstatic', 'staticstuff', 0.5, value1, 'linear');
+	else
+		doTweenAlpha('startstatic', 'staticstuff', value2, value1, 'linear');
+	end
+	if getPropertyFromClass('states.PlayState','chartingMode') == false then
+		doTweenAlpha('startstuff5', 'red', 1, 1.56, 'linear')
+	end
 	setProperty('gf.alpha',1);
 	setProperty('dad.alpha',1);
 	setProperty('boyfriend.alpha',1);
@@ -115,6 +248,11 @@ function onSongStart()
 	setTimeBarColors(string.format('%02x%02x%02x', unpack(getProperty('dad.healthColorArray'))));
 end
 function onStartCountdown()
+    if loading == false and getPropertyFromClass('states.PlayState','chartingMode') == false then
+        return Function_Stop
+    elseif loading == true and getPropertyFromClass('states.PlayState','chartingMode') == false then
+        return Function_Continue
+    end
 	setProperty('gfGroup.alpha',0.00001);
 	setProperty('dadGroup.alpha',0.00001);
 	setProperty('boyfriendGroup.alpha',0.00001);
@@ -330,8 +468,8 @@ function onUpdate(elapsed)
 		yy2 = 630;
 		setProperty('boyfriendGroup.x',70);
 		setProperty('boyfriendGroup.y',144);
-		setProperty('dadGroup.x',90);
-		setProperty('dadGroup.y',170);
+		setProperty('dadGroup.x',-190);
+		setProperty('dadGroup.y',95);
 		setProperty('gfGroup.x',2460);
 		setProperty('gfGroup.y',500);
 	end
@@ -1087,6 +1225,16 @@ function onUpdate(elapsed)
 		ofs = 0;
 		ofs2 = 0;
 	end
+	if curStep == 13088 then
+		doTweenAlpha('camHUDTween', 'camHUD', 0, 1.29);
+	end
+	if curStep == 13104 then
+		doTweenAlpha('lastflash', 'flashingshit3', 1, 2.58);
+	end
+	if curStep == 13136 then
+		setProperty('flashingshit2.alpha',1);
+		setProperty('flashingshit3.alpha',0);
+	end
 	if curStep >= 12240 and curStep <= 12495 then
 		triggerEvent('Cam Zoom', '1', '0.01, linear');
 		setProperty('defaultCamZoom',1);
@@ -1219,11 +1367,88 @@ function onUpdate(elapsed)
             Credits = true
         end
 	end
+	if curStep <= 12220 and curStep >= 0 or curStep >= 12776 and curStep <= 13104 then
+		setProperty(ghost..'.antialiasing', getProperty(char..'.antialiasing'))
+		setProperty(ghost..'.offset.x', noteData[2])
+		setProperty(ghost..'.offset.y', noteData[3])
+		setProperty(ghost..'.scale.x', getProperty(char..'.scale.x'))
+		setProperty(ghost..'.scale.y', getProperty(char..'.scale.y'))
+		setProperty(ghost..'.flipX', getProperty(char..'.flipX'))
+		setProperty(ghost..'.flipY', getProperty(char..'.flipY'))
+		setProperty(ghost..'.visible', getProperty(char..'.visible'))
+		setProperty(ghost..'.color', getIconColor(char))
+	end
+	if curStep >= 12240 then
+		setObjectOrder('whitebg2',1);
+	end
+	if stop == true then
+		setProperty('VG2.alpha',0);
+	end
 end
 function onSpawnNote()
     setPropertyFromGroup('notes', i, 'noteSplashData.useRGBShader', false)
 end
-function onTimerCompleted(tag)
+function onTimerCompleted(tag, loops, loopsLeft)
+	if tag == 'gf-idle' then
+		setProperty('gf.idleSuffix','')
+	end
+    if tag == 'reset' then
+        setProperty('whitebg.alpha',0.00001);
+    end
+	if tag == 'middle1' then
+		noteTweenX('MiddleXBF1', 5, 532, 2, 'quartInOut');
+	end
+	if tag == 'middle2' then
+		noteTweenX('MiddleXBF2', 6, 642, 2, 'quartInOut');
+	end
+	if tag == 'middle3' then
+		noteTweenX('MiddleXBF3', 7, 752, 2, 'quartInOut');
+	end
+	if tag == 'middle4' then
+		noteTweenX('MiddleXDAD1', 2, 642, 0.5, 'quartInOut');
+	end
+	if tag == 'middle5' then
+		noteTweenX('MiddleXDAD2', 1, 532, 0.5, 'quartInOut');
+	end
+	if tag == 'middle6' then
+		noteTweenX('MiddleXDAD3', 0, 422, 0.5, 'quartInOut');
+	end
+	if tag == 'end' then
+		removeLuaSprite('staticstuff');
+	end
+	if tag == 'First' then
+		doTweenAlpha('VG2Tween', 'VG2', 0, vgspeed, 'linear');
+		runTimer('Second',vgspeed);
+	end
+	if tag == 'Second' then
+		doTweenAlpha('VG2Tween', 'VG2', 0.7, vgspeed, 'linear');
+		runTimer('First',vgspeed);
+	end
+	if tag == 'bfghost' then
+		runTimer('bfstr'..strumTime)
+	end
+	if tag == 'gfghost' then
+		runTimer('gfstr'..strumTime)
+	end
+	if tag == 'dadghost' then
+		runTimer('ddstr'..strumTime)
+	end
+	if string.match(tag, 'bfstr') then
+		bfRows[string.sub(tag, 6, string.len(tag))] = nil
+	elseif string.match(tag, 'ddstr') then
+		ddRows[string.sub(tag, 6, string.len(tag))] = nil
+	elseif string.match(tag, 'mmstr') then
+		mmRows[string.sub(tag, 6, string.len(tag))] = nil
+	elseif string.match(tag, 'gfstr') then
+		gfRows[string.sub(tag, 6, string.len(tag))] = nil
+	end
+	if tag == 'start' then
+        doTweenAlpha('startstuff4', 'text', 1, 0.8, 'linear')
+	end
+    if tag == 'bye' then
+        loading = true
+        startCountdown()
+    end
 	if tag == 'eyes up' and curStep <= 12243 then
 		doTweenY('egg_eys-TweenUp', 'eggman_eys', -1000, 2.5, 'sineInOut')
 		runTimer('eyes down', 2.5, 1)
@@ -1437,49 +1662,151 @@ function onBeatHit()
 	if curBeat % 2 == 0 and curStep >= 12496 and curStep <= 12751 then
 		triggerEvent('Add Camera Zoom', 0.06, 0);
 	end
+	if curBeat % beat == 0 then
+		setProperty('VG3.alpha',0.7);
+		doTweenAlpha('VG3Tween', 'VG3', 0, 0.4, 'linear');
+	end
 end
-function opponentNoteHit(membersIndex, notedata, noteType, isSustainNote)
-	if curStep >= 12815 then
+function opponentNoteHit(id, direction, noteType, isSustainNote, gfSection)
+	if noteType == 'DAD and GF' then
+		setProperty('gf.idleSuffix','-nothing')
+		runTimer('gf-idle', 0.3)
+		if direction == 0 then
+			triggerEvent('Play Animation', 'singLEFT', 'gf')
+		end
+		if direction == 1 then
+			triggerEvent('Play Animation', 'singDOWN', 'gf')
+		end
+		if direction == 2 then
+			triggerEvent('Play Animation', 'singUP', 'gf')
+		end
+		if direction == 3 then
+			triggerEvent('Play Animation', 'singRIGHT', 'gf')
+		end
+	end
+	if noteType == 'DAD and GF' and gfSection then
 		setProperty('dad.idleSuffix','-nothing')
 		runTimer('dad-idle', 0.3)
-		if notedata == 0 then
+		if direction == 0 then
 			triggerEvent('Play Animation', 'singLEFT', 'dad')
 		end
-		if notedata == 1 then
+		if direction == 1 then
 			triggerEvent('Play Animation', 'singDOWN', 'dad')
 		end
-		if notedata == 2 then
+		if direction == 2 then
 			triggerEvent('Play Animation', 'singUP', 'dad')
 		end
-		if notedata == 3 then
+		if direction == 3 then
 			triggerEvent('Play Animation', 'singRIGHT', 'dad')
 		end
 	end
-end
-function goodNoteHit(membersIndex, notedata, noteType, isSustainNote)
+	if noteType == 'ALL' then
+		setProperty('gf.idleSuffix','-nothing')
+		runTimer('gf-idle', 0.3)
+		if direction == 0 then
+			triggerEvent('Play Animation', 'singLEFT', 'gf')
+		end
+		if direction == 1 then
+			triggerEvent('Play Animation', 'singDOWN', 'gf')
+		end
+		if direction == 2 then
+			triggerEvent('Play Animation', 'singUP', 'gf')
+		end
+		if direction == 3 then
+			triggerEvent('Play Animation', 'singRIGHT', 'gf')
+		end
+	end
 	if curStep >= 12815 then
-		setProperty('boyfriend.idleSuffix','-nothing')
-		runTimer('bf-idle', 0.3)
-		if notedata == 0 then
-			triggerEvent('Play Animation', 'singLEFT', 'bf')
+		setProperty('dad.idleSuffix','-nothing')
+		runTimer('dad-idle', 0.3)
+		if direction == 0 then
+			triggerEvent('Play Animation', 'singLEFT', 'dad')
 		end
-		if notedata == 1 then
-			triggerEvent('Play Animation', 'singDOWN', 'bf')
+		if direction == 1 then
+			triggerEvent('Play Animation', 'singDOWN', 'dad')
 		end
-		if notedata == 2 then
-			triggerEvent('Play Animation', 'singUP', 'bf')
+		if direction == 2 then
+			triggerEvent('Play Animation', 'singUP', 'dad')
 		end
-		if notedata == 3 then
-			triggerEvent('Play Animation', 'singRIGHT', 'bf')
+		if direction == 3 then
+			triggerEvent('Play Animation', 'singRIGHT', 'dad')
+		end
+	end
+	local strumTime = ''
+	local frameName = ''
+	if curStep <= 12220 and curStep >= 0 or curStep >= 12776 and curStep <= 13104 then
+		if not isSustainNote and noteType == '' and not getPropertyFromGroup('notes', i, 'gfNote') or noteType == 'DAD and GF' and not isSustainNote then
+			strumTime = dadName..getPropertyFromGroup('notes', id, 'strumTime')
+			if ddRows[strumTime] then
+				ghostTrail('dad', ddRows[strumTime], isSustainNote)
+			end
+			frameName = getProperty('dad.animation.frameName')
+			frameName = string.sub(frameName, 1, string.len(frameName) - 3)
+			ddRows[strumTime] = {frameName, getProperty('dad.offset.x'), getProperty('dad.offset.y')}
+			runTimer('dadghost',0.01)
+		end
+		if gfNote or noteType == 'DAD and GF' or getPropertyFromGroup('notes', i, 'gfNote') or noteType == 'DAD and GF' then
+			if not isSustainNote then
+				strumTime = gfName..getPropertyFromGroup('notes', id, 'strumTime')
+				if gfRows[strumTime] then
+					ghostTrail('gf', gfRows[strumTime], isSustainNote)
+				end
+				frameName = getProperty('gf.animation.frameName')
+				frameName = string.sub(frameName, 1, string.len(frameName) - 3)
+				gfRows[strumTime] = {frameName, getProperty('gf.offset.x'), getProperty('gf.offset.y')}
+				runTimer('gfghost',0.01)
+			end
 		end
 	end
 end
+function ghostTrail(char, noteData, reactivate)
+	local ghost = char..'Ghost'
+	local group = char
+	if curStep <= 12220 and curStep >= 0 or curStep >= 12776 and curStep <= 13104 then
+		if char == 'mom' then
+			group = 'dad'
+		end
+		makeAnimatedLuaSprite(ghost, getProperty(char..'.imageFile'), getProperty(char..'.x'), getProperty(char..'.y'))
+		addAnimationByPrefix(ghost, 'idle', noteData[1], 24, false)
+		setProperty(ghost..'.antialiasing', getProperty(char..'.antialiasing'))
+		setProperty(ghost..'.offset.x', noteData[2])
+		setProperty(ghost..'.offset.y', noteData[3])
+		setProperty(ghost..'.scale.x', getProperty(char..'.scale.x'))
+		setProperty(ghost..'.scale.y', getProperty(char..'.scale.y'))
+		setProperty(ghost..'.flipX', getProperty(char..'.flipX'))
+		setProperty(ghost..'.flipY', getProperty(char..'.flipY'))
+		setProperty(ghost..'.visible', getProperty(char..'.visible'))
+		setProperty(ghost..'.color', getIconColor(char))
+		setProperty(ghost..'.alpha', 0.8 * getProperty(char..'.alpha'))
+		setBlendMode(ghost, 'hardlight')
+		addLuaSprite(ghost)
+		playAnim(ghost, 'idle', true)
+		setObjectOrder(ghost, getObjectOrder(group..'Group') - 0.1)
+		cancelTween(ghost)
+		doTweenAlpha(ghost, ghost, 0, 0.75, 'linear')
+
+		local stage = string.lower(curStage)
+	end
+end
 function onTweenCompleted(tag)
+	if string.match(tag, 'Ghost') then
+		removeLuaSprite(tag, true)
+	end
 	if tag == 'jump1' and curStep <= 6640 then
 		doTweenAlpha('jump2', 'simplejump', 0, 0.3875, 'linear');
 	end
 	if tag == 'jump2' and curStep <= 6640 then
 		doTweenAlpha('jump1', 'simplejump', 1, 0.3875, 'linear');
+	end
+	if tag == 'startstuff5' then
+		setProperty('white.alpha',1);
+		doTweenAlpha('startstuff6', 'white', 0, 0.5, 'linear')
+		removeLuaSprite('red');
+		removeLuaSprite('text')
+		removeLuaSprite('black')
+	end
+	if tag == 'startstuff6' then
+		removeLuaSprite('white');
 	end
 end
 function Lerp(Min,Max,Ratio)
@@ -1487,6 +1814,80 @@ function Lerp(Min,Max,Ratio)
 end
 
 function goodNoteHit(id, direction, noteType, isSustainNote, gfNote)
+	if curStep <= 12220 and curStep >= 0 or curStep >= 12776 and curStep <= 13104 then
+		if not isSustainNote and noteType == '' or noteType == 'GF and BF' and not isSustainNote then
+			if not getPropertyFromGroup('notes', id, 'gfNote') then
+				local strumTime = boyfriendName..getPropertyFromGroup('notes', id, 'strumTime')
+				if bfRows[strumTime] then
+					ghostTrail('boyfriend', bfRows[strumTime], isSustainNote)
+				end
+				local frameName = getProperty('boyfriend.animation.frameName')
+				frameName = string.sub(frameName, 1, string.len(frameName) - 3)
+				bfRows[strumTime] = {frameName, getProperty('boyfriend.offset.x'), getProperty('boyfriend.offset.y')}
+				runTimer('bfghost',0.01)
+			end
+		end
+		if getPropertyFromGroup('notes', id, 'gfNote') or noteType == 'GF and BF' then
+			if not isSustainNote then
+				local strumTime = gfName..getPropertyFromGroup('notes', id, 'strumTime')
+				if gfRows[strumTime] then
+					ghostTrail('gf', gfRows[strumTime], isSustainNote)
+				end
+				local frameName = getProperty('gf.animation.frameName')
+				frameName = string.sub(frameName, 1, string.len(frameName) - 3)
+				gfRows[strumTime] = {frameName, getProperty('gf.offset.x'), getProperty('gf.offset.y')}
+				runTimer('gfghost',0.01)
+			end
+		end
+	end
+	if noteType == 'GF and BF' then
+		setProperty('gf.idleSuffix','-nothing')
+		runTimer('gf-idle', 0.3)
+		if direction == 0 then
+			triggerEvent('Play Animation', 'singLEFT', 'gf')
+		end
+		if direction == 1 then
+			triggerEvent('Play Animation', 'singDOWN', 'gf')
+		end
+		if direction == 2 then
+			triggerEvent('Play Animation', 'singUP', 'gf')
+		end
+		if direction == 3 then
+			triggerEvent('Play Animation', 'singRIGHT', 'gf')
+		end
+	end
+	if noteType == 'GF and BF' and gfSection then
+		setProperty('boyfriend.idleSuffix','-nothing')
+		runTimer('bf-idle', 0.3)
+		if direction == 0 then
+			triggerEvent('Play Animation', 'singLEFT', 'bf')
+		end
+		if direction == 1 then
+			triggerEvent('Play Animation', 'singDOWN', 'bf')
+		end
+		if direction == 2 then
+			triggerEvent('Play Animation', 'singUP', 'bf')
+		end
+		if direction == 3 then
+			triggerEvent('Play Animation', 'singRIGHT', 'bf')
+		end
+	end
+	if curStep >= 12815 then
+		setProperty('boyfriend.idleSuffix','-nothing')
+		runTimer('bf-idle', 0.3)
+		if direction == 0 then
+			triggerEvent('Play Animation', 'singLEFT', 'bf')
+		end
+		if direction == 1 then
+			triggerEvent('Play Animation', 'singDOWN', 'bf')
+		end
+		if direction == 2 then
+			triggerEvent('Play Animation', 'singUP', 'bf')
+		end
+		if direction == 3 then
+			triggerEvent('Play Animation', 'singRIGHT', 'bf')
+		end
+	end
 	if getPropertyFromGroup('notes', id, 'gfNote') and gfMoment == true and mustHitSection == true then
 		if getProperty('gf.animation.curAnim.name') == 'singLEFT' then
 			triggerEvent('Camera Follow Pos',xx3-ofs,yy3)
@@ -1531,6 +1932,244 @@ function onNoteMiss()
 	end
 end
 function onEvent(name, value1, value2)
+	if name == 'badapplelol' and value1 == 'a' and hasSpawned2 == false then
+		makeLuaSprite('whitebg2', '', -2000, -1000)
+		setScrollFactor('whitebg2', 0, 0)
+		makeGraphic('whitebg2', 3920, 3080, 'ffffff')
+		addLuaSprite('whitebg2', false)
+		screenCenter('whitebg2');
+		setProperty('whitebg2.alpha', 0.00001)
+		doTweenAlpha('applebadxd69', 'whitebg2', 1, value2, 'linear')
+		doTweenColor('badapplexd', 'boyfriend', '000000', value2, 'linear')
+		doTweenColor('badapplexd1', 'dad', '000000', value2, 'linear')
+		doTweenColor('badapplexd2', 'gf', '000000', value2, 'linear')
+		doTweenColor('badapplexd2', 'true-fatal', '000000', value2, 'linear')
+		doTweenColor('badapplexd6', 'healthBar', '000000', value2, 'linear')
+		doTweenColor('badapplexd100', 'iconP1', '000000', value2, 'linear')
+		doTweenColor('badapplexd10', 'iconP2', '000000', value2, 'linear')
+		hasSpawned2 = true
+	end
+	if name == 'badapplelol' and value1 == 'a' and hasSpawned2 == true then
+		doTweenAlpha('applebadxd69', 'whitebg2', 1, value2, 'linear')
+		doTweenColor('badapplexd', 'boyfriend', '000000', value2, 'linear')
+		doTweenColor('badapplexd1', 'dad', '000000', value2, 'linear')
+		doTweenColor('badapplexd2', 'gf', '000000', value2, 'linear')
+		doTweenColor('badapplexd2', 'true-fatal', '000000', value2, 'linear')
+		doTweenColor('badapplexd6', 'healthBar', '000000', value2, 'linear')
+		doTweenColor('badapplexd100', 'iconP1', '000000', value2, 'linear')
+		doTweenColor('badapplexd10', 'iconP2', '000000', value2, 'linear')
+	end
+	if name == 'badapplelol' and value1 == 'b' then
+		doTweenAlpha('applebadxd', 'whitebg2', 0.00001, value2, 'linear')
+		doTweenColor('badapplexd3', 'boyfriend', 'FFFFFF', value2, 'linear')
+		doTweenColor('badapplexd4', 'dad', 'FFFFFF', value2, 'linear')
+		doTweenColor('badapplexd5', 'gf', 'FFFFFF', value2, 'linear')
+		doTweenColor('badapplexd5', 'true-fatal', 'FFFFFF', value2, 'linear')
+		doTweenColor('badapplexd7', 'healthBar', 'FFFFFF', value2, 'linear')
+		doTweenColor('badapplexd101', 'iconP1', 'FFFFFF', value2, 'linear')
+		doTweenColor('badapplexd11', 'iconP2', 'FFFFFF', value2, 'linear')
+	end
+	if name == "Cam Zoom" then
+        if value1 ~= nil and value2 ~= nil then
+            local zoom = tonumber(value1)
+            local v = stringSplit(value2, ', ')
+            local speed = v[1]
+            local ease = v[2]
+            startTween('camz', 'this', {defaultCamZoom = zoom, ['camGame.zoom'] = zoom}, speed, {ease = ease})
+        end
+    end
+    if name == 'badapplelolFlash' then
+        setProperty('iconP1.color', 0x000000);
+        setProperty('iconP2.color', 0x000000);
+        setProperty('healthBar.alpha',0);
+        setProperty('boyfriend.color', 0x000000);
+        setProperty('gf.color', 0x000000);
+        setProperty('dad.color', 0x000000);
+        screenCenter('whitebg');
+        addLuaSprite('whitebg', false)
+        setProperty('gfGroup.alpha',0);
+        setProperty('dadGroup.alpha',0);
+        setProperty('boyfriendGroup.alpha',0);
+        setProperty('boyfriend.alpha',1);
+        setProperty('dad.alpha',1);
+        setProperty('gf.alpha',1);
+        setProperty('whitebg.alpha',1);
+        runTimer('reset', value1);
+        doTweenAlpha('applebadxd', 'whitebg', 0.00001, value1, 'linear')
+        doTweenColor('badapplexd3', 'boyfriend', 'FFFFFF', value1, 'linear')
+        doTweenColor('badapplexd4', 'dad', 'FFFFFF', value1, 'linear')
+        doTweenColor('badapplexd5', 'gf', 'FFFFFF', value1, 'linear')
+        doTweenAlpha('badapplexd7', 'healthBar', 1, value1, 'linear')
+        doTweenColor('badapplexd101', 'iconP1', 'FFFFFF', value1, 'linear')
+        doTweenColor('badapplexd11', 'iconP2', 'FFFFFF', value1, 'linear')
+    end
+	if name == 'phasestatic' then
+		fps = framecount / value1;
+		
+		makeAnimatedLuaSprite('staticstuff', 'Phase3Static', 0, 0);
+		setScrollFactor('staticstuff', 1, 1);
+		addAnimationByPrefix('staticstuff', 'idle', 'Phase3Static instance 1', fps, false);
+		setProperty('staticstuff.antialiasing', false);
+		scaleObject('staticstuff', 5, 5);
+		if value2 == '' and curStep >= 16 then
+			setProperty('staticstuff.alpha',0.5);
+		else
+			setProperty('staticstuff.alpha',value2);
+		end
+		setObjectCamera('staticstuff', 'camOther');
+		screenCenter('staticstuff');
+		addLuaSprite('staticstuff', true);
+		objectPlayAnimation('staticstuff', 'idle', true)
+		runTimer('end',value1);
+	end
+	if curStep <= 12220 and curStep >= 0 or curStep >= 12776 and curStep <= 13104 then
+		if name == 'Change Character' and value1 == 'dad' or name == 'Change Character' and value1 == 'bf' then
+			setProperty('boyfriendGhost.alpha',0);
+			setProperty('dadGhost.alpha',0);
+			removeLuaSprite('dadGhost');
+			removeLuaSprite('boyfriendGhost');
+		end
+	end
+    if name == 'Cam Speed' then
+        setProperty('cameraSpeed', tonumber(value1))
+    end
+	if name == 'Flash Camera red' and getPropertyFromClass('states.PlayState','chartingMode') == false then
+		makeLuaSprite('flashred', '', 0, 0);
+		makeGraphic('flashred',1920,1080,'FF0000')
+		setLuaSpriteScrollFactor('flashred',0,0)
+		setProperty('flashred.scale.x',2)
+		setProperty('flashred.scale.y',2)
+		setObjectCamera('flashred', 'HUD')
+		doTweenAlpha('flTw','flashred',0,value1,'linear')
+		addLuaSprite('flashred', true);
+	end
+	if name == 'Flash Camera' and getPropertyFromClass('states.PlayState','chartingMode') == false then
+		makeLuaSprite('flash', '', 0, 0);
+		if value2 == '' then
+			setProperty('flash.alpha',1);
+		else
+			setProperty('flash.alpha',value2);
+		end
+		makeGraphic('flash',1920,1080,'FFFFFF')
+		addLuaSprite('flash', true);
+		setLuaSpriteScrollFactor('flash',0,0)
+		setProperty('flash.scale.x',2)
+		setProperty('flash.scale.y',2)
+		setObjectCamera('flash', 'HUD')
+		setProperty('flash.alpha',1);
+		screenCenter('flash');
+		doTweenAlpha('flTw','flash',0,value1,'linear')
+	end
+	if name == 'funnyHudStuff' then
+		if value1 == '1' then --hide notes bf
+			noteTweenAlpha('BFAlpha1', 4, 0, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha2', 5, 0, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha3', 6, 0, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha4', 7, 0, value2, 'easeIn');
+		end
+		if value1 == '2' then --fix notes bf
+			noteTweenAlpha('BFAlpha1', 4, 1, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha2', 5, 1, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha3', 6, 1, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha4', 7, 1, value2, 'easeIn');
+		end
+		if value1 == '3' then
+			noteTweenAlpha('OpponentAlpha1', 0, 0, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha2', 1, 0, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha3', 2, 0, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha4', 3, 0, value2, 'easeIn');
+		end
+		if value1 == '4' then
+			noteTweenAlpha('OpponentAlpha1', 0, 1, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha2', 1, 1, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha3', 2, 1, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha4', 3, 1, value2, 'easeIn');
+		end
+		if value1 == '5' then --hide healthBar
+			doTweenAlpha('icon1Tween', 'iconP1', 0, value2, 'easeIn');
+			doTweenAlpha('icon2Tween', 'iconP2', 0, value2, 'easeIn');
+			doTweenAlpha('healthBarTween', 'healthBar', 0, value2, 'easeIn');
+			doTweenAlpha('healthBarBGTween', 'healthBarBG', 0, value2, 'easeIn');
+			doTweenAlpha('scoreTween', 'scoreTxt', 0, value2, 'easeIn');
+		end
+		if value1 == '6' then --show healthBar
+			doTweenAlpha('icon1Tween', 'iconP1', 1, value2, 'easeIn');
+			doTweenAlpha('icon2Tween', 'iconP2', 1, value2, 'easeIn');
+			doTweenAlpha('healthBarTween', 'healthBar', 1, value2, 'easeIn');
+			doTweenAlpha('healthBarBGTween', 'healthBarBG', 1, value2, 'easeIn');
+			doTweenAlpha('scoreTween', 'scoreTxt', 1, value2, 'easeIn');
+		end
+		if value1 == '7' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --swap notes
+			noteTweenX('XDAD1', 0, 732, 0.1, 'quartInOut');
+			noteTweenX('XDAD2', 1, 844, 0.1, 'quartInOut');
+			noteTweenX('XDAD3', 2, 956, 0.1, 'quartInOut');
+			noteTweenX('XDAD4', 3, 1068, 0.1, 'quartInOut');
+			noteTweenX('XBF1', 4, 92, 0.1, 'quartInOut');
+			noteTweenX('XBF2', 5, 204, 0.1, 'quartInOut');
+			noteTweenX('XBF3', 6, 316, 0.1, 'quartInOut');
+			noteTweenX('XBF4', 7, 428, 0.1, 'quartInOut');
+		end
+		if value1 == '8' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --reswap notes
+			noteTweenX('XBF1', 4, 732, 0.1, 'quartInOut');
+			noteTweenX('XBF2', 5, 844, 0.1, 'quartInOut');
+			noteTweenX('XBF3', 6, 956, 0.1, 'quartInOut');
+			noteTweenX('XBF4', 7, 1068, 0.1, 'quartInOut');
+			noteTweenX('XDAD1', 0, 92, 0.1, 'quartInOut');
+			noteTweenX('XDAD2', 1, 204, 0.1, 'quartInOut');
+			noteTweenX('XDAD3', 2, 316, 0.1, 'quartInOut');
+			noteTweenX('XDAD4', 3, 428, 0.1, 'quartInOut');
+		end
+		if value1 == '9' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --middle
+			noteTweenX('MiddleXBF0', 4, 422, 2, 'quartInOut');
+			runTimer('middle1',0.1);
+			runTimer('middle2',0.2);
+			runTimer('middle3',0.3);
+		end
+		if value1 == '10' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --middle opp
+			noteTweenX('MiddleXDAD0', 3, 752, 0.5, 'quartInOut');
+			runTimer('middle4',0.05);
+			runTimer('middle5',0.1);
+			runTimer('middle6',0.15);
+		end
+		if value1 == '11' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --move back
+			noteTweenX('XDAD1', 0, 92, value2, 'quartInOut');
+			noteTweenX('XDAD2', 1, 204, value2, 'quartInOut');
+			noteTweenX('XDAD3', 2, 316, value2, 'quartInOut');
+			noteTweenX('XDAD4', 3, 428, value2, 'quartInOut');
+		end
+	end
+	if name == 'Trigger VG' then
+		beat = value1;
+		color2 = value2;
+		doTweenColor('VG3Color', 'VG3', color2, 0.00001, 'linear');
+		setProperty('VG3.alpha',0.7);
+		doTweenAlpha('VG3Tween', 'VG3', 0, 0.4, 'linear');
+	end
+	if name == 'Trigger VG' and value1 == '0' then
+		beat = 0;
+		cancelTween('VG3Color');
+		cancelTween('VG3Tween');
+		setProperty('VG3.alpha',0);
+	end
+	if name == 'VG Pulse' then
+		if value1 == '0' then
+			cancelTimer('First');
+			cancelTimer('Second');
+			doTweenAlpha('VG3Tween', 'VG2', 0, vgspeed);
+			vgspeed = 0;
+			stop = true;
+			cancelTween('VG2Color');
+			cancelTween('VG2Tween');
+		else
+			stop = false;
+			vgspeed = value1;
+			color = value2;
+			doTweenColor('VG2Color', 'VG2', color, 0.00001, 'linear');
+			doTweenAlpha('VG3Tween', 'VG2', 0.7, vgspeed, 'linear');
+			setProperty('VG2.alpha',0);
+			runTimer('First',vgspeed);
+		end
+	end
 	if name == 'Change Character' then
 		setProperty('health', getProperty('health') - 0.000001);
 		setTimeBarColors(string.format('%02x%02x%02x', unpack(getProperty('dad.healthColorArray'))));
@@ -1546,5 +2185,40 @@ function onEvent(name, value1, value2)
 		setProperty('healthBarP1.color', 0x000000);
 		setProperty('healthBarP2.color', 0x000000);
 		setProperty('true-fatal.color', 0x000000);
+	end
+	if name == 'Better Cinematics' then
+		CinSpeed = tonumber(value1)
+		Distance = tonumber(value2)
+	end
+	if CinSpeed > 0 then	
+		doTweenY('Cinematics1', 'UpperBar', UpperBar + Distance, CinSpeed, 'QuadOut')
+		doTweenY('Cinematics2', 'LowerBar', LowerBar - Distance, CinSpeed, 'QuadOut')
+		for Alphas = 1,8 do
+		doTweenAlpha('Alpha'..Alphas, HudPieces[index], 0, CinSpeed - 0.1)
+		index = index + 1
+			if index > #HudPieces then
+				index = 1
+			end
+		end
+	end
+	if downscroll and CinSpeed > 0 then	
+		doTweenY('Cinematics1', 'UpperBar', UpperBar + Distance, CinSpeed, 'QuadOut')
+		doTweenY('Cinematics2', 'LowerBar', LowerBar - Distance, CinSpeed, 'QuadOut')
+		for Alphas = 1,8 do
+		doTweenAlpha('Alpha'..Alphas, HudPieces[index], 0, CinSpeed - 0.1)
+		index = index + 1
+			if index > #HudPieces then
+				index = 1
+			end
+		end
+	end
+	if Distance <= 0 then
+		for Alphas = 1,8 do
+		doTweenAlpha('Alpha'..Alphas, HudPieces[index], 1, CinSpeed - 0.1)
+		index = index + 1
+			if index > #HudPieces then
+				index = 1
+			end
+		end
 	end
 end

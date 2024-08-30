@@ -49,7 +49,7 @@ class FatalPopup extends FlxSpriteGroup {
       if(limitedPopups.length>=limit){
         for(i in 0...limitedPopups.length - limit){
           limitedPopups[0].close();
-          trace("auto-closing " + i);
+          //trace("auto-closing " + i);
         }
       }
       limitedPopups.push(this);
