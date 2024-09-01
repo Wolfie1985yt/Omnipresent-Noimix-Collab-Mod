@@ -83,7 +83,7 @@ class ChartingState extends MusicBeatState
 		['Fatality Popup', "Fatality Popup WOo.\nValue 1: Amount of popups\nValue 2: Type (1, 2 or 3)\nType 2 ignores the hard cap of 10 popups\nand are also a bit bigger\nType 3 is the same but alot bigger"],
 		['Clear Popups', "Removes all fatality popups"],
 		['WechJump', "Spoopy jumpscare"],
-		['Fatal Static', "Fatal Error static stuff, what did you expect?"]
+		['Lyrics', "Lyrics!!!\nValue 1: Text and optionally, colour\n(To specify colour, seperate it by a --)\nValue 2: Duration, in seconds.\nDuration defaults to text length multiplied by 0.5"]
 	];
 
 	var _file:FileReference;

@@ -1,81 +1,82 @@
 {
 	"animations": [
 		{
+			"loop": false,
+			"cameraOffset": [
+				0,
+				0
+			],
 			"offsets": [
 				-5,
 				0
 			],
-			"cameraOffset": [
-				0,
-				0
-			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "BF Idle"
+			"fps": 24,
+			"name": "BF Idle",
+			"indices": []
 		},
 		{
-			"offsets": [
-				41,
-				-36
-			],
+			"loop": false,
 			"cameraOffset": [
 				-30,
 				0
 			],
-			"loop": false,
-			"fps": 24,
+			"offsets": [
+				41,
+				-36
+			],
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "BF Left0"
+			"fps": 24,
+			"name": "BF Left0",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-25,
-				53
-			],
+			"loop": false,
 			"cameraOffset": [
 				0,
 				-30
 			],
-			"loop": false,
-			"fps": 24,
+			"offsets": [
+				-22,
+				34
+			],
 			"anim": "singUP",
-			"indices": [],
-			"name": "BF Up0"
+			"fps": 24,
+			"name": "BF Up0",
+			"indices": []
 		},
 		{
-			"offsets": [
-				65,
-				-102
-			],
+			"loop": false,
 			"cameraOffset": [
 				0,
 				30
 			],
-			"loop": false,
-			"fps": 24,
+			"offsets": [
+				65,
+				-102
+			],
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "BF Down0"
+			"fps": 24,
+			"name": "BF Down0",
+			"indices": []
 		},
 		{
-			"offsets": [
-				101,
-				-16
-			],
+			"loop": false,
 			"cameraOffset": [
 				30,
 				0
 			],
-			"loop": false,
-			"fps": 24,
+			"offsets": [
+				101,
+				-16
+			],
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "BF Right0"
+			"fps": 24,
+			"name": "BF Right0",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
 	"image": "characters/BF/HD/BF_Requital",
 	"position": [
@@ -94,5 +95,6 @@
 		-430
 	],
 	"sing_duration": 4,
-	"scale": 2.1
+	"scale": 2.1,
+	"_editor_isPlayer": true
 }

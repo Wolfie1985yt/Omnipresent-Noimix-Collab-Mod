@@ -1,14 +1,13 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 24,
-			"name": "Fleetway Idle",
+			"anim": "idle",
 			"indices": [
 				0,
 				1,
@@ -24,17 +23,17 @@
 				11,
 				12,
 				13
-			]
+			],
+			"name": "Fleetway Idle"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-35,
 				13
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 24,
-			"name": "Fleetway Up",
+			"anim": "singUP",
 			"indices": [
 				0,
 				1,
@@ -52,17 +51,17 @@
 				13,
 				14,
 				15
-			]
+			],
+			"name": "Fleetway Up"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-22,
 				-85
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "Fleetway Right",
 			"indices": [
 				0,
 				1,
@@ -80,17 +79,17 @@
 				13,
 				14,
 				15
-			]
-		},
-		{
-			"loop": false,
-			"offsets": [
-				7,
-				-41
 			],
-			"anim": "singDOWN",
+			"name": "Fleetway Right"
+		},
+		{
+			"offsets": [
+				3,
+				-98
+			],
+			"loop": false,
 			"fps": 24,
-			"name": "Fleetway Down",
+			"anim": "singDOWN",
 			"indices": [
 				0,
 				1,
@@ -108,17 +107,17 @@
 				13,
 				14,
 				15
-			]
+			],
+			"name": "Fleetway Down"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				123,
 				-80
 			],
-			"anim": "singLEFT",
+			"loop": false,
 			"fps": 24,
-			"name": "Fleetway Left",
+			"anim": "singLEFT",
 			"indices": [
 				0,
 				1,
@@ -136,20 +135,22 @@
 				13,
 				14,
 				15
-			]
+			],
+			"name": "Fleetway Left"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				12,
 				11
 			],
-			"anim": "fastanim",
+			"loop": false,
 			"fps": 24,
-			"name": "Fleetway HowFast",
-			"indices": []
+			"anim": "fastanim",
+			"indices": [],
+			"name": "Fleetway HowFast"
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
 	"image": "characters/Fleetway/Fleetway_Super_Sonic",
 	"position": [
@@ -168,5 +169,6 @@
 		180
 	],
 	"sing_duration": 4,
-	"scale": 0.95
+	"scale": 0.95,
+	"_editor_isPlayer": false
 }

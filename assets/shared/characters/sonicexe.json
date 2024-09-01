@@ -1,76 +1,66 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				0,
-				-43
-			],
 			"loop": false,
-			"fps": 24,
-			"anim": "singDOWN-alt",
-			"indices": [],
-			"name": "SONIClaugh"
-		},
-		{
 			"offsets": [
-				34,
-				31
+				33,
+				26
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "SONICmoveUP"
+			"fps": 24,
+			"name": "SONICmoveUP",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
-				-90,
+				-96,
 				-16
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "SONICmoveRIGHT"
+			"fps": 24,
+			"name": "SONICmoveRIGHT",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-60,
 				-80
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "SONICmoveIDLE"
+			"fps": 24,
+			"name": "SONICmoveIDLE",
+			"indices": []
 		},
 		{
-			"offsets": [
-				10,
-				-161
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				15,
+				-162
+			],
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "SONICmoveDOWN"
+			"fps": 24,
+			"name": "SONICmoveDOWN",
+			"indices": []
 		},
 		{
-			"offsets": [
-				67,
-				-51
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				95,
+				-55
+			],
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "SONICmoveLEFT"
+			"fps": 24,
+			"name": "SONICmoveLEFT",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
 	"image": "characters/XenoAndGrimbo/HD/sonicexe",
 	"position": [
-		-120,
+		-100,
 		-40
 	],
 	"healthicon": "sonicexe",
@@ -85,5 +75,6 @@
 		110
 	],
 	"sing_duration": 4,
-	"scale": 1
+	"scale": 1,
+	"_editor_isPlayer": false
 }

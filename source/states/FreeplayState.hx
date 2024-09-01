@@ -145,7 +145,7 @@ class FreeplayState extends MusicBeatState
 	function ScoreUPD()
 	{
 		#if !switch
-		intendedScore = Highscore.getScore('omnipresent', 2);
+		intendedScore = Highscore.getScore('omnipresent-fucked', 2);
 		#end
 		scoreText.text = 'SCORE: ' + lerpScore;
 		scoreText.screenCenter(X);
@@ -155,7 +155,7 @@ class FreeplayState extends MusicBeatState
     {    
         super.update(elapsed); // Ensure the base class update method is called first
         
-        intendedScore = Highscore.getScore('omnipresent', 2);
+        intendedScore = Highscore.getScore('omnipresent-fucked', 2);
         lerpScore = Math.floor(FlxMath.lerp(intendedScore, lerpScore, Math.exp(-elapsed * 24)));
 
 		if (Math.abs(lerpScore - intendedScore) <= 10)
@@ -167,9 +167,9 @@ class FreeplayState extends MusicBeatState
         if (controls.ACCEPT && select && !loading && omniBeaten) {
             FlxG.sound.play(Paths.sound('confirmMenu'));
             loading = true;
-            PlayState.SONG = backend.Song.loadFromJson('omnipresent' + '-hard', 'omnipresent');
+            PlayState.SONG = backend.Song.loadFromJson('omnipresent-fucked' + '-hard', 'omnipresent-fucked');
             PlayState.storyDifficulty = 2;
-            PlayState.storyWeek = 1;
+            PlayState.storyWeek = 2;
             PlayState.isStoryMode = false;
 			new FlxTimer().start(1, function(tmr:FlxTimer) { LoadingState.loadAndSwitchState(new PlayState()); });
         }

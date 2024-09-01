@@ -29,6 +29,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 	var blackScreen:FlxSprite;
 	var opponentName:String;
 	var gfName:String;
+	var bfName:String;
 	var videoIsFinished:Bool = false;
 	
 	var video:FlxVideoSprite;
@@ -51,6 +52,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 
 		opponentName = playStateInstance.dad.curCharacter;
 		gfName = playStateInstance.gf.curCharacter;
+		bfName = playStateInstance.boyfriend.curCharacter;
     
 		//trace(playStateInstance.dad.curCharacter);
 
@@ -82,7 +84,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 				endBullshit();
 			});
 		case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99:
-			if (opponentName == 'tailsdoll') {
+			if (opponentName == 'tailsdoll' || opponentName == 'tailsdoll-flipped') {
 				video = new FlxVideoSprite(0, 0);
 				video.updateHitbox();
 				video.load(Paths.video('test1'));
@@ -94,7 +96,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 					endBullshit();
 				});
 			}
-			if (opponentName == 'xterion-first') {
+			if (opponentName == 'xterion-first' || opponentName == 'xterion-second') {
 				video = new FlxVideoSprite(0, 0);
 				video.updateHitbox();
 				video.load(Paths.video('what'));
@@ -106,7 +108,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 					endBullshit();
 				});
 			}
-			if (gfName == 'sonic' || opponentName == 'fleetway') {
+			if (gfName == 'sonic' || opponentName == 'fleetway' || opponentName == 'fleetway-anims2' || opponentName == 'fleetway-anims3' || opponentName == 'fleetwaylaser') {
 				video = new FlxVideoSprite(0, 0);
 				video.updateHitbox();
 				video.load(Paths.video('fleetgeta'));
@@ -118,7 +120,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 					endBullshit();
 				});
 			}
-			if (opponentName == 'Chaotix' || opponentName == 'wechBeast' || opponentName == 'Knuckles-Encore') {
+			if (opponentName == 'Chaotix' || opponentName == 'wechBeast' || opponentName == 'Knuckles-Encore' || opponentName == 'wechBeast-flipped') {
 				video = new FlxVideoSprite(0, 0);
 				video.updateHitbox();
 				video.load(Paths.video('i am wechidn-asdfl;'));
@@ -130,7 +132,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 					endBullshit();
 				});
 			}
-			if (opponentName == 'Satanos' || opponentName == 'Eggman-Encore') {
+			if (opponentName == 'Satanos' || opponentName == 'Eggman-Encore' || opponentName == 'Eggman-Encore-flipped') {
 				video = new FlxVideoSprite(0, 0);
 				video.updateHitbox();
 				video.load(Paths.video('EGGMAN NO'));
@@ -142,7 +144,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 					endBullshit();
 				});
 			}
-			if (opponentName == 'sonicexe') {
+			if (opponentName == 'sonicexe' || opponentName == 'ycr-cherribun' || opponentName == 'ycr-mad-cherribun') {
 				switch(FlxG.random.int(1, 2)) {
 					case 1:
 						video = new FlxVideoSprite(0, 0);
@@ -181,7 +183,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 					endBullshit();
 				});
 			}	
-			if (opponentName == 'Tails-Encore' || opponentName == 'Needlemouse' && gfName == 'gf' || opponentName == 'Needlemouse' && gfName == 'Tails-Encore') {
+			if (opponentName == 'Tails-Encore' || opponentName == 'Needlemouse' || opponentName == 'Needlemouse' && gfName == 'Tails-Encore' || opponentName == 'Needlemouse-flipped' || opponentName == 'Needlemouse-p2' || opponentName == 'Needlemouse-p2-flipped' || opponentName == 'Tails-Encore-flipped') {
 				video = new FlxVideoSprite(0, 0);
 				video.updateHitbox();
 				video.load(Paths.video('he has a point'));
@@ -205,7 +207,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 					endBullshit();
 				});
 			}
-			if (opponentName == 'BEAST-Enc' || gfName == 'Tails-Encore') {
+			if (opponentName == 'BEAST-Enc' && gfName == 'Tails-Encore') {
 				video = new FlxVideoSprite(0, 0);
 				video.updateHitbox();
 				video.load(Paths.video('sonic_jacking_off'));
@@ -217,7 +219,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 					endBullshit();
 				});
 			}
-			if (opponentName == 'majin') {
+			if (opponentName == 'majin' || opponentName == 'majin-flipped') {
 				switch(FlxG.random.int(1, 2)) {
 					case 1:
 						video = new FlxVideoSprite(0, 0);
@@ -244,7 +246,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 						});
 				}
 			}
-			if (opponentName == 'BEAST-Enc' && gfName == 'gf') {
+			if (opponentName == 'BEAST-Enc' && bfName == 'Encore-right') {
 				switch(FlxG.random.int(1, 2)) {
 					case 1:
 						video = new FlxVideoSprite(0, 0);
@@ -271,7 +273,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 						});
 				}
 			}
-			if (opponentName == 'coldsteel' || opponentName == 'guitar') {
+			if (opponentName == 'coldsteel' || opponentName == 'coldsteel_guitar' || opponentName == 'coldsteel-flipped') {
 				video = new FlxVideoSprite(0, 0);
 				video.updateHitbox();
 				video.load(Paths.video('gettrolled'));
@@ -319,7 +321,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 					endBullshit();
 				});
 			}
-			if (opponentName == 'fatal-sonic') {
+			if (opponentName == 'fatal-sonic' || opponentName == 'true-fatal') {
 				switch(FlxG.random.int(1, 10)) {
 					case 1, 2, 3, 4, 5, 6, 7, 8, 9:
 						video = new FlxVideoSprite(0, 0);
@@ -346,7 +348,7 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 						});
 				}
 			}
-			if (opponentName == 'gf') {
+			if (opponentName == 'BEAST-Enc' && bfName == 'bf-encore-pixel-smaller' || opponentName == 'BEAST-Enc' && bfName == 'bf-encore-small' || opponentName == 'BEAST-Enc' && bfName == 'bf-jogn9doe-3d-small' || opponentName == 'BEAST-Enc' && bfName == 'bf-needle-encore-small') {
 				switch(FlxG.random.int(1, 10)) {
 					case 1, 2, 3, 4, 5, 6, 7, 8, 9:
 						video = new FlxVideoSprite(0, 0);

@@ -24,6 +24,7 @@ class Omni extends BaseStage
 
 	var sunkyTransition:FlxSprite;
 	var daJumpscare:FlxSprite;
+	var wechJump:FlxSprite;
 	var ring:FlxSprite;
 
 	var tailsdoll_floor:FlxSprite;
@@ -46,6 +47,7 @@ class Omni extends BaseStage
 	var emeralds:FlxSprite;
 	var thechamber:FlxSprite;
 	var chamberFront:FlxSprite;
+	var fleetwayMoment = false;
 
 	var fucklesBGPixel:BGSprite;
 	var fucklesFGPixel:BGSprite;
@@ -324,11 +326,14 @@ class Omni extends BaseStage
 		preload('characters/BF/HD/encoreBF-blackTint');
 		preload('characters/BF/HD/encoreBF-majin');
 		preload('characters/BF/HD/encoreBF-redTint');
-		preload('characters/BF/3D/bf-3d');
+		preload('characters/HogAndScorched/Hog');
 		preload('characters/Knuckles/knux-encore');
 		preload('characters/Sunky/Sunky');
+		preload('characters/BF/3D/bf-3d');
 		preload('characters/XTerion/3D/xterion-first');
 		preload('characters/ChotixXenotixAndChaotix/HD/chaotix-hd');
+		preload('characters/XenoAndGrimbo/HD/YCR-Mad-Cherribun');
+		preload('characters/XenoAndGrimbo/HD/YCR-Cherribun');
 		preload('characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix');
 		preload('characters/FatalAndCritical/fatal-error-sonic');
 		preload('characters/FatalAndCritical/true-fatal');
@@ -520,6 +525,10 @@ class Omni extends BaseStage
 		preload('icons/icon-gf');
 		preload('icons/icon-sonic-rr');
 		preload('icons/icon-face');
+		preload('noteSkins/NOTE_assets');
+		preload('philly/gradient');
+		preload('philly/particle');
+		preload('characters/BF/HD/BOYFRIEND');
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
@@ -560,7 +569,7 @@ class Omni extends BaseStage
 		char41.loadGraphic(Paths.image('characters/Wechidna/wechBeast'));
 		char41.scrollFactor.set(1, 1);
 		char41.scale.set(1, 1);
-		char41.antialiasing = true;
+		char41.antialiasing = ClientPrefs.data.antialiasing;
 		char41.alpha = 0.00001;
 		char41.screenCenter(X);
 		char41.screenCenter(Y);
@@ -570,7 +579,7 @@ class Omni extends BaseStage
 		tailsdoll_floor.loadGraphic(Paths.image('bgs/tails-doll/bg'));
 		tailsdoll_floor.scrollFactor.set(1, 1);
 		tailsdoll_floor.scale.set(1.1, 1.1);
-		tailsdoll_floor.antialiasing = true;
+		tailsdoll_floor.antialiasing = ClientPrefs.data.antialiasing;
 		tailsdoll_floor.visible = true;
 		add(tailsdoll_floor);
 
@@ -586,7 +595,7 @@ class Omni extends BaseStage
 		tails_sky.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_sky'));
 		tails_sky.scrollFactor.set(1, 1);
 		tails_sky.scale.set(1.6, 1.2);
-		tails_sky.antialiasing = true;
+		tails_sky.antialiasing = ClientPrefs.data.antialiasing;
 		tails_sky.visible = false;
 		add(tails_sky);
 		
@@ -614,7 +623,7 @@ class Omni extends BaseStage
 		tails_sky.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_sky'));
 		tails_sky.scrollFactor.set(1, 1);
 		tails_sky.scale.set(1.6, 1.2);
-		tails_sky.antialiasing = true;
+		tails_sky.antialiasing = ClientPrefs.data.antialiasing;
 		tails_sky.visible = false;
 		add(tails_sky);
 		
@@ -622,7 +631,7 @@ class Omni extends BaseStage
 		tails_trees1.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_trees1'));
 		tails_trees1.scrollFactor.set(0.8, 0.9);
 		tails_trees1.scale.set(0.95, 0.95);
-		tails_trees1.antialiasing = true;
+		tails_trees1.antialiasing = ClientPrefs.data.antialiasing;
 		tails_trees1.visible = false;
 		add(tails_trees1);
 		
@@ -631,7 +640,7 @@ class Omni extends BaseStage
 			tails_trees2.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_trees2'));
 			tails_trees2.scrollFactor.set(0.9, 1);
 			tails_trees2.scale.set(0.95, 0.95);
-			tails_trees2.antialiasing = true;
+			tails_trees2.antialiasing = ClientPrefs.data.antialiasing;
 			tails_trees2.visible = false;
 			add(tails_trees2);
 		} else {
@@ -639,7 +648,7 @@ class Omni extends BaseStage
 			tails_trees2.loadGraphic(Paths.image('blank'));
 			tails_trees2.scrollFactor.set(0.9, 1);
 			tails_trees2.scale.set(0.95, 0.95);
-			tails_trees2.antialiasing = true;
+			tails_trees2.antialiasing = ClientPrefs.data.antialiasing;
 			tails_trees2.visible = false;
 			add(tails_trees2);
 		}
@@ -648,28 +657,29 @@ class Omni extends BaseStage
 		tails_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_floor'));
 		tails_floor.scrollFactor.set(1, 1);
 		tails_floor.scale.set(0.95, 0.95);
-		tails_floor.antialiasing = true;
+		tails_floor.antialiasing = ClientPrefs.data.antialiasing;
 		tails_floor.visible = false;
 		add(tails_floor);
 		
 		if (!lowQuality) {
 			fleetwaybgshit = new FlxSprite(-2629.05, -1344.05);
 			fleetwaybgshit.loadGraphic(Paths.image('bgs/Chamber/FleetwayBGshit'));
-			fleetwaybgshit.antialiasing = true;
+			fleetwaybgshit.antialiasing = ClientPrefs.data.antialiasing;
+			fleetwaybgshit.scale.y = 1.015;
 			fleetwaybgshit.scrollFactor.set(1.1, 1);
 			fleetwaybgshit.alpha = 0.000001;
 			add(fleetwaybgshit);
 		} else {
 			fleetwaybgshit = new FlxSprite(-2629.05, -1344.05);
 			fleetwaybgshit.loadGraphic(Paths.image('blank'));
-			fleetwaybgshit.antialiasing = true;
+			fleetwaybgshit.antialiasing = ClientPrefs.data.antialiasing;
 			fleetwaybgshit.scrollFactor.set(1.1, 1);
 			fleetwaybgshit.alpha = 0.000001;
 			add(fleetwaybgshit);
 		}
 				
 		emeraldbeamyellow = new FlxSprite(-300, -1376.95 - 200);
-		emeraldbeamyellow.antialiasing = true;
+		emeraldbeamyellow.antialiasing = ClientPrefs.data.antialiasing;
 		emeraldbeamyellow.frames = Paths.getSparrowAtlas('bgs/Chamber/Emerald Beam Charged');
 		emeraldbeamyellow.animation.addByPrefix('a', 'Emerald Beam Charged instance 1', 24, true);
 		emeraldbeamyellow.animation.play('a');
@@ -679,30 +689,26 @@ class Omni extends BaseStage
 
 		if (!lowQuality) {
 			emeralds = new FlxSprite(326.6, -191.75);
-			emeralds.antialiasing = true;
-			emeralds.frames = Paths.getSparrowAtlas('bgs/Chamber/Emeralds');
-			emeralds.animation.addByPrefix('a', 'TheEmeralds instance 1', 24, true);
-			emeralds.animation.play('a');
+			emeralds.antialiasing = ClientPrefs.data.antialiasing;
+			emeralds.loadGraphic(Paths.image('bgs/Chamber/Emeralds'));
 			emeralds.scrollFactor.set(1.1, 1);
-			emeralds.antialiasing = true;
+			emeralds.antialiasing = ClientPrefs.data.antialiasing;
 			emeralds.alpha = 0.000001;
 			add(emeralds);
 		} else {
 			emeralds = new FlxSprite(326.6, -191.75);
-			emeralds.antialiasing = true;
-			emeralds.frames = Paths.getSparrowAtlas('blank');
-			emeralds.animation.addByPrefix('a', 'fun', 24, true);
-			emeralds.animation.play('a');
+			emeralds.antialiasing = ClientPrefs.data.antialiasing;
+			emeralds.loadGraphic(Paths.image('blank'));
 			emeralds.scrollFactor.set(1.1, 1);
-			emeralds.antialiasing = true;
-			emeralds.visible = false;
+			emeralds.antialiasing = ClientPrefs.data.antialiasing;
+			emeralds.alpha = 0.000001;
 			add(emeralds);
 		}
 			
 		thechamber = new FlxSprite(-465.05, 813.9);
 		thechamber.loadGraphic(Paths.image('bgs/Chamber/The Chamber'));
 		thechamber.scrollFactor.set(1.1, 1);
-		thechamber.antialiasing = true;
+		thechamber.antialiasing = ClientPrefs.data.antialiasing;
 		thechamber.alpha = 0.000001;
 		add(thechamber);
 
@@ -1367,7 +1373,7 @@ class Omni extends BaseStage
 		circle.loadGraphic(Paths.image('circleshit'));
 		circle.scrollFactor.set(1, 1);
 		circle.scale.set(0.5, 0.5);
-		circle.antialiasing = true;
+		circle.antialiasing = ClientPrefs.data.antialiasing;
 		circle.visible = false;
 		circle.screenCenter(X);
 		circle.screenCenter(Y);
@@ -1392,7 +1398,7 @@ class Omni extends BaseStage
 			tails_fg.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_fg'));
 			tails_fg.scrollFactor.set(0.7, 0.9);
 			tails_fg.scale.set(0.95, 0.95);
-			tails_fg.antialiasing = true;
+			tails_fg.antialiasing = ClientPrefs.data.antialiasing;
 			tails_fg.visible = false;
 			add(tails_fg);
 
@@ -1469,7 +1475,7 @@ class Omni extends BaseStage
 			tails_fg.loadGraphic(Paths.image('blank'));
 			tails_fg.scrollFactor.set(0.7, 0.9);
 			tails_fg.scale.set(0.95, 0.95);
-			tails_fg.antialiasing = true;
+			tails_fg.antialiasing = ClientPrefs.data.antialiasing;
 			tails_fg.visible = false;
 			add(tails_fg);
 		
@@ -1539,7 +1545,7 @@ class Omni extends BaseStage
 			sunkyTransition.frames = Paths.getSparrowAtlas('bgs/sunky/sunkTransition');
 			sunkyTransition.animation.addByPrefix('b', 'sunkTransition', 26, false);
 			sunkyTransition.scrollFactor.set(1, 1);
-			sunkyTransition.antialiasing = true;
+			sunkyTransition.antialiasing = ClientPrefs.data.antialiasing;
 			sunkyTransition.cameras = [camHUD];
 			sunkyTransition.visible = false;
 			add(sunkyTransition);
@@ -1548,7 +1554,7 @@ class Omni extends BaseStage
 			sunkyTransition.frames = Paths.getSparrowAtlas('blank');
 			sunkyTransition.animation.addByPrefix('b', 'fun', 24, false);
 			sunkyTransition.scrollFactor.set(1, 1);
-			sunkyTransition.antialiasing = true;
+			sunkyTransition.antialiasing = ClientPrefs.data.antialiasing;
 			sunkyTransition.cameras = [camHUD];
 			sunkyTransition.visible = false;
 			sunkyTransition.screenCenter();
@@ -1628,13 +1634,21 @@ class Omni extends BaseStage
 		exeDie.animation.play('frame1');
 		exeDie.scale.x = 1.8;
 		exeDie.scale.y = 1.8;
+		exeDie.alpha = 0.000001;
 		exeDie.antialiasing = ClientPrefs.data.antialiasing;
 		exeDie.scrollFactor.set(1, 1);
 		exeDie.screenCenter(X);
 		exeDie.screenCenter(Y);
-		exeDie.visible = false;
+		exeDie.visible = true;
 		exeDie.cameras = [camOther];
 		add(exeDie);
+		
+		wechJump = new FlxSprite(0, 0);
+		wechJump.loadGraphic(Paths.image('wechidna'));
+		wechJump.antialiasing = ClientPrefs.data.antialiasing;
+		wechJump.scrollFactor.set(1.1, 1);
+		wechJump.alpha = 0.000001;
+		add(wechJump);
 	
 		ring = new FlxSprite(0, 0);
 		ring.frames = Paths.getSparrowAtlas('bgs/digitalized/ring');
@@ -1659,7 +1673,7 @@ class Omni extends BaseStage
 		char1.loadGraphic(Paths.image('characters/BF/3D/bf-3d'));
 		char1.scrollFactor.set(1, 1);
 		char1.scale.set(1, 1);
-		char1.antialiasing = true;
+		char1.antialiasing = ClientPrefs.data.antialiasing;
 		char1.alpha = 0.00001;
 		char1.screenCenter(X);
 		char1.screenCenter(Y);
@@ -1669,7 +1683,7 @@ class Omni extends BaseStage
 		char2.loadGraphic(Paths.image('characters/TailsDoll/3D/Tails_Doll'));
 		char2.scrollFactor.set(1, 1);
 		char2.scale.set(1, 1);
-		char2.antialiasing = true;
+		char2.antialiasing = ClientPrefs.data.antialiasing;
 		char2.alpha = 0.00001;
 		char2.screenCenter(X);
 		char2.screenCenter(Y);
@@ -1679,7 +1693,7 @@ class Omni extends BaseStage
 		char3.loadGraphic(Paths.image('characters/XTerion/3D/xterion-first'));
 		char3.scrollFactor.set(1, 1);
 		char3.scale.set(1, 1);
-		char3.antialiasing = true;
+		char3.antialiasing = ClientPrefs.data.antialiasing;
 		char3.alpha = 0.00001;
 		char3.screenCenter(X);
 		char3.screenCenter(Y);
@@ -1689,7 +1703,7 @@ class Omni extends BaseStage
 		char4.loadGraphic(Paths.image('characters/LordX/lordxEncore'));
 		char4.scrollFactor.set(1, 1);
 		char4.scale.set(1, 1);
-		char4.antialiasing = true;
+		char4.antialiasing = ClientPrefs.data.antialiasing;
 		char4.alpha = 0.00001;
 		char4.screenCenter(X);
 		char4.screenCenter(Y);
@@ -1699,7 +1713,7 @@ class Omni extends BaseStage
 		char5.loadGraphic(Paths.image('characters/Tails/tails-encore'));
 		char5.scrollFactor.set(1, 1);
 		char5.scale.set(1, 1);
-		char5.antialiasing = true;
+		char5.antialiasing = ClientPrefs.data.antialiasing;
 		char5.alpha = 0.00001;
 		char5.screenCenter(X);
 		char5.screenCenter(Y);
@@ -1709,7 +1723,7 @@ class Omni extends BaseStage
 		char6.loadGraphic(Paths.image('characters/Fleetway/Fleetway_Super_Sonic'));
 		char6.scrollFactor.set(1, 1);
 		char6.scale.set(1, 1);
-		char6.antialiasing = true;
+		char6.antialiasing = ClientPrefs.data.antialiasing;
 		char6.alpha = 0.00001;
 		char6.screenCenter(X);
 		char6.screenCenter(Y);
@@ -1719,7 +1733,7 @@ class Omni extends BaseStage
 		char7.loadGraphic(Paths.image('characters/BF/HD/encoreBF'));
 		char7.scrollFactor.set(1, 1);
 		char7.scale.set(1, 1);
-		char7.antialiasing = true;
+		char7.antialiasing = ClientPrefs.data.antialiasing;
 		char7.alpha = 0.00001;
 		char7.screenCenter(X);
 		char7.screenCenter(Y);
@@ -1729,7 +1743,7 @@ class Omni extends BaseStage
 		char8.loadGraphic(Paths.image('characters/BF/HD/encoreBF-majin'));
 		char8.scrollFactor.set(1, 1);
 		char8.scale.set(1, 1);
-		char8.antialiasing = true;
+		char8.antialiasing = ClientPrefs.data.antialiasing;
 		char8.alpha = 0.00001;
 		char8.screenCenter(X);
 		char8.screenCenter(Y);
@@ -1739,7 +1753,7 @@ class Omni extends BaseStage
 		char9.loadGraphic(Paths.image('characters/BF/HD/encoreBF-redTint'));
 		char9.scrollFactor.set(1, 1);
 		char9.scale.set(1, 1);
-		char9.antialiasing = true;
+		char9.antialiasing = ClientPrefs.data.antialiasing;
 		char9.alpha = 0.00001;
 		char9.screenCenter(X);
 		char9.screenCenter(Y);
@@ -1749,7 +1763,7 @@ class Omni extends BaseStage
 		char10.loadGraphic(Paths.image('characters/BF/HD/encoreBF-blackTint'));
 		char10.scrollFactor.set(1, 1);
 		char10.scale.set(1, 1);
-		char10.antialiasing = true;
+		char10.antialiasing = ClientPrefs.data.antialiasing;
 		char10.alpha = 0.00001;
 		char10.screenCenter(X);
 		char10.screenCenter(Y);
@@ -1759,7 +1773,7 @@ class Omni extends BaseStage
 		char12.loadGraphic(Paths.image('characters/BF/HD/needle-bf-encore'));
 		char12.scrollFactor.set(1, 1);
 		char12.scale.set(1, 1);
-		char12.antialiasing = true;
+		char12.antialiasing = ClientPrefs.data.antialiasing;
 		char12.alpha = 0.00001;
 		char12.screenCenter(X);
 		char12.screenCenter(Y);
@@ -1769,7 +1783,7 @@ class Omni extends BaseStage
 		char13.loadGraphic(Paths.image('characters/BF/HD/Sonic'));
 		char13.scrollFactor.set(1, 1);
 		char13.scale.set(1, 1);
-		char13.antialiasing = true;
+		char13.antialiasing = ClientPrefs.data.antialiasing;
 		char13.alpha = 0.00001;
 		char13.screenCenter(X);
 		char13.screenCenter(Y);
@@ -1779,7 +1793,7 @@ class Omni extends BaseStage
 		char14.loadGraphic(Paths.image('characters/BF/Pixel/bf-encore-pixel'));
 		char14.scrollFactor.set(1, 1);
 		char14.scale.set(1, 1);
-		char14.antialiasing = true;
+		char14.antialiasing = ClientPrefs.data.antialiasing;
 		char14.alpha = 0.00001;
 		char14.screenCenter(X);
 		char14.screenCenter(Y);
@@ -1789,7 +1803,7 @@ class Omni extends BaseStage
 		char16.loadGraphic(Paths.image('characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix'));
 		char16.scrollFactor.set(1, 1);
 		char16.scale.set(1, 1);
-		char16.antialiasing = true;
+		char16.antialiasing = ClientPrefs.data.antialiasing;
 		char16.alpha = 0.00001;
 		char16.screenCenter(X);
 		char16.screenCenter(Y);
@@ -1799,7 +1813,7 @@ class Omni extends BaseStage
 		char17.loadGraphic(Paths.image('characters/Coldsteel/coldsteel_assets'));
 		char17.scrollFactor.set(1, 1);
 		char17.scale.set(1, 1);
-		char17.antialiasing = true;
+		char17.antialiasing = ClientPrefs.data.antialiasing;
 		char17.alpha = 0.00001;
 		char17.screenCenter(X);
 		char17.screenCenter(Y);
@@ -1809,7 +1823,7 @@ class Omni extends BaseStage
 		char18.loadGraphic(Paths.image('characters/Coldsteel/coldsteel_guitar'));
 		char18.scrollFactor.set(1, 1);
 		char18.scale.set(1, 1);
-		char18.antialiasing = true;
+		char18.antialiasing = ClientPrefs.data.antialiasing;
 		char18.alpha = 0.00001;
 		char18.screenCenter(X);
 		char18.screenCenter(Y);
@@ -1819,7 +1833,7 @@ class Omni extends BaseStage
 		char19.loadGraphic(Paths.image('characters/Eggman/eggman-encore'));
 		char19.scrollFactor.set(1, 1);
 		char19.scale.set(1, 1);
-		char19.antialiasing = true;
+		char19.antialiasing = ClientPrefs.data.antialiasing;
 		char19.alpha = 0.00001;
 		char19.screenCenter(X);
 		char19.screenCenter(Y);
@@ -1829,7 +1843,7 @@ class Omni extends BaseStage
 		char20.loadGraphic(Paths.image('characters/FakerAndExe/faker_encore'));
 		char20.scrollFactor.set(1, 1);
 		char20.scale.set(1, 1);
-		char20.antialiasing = true;
+		char20.antialiasing = ClientPrefs.data.antialiasing;
 		char20.alpha = 0.00001;
 		char20.screenCenter(X);
 		char20.screenCenter(Y);
@@ -1839,7 +1853,7 @@ class Omni extends BaseStage
 		char21.loadGraphic(Paths.image('characters/FakerAndExe/faker-exe-encore'));
 		char21.scrollFactor.set(1, 1);
 		char21.scale.set(1, 1);
-		char21.antialiasing = true;
+		char21.antialiasing = ClientPrefs.data.antialiasing;
 		char21.alpha = 0.00001;
 		char21.screenCenter(X);
 		char21.screenCenter(Y);
@@ -1849,7 +1863,7 @@ class Omni extends BaseStage
 		char22.loadGraphic(Paths.image('characters/FatalAndCritical/fatal-error-sonic'));
 		char22.scrollFactor.set(1, 1);
 		char22.scale.set(1, 1);
-		char22.antialiasing = true;
+		char22.antialiasing = ClientPrefs.data.antialiasing;
 		char22.alpha = 0.00001;
 		char22.screenCenter(X);
 		char22.screenCenter(Y);
@@ -1859,7 +1873,7 @@ class Omni extends BaseStage
 		char24.loadGraphic(Paths.image('characters/FatalAndCritical/true-fatal'));
 		char24.scrollFactor.set(1, 1);
 		char24.scale.set(1, 1);
-		char24.antialiasing = true;
+		char24.antialiasing = ClientPrefs.data.antialiasing;
 		char24.alpha = 0.00001;
 		char24.screenCenter(X);
 		char24.screenCenter(Y);
@@ -1869,7 +1883,7 @@ class Omni extends BaseStage
 		char25.loadGraphic(Paths.image('characters/Fleetway/fleetway1'));
 		char25.scrollFactor.set(1, 1);
 		char25.scale.set(1, 1);
-		char25.antialiasing = true;
+		char25.antialiasing = ClientPrefs.data.antialiasing;
 		char25.alpha = 0.00001;
 		char25.screenCenter(X);
 		char25.screenCenter(Y);
@@ -1879,7 +1893,7 @@ class Omni extends BaseStage
 		char26.loadGraphic(Paths.image('characters/HogAndScorched/Hog'));
 		char26.scrollFactor.set(1, 1);
 		char26.scale.set(1, 1);
-		char26.antialiasing = true;
+		char26.antialiasing = ClientPrefs.data.antialiasing;
 		char26.alpha = 0.00001;
 		char26.screenCenter(X);
 		char26.screenCenter(Y);
@@ -1889,7 +1903,7 @@ class Omni extends BaseStage
 		char27.loadGraphic(Paths.image('characters/HogAndScorched/scorched'));
 		char27.scrollFactor.set(1, 1);
 		char27.scale.set(1, 1);
-		char27.antialiasing = true;
+		char27.antialiasing = ClientPrefs.data.antialiasing;
 		char27.alpha = 0.00001;
 		char27.screenCenter(X);
 		char27.screenCenter(Y);
@@ -1899,7 +1913,7 @@ class Omni extends BaseStage
 		char28.loadGraphic(Paths.image('characters/Knuckles/knux-encore'));
 		char28.scrollFactor.set(1, 1);
 		char28.scale.set(1, 1);
-		char28.antialiasing = true;
+		char28.antialiasing = ClientPrefs.data.antialiasing;
 		char28.alpha = 0.00001;
 		char28.screenCenter(X);
 		char28.screenCenter(Y);
@@ -1909,7 +1923,7 @@ class Omni extends BaseStage
 		char29.loadGraphic(Paths.image('characters/Majin/SonicFunAssets'));
 		char29.scrollFactor.set(1, 1);
 		char29.scale.set(1, 1);
-		char29.antialiasing = true;
+		char29.antialiasing = ClientPrefs.data.antialiasing;
 		char29.alpha = 0.00001;
 		char29.screenCenter(X);
 		char29.screenCenter(Y);
@@ -1919,7 +1933,7 @@ class Omni extends BaseStage
 		char30.loadGraphic(Paths.image('characters/NeedlemouseSarahShadowmouseLutherSunter/Needlemouse'));
 		char30.scrollFactor.set(1, 1);
 		char30.scale.set(1, 1);
-		char30.antialiasing = true;
+		char30.antialiasing = ClientPrefs.data.antialiasing;
 		char30.alpha = 0.00001;
 		char30.screenCenter(X);
 		char30.screenCenter(Y);
@@ -1929,7 +1943,7 @@ class Omni extends BaseStage
 		char31.loadGraphic(Paths.image('characters/Sanic/sanic'));
 		char31.scrollFactor.set(1, 1);
 		char31.scale.set(1, 1);
-		char31.antialiasing = true;
+		char31.antialiasing = ClientPrefs.data.antialiasing;
 		char31.alpha = 0.00001;
 		char31.screenCenter(X);
 		char31.screenCenter(Y);
@@ -1939,7 +1953,7 @@ class Omni extends BaseStage
 		char32.loadGraphic(Paths.image('characters/Satanos/Satanos'));
 		char32.scrollFactor.set(1, 1);
 		char32.scale.set(1, 1);
-		char32.antialiasing = true;
+		char32.antialiasing = ClientPrefs.data.antialiasing;
 		char32.alpha = 0.00001;
 		char32.screenCenter(X);
 		char32.screenCenter(Y);
@@ -1949,7 +1963,7 @@ class Omni extends BaseStage
 		char33.loadGraphic(Paths.image('characters/Sunky/Sunky'));
 		char33.scrollFactor.set(1, 1);
 		char33.scale.set(1, 1);
-		char33.antialiasing = true;
+		char33.antialiasing = ClientPrefs.data.antialiasing;
 		char33.alpha = 0.00001;
 		char33.screenCenter(X);
 		char33.screenCenter(Y);
@@ -1959,7 +1973,7 @@ class Omni extends BaseStage
 		char34.loadGraphic(Paths.image('characters/XenoAndGrimbo/HD/Beast'));
 		char34.scrollFactor.set(1, 1);
 		char34.scale.set(1, 1);
-		char34.antialiasing = true;
+		char34.antialiasing = ClientPrefs.data.antialiasing;
 		char34.alpha = 0.00001;
 		char34.screenCenter(X);
 		char34.screenCenter(Y);
@@ -1969,7 +1983,7 @@ class Omni extends BaseStage
 		char35.loadGraphic(Paths.image('characters/XenoAndGrimbo/HD/sonicexe'));
 		char35.scrollFactor.set(1, 1);
 		char35.scale.set(1, 1);
-		char35.antialiasing = true;
+		char35.antialiasing = ClientPrefs.data.antialiasing;
 		char35.alpha = 0.00001;
 		char35.screenCenter(X);
 		char35.screenCenter(Y);
@@ -1979,7 +1993,7 @@ class Omni extends BaseStage
 		char36.loadGraphic(Paths.image('characters/XenoAndGrimbo/HD/YCR-Mad-Cherribun'));
 		char36.scrollFactor.set(1, 1);
 		char36.scale.set(1, 1);
-		char36.antialiasing = true;
+		char36.antialiasing = ClientPrefs.data.antialiasing;
 		char36.alpha = 0.00001;
 		char36.screenCenter(X);
 		char36.screenCenter(Y);
@@ -1989,7 +2003,7 @@ class Omni extends BaseStage
 		char37.loadGraphic(Paths.image('characters/XenoAndGrimbo/HD/YCR-Cherribun'));
 		char37.scrollFactor.set(1, 1);
 		char37.scale.set(1, 1);
-		char37.antialiasing = true;
+		char37.antialiasing = ClientPrefs.data.antialiasing;
 		char37.alpha = 0.00001;
 		char37.screenCenter(X);
 		char37.screenCenter(Y);
@@ -1999,7 +2013,7 @@ class Omni extends BaseStage
 		char38.loadGraphic(Paths.image('characters/BF/Pixel/pixel-normal'));
 		char38.scrollFactor.set(1, 1);
 		char38.scale.set(1, 1);
-		char38.antialiasing = true;
+		char38.antialiasing = ClientPrefs.data.antialiasing;
 		char38.alpha = 0.00001;
 		char38.screenCenter(X);
 		char38.screenCenter(Y);
@@ -2009,7 +2023,7 @@ class Omni extends BaseStage
 		char39.loadGraphic(Paths.image('characters/FakerAndExe/faker_pixel'));
 		char39.scrollFactor.set(1, 1);
 		char39.scale.set(1, 1);
-		char39.antialiasing = true;
+		char39.antialiasing = ClientPrefs.data.antialiasing;
 		char39.alpha = 0.00001;
 		char39.screenCenter(X);
 		char39.screenCenter(Y);
@@ -2019,7 +2033,7 @@ class Omni extends BaseStage
 		char40.loadGraphic(Paths.image('characters/ChotixXenotixAndChaotix/HD/chaotix-hd'));
 		char40.scrollFactor.set(1, 1);
 		char40.scale.set(1, 1);
-		char40.antialiasing = true;
+		char40.antialiasing = ClientPrefs.data.antialiasing;
 		char40.alpha = 0.00001;
 		char40.screenCenter(X);
 		char40.screenCenter(Y);
@@ -2029,7 +2043,7 @@ class Omni extends BaseStage
 		char42.loadGraphic(Paths.image('characters/BF/HD/BF_Requital'));
 		char42.scrollFactor.set(1, 1);
 		char42.scale.set(1, 1);
-		char42.antialiasing = true;
+		char42.antialiasing = ClientPrefs.data.antialiasing;
 		char42.alpha = 0.00001;
 		char42.screenCenter(X);
 		char42.screenCenter(Y);
@@ -2082,6 +2096,11 @@ class Omni extends BaseStage
 
 	override function update(elapsed:Float)
 	{
+		if (fleetwayMoment) {
+			if (emeralds.y == -191.75) FlxTween.tween(emeralds, {y: -161.75}, 0.5, {ease: FlxEase.quadInOut});
+			if (emeralds.y == -161.75) FlxTween.tween(emeralds, {y: -191.75}, 0.5, {ease: FlxEase.quadInOut});
+		}
+
 		if (!PlayState.chartingMode) {
 			if (ClientPrefs.data.doTheThing) {
 				ClientPrefs.data.doTheThing = false;
@@ -2105,6 +2124,7 @@ class Omni extends BaseStage
 		{	
 			//Exe flash shit
 			case 9061:
+				exeDie.alpha = 1;
 				exeDie.visible = true;
 				exeDie.animation.play('frame1', true);
 			case 9063:
@@ -2250,6 +2270,7 @@ class Omni extends BaseStage
 				
 			case 2064, 10672: //fleetway
 				redRingTransition();
+				fleetwayMoment = true;
 				fleetwaybgshit.alpha = 1;
 				emeraldbeamyellow.alpha = 1;
 				emeralds.alpha = 1;
@@ -2264,6 +2285,7 @@ class Omni extends BaseStage
 				gfGroup.scrollFactor.set(1.1, 1);
 
 			case 3217: //Chaotix init
+				fleetwayMoment = false;
 				fleetwaybgshit.alpha = 0.000001;
 				emeraldbeamyellow.alpha = 0.000001;
 				emeralds.alpha = 0.000001;
@@ -2344,6 +2366,7 @@ class Omni extends BaseStage
 			
 			case 3744, 4128, 10928: //wechidna
 				redRingTransition();
+				fleetwayMoment = false;
 				wechidna_sky.visible = true;
 				wechidna_building1.visible = true;
 				wechidna_building2.visible = true;
@@ -2371,20 +2394,18 @@ class Omni extends BaseStage
 				satanos_trees.visible = true;
 				satanos_floor.visible = true;
 				satanos_rock.visible = true;
-				satanos_sky.visible = false;
-				satanos_trees.visible = false;
-				satanos_floor.visible = false;
-				satanos_rock.visible = false;
-				satanos_sky.visible = true;
-				satanos_trees.visible = true;
-				satanos_floor.visible = true;
-				satanos_rock.visible = true;
+				lordx_notknuckles.visible = true;
+				lordx_bfsmallflower.visible = true;
+				lordx_tree.visible = true;
 				
 			case 3522: //remove satanos
 				satanos_sky.visible = false;
 				satanos_trees.visible = false;
 				satanos_floor.visible = false;
 				satanos_rock.visible = false;
+				lordx_notknuckles.visible = false;
+				lordx_bfsmallflower.visible = false;
+				lordx_tree.visible = false;
 				
 			case 4256, 4768, 5056, 5184, 5424, 11184: //satanos
 				redRingTransition();
@@ -2406,14 +2427,10 @@ class Omni extends BaseStage
 			case 5345: //preload xeno, majin
 				xeno_fg.visible = true;
 				xeno_floor.visible = true;
-				daJumpscare.visible = true;
 				majin_bush2.visible = true;
 				majin_bush.visible = true;
 				majin_floor.visible = true;
 				majin_pillars1.visible = true;
-				majin_pillars2.visible = true;
-				majin_fgmajin.visible = true;
-				majin_fgmajin2.visible = true;
 				
 			case 5346: //remove preload shit
 				xeno_fg.visible = false;
@@ -2422,25 +2439,25 @@ class Omni extends BaseStage
 				majin_bush.visible = false;
 				majin_floor.visible = false;
 				majin_pillars1.visible = false;
-				majin_pillars2.visible = false;
-				majin_fgmajin.visible = false;
-				majin_fgmajin2.visible = false;
 				
-			case 5473: //Preload sonic.exe, lordx, fatal
+			case 5473: //Preload sonic.exe
 				sonic_bg.visible = true;
 				sonic_ground.visible = true;
+				majin_pillars2.visible = true;
+				majin_fgmajin.visible = true;
+				majin_fgmajin2.visible = true;
 				
 			case 5474: //remove preload shit
 				sonic_bg.visible = false;
 				sonic_ground.visible = false;
+				majin_pillars2.visible = false;
+				majin_fgmajin.visible = false;
+				majin_fgmajin2.visible = false;
 				
 			case 5585: //preload lordx, fatal
 				lordx_sky.visible = true;
 				lordx_floor.visible = true;
 				lordx_eyeflower.visible = true;
-				lordx_notknuckles.visible = true;
-				lordx_bfsmallflower.visible = true;
-				lordx_tree.visible = true;
 				domain.visible = true;
 				domain2.visible = true;
 				
@@ -2448,9 +2465,6 @@ class Omni extends BaseStage
 				lordx_sky.visible = false;
 				lordx_floor.visible = false;
 				lordx_eyeflower.visible = false;
-				lordx_notknuckles.visible = false;
-				lordx_bfsmallflower.visible = false;
-				lordx_tree.visible = false;
 				domain.visible = false;
 				domain2.visible = false;
 				

@@ -1,72 +1,71 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				-74,
 				-50
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "idle",
-			"fps": 24,
-			"name": "idle",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				-95,
-				57
-			],
-			"anim": "singUP",
-			"fps": 24,
-			"name": "up",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				-103,
-				-101
-			],
-			"anim": "singDOWN",
-			"fps": 24,
-			"name": "down",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				-102,
-				-45
-			],
-			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "right",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				63,
-				-10
-			],
-			"anim": "singLEFT",
-			"fps": 24,
-			"name": "left",
-			"indices": []
-		},
-		{
-			"offsets": [
-				-74,
-				-51
-			],
 			"indices": [],
-			"fps": 24,
-			"anim": "out",
+			"name": "idle"
+		},
+		{
+			"offsets": [
+				-91,
+				49
+			],
 			"loop": false,
-			"name": "light out"
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		},
+		{
+			"offsets": [
+				-94,
+				-103
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"offsets": [
+				53,
+				-7
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [
+				-106,
+				-33
+			],
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7
+			],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "right"
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
 	"image": "characters/TailsDoll/3D/Tails_Doll",
 	"position": [
@@ -85,5 +84,6 @@
 		50
 	],
 	"sing_duration": 4,
-	"scale": 1.55
+	"scale": 1.55,
+	"_editor_isPlayer": false
 }

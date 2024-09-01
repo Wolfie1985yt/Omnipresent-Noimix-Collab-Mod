@@ -22,7 +22,7 @@ local isPlayer = false
 
 --Character stage offset
 local stageOffsets = {
-    750, --x
+    720, --x
     0 --y
 }
 

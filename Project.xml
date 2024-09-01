@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="FNF': Omnipresent Noimix" file="Omnipresent" packageName="com.wolfie2.omnipresent" package="com.wolfie2.omnipresent" main="Main" version="1.0" company="Wolfie_1986" />
+	<app title="FNF': Omnipresent Noimix" file="Omnipresent" packageName="com.wolfie.omnipresent" package="com.wolfie.omnipresent" main="Main" version="1.0" company="Wolfie_1985" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />

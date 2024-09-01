@@ -161,19 +161,11 @@ function onCreate()
 		runTimer('start', 0.5)
 		runTimer('bye', 1.9)
 	
-		if getRandomInt(1,2) == 1 then
-			makeLuaSprite('text', 'StartScreens/Text1-omnipresent', 0, 0)
-			setObjectCamera('text', 'other')
-			scaleObject('text', 1, 1)
-			setProperty('text.alpha',0)
-			addLuaSprite('text')
-		else
-			makeLuaSprite('text', 'StartScreens/Text2-omnipresent', 0, 0)
-			setObjectCamera('text', 'other')
-			scaleObject('text', 1, 1)
-			setProperty('text.alpha',0)
-			addLuaSprite('text')
-		end
+		makeLuaSprite('text', 'StartScreens/Text2-omnipresent', 0, 0)
+		setObjectCamera('text', 'other')
+		scaleObject('text', 1, 1)
+		setProperty('text.alpha',0)
+		addLuaSprite('text')
 		
 		makeLuaSprite('red', '', 0, 0);
 		makeGraphic('red',1920,1080,'FF0000')
@@ -215,6 +207,14 @@ function onCreate()
 	end
 end
 function onCreatePost()
+	setProperty('gfGroup.alpha',0.00001);
+	setProperty('dadGroup.alpha',0.00001);
+	setProperty('boyfriendGroup.alpha',0.00001);
+	runTimer('preload',0.1);
+	runTimer('preload',0.2);
+	runTimer('preload',0.3);
+	runTimer('reset-preload',0.4);
+
 	--THE TOP BAR--
 	makeLuaSprite('UpperBar', 'blank', -110, -360)
 	makeGraphic('UpperBar', 1500, 350, '000000')
@@ -392,7 +392,7 @@ function onUpdate(elapsed)
 		setProperty('boyfriendGroup.x',1100);
 		setProperty('boyfriendGroup.y',125);
 		setProperty('dadGroup.x',0);
-		setProperty('dadGroup.y',100);
+		setProperty('dadGroup.y',150);
 		setProperty('gfGroup.x',875);
 		setProperty('gfGroup.y',270);
 		setProperty('defaultCamZoom',0.7);
@@ -422,7 +422,7 @@ function onUpdate(elapsed)
 		setProperty('boyfriendGroup.x',975);
 		setProperty('boyfriendGroup.y',375);
 		setProperty('dadGroup.x',20);
-		setProperty('dadGroup.y',365);
+		setProperty('dadGroup.y',395);
 		setProperty('gfGroup.x',220);
 		setProperty('gfGroup.y',400);
 		setProperty('defaultCamZoom',0.6);
@@ -748,7 +748,7 @@ function onUpdate(elapsed)
 		setProperty('boyfriendGroup.x',900);
 		setProperty('boyfriendGroup.y',50);
 		setProperty('dadGroup.x',200);
-		setProperty('dadGroup.y',75);
+		setProperty('dadGroup.y',55);
 		setProperty('gfGroup.x',-220);
 		setProperty('gfGroup.y',55);
 		setProperty('defaultCamZoom',0.7);
@@ -1070,6 +1070,12 @@ function onUpdate(elapsed)
 		doTweenAlpha('gfAlpha', 'gf', 0, 0.5, 'linear');
 		doTweenAlpha('sunkyAlpha', 'sunky', 0, 0.5, 'linear');
 	end
+	if curStep == 12208 then
+		doTweenAlpha('secondtolastflash', 'flashingshit3', 1, 0.2);
+	end
+	if curStep == 12224 then
+		doTweenAlpha('secondtolastflash', 'flashingshit3', 0, 1.29);
+	end
 	if curStep == 8976 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 1, 'linear');
 	end
@@ -1384,9 +1390,16 @@ function onUpdate(elapsed)
 	if stop == true then
 		setProperty('VG2.alpha',0);
 	end
-end
-function onSpawnNote()
-    setPropertyFromGroup('notes', i, 'noteSplashData.useRGBShader', false)
+	if curStep >= 2064 and curStep <= 3200 or curStep >= 10672 and curStep <= 10927 then
+		setScrollFactor('boyfriendGhost', 1.1, 1);
+		setScrollFactor('dadGhost', 1.1, 1);
+		setScrollFactor('gfGhost', 1.1, 1);
+	end
+	if curStep <= 2064 or curStep >= 3200 and curStep <= 10671 or curStep >= 10928 then
+		setScrollFactor('boyfriendGhost', 1, 1);
+		setScrollFactor('dadGhost', 1, 1);
+		setScrollFactor('gfGhost', 1, 1);
+	end
 end
 function onTimerCompleted(tag, loops, loopsLeft)
 	if tag == 'gf-idle' then
@@ -1978,6 +1991,84 @@ function onEvent(name, value1, value2)
             startTween('camz', 'this', {defaultCamZoom = zoom, ['camGame.zoom'] = zoom}, speed, {ease = ease})
         end
     end
+	if name == 'funnyHudStuff' then
+		if value1 == '1' then --hide notes bf
+			noteTweenAlpha('BFAlpha1', 4, 0, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha2', 5, 0, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha3', 6, 0, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha4', 7, 0, value2, 'easeIn');
+		end
+		if value1 == '2' then --fix notes bf
+			noteTweenAlpha('BFAlpha1', 4, 1, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha2', 5, 1, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha3', 6, 1, value2, 'easeIn');
+			noteTweenAlpha('BFAlpha4', 7, 1, value2, 'easeIn');
+		end
+		if value1 == '3' then
+			noteTweenAlpha('OpponentAlpha1', 0, 0, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha2', 1, 0, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha3', 2, 0, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha4', 3, 0, value2, 'easeIn');
+		end
+		if value1 == '4' then
+			noteTweenAlpha('OpponentAlpha1', 0, 1, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha2', 1, 1, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha3', 2, 1, value2, 'easeIn');
+			noteTweenAlpha('OpponentAlpha4', 3, 1, value2, 'easeIn');
+		end
+		if value1 == '5' then --hide healthBar
+			doTweenAlpha('icon1Tween', 'iconP1', 0, value2, 'easeIn');
+			doTweenAlpha('icon2Tween', 'iconP2', 0, value2, 'easeIn');
+			doTweenAlpha('healthBarTween', 'healthBar', 0, value2, 'easeIn');
+			doTweenAlpha('healthBarBGTween', 'healthBarBG', 0, value2, 'easeIn');
+			doTweenAlpha('scoreTween', 'scoreTxt', 0, value2, 'easeIn');
+		end
+		if value1 == '6' then --show healthBar
+			doTweenAlpha('icon1Tween', 'iconP1', 1, value2, 'easeIn');
+			doTweenAlpha('icon2Tween', 'iconP2', 1, value2, 'easeIn');
+			doTweenAlpha('healthBarTween', 'healthBar', 1, value2, 'easeIn');
+			doTweenAlpha('healthBarBGTween', 'healthBarBG', 1, value2, 'easeIn');
+			doTweenAlpha('scoreTween', 'scoreTxt', 1, value2, 'easeIn');
+		end
+		if value1 == '7' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --swap notes
+			noteTweenX('XDAD1', 0, 732, 0.1, 'quartInOut');
+			noteTweenX('XDAD2', 1, 844, 0.1, 'quartInOut');
+			noteTweenX('XDAD3', 2, 956, 0.1, 'quartInOut');
+			noteTweenX('XDAD4', 3, 1068, 0.1, 'quartInOut');
+			noteTweenX('XBF1', 4, 92, 0.1, 'quartInOut');
+			noteTweenX('XBF2', 5, 204, 0.1, 'quartInOut');
+			noteTweenX('XBF3', 6, 316, 0.1, 'quartInOut');
+			noteTweenX('XBF4', 7, 428, 0.1, 'quartInOut');
+		end
+		if value1 == '8' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --reswap notes
+			noteTweenX('XBF1', 4, 732, 0.1, 'quartInOut');
+			noteTweenX('XBF2', 5, 844, 0.1, 'quartInOut');
+			noteTweenX('XBF3', 6, 956, 0.1, 'quartInOut');
+			noteTweenX('XBF4', 7, 1068, 0.1, 'quartInOut');
+			noteTweenX('XDAD1', 0, 92, 0.1, 'quartInOut');
+			noteTweenX('XDAD2', 1, 204, 0.1, 'quartInOut');
+			noteTweenX('XDAD3', 2, 316, 0.1, 'quartInOut');
+			noteTweenX('XDAD4', 3, 428, 0.1, 'quartInOut');
+		end
+		if value1 == '9' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --middle
+			noteTweenX('MiddleXBF0', 4, 422, 2, 'quartInOut');
+			runTimer('middle1',0.1);
+			runTimer('middle2',0.2);
+			runTimer('middle3',0.3);
+		end
+		if value1 == '10' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --middle opp
+			noteTweenX('MiddleXDAD0', 3, 752, 0.5, 'quartInOut');
+			runTimer('middle4',0.05);
+			runTimer('middle5',0.1);
+			runTimer('middle6',0.15);
+		end
+		if value1 == '11' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --move back
+			noteTweenX('XDAD1', 0, 92, value2, 'quartInOut');
+			noteTweenX('XDAD2', 1, 204, value2, 'quartInOut');
+			noteTweenX('XDAD3', 2, 316, value2, 'quartInOut');
+			noteTweenX('XDAD4', 3, 428, value2, 'quartInOut');
+		end
+	end
     if name == 'badapplelolFlash' then
         setProperty('iconP1.color', 0x000000);
         setProperty('iconP2.color', 0x000000);
@@ -2059,84 +2150,6 @@ function onEvent(name, value1, value2)
 		setProperty('flash.alpha',1);
 		screenCenter('flash');
 		doTweenAlpha('flTw','flash',0,value1,'linear')
-	end
-	if name == 'funnyHudStuff' then
-		if value1 == '1' then --hide notes bf
-			noteTweenAlpha('BFAlpha1', 4, 0, value2, 'easeIn');
-			noteTweenAlpha('BFAlpha2', 5, 0, value2, 'easeIn');
-			noteTweenAlpha('BFAlpha3', 6, 0, value2, 'easeIn');
-			noteTweenAlpha('BFAlpha4', 7, 0, value2, 'easeIn');
-		end
-		if value1 == '2' then --fix notes bf
-			noteTweenAlpha('BFAlpha1', 4, 1, value2, 'easeIn');
-			noteTweenAlpha('BFAlpha2', 5, 1, value2, 'easeIn');
-			noteTweenAlpha('BFAlpha3', 6, 1, value2, 'easeIn');
-			noteTweenAlpha('BFAlpha4', 7, 1, value2, 'easeIn');
-		end
-		if value1 == '3' then
-			noteTweenAlpha('OpponentAlpha1', 0, 0, value2, 'easeIn');
-			noteTweenAlpha('OpponentAlpha2', 1, 0, value2, 'easeIn');
-			noteTweenAlpha('OpponentAlpha3', 2, 0, value2, 'easeIn');
-			noteTweenAlpha('OpponentAlpha4', 3, 0, value2, 'easeIn');
-		end
-		if value1 == '4' then
-			noteTweenAlpha('OpponentAlpha1', 0, 1, value2, 'easeIn');
-			noteTweenAlpha('OpponentAlpha2', 1, 1, value2, 'easeIn');
-			noteTweenAlpha('OpponentAlpha3', 2, 1, value2, 'easeIn');
-			noteTweenAlpha('OpponentAlpha4', 3, 1, value2, 'easeIn');
-		end
-		if value1 == '5' then --hide healthBar
-			doTweenAlpha('icon1Tween', 'iconP1', 0, value2, 'easeIn');
-			doTweenAlpha('icon2Tween', 'iconP2', 0, value2, 'easeIn');
-			doTweenAlpha('healthBarTween', 'healthBar', 0, value2, 'easeIn');
-			doTweenAlpha('healthBarBGTween', 'healthBarBG', 0, value2, 'easeIn');
-			doTweenAlpha('scoreTween', 'scoreTxt', 0, value2, 'easeIn');
-		end
-		if value1 == '6' then --show healthBar
-			doTweenAlpha('icon1Tween', 'iconP1', 1, value2, 'easeIn');
-			doTweenAlpha('icon2Tween', 'iconP2', 1, value2, 'easeIn');
-			doTweenAlpha('healthBarTween', 'healthBar', 1, value2, 'easeIn');
-			doTweenAlpha('healthBarBGTween', 'healthBarBG', 1, value2, 'easeIn');
-			doTweenAlpha('scoreTween', 'scoreTxt', 1, value2, 'easeIn');
-		end
-		if value1 == '7' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --swap notes
-			noteTweenX('XDAD1', 0, 732, 0.1, 'quartInOut');
-			noteTweenX('XDAD2', 1, 844, 0.1, 'quartInOut');
-			noteTweenX('XDAD3', 2, 956, 0.1, 'quartInOut');
-			noteTweenX('XDAD4', 3, 1068, 0.1, 'quartInOut');
-			noteTweenX('XBF1', 4, 92, 0.1, 'quartInOut');
-			noteTweenX('XBF2', 5, 204, 0.1, 'quartInOut');
-			noteTweenX('XBF3', 6, 316, 0.1, 'quartInOut');
-			noteTweenX('XBF4', 7, 428, 0.1, 'quartInOut');
-		end
-		if value1 == '8' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --reswap notes
-			noteTweenX('XBF1', 4, 732, 0.1, 'quartInOut');
-			noteTweenX('XBF2', 5, 844, 0.1, 'quartInOut');
-			noteTweenX('XBF3', 6, 956, 0.1, 'quartInOut');
-			noteTweenX('XBF4', 7, 1068, 0.1, 'quartInOut');
-			noteTweenX('XDAD1', 0, 92, 0.1, 'quartInOut');
-			noteTweenX('XDAD2', 1, 204, 0.1, 'quartInOut');
-			noteTweenX('XDAD3', 2, 316, 0.1, 'quartInOut');
-			noteTweenX('XDAD4', 3, 428, 0.1, 'quartInOut');
-		end
-		if value1 == '9' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --middle
-			noteTweenX('MiddleXBF0', 4, 422, 2, 'quartInOut');
-			runTimer('middle1',0.1);
-			runTimer('middle2',0.2);
-			runTimer('middle3',0.3);
-		end
-		if value1 == '10' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --middle opp
-			noteTweenX('MiddleXDAD0', 3, 752, 0.5, 'quartInOut');
-			runTimer('middle4',0.05);
-			runTimer('middle5',0.1);
-			runTimer('middle6',0.15);
-		end
-		if value1 == '11' and not getPropertyFromClass('backend.ClientPrefs', 'data.middleScroll') then --move back
-			noteTweenX('XDAD1', 0, 92, value2, 'quartInOut');
-			noteTweenX('XDAD2', 1, 204, value2, 'quartInOut');
-			noteTweenX('XDAD3', 2, 316, value2, 'quartInOut');
-			noteTweenX('XDAD4', 3, 428, value2, 'quartInOut');
-		end
 	end
 	if name == 'Trigger VG' then
 		beat = value1;

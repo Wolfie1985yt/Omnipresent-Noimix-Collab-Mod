@@ -1,0 +1,7 @@
+Sunky Cameo (Coded by KJP)
+
+Value 1: Image Path
+Value 2: Direction
+("right" or "down", "left" or "up")
+("staircase-right", "staircase-left"
+Add "-up" or "-down" at the end for where it goes.)

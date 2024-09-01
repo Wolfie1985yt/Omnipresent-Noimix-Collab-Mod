@@ -1,61 +1,62 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				-190,
-				-289
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				-206,
+				-292
+			],
 			"anim": "idle",
-			"indices": [],
-			"name": "Needlemouse_IDLE"
-		},
-		{
-			"offsets": [
-				40,
-				-268
-			],
-			"loop": false,
 			"fps": 24,
-			"anim": "singLEFT",
-			"indices": [],
-			"name": "Needlemouse_LEFT"
+			"name": "Needlemouse_IDLE",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
-				-187,
+				53,
+				-261
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Needlemouse_LEFT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-193,
 				-258
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "Needlemouse_RIGHT"
+			"fps": 24,
+			"name": "Needlemouse_RIGHT",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-178,
-				-69
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				-197,
+				-71
+			],
 			"anim": "singUP",
-			"indices": [],
-			"name": "Needlemouse_UP"
+			"fps": 24,
+			"name": "Needlemouse_UP",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-70,
-				-268
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				-53,
+				-255
+			],
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "Needlemouse_DOWN"
+			"fps": 24,
+			"name": "Needlemouse_DOWN",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
 	"image": "characters/NeedlemouseSarahShadowmouseLutherSunter/Needlemouse",
 	"position": [
@@ -74,5 +75,6 @@
 		120
 	],
 	"sing_duration": 4,
-	"scale": 1.2
+	"scale": 1.2,
+	"_editor_isPlayer": false
 }

@@ -1,61 +1,62 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				124,
-				191
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				114,
+				193
+			],
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "left"
+			"fps": 24,
+			"name": "left",
+			"indices": []
 		},
 		{
-			"offsets": [
-				-94,
-				61
-			],
 			"loop": false,
-			"fps": 24,
+			"offsets": [
+				-55,
+				66
+			],
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "right"
-		},
-		{
-			"offsets": [
-				66,
-				-98
-			],
-			"loop": false,
 			"fps": 24,
-			"anim": "singDOWN",
-			"indices": [],
-			"name": "down"
+			"name": "right",
+			"indices": []
 		},
 		{
+			"loop": false,
+			"offsets": [
+				71,
+				-90
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "down",
+			"indices": []
+		},
+		{
+			"loop": false,
 			"offsets": [
 				519,
 				389
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "up"
+			"fps": 24,
+			"name": "up",
+			"indices": []
 		},
 		{
+			"loop": true,
 			"offsets": [
 				2,
 				-11
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "idle",
-			"loop": true,
-			"name": "idle"
+			"fps": 24,
+			"name": "idle",
+			"indices": []
 		}
 	],
+	"vocals_file": "",
 	"no_antialiasing": false,
 	"image": "characters/Satanos/Satanos",
 	"position": [
@@ -74,5 +75,6 @@
 		-40
 	],
 	"sing_duration": 8.49999999999999,
-	"scale": 1.2
+	"scale": 1.2,
+	"_editor_isPlayer": false
 }

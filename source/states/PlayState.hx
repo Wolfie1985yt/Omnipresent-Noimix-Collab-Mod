@@ -397,6 +397,7 @@ class PlayState extends MusicBeatState
 		{
 			case 'stage': new states.stages.StageWeek1(); //Week 1
 			case 'omni': new states.stages.Omni(); //Omnipresent Noimix V2 - Omnipresent
+			case 'omnifucked': new states.stages.OmniFucked(); //Omnipresent Noimix V2 - Omnipresent Fucked
 		}
 
 		if(isPixelStage) {
@@ -2247,6 +2248,49 @@ class PlayState extends MusicBeatState
 		}
 	}
 	
+	var lyricText:FlxText;
+	var lyricTween:FlxTween;
+	
+	function writeLyrics(text:String, duration:Float, color:FlxColor)
+	{
+		if(lyricText!=null){
+			var old:FlxText = cast lyricText;
+			FlxTween.tween(old, {alpha: 0}, 0.2, {onComplete: function(twn:FlxTween)
+			{
+				remove(old);
+				old.destroy();
+			}});
+			lyricText=null;
+		}
+		if(lyricTween!=null){
+			lyricTween.cancel();
+			lyricTween=null;
+		}
+		if(text.trim()!='' && duration>0 && color.alphaFloat>0){
+			lyricText = new FlxText(0, 0, FlxG.width, text);
+			lyricText.setFormat(Paths.font("PressStart2P.ttf"), 24, color, CENTER, OUTLINE, FlxColor.BLACK);
+			lyricText.alpha = 0;
+			lyricText.screenCenter(XY);
+			if (SONG.song.toLowerCase() == 'you-cant-run-encore')
+				lyricText.y += 320;
+			else
+				lyricText.y += 250;
+			lyricText.cameras = [camOther];
+			add(lyricText);
+			lyricTween = FlxTween.tween(lyricText, {alpha: color.alphaFloat}, 0.2, {onComplete: function(twn:FlxTween)
+			{
+				trace("done");
+				lyricTween = FlxTween.tween(lyricText, {alpha: 0}, 0.2, {startDelay: duration, onComplete: function(twn:FlxTween)
+				{
+					remove(lyricText);
+					lyricText.destroy();
+					lyricText = null;
+					if(lyricTween==twn)lyricTween = null;
+				}});
+			}});
+		}
+	}	
+	
 	var errorRandom:FlxRandom = new FlxRandom(666);
 
 	public function triggerEvent(eventName:String, value1:String, value2:String, strumTime:Float) {
@@ -2309,6 +2353,20 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'Fatal Static':
+
+			case 'Lyrics':
+				var split = value1.split("--");
+				var text = value1;
+				var color = FlxColor.WHITE;
+				if(split.length > 1){
+					text = split[0];
+					color = FlxColor.fromString(split[1]);
+				}
+				var duration:Float = Std.parseFloat(value2);
+				if (Math.isNaN(duration) || duration <= 0)
+					duration = text.length * 0.5;
+
+				writeLyrics(text, duration, color);
 
 			case 'WechJump':
 				var doP3JumpTD:FlxSprite = new FlxSprite().loadGraphic(Paths.image('wechidna'));
