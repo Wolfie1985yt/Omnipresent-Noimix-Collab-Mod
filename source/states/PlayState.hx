@@ -1835,7 +1835,11 @@ class PlayState extends MusicBeatState
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
 	var freezeCamera:Bool = false;
+	#if mac
 	var allowDebugKeys:Bool = true;
+	#else
+	var allowDebugKeys:Bool = false;
+	#end
 
 	override public function update(elapsed:Float)
 	{
