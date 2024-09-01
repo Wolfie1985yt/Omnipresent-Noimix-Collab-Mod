@@ -219,20 +219,22 @@ class Omni extends BaseStage
 		video.play();
 		video.pause();
 		video.destroy();
-		//trace("Video Preloaded Successfully: " + graphic + ".mp4");
+		trace("Video Preloaded Successfully: " + graphic + ".mp4");
     }
 
 	override function create()
 	{
-		#if DISCORD_ALLOWED
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Loading Assets 0%", null);
-		#end
-
 		Paths.clearStoredMemory();
 		if (ClientPrefs.data.lowQuality) {
 			lowQuality = true;
 		}
+		
+		#if DISCORD_ALLOWED
+		// Updating Discord Rich Presence
+		if (!lowQuality) {
+		DiscordClient.changePresence("Loading Assets 0%", null);
+		}
+		#end
 		
 		if (ClientPrefs.data.smartCache && !lowQuality) {
 			gpuCache = true;
@@ -301,238 +303,251 @@ class Omni extends BaseStage
 		}
 			
 		//Characters
-		preload('characters/Wechidna/wechBeast');
-		preload('characters/BF/HD/Sonic');
-		preload('characters/Fleetway/Fleetway_Super_Sonic');
-		preload('characters/Fleetway/fleetway1');
-		preload('characters/HogAndScorched/scorched');
-		preload('characters/Satanos/Satanos');
-		preload('characters/TailsDoll/3D/Tails_Doll');
-		preload('characters/NeedlemouseSarahShadowmouseLutherSunter/Needlemouse');
-		preload('characters/BF/HD/needle-bf-encore');
-		preload('characters/Sanic/sanic');
-		preload('characters/LordX/lordxEncore');
-		preload('characters/Majin/SonicFunAssets');
-		preload('characters/XenoAndGrimbo/HD/Beast');
-		preload('characters/XenoAndGrimbo/HD/sonicexe');
-		preload('characters/FakerAndExe/faker-exe-encore');
-		preload('characters/FakerAndExe/faker_encore');
-		preload('characters/Coldsteel/coldsteel_assets');
-		preload('characters/Coldsteel/coldsteel_guitar');
-		preload('characters/Eggman/eggman-encore');
-		preload('characters/Tails/tails-encore');
-		preload('characters/BF/HD/BF_Requital');
-		preload('characters/BF/HD/encoreBF');
-		preload('characters/BF/HD/encoreBF-blackTint');
-		preload('characters/BF/HD/encoreBF-majin');
-		preload('characters/BF/HD/encoreBF-redTint');
-		preload('characters/HogAndScorched/Hog');
-		preload('characters/Knuckles/knux-encore');
-		preload('characters/Sunky/Sunky');
-		preload('characters/BF/3D/bf-3d');
-		preload('characters/XTerion/3D/xterion-first');
-		preload('characters/ChotixXenotixAndChaotix/HD/chaotix-hd');
-		preload('characters/XenoAndGrimbo/HD/YCR-Mad-Cherribun');
-		preload('characters/XenoAndGrimbo/HD/YCR-Cherribun');
-		preload('characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix');
-		preload('characters/FatalAndCritical/fatal-error-sonic');
-		preload('characters/FatalAndCritical/true-fatal');
-		preload('characters/BF/Pixel/bf-encore-pixel');
-		preload('characters/BF/Pixel/pixel-normal');
-		preload('characters/FakerAndExe/faker_pixel');
+		if(!lowQuality) {
+			preload('characters/Wechidna/wechBeast');
+			preload('characters/BF/HD/Sonic');
+			preload('characters/Fleetway/Fleetway_Super_Sonic');
+			preload('characters/Fleetway/fleetway1');
+			preload('characters/HogAndScorched/scorched');
+			preload('characters/Satanos/Satanos');
+			preload('characters/TailsDoll/3D/Tails_Doll');
+			preload('characters/NeedlemouseSarahShadowmouseLutherSunter/Needlemouse');
+			preload('characters/BF/HD/needle-bf-encore');
+			preload('characters/Sanic/sanic');
+			preload('characters/LordX/lordxEncore');
+			preload('characters/Majin/SonicFunAssets');
+			preload('characters/XenoAndGrimbo/HD/Beast');
+			preload('characters/XenoAndGrimbo/HD/sonicexe');
+			preload('characters/FakerAndExe/faker-exe-encore');
+			preload('characters/FakerAndExe/faker_encore');
+			preload('characters/Coldsteel/coldsteel_assets');
+			preload('characters/Coldsteel/coldsteel_guitar');
+			preload('characters/Eggman/eggman-encore');
+			preload('characters/Tails/tails-encore');
+			preload('characters/BF/HD/BF_Requital');
+			preload('characters/BF/HD/encoreBF');
+			preload('characters/BF/HD/encoreBF-blackTint');
+			preload('characters/BF/HD/encoreBF-majin');
+			preload('characters/BF/HD/encoreBF-redTint');
+			preload('characters/HogAndScorched/Hog');
+			preload('characters/Knuckles/knux-encore');
+			preload('characters/Sunky/Sunky');
+			preload('characters/BF/3D/bf-3d');
+			preload('characters/XTerion/3D/xterion-first');
+			preload('characters/ChotixXenotixAndChaotix/HD/chaotix-hd');
+			preload('characters/XenoAndGrimbo/HD/YCR-Mad-Cherribun');
+			preload('characters/XenoAndGrimbo/HD/YCR-Cherribun');
+			preload('characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix');
+			preload('characters/FatalAndCritical/fatal-error-sonic');
+			preload('characters/FatalAndCritical/true-fatal');
+			preload('characters/BF/Pixel/bf-encore-pixel');
+			preload('characters/BF/Pixel/pixel-normal');
+			preload('characters/FakerAndExe/faker_pixel');
+		}
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
+		if (!lowQuality) {
 		DiscordClient.changePresence("Loading Assets 20%", null);
+		}
 		#end
 		
 		//Stages
-		preload('bgs/Chamber/Emerald Beam Charged');
-		preload('bgs/Chamber/Emeralds');
-		preload('bgs/Chamber/FleetwayBGshit');
-		preload('bgs/Chamber/The Chamber');
-		preload('bgs/LordXStage/floor');
-		preload('bgs/LordXStage/NotKnuckles_Assets');
-		preload('bgs/LordXStage/sky');
-		preload('bgs/LordXStage/smallflower');
-		preload('bgs/LordXStage/tree');
-		preload('bgs/LordXStage/WeirdAssFlower_Assets');
-		preload('bgs/satanos-bg/FRock');
-		preload('bgs/satanos-bg/gamemasters');
-		preload('bgs/satanos-bg/Sky');
-		preload('bgs/satanos-bg/Trees');
-		preload('bgs/triple-trouble-encore/xeno/xeno_floor');
-		preload('bgs/triple-trouble-encore/xeno/xeno_fg');
-		preload('bgs/triple-trouble-encore/knuckles/kn_bg');
-		preload('bgs/triple-trouble-encore/knuckles/kn_city2');
-		preload('bgs/triple-trouble-encore/knuckles/kn_floor');
-		preload('bgs/triple-trouble-encore/tails/ts_fg');
-		preload('bgs/triple-trouble-encore/tails/ts_floor');
-		preload('bgs/triple-trouble-encore/tails/ts_sky');
-		preload('bgs/triple-trouble-encore/tails/ts_trees1');
-		preload('bgs/triple-trouble-encore/tails/ts_trees2');
-		preload('bgs/Wechidna/floor');
-		preload('bgs/Wechidna/bg-building');
-		preload('bgs/Wechidna/building');
-		preload('bgs/Wechidna/fg-grass');
-		preload('bgs/Wechidna/fg-smth');
-		preload('bgs/Wechidna/fg-trees');
-		preload('bgs/Wechidna/sky');
-		preload('bgs/faker-encore/bgP1');
-		preload('bgs/faker-encore/bgP2');
-		preload('bgs/faker-encore/eclipiceP1');
-		preload('bgs/faker-encore/eclipiceP2');
-		preload('bgs/faker-encore/moutainsP1');
-		preload('bgs/faker-encore/moutainsP2');
-		preload('bgs/faker-encore/ringsP1');
-		preload('bgs/faker-encore/ringsP2');
-		preload('bgs/faker-encore/skyP1');
-		preload('bgs/faker-encore/skyP2');
-		preload('bgs/faker-encore/jover');
-		preload('bgs/faker-encore/fakerpixel');
-		preload('bgs/FunInfiniteStage/Bush 1');
-		preload('bgs/FunInfiniteStage/Bush2');
-		preload('bgs/FunInfiniteStage/floor BG');
-		preload('bgs/FunInfiniteStage/Majin Boppers Back');
-		preload('bgs/FunInfiniteStage/Majin Boppers Front');
-		preload('bgs/FunInfiniteStage/majin FG1');
-		preload('bgs/FunInfiniteStage/majin FG2');
-		preload('bgs/FunInfiniteStage/overlay');
-		preload('bgs/FunInfiniteStage/sonicFUNsky');
-		preload('bgs/hog/bg');
-		preload('bgs/hog/floor');
-		preload('bgs/hog/HillsandHills');
-		preload('bgs/hog/motains');
-		preload('bgs/hog/overlay');
-		preload('bgs/hog/rocks');
-		preload('bgs/hog/trees');
-		preload('bgs/hog/Waterfalls');
-		preload('bgs/hog/blast/Floor');
-		preload('bgs/hog/blast/Hills');
-		preload('bgs/hog/blast/Monitor');
-		preload('bgs/hog/blast/Mountains');
-		preload('bgs/hog/blast/Plants');
-		preload('bgs/hog/blast/Rocks');
-		preload('bgs/hog/blast/Sunset');
-		preload('bgs/hog/blast/Waterfalls');
-		preload('bgs/too-slow-encore/ground');
-		preload('bgs/sunky/ceral');
-		preload('bgs/sunky/floor');
-		preload('bgs/sunky/hang');
-		preload('bgs/sunky/milk');
-		preload('bgs/sunky/speakers');
-		preload('bgs/sunky/sunkTransition');
-		preload('bgs/sunky/sunky BG');
-		preload('bgs/needlemouse/buildings');
-		preload('bgs/needlemouse/CONK_CREET');
-		preload('bgs/needlemouse/fg');
-		preload('bgs/needlemouse/mountains');
-		preload('bgs/triple-trouble-encore/eggman/egg_bg');
-		preload('bgs/triple-trouble-encore/eggman/egg_eys');
-		preload('bgs/sanic/sanicbg');
-		preload('bgs/digitalized/bg');
-		preload('bgs/digitalized/ring');
-		preload('bgs/tails-doll/bg');
-		preload('bgs/void/shadow');
-		preload('bgs/fatal/domain');
-		preload('bgs/fatal/domain2');
-		preload('bgs/chaotix/horizonFg');
-		preload('bgs/chaotix/horizonsky');
-		preload('bgs/chaotix/BG_amy');
-		preload('bgs/chaotix/BG_charmy');
-		preload('bgs/chaotix/BG_espio');
-		preload('bgs/chaotix/BG_knuckles');
-		preload('bgs/chaotix/BG_mighty');
-		preload('bgs/chaotix/BG_vector');
-		
+		if(!lowQuality) {
+			preload('bgs/Chamber/Emerald Beam Charged');
+			preload('bgs/Chamber/Emeralds');
+			preload('bgs/Chamber/FleetwayBGshit');
+			preload('bgs/Chamber/The Chamber');
+			preload('bgs/LordXStage/floor');
+			preload('bgs/LordXStage/NotKnuckles_Assets');
+			preload('bgs/LordXStage/sky');
+			preload('bgs/LordXStage/smallflower');
+			preload('bgs/LordXStage/tree');
+			preload('bgs/LordXStage/WeirdAssFlower_Assets');
+			preload('bgs/satanos-bg/FRock');
+			preload('bgs/satanos-bg/gamemasters');
+			preload('bgs/satanos-bg/Sky');
+			preload('bgs/satanos-bg/Trees');
+			preload('bgs/triple-trouble-encore/xeno/xeno_floor');
+			preload('bgs/triple-trouble-encore/xeno/xeno_fg');
+			preload('bgs/triple-trouble-encore/knuckles/kn_bg');
+			preload('bgs/triple-trouble-encore/knuckles/kn_city2');
+			preload('bgs/triple-trouble-encore/knuckles/kn_floor');
+			preload('bgs/triple-trouble-encore/tails/ts_fg');
+			preload('bgs/triple-trouble-encore/tails/ts_floor');
+			preload('bgs/triple-trouble-encore/tails/ts_sky');
+			preload('bgs/triple-trouble-encore/tails/ts_trees1');
+			preload('bgs/triple-trouble-encore/tails/ts_trees2');
+			preload('bgs/Wechidna/floor');
+			preload('bgs/Wechidna/bg-building');
+			preload('bgs/Wechidna/building');
+			preload('bgs/Wechidna/fg-grass');
+			preload('bgs/Wechidna/fg-smth');
+			preload('bgs/Wechidna/fg-trees');
+			preload('bgs/Wechidna/sky');
+			preload('bgs/faker-encore/bgP1');
+			preload('bgs/faker-encore/bgP2');
+			preload	('bgs/faker-encore/eclipiceP1');
+			preload('bgs/faker-encore/eclipiceP2');
+			preload('bgs/faker-encore/moutainsP1');
+			preload('bgs/faker-encore/moutainsP2');
+			preload('bgs/faker-encore/ringsP1');
+			preload('bgs/faker-encore/ringsP2');
+			preload('bgs/faker-encore/skyP1');
+			preload('bgs/faker-encore/skyP2');
+			preload('bgs/faker-encore/jover');
+			preload('bgs/faker-encore/fakerpixel');
+			preload('bgs/FunInfiniteStage/Bush 1');
+			preload('bgs/FunInfiniteStage/Bush2');
+			preload('bgs/FunInfiniteStage/floor BG');
+			preload('bgs/FunInfiniteStage/Majin Boppers Back');
+			preload('bgs/FunInfiniteStage/Majin Boppers Front');
+			preload('bgs/FunInfiniteStage/majin FG1');
+			preload('bgs/FunInfiniteStage/majin FG2');
+			preload('bgs/FunInfiniteStage/overlay');
+			preload('bgs/FunInfiniteStage/sonicFUNsky');
+			preload('bgs/hog/bg');
+			preload('bgs/hog/floor');
+			preload('bgs/hog/HillsandHills');
+			preload('bgs/hog/motains');
+			preload('bgs/hog/overlay');
+			preload('bgs/hog/rocks');
+			preload('bgs/hog/trees');
+			preload('bgs/hog/Waterfalls');
+			preload('bgs/hog/blast/Floor');
+			preload('bgs/hog/blast/Hills');
+			preload('bgs/hog/blast/Monitor');
+			preload('bgs/hog/blast/Mountains');
+			preload('bgs/hog/blast/Plants');
+			preload('bgs/hog/blast/Rocks');
+			preload('bgs/hog/blast/Sunset');
+			preload('bgs/hog/blast/Waterfalls');
+			preload('bgs/too-slow-encore/ground');
+			preload('bgs/sunky/ceral');
+			preload('bgs/sunky/floor');
+			preload('bgs/sunky/hang');
+			preload('bgs/sunky/milk');
+			preload('bgs/sunky/speakers');
+			preload('bgs/sunky/sunkTransition');
+			preload('bgs/sunky/sunky BG');
+			preload('bgs/needlemouse/buildings');
+			preload('bgs/needlemouse/CONK_CREET');
+			preload('bgs/needlemouse/fg');
+			preload('bgs/needlemouse/mountains');
+			preload('bgs/triple-trouble-encore/eggman/egg_bg');
+			preload('bgs/triple-trouble-encore/eggman/egg_eys');
+			preload('bgs/sanic/sanicbg');
+			preload('bgs/digitalized/bg');
+			preload('bgs/digitalized/ring');
+			preload('bgs/tails-doll/bg');
+			preload('bgs/void/shadow');
+			preload('bgs/fatal/domain');
+			preload('bgs/fatal/domain2');
+			preload('bgs/chaotix/horizonFg');
+			preload('bgs/chaotix/horizonsky');
+			preload('bgs/chaotix/BG_amy');
+			preload('bgs/chaotix/BG_charmy');
+			preload('bgs/chaotix/BG_espio');
+			preload('bgs/chaotix/BG_knuckles');
+			preload('bgs/chaotix/BG_mighty');
+			preload('bgs/chaotix/BG_vector');
+		}
+			
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
+		if (!lowQuality) {
 		DiscordClient.changePresence("Loading Assets 40%", null);
+		}
 		#end
 		
 		//Other used stuff
-		preload('Phase3Static');
-		preload('sonicJUMPSCARE');
-		preload('epicjump');
-		preload('wechidna');
-		preload('exedeath');
-		preload('WhiteVG');
-		preload('bad');
-		preload('blank');
-		preload('box');
-		preload('circleshit');
-		preload('error_popups');
-		preload('good');
-		preload('guitar');
-		preload('healthBar');
-		preload('num0');
-		preload('num1');
-		preload('num2');
-		preload('num3');
-		preload('num4');
-		preload('num5');
-		preload('num6');
-		preload('num7');
-		preload('num8');
-		preload('num9');
-		preload('shit');
-		preload('sick');
-		preload('noteSplashes/noteSplashes-Bloodsplash');
-		preload('StartScreens/Text1-omnipresent');
-		preload('StartScreens/Text2-omnipresent');
-		preload('characters/GF_assets');
-		preload('healthBar');
-		preload('hpR-dark');
-		preload('timeBar');
-		preload('tbR-dark');
-		
+		if (!lowQuality) {
+			preload('Phase3Static');
+			preload('sonicJUMPSCARE');
+			preload('epicjump');
+			preload('wechidna');
+			preload('exedeath');
+			preload('WhiteVG');
+			preload('bad');
+			preload('blank');
+			preload('box');
+			preload('circleshit');
+			preload('error_popups');
+			preload('good');
+			preload('guitar');
+			preload('healthBar');
+			preload('num0');
+			preload('num1');
+			preload('num2');
+			preload('num3');
+			preload('num4');
+			preload('num5');
+			preload('num6');
+			preload('num7');
+			preload('num8');
+			preload('num9');
+			preload('shit');
+			preload('sick');
+			preload('noteSplashes/noteSplashes-Bloodsplash');
+			preload('StartScreens/Text1-omnipresent');
+			preload('StartScreens/Text2-omnipresent');
+			preload('characters/GF_assets');
+			preload('healthBar');
+			preload('hpR-dark');
+			preload('timeBar');
+			preload('tbR-dark');
+		}
 		//Icons
-		preload('icons/icon-xterion-first');
-		preload('icons/icon-needlemouse');
-		preload('icons/icon-bf-needlemouse');
-		preload('icons/icon-tails-encore');
-		preload('icons/icon-bunfriend');
-		preload('icons/icon-fleetway');
-		preload('icons/icon-chaotix-pixel');
-		preload('icons/icon-pixel-bunfriend');
-		preload('icons/icon-knuckles-encore');
-		preload('icons/icon-wechBeast');
-		preload('icons/icon-satanos');
-		preload('icons/icon-egg-encore');
-		preload('icons/icon-sonicexe');
-		preload('icons/icon-lordx-encore');
-		preload('icons/icon-fatal-sonic');
-		preload('icons/icon-ycr');
-		preload('icons/icon-BEAST');
-		preload('icons/icon-majin');
-		preload('icons/icon-sunky');
-		preload('icons/icon-sanic');
-		preload('icons/icon-fatal-glitched');
-		preload('icons/icon-bunfriend-needlemouse');
-		preload('icons/icon-true-fatal');
-		preload('icons/icon-ycrep4');
-		preload('icons/icon-ycr-pissy');
-		preload('icons/icon-coldsteel');
-		preload('icons/icon-exe-enc');
-		preload('icons/icon-faker-enc');
-		preload('icons/icon-scorched');
-		preload('icons/icon-bfpixel');
-		preload('icons/icon-fakerpixel');
-		preload('icons/icon-taildoll');
-		preload('icons/icon-bf-3d');
-		preload('icons/icon-hog');
-		preload('icons/icon-chaotix-hd');
-		preload('icons/icon-gf');
-		preload('icons/icon-sonic-rr');
-		preload('icons/icon-face');
-		preload('noteSkins/NOTE_assets');
-		preload('philly/gradient');
-		preload('philly/particle');
-		preload('characters/BF/HD/BOYFRIEND');
+		if (!lowQuality) {
+			preload('icons/icon-xterion-first');
+			preload('icons/icon-needlemouse');
+			preload('icons/icon-bf-needlemouse');
+			preload('icons/icon-tails-encore');
+			preload('icons/icon-bunfriend');
+			preload('icons/icon-fleetway');
+			preload('icons/icon-chaotix-pixel');
+			preload('icons/icon-pixel-bunfriend');
+			preload('icons/icon-knuckles-encore');
+			preload('icons/icon-wechBeast');
+			preload('icons/icon-satanos');
+			preload('icons/icon-egg-encore');
+			preload('icons/icon-sonicexe');
+			preload('icons/icon-lordx-encore');
+			preload('icons/icon-fatal-sonic');
+			preload('icons/icon-ycr');
+			preload('icons/icon-BEAST');
+			preload('icons/icon-majin');
+			preload('icons/icon-sunky');
+			preload('icons/icon-sanic');
+			preload('icons/icon-fatal-glitched');
+			preload('icons/icon-bunfriend-needlemouse');
+			preload('icons/icon-true-fatal');
+			preload('icons/icon-ycrep4');
+			preload('icons/icon-ycr-pissy');
+			preload('icons/icon-coldsteel');
+			preload('icons/icon-exe-enc');
+			preload('icons/icon-faker-enc');
+			preload('icons/icon-scorched');
+			preload('icons/icon-bfpixel');
+			preload('icons/icon-fakerpixel');
+			preload('icons/icon-taildoll');
+			preload('icons/icon-bf-3d');
+			preload('icons/icon-hog');
+			preload('icons/icon-chaotix-hd');
+			preload('icons/icon-gf');
+			preload('icons/icon-sonic-rr');
+			preload('icons/icon-face');
+			preload('noteSkins/NOTE_assets');
+			preload('philly/gradient');
+			preload('philly/particle');
+			preload('characters/BF/HD/BOYFRIEND');
+		}
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
+		if (!lowQuality) {
 		DiscordClient.changePresence("Loading Assets 60%", null);
+		}
 		#end
 		
 		//Videos
@@ -1025,7 +1040,9 @@ class Omni extends BaseStage
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
+		if (!lowQuality) {
 		DiscordClient.changePresence("Loading Assets 90%", null);
+		}
 		#end
 		
 		majin_floor = new BGSprite('bgs/FunInfiniteStage/floor BG', -340, 660, 1.0, 1.0);
@@ -1666,7 +1683,9 @@ class Omni extends BaseStage
 
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
+		if (!lowQuality) {
 		DiscordClient.changePresence("Loading Assets 99%", null);
+		}
 		#end
 	
 		char1 = new FlxSprite(0, 0);
@@ -2090,7 +2109,9 @@ class Omni extends BaseStage
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
+		if (!lowQuality) {
 		DiscordClient.changePresence("Starting Song...", null);
+		}
 		#end
 	}
 
@@ -3095,7 +3116,7 @@ class Omni extends BaseStage
 		vignette.visible = false;
 		
 		if (theThing == 3) {
-			//trace("The thing done thrice");
+			trace("The thing done thrice");
 			tailsdoll_floor.visible = true;
 			ring.visible = true;
 			fleetwaybgshit.visible = true;
@@ -3107,13 +3128,13 @@ class Omni extends BaseStage
 		if (theThing == 2) {
 			theThing = 3;
 			doTheThing();
-			//trace("The thing done twice");
+			trace("The thing done twice");
 		}
 		
 		if (theThing == 1) {
 			theThing = 2;
 			doTheThing();
-			//trace("The thing done once");
+			trace("The thing done once");
 		}
 	}
 	
@@ -3335,7 +3356,7 @@ class Omni extends BaseStage
 			{
 				ring.alpha = 0.00001;
 				ring.animation.play('idle');
-				//trace('ring finished');
+				trace('ring finished');
 				ringStarted = false;
 			});
 		}

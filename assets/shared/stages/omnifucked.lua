@@ -393,7 +393,7 @@ function onUpdate(elapsed)
 		setProperty('boyfriendGroup.x',1100);
 		setProperty('boyfriendGroup.y',125);
 		setProperty('dadGroup.x',0);
-		setProperty('dadGroup.y',110);
+		setProperty('dadGroup.y',100);
 		setProperty('gfGroup.x',875);
 		setProperty('gfGroup.y',270);
 		setProperty('defaultCamZoom',0.7);

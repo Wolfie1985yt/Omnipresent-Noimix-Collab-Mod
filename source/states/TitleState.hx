@@ -94,22 +94,22 @@ class TitleState extends MusicBeatState
 
 		#if CHECK_FOR_UPDATES
 		if(ClientPrefs.data.checkForUpdates && !closedState) {
-			//trace('checking for update');
+			trace('checking for update');
 			var http = new haxe.Http("https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/main/gitVersion.txt");
 
 			http.onData = function (data:String)
 			{
 				updateVersion = data.split('\n')[0].trim();
 				var curVersion:String = MainMenuState.psychEngineVersion.trim();
-				//trace('version online: ' + updateVersion + ', your version: ' + curVersion);
+				trace('version online: ' + updateVersion + ', your version: ' + curVersion);
 				if(updateVersion != curVersion) {
-					//trace('versions arent matching!');
+					trace('versions arent matching!');
 					mustUpdate = true;
 				}
 			}
 
 			http.onError = function (error) {
-				//trace('error: $error');
+				trace('error: $error');
 			}
 
 			http.request();
@@ -142,7 +142,7 @@ class TitleState extends MusicBeatState
 			if(FlxG.save.data != null && FlxG.save.data.fullscreen)
 			{
 				FlxG.fullscreen = FlxG.save.data.fullscreen;
-				//trace('LOADED FULLSCREEN SETTING!!');
+				trace('LOADED FULLSCREEN SETTING!!');
 			}
 			persistentUpdate = true;
 			persistentDraw = true;
@@ -428,14 +428,14 @@ class TitleState extends MusicBeatState
 				if(allowedKeys.contains(keyName)) {
 					easterEggKeysBuffer += keyName;
 					if(easterEggKeysBuffer.length >= 32) easterEggKeysBuffer = easterEggKeysBuffer.substring(1);
-					//trace('Test! Allowed Key pressed!!! Buffer: ' + easterEggKeysBuffer);
+					trace('Test! Allowed Key pressed!!! Buffer: ' + easterEggKeysBuffer);
 
 					for (wordRaw in easterEggKeys)
 					{
 						var word:String = wordRaw.toUpperCase(); //just for being sure you're doing it right
 						if (easterEggKeysBuffer.contains(word))
 						{
-							//trace('YOOO! ' + word);
+							trace('YOOO! ' + word);
 							if (FlxG.save.data.psychDevsEasterEgg == word)
 								FlxG.save.data.psychDevsEasterEgg = '';
 							else

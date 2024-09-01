@@ -219,7 +219,7 @@ class OmniFucked extends BaseStage
 		video.play();
 		video.pause();
 		video.destroy();
-		//trace("Video Preloaded Successfully: " + graphic + ".mp4");
+		trace("Video Preloaded Successfully: " + graphic + ".mp4");
     }
 
 	override function create()
@@ -3110,7 +3110,7 @@ class OmniFucked extends BaseStage
 		vignette.visible = false;
 		
 		if (theThing == 3) {
-			//trace("The thing done thrice");
+			trace("The thing done thrice");
 			tailsdoll_floor.visible = true;
 			ring.visible = true;
 			fleetwaybgshit.visible = true;
@@ -3122,13 +3122,13 @@ class OmniFucked extends BaseStage
 		if (theThing == 2) {
 			theThing = 3;
 			doTheThing();
-			//trace("The thing done twice");
+			trace("The thing done twice");
 		}
 		
 		if (theThing == 1) {
 			theThing = 2;
 			doTheThing();
-			//trace("The thing done once");
+			trace("The thing done once");
 		}
 	}
 	
@@ -3350,7 +3350,7 @@ class OmniFucked extends BaseStage
 			{
 				ring.alpha = 0.00001;
 				ring.animation.play('idle');
-				//trace('ring finished');
+				trace('ring finished');
 				ringStarted = false;
 			});
 		}

@@ -16,7 +16,7 @@
 	"image": "characters/Fleetway/fleetway3",
 	"position": [
 		-50,
-		0
+		-100
 	],
 	"healthicon": "fleetway",
 	"flip_x": false,
