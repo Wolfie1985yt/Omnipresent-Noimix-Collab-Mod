@@ -35,11 +35,9 @@ class FlashingState extends MusicBeatState
 
 		warnText = new FlxText(0, 0, FlxG.width,
 			"Hey, watch out!\n
-			This Mod contains some flashing lights, and this is a BETA build!\n
-			This WILL lag and may have bugs, there is no getting around that. Some of it is intentional though.\n
-			It also is unfinished cause its a beta, so things are subject to change.\n
-			Press ENTER to disable flashes now or go to Options Menu.\n
-			Press ESCAPE to ignore this message.\n
+			This Mod contains some flashing lights!\n
+			And, this WILL lag, there is no getting around that. Some of it is intentional though.\n
+			Press ESCAPE to start the game\n
 			You've been warned!",
 			32);
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
