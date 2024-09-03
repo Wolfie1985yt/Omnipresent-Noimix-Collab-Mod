@@ -48,6 +48,36 @@ local ddRows = {}
 local mmRows = {}
 
 function onCreate()
+	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false then
+		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/egg_bg', -1000, -1000);
+		scaleObject('eggman_bg', 1.5, 1.5);
+		setScrollFactor('eggman_bg', 1, 1);
+		setProperty('eggman_bg.antialiasing', true);
+		setProperty('eggman_bg.visible', false);
+		addLuaSprite('eggman_bg', false);
+	
+		makeLuaSprite('eggman_eys', 'bgs/triple-trouble-encore/eggman/egg_eys', -1000, -1000);
+		scaleObject('eggman_eys', 1.5, 1.5);
+		setScrollFactor('eggman_eys', 1, 1);
+		setProperty('eggman_eys.antialiasing', true);
+		setProperty('eggman_eys.visible', false);
+		addLuaSprite('eggman_eys', false);
+	else
+		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/eggbgLowQuality', -1000, -1000);
+		scaleObject('eggman_bg', 1.5, 1.5);
+		setScrollFactor('eggman_bg', 1, 1);
+		setProperty('eggman_bg.antialiasing', true);
+		setProperty('eggman_bg.visible', false);
+		addLuaSprite('eggman_bg', false);
+	
+		makeLuaSprite('eggman_eys', 'blank', -1000, -1000);
+		scaleObject('eggman_eys', 1.5, 1.5);
+		setScrollFactor('eggman_eys', 1, 1);
+		setProperty('eggman_eys.antialiasing', true);
+		setProperty('eggman_eys.visible', false);
+		addLuaSprite('eggman_eys', false);
+	end
+
 	addCharacterToList('wechBeast', 'dad');
 	addCharacterToList('fleetway', 'dad');
 	addCharacterToList('Satanos', 'dad');
@@ -125,36 +155,6 @@ function onCreate()
 	setProperty('faker_pixel.antialiasing', false);
 	setProperty('faker_pixel.visible', false);
 	addLuaSprite('faker_pixel', false);
-
-	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false then
-		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/egg_bg', -1000, -1000);
-		scaleObject('eggman_bg', 1.5, 1.5);
-		setScrollFactor('eggman_bg', 1, 1);
-		setProperty('eggman_bg.antialiasing', true);
-		setProperty('eggman_bg.visible', false);
-		addLuaSprite('eggman_bg', false);
-	
-		makeLuaSprite('eggman_eys', 'bgs/triple-trouble-encore/eggman/egg_eys', -1000, -1000);
-		scaleObject('eggman_eys', 1.5, 1.5);
-		setScrollFactor('eggman_eys', 1, 1);
-		setProperty('eggman_eys.antialiasing', true);
-		setProperty('eggman_eys.visible', false);
-		addLuaSprite('eggman_eys', false);
-	else
-		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/eggbgLowQuality', -1000, -1000);
-		scaleObject('eggman_bg', 1.5, 1.5);
-		setScrollFactor('eggman_bg', 1, 1);
-		setProperty('eggman_bg.antialiasing', true);
-		setProperty('eggman_bg.visible', false);
-		addLuaSprite('eggman_bg', false);
-	
-		makeLuaSprite('eggman_eys', 'blank', -1000, -1000);
-		scaleObject('eggman_eys', 1.5, 1.5);
-		setScrollFactor('eggman_eys', 1, 1);
-		setProperty('eggman_eys.antialiasing', true);
-		setProperty('eggman_eys.visible', false);
-		addLuaSprite('eggman_eys', false);
-	end
 	
 	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false then
 		makeLuaSprite('simplejump', 'epicjump', 0, 0);
@@ -683,9 +683,6 @@ function onUpdate(elapsed)
 		setProperty('gfGroup.x',75);
 		setProperty('gfGroup.y',-100);
 		setProperty('defaultCamZoom',0.6);
-		setObjectOrder('dadGroup', 100)
-		setObjectOrder('gfGroup', 101)
-		setObjectOrder('boyfriendGroup', 102)
 	end
 	if curStep == 6768 or curStep == 6912 or curStep == 6944 or curStep == 11504 or curStep == 11616 then --majin
 		fatalMoment = false;
@@ -717,9 +714,6 @@ function onUpdate(elapsed)
 		setProperty('gfGroup.x',790);
 		setProperty('gfGroup.y',0);
 		setProperty('defaultCamZoom',0.77);
-		setObjectOrder('gfGroup', 104)
-		setObjectOrder('dadGroup', 105)
-		setObjectOrder('boyfriendGroup', 106)
 	end
 	if curStep == 7232 or curStep == 7332 or curStep == 8336 or curStep == 8392 or curStep == 11728 then --sanic
 		runTimer('ringStart',0.1);
@@ -821,20 +815,6 @@ function onUpdate(elapsed)
 		setProperty('gfGroup.x',-800);
 		setProperty('gfGroup.y',75);
 		setProperty('defaultCamZoom',0.7);
-		setObjectOrder('eggman_bg',104);
-		setObjectOrder('eggman_eys',105);
-		setObjectOrder('gfGroup', 112)
-		setObjectOrder('dadGroup', 113)
-		setObjectOrder('boyfriendGroup', 116)
-	end
-	if curStep == 12081 then
-		setObjectOrder('gfGroup', 110)
-		setObjectOrder('dadGroup', 104)
-	end
-	if curStep == 12224 then
-		setObjectOrder('gfGroup', 112)
-		setObjectOrder('dadGroup', 113)
-		setObjectOrder('boyfriendGroup', 116)
 	end
 	if curStep == 12240 then --badappleshit
 		xx = 1035;
@@ -850,9 +830,6 @@ function onUpdate(elapsed)
 		setProperty('gfGroup.x',75);
 		setProperty('gfGroup.y',-100);
 		setProperty('defaultCamZoom',1);
-		setObjectOrder('dadGroup', 100)
-		setObjectOrder('gfGroup', 101)
-		setObjectOrder('boyfriendGroup', 102)
 		finalMoment = true;
 	end
 	if curStep == 12784 then --faker ending
@@ -874,8 +851,6 @@ function onUpdate(elapsed)
 		setProperty('gfGroup.y',75);
 		setProperty('defaultCamZoom',1.7);
 		setProperty('faker_pixel.visible', true);
-		setObjectOrder('gfGroup',1000);
-		setObjectOrder('dadGroup',1001);
 		setObjectOrder('boyfriendGroup',1002);
 	end
 	if curStep == 5584 then --remove eggman
