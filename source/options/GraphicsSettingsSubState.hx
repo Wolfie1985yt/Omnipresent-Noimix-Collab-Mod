@@ -11,7 +11,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		title = 'Graphics';
 		rpcTitle = 'Graphics Settings Menu'; //for Discord Rich Presence
 
-		boyfriend = new Character(840, 170, 'bf', true);
+		boyfriend = new Character(840, 170, 'bf-encore', true);
 		boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.75));
 		boyfriend.updateHitbox();
 		boyfriend.dance();
@@ -20,7 +20,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 
 		//I'd suggest using "Low Quality" as an example for making your own option since it is the simplest here
 		var option:Option = new Option('Low Quality', //Name
-			'If checked, disables some background details,\ndecreases loading times and improves performance.', //Description
+			'If checked, disables certain bg aspects and scroll speeds\nRequires a full game restart to fully activate.', //Description
 			'lowQuality', //Save data variable name
 			'bool'); //Variable type
 		addOption(option);

@@ -1,0 +1,34 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				470,
+				326
+			],
+			"anim": "laser",
+			"fps": 24,
+			"name": "fun",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "blank",
+	"position": [
+		-50,
+		-100
+	],
+	"healthicon": "fleetway",
+	"flip_x": false,
+	"healthbar_colors": [
+		175,
+		115,
+		0
+	],
+	"camera_position": [
+		-1240,
+		-280
+	],
+	"sing_duration": 4,
+	"scale": 0.95
+}

@@ -23,6 +23,7 @@
 	<define name="MODS_ALLOWED" if="desktop" />
 	<define name="HSCRIPT_ALLOWED" if="desktop" />
 	<define name="LUA_ALLOWED" if="desktop" />
+	<define name="DISCORD_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="desktop || mobile" unless="32bits"/> <!-- IF YOU WANT TO USE VIDEOS ON YOUR SOURCE MOD, GET THIS LINE OUTSIDE OF THE SECTION -->
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 
@@ -65,6 +66,7 @@
 	<assets path="assets/songs"         library="songs"         exclude="*.ogg" if="web"/>
 	<assets path="systeminfo" rename="assets" exclude="*.mp3"  unless="web"/>
 	<assets path="assets/songs"         library="songs"         exclude="*.mp3" unless="web"/>
+	<assets path="art/yesnt"         rename=""         exclude="*.mp3" unless="web"/>
 	<section if="TITLE_SCREEN_EASTER_EGG">
 		<assets path="assets/secrets" rename="assets/shared" exclude="*.ogg" if="web"/>
 		<assets path="assets/secrets" rename="assets/shared" exclude="*.mp3"  unless="web"/>
@@ -90,7 +92,7 @@
 	<!--Psych stuff needed-->
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
-	<haxelib name="hxvlc" if="VIDEOS_ALLOWED"/>
+	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 	<haxelib name="hxdiscord_rpc" if="DISCORD_ALLOWED"/>
 	<haxelib name="flxanimate"/>
 

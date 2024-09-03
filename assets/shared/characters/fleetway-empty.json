@@ -1,0 +1,174 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				-35,
+				13
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15
+			],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				-22,
+				-85
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15
+			],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				3,
+				-98
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15
+			],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				123,
+				-80
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15
+			],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				12,
+				11
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "fastanim",
+			"indices": [],
+			"name": "fun"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "blank",
+	"position": [
+		-50,
+		0
+	],
+	"healthicon": "fleetway",
+	"flip_x": false,
+	"healthbar_colors": [
+		175,
+		115,
+		0
+	],
+	"camera_position": [
+		-50,
+		180
+	],
+	"sing_duration": 4,
+	"scale": 0.95,
+	"_editor_isPlayer": false
+}

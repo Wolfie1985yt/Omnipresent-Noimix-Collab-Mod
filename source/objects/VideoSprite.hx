@@ -1,173 +1,351 @@
 package objects;
 
-import flixel.addons.display.FlxPieDial;
+#if flixel
+import flixel.graphics.FlxGraphic;
+import flixel.util.FlxColor;
+import flixel.FlxG;
+import flixel.FlxSprite;
+import haxe.io.Bytes;
+import hxvlc.externs.Types;
+import hxvlc.util.macros.Define;
+import hxvlc.util.Location;
+import hxvlc.openfl.Video;
+import sys.FileSystem;
 
-#if hxvlc
-import hxvlc.flixel.FlxVideoSprite;
-#end
+using StringTools;
 
-class VideoSprite extends FlxSpriteGroup {
-	#if VIDEOS_ALLOWED
-	public var finishCallback:Void->Void = null;
-	public var onSkip:Void->Void = null;
+/**
+ * This class extends FlxSprite to display video files in HaxeFlixel.
+ *
+ * ```haxe
+ * var video:FlxVideoSprite = new FlxVideoSprite(0, 0);
+ * video.antialiasing = true;
+ * video.bitmap.onFormatSetup.add(function():Void
+ * {
+ * 	if (video.bitmap != null && video.bitmap.bitmapData != null)
+ * 	{
+ * 		final scale:Float = Math.min(FlxG.width / video.bitmap.bitmapData.width, FlxG.height / video.bitmap.bitmapData.height);
+ *
+ * 		video.setGraphicSize(video.bitmap.bitmapData.width * scale, video.bitmap.bitmapData.height * scale);
+ * 		video.updateHitbox();
+ * 		video.screenCenter();
+ * 	}
+ * });
+ * video.bitmap.onEndReached.add(video.destroy);
+ * add(video);
+ *
+ * if (video.load('assets/videos/video.mp4'))
+ * 	FlxTimer.wait(0.001, () -> video.play());
+ * ```
+ */
+class VideoSprite extends FlxSprite implements IFlxVideoSprite
+{
+	/**
+	 * Indicates whether the video should automatically pause when focus is lost.
+	 *
+	 * Must be set before loading a video.
+	 */
+	public var autoPause:Bool = FlxG.autoPause;
 
-	final _timeToSkip:Float = 1;
-	public var holdingTime:Float = 0;
-	public var videoSprite:FlxVideoSprite;
-	public var skipSprite:FlxPieDial;
-	public var cover:FlxSprite;
-	public var canSkip(default, set):Bool = false;
+	#if FLX_SOUND_SYSTEM
+	/**
+	 * Determines if Flixel automatically adjusts the volume based on the Flixel sound system's current volume.
+	 */
+	public var autoVolumeHandle:Bool = true;
+	#end
 
-	private var videoName:String;
+	/**
+	 * The video bitmap object.
+	 */
+	public var bitmap(default, null):Video;
 
-	public var waiting:Bool = false;
-	public var didPlay:Bool = false;
+	/**
+	 * Creates a `FlxVideoSprite` at a specified position.
+	 *
+	 * @param x The initial X position of the sprite.
+	 * @param y The initial Y position of the sprite.
+	 */
+	public function new(?x:Float = 0, ?y:Float = 0):Void
+	{
+		super(x, y);
 
-	public function new(videoName:String, isWaiting:Bool, canSkip:Bool = false, shouldLoop:Dynamic = false) {
-		super();
+		makeGraphic(1, 1, FlxColor.TRANSPARENT);
 
-		this.videoName = videoName;
-		scrollFactor.set();
-		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
-
-		waiting = isWaiting;
-		if(!waiting)
+		bitmap = new Video(antialiasing);
+		bitmap.onOpening.add(function():Void
 		{
-			cover = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
-			cover.scale.set(FlxG.width + 100, FlxG.height + 100);
-			cover.screenCenter();
-			cover.scrollFactor.set();
-			add(cover);
-		}
+			bitmap.role = LibVLC_Role_Game;
 
-		// initialize sprites
-		videoSprite = new FlxVideoSprite();
-		videoSprite.antialiasing = ClientPrefs.data.antialiasing;
-		add(videoSprite);
-		if(canSkip) this.canSkip = true;
-
-		// callbacks
-		if(!shouldLoop)
-		{
-			videoSprite.bitmap.onEndReached.add(function() {
-				if(alreadyDestroyed) return;
-	
-				//trace('Video destroyed');
-				if(cover != null)
-				{
-					remove(cover);
-					cover.destroy();
-				}
-		
-				PlayState.instance.remove(this);
-				destroy();
-				alreadyDestroyed = true;
-			});
-		}
-
-		videoSprite.bitmap.onFormatSetup.add(function()
-		{
-			/*
-			#if hxvlc
-			var wd:Int = videoSprite.bitmap.formatWidth;
-			var hg:Int = videoSprite.bitmap.formatHeight;
-			//trace('Video Resolution: ${wd}x${hg}');
-			videoSprite.scale.set(FlxG.width / wd, FlxG.height / hg);
+			#if FLX_SOUND_SYSTEM
+			if (bitmap != null && autoVolumeHandle)
+				bitmap.volume = Math.floor((FlxG.sound.muted ? 0 : 1) * FlxG.sound.volume * Define.getFloat('HXVLC_FLIXEL_VOLUME_MULTIPLIER', 100));
 			#end
-			*/
-			videoSprite.setGraphicSize(FlxG.width);
-			videoSprite.updateHitbox();
-			videoSprite.screenCenter();
 		});
-
-		// start video and adjust resolution to screen size
-		videoSprite.load(videoName, shouldLoop ? ['input-repeat=65545'] : null);
+		bitmap.onFormatSetup.add(function():Void
+		{
+			if (bitmap != null && bitmap.bitmapData != null)
+				loadGraphic(FlxGraphic.fromBitmapData(bitmap.bitmapData, false, null, false));
+		});
+		bitmap.alpha = 0;
+		FlxG.game.addChild(bitmap);
 	}
 
-	var alreadyDestroyed:Bool = false;
-	override function destroy()
+	/**
+	 * Loads a video from the specified location.
+	 *
+	 * @param location The location of the media file or stream.
+	 * @param options Additional options to configure the media.
+	 * @return `true` if the media was loaded successfully, `false` otherwise.
+	 */
+	public function load(location:Location, ?options:Array<String>):Bool
 	{
-		if(alreadyDestroyed)
+		if (bitmap == null)
+			return false;
+
+		if (autoPause)
 		{
-			super.destroy();
-			return;
+			if (!FlxG.signals.focusGained.has(resume))
+				FlxG.signals.focusGained.add(resume);
+
+			if (!FlxG.signals.focusLost.has(pause))
+				FlxG.signals.focusLost.add(pause);
 		}
 
-		//trace('Video destroyed');
-		if(cover != null)
+		if (location != null && !(location is Int) && !(location is Bytes) && (location is String))
 		{
-			remove(cover);
-			cover.destroy();
+			final location:String = cast(location, String);
+
+			if (!location.contains('://'))
+			{
+				final absolutePath:String = FileSystem.absolutePath(location);
+
+				if (FileSystem.exists(absolutePath))
+					return bitmap.load(absolutePath, options);
+				else
+				{
+					FlxG.log.warn('Unable to find the video file at location "$absolutePath".');
+
+					return false;
+				}
+			}
 		}
 
-		if(finishCallback != null)
-			finishCallback();
-		onSkip = null;
+		return bitmap.load(location, options);
+	}
 
-		PlayState.instance.remove(this);
+	/**
+	 * Loads a media subitem from the current media's subitems list at the specified index.
+	 *
+	 * @param index The index of the subitem to load.
+	 * @param options Additional options to configure the loaded subitem.
+	 * @return `true` if the subitem was loaded successfully, `false` otherwise.
+	 */
+	public function loadFromSubItem(index:Int, ?options:Array<String>):Bool
+	{
+		return bitmap == null ? false : bitmap.loadFromSubItem(index, options);
+	}
+
+	/**
+	 * Parses the current media item with the specified options.
+	 *
+	 * @param parse_flag The parsing option.
+	 * @param timeout The timeout in milliseconds.
+	 * @return `true` if parsing succeeded, `false` otherwise.
+	 */
+	public function parseWithOptions(parse_flag:Int, timeout:Int):Bool
+	{
+		return bitmap == null ? false : bitmap.parseWithOptions(parse_flag, timeout);
+	}
+
+	/**
+	 * Stops parsing the current media item.
+	 */
+	public function parseStop():Void
+	{
+		if (bitmap != null)
+			bitmap.parseStop();
+	}
+
+	/**
+	 * Starts video playback.
+	 *
+	 * @return `true` if playback started successfully, `false` otherwise.
+	 */
+	public function play():Bool
+	{
+		return bitmap == null ? false : bitmap.play();
+	}
+
+	/**
+	 * Stops video playback.
+	 */
+	public function stop():Void
+	{
+		if (bitmap != null)
+			bitmap.stop();
+	}
+
+	/**
+	 * Pauses video playback.
+	 */
+	public function pause():Void
+	{
+		if (bitmap != null)
+			bitmap.pause();
+	}
+
+	/**
+	 * Resumes playback of a paused video.
+	 */
+	public function resume():Void
+	{
+		if (bitmap != null)
+			bitmap.resume();
+	}
+
+	/**
+	 * Toggles between play and pause states of the video.
+	 */
+	public function togglePaused():Void
+	{
+		if (bitmap != null)
+			bitmap.togglePaused();
+	}
+
+	public override function destroy():Void
+	{
+		if (FlxG.signals.focusGained.has(resume))
+			FlxG.signals.focusGained.remove(resume);
+
+		if (FlxG.signals.focusLost.has(pause))
+			FlxG.signals.focusLost.remove(pause);
+
 		super.destroy();
+
+		if (bitmap != null)
+		{
+			bitmap.dispose();
+
+			FlxG.removeChild(bitmap);
+
+			bitmap = null;
+		}
 	}
 
-	override function update(elapsed:Float)
+	public override function kill():Void
 	{
-		if(canSkip)
-		{
-			if(Controls.instance.pressed('accept'))
-			{
-				holdingTime = Math.max(0, Math.min(_timeToSkip, holdingTime + elapsed));
-			}
-			else if (holdingTime > 0)
-			{
-				holdingTime = Math.max(0, FlxMath.lerp(holdingTime, -0.1, FlxMath.bound(elapsed * 3, 0, 1)));
-			}
-			updateSkipAlpha();
+		if (bitmap != null)
+			bitmap.pause();
 
-			if(holdingTime >= _timeToSkip)
-			{
-				if(onSkip != null) onSkip();
-				finishCallback = null;
-				videoSprite.bitmap.onEndReached.dispatch();
-				PlayState.instance.remove(this);
-				//trace('Skipped video');
-				return;
-			}
-		}
+		super.kill();
+	}
+
+	public override function revive():Void
+	{
+		super.revive();
+
+		if (bitmap != null)
+			bitmap.resume();
+	}
+
+	public override function update(elapsed:Float):Void
+	{
+		#if FLX_SOUND_SYSTEM
+		if (bitmap != null && autoVolumeHandle)
+			bitmap.volume = Math.floor((FlxG.sound.muted ? 0 : 1) * FlxG.sound.volume * Define.getFloat('HXVLC_FLIXEL_VOLUME_MULTIPLIER', 100));
+		#end
+
 		super.update(elapsed);
 	}
 
-	function set_canSkip(newValue:Bool)
+	@:noCompletion
+	private override function set_antialiasing(value:Bool):Bool
 	{
-		canSkip = newValue;
-		if(canSkip)
-		{
-			if(skipSprite == null)
-			{
-				skipSprite = new FlxPieDial(0, 0, 40, FlxColor.WHITE, 40, true, 24);
-				skipSprite.replaceColor(FlxColor.BLACK, FlxColor.TRANSPARENT);
-				skipSprite.x = FlxG.width - (skipSprite.width + 80);
-				skipSprite.y = FlxG.height - (skipSprite.height + 72);
-				skipSprite.amount = 0;
-				add(skipSprite);
-			}
-		}
-		else if(skipSprite != null)
-		{
-			remove(skipSprite);
-			skipSprite.destroy();
-			skipSprite = null;
-		}
-		return canSkip;
+		return antialiasing = (bitmap == null ? value : (bitmap.smoothing = value));
 	}
-
-	function updateSkipAlpha()
-	{
-		if(skipSprite == null) return;
-
-		skipSprite.amount = Math.min(1, Math.max(0, (holdingTime / _timeToSkip) * 1.025));
-		skipSprite.alpha = FlxMath.remapToRange(skipSprite.amount, 0.025, 1, 0, 1);
-	}
-
-	public function resume() videoSprite.resume();
-	public function pause() videoSprite.pause();
-	#end
 }
+
+/**
+ * Interface representing a video sprite object in Flixel.
+ */
+interface IFlxVideoSprite
+{
+	/**
+	 * Indicates whether the video should automatically pause when focus is lost.
+	 *
+	 * Must be set before loading a video.
+	 */
+	public var autoPause:Bool;
+
+	#if FLX_SOUND_SYSTEM
+	/**
+	 * Determines if Flixel automatically adjusts the volume based on the Flixel sound system's current volume.
+	 */
+	public var autoVolumeHandle:Bool;
+	#end
+
+	/**
+	 * The video bitmap object.
+	 */
+	public var bitmap(default, null):Video;
+
+	/**
+	 * Loads a video from a specified location.
+	 *
+	 * @param location The path, URL, file descriptor ID, or bitstream input of the media.
+	 * @param options Additional options for LibVLC Media.
+	 * @return `true` if the video loads successfully, `false` otherwise.
+	 */
+	public function load(location:Location, ?options:Array<String>):Bool;
+
+	/**
+	 * Loads a media subitem from the current media's subitems list at the specified index.
+	 *
+	 * @param index The index of the subitem to load.
+	 * @param options Additional options to configure the loaded subitem.
+	 * @return `true` if the subitem was loaded successfully, `false` otherwise.
+	 */
+	public function loadFromSubItem(index:Int, ?options:Array<String>):Bool;
+
+	/**
+	 * Parses the current media item with the specified options.
+	 *
+	 * @param parse_flag The parsing option.
+	 * @param timeout The timeout duration in milliseconds.
+	 * @return `true` if parsing succeeds, `false` otherwise.
+	 */
+	public function parseWithOptions(parse_flag:Int, timeout:Int):Bool;
+
+	/**
+	 * Stops the parsing of the current media item.
+	 */
+	public function parseStop():Void;
+
+	/**
+	 * Starts video playback.
+	 *
+	 * @return `true` if playback started successfully, `false` otherwise.
+	 */
+	public function play():Bool;
+
+	/**
+	 * Stops video playback.
+	 */
+	public function stop():Void;
+
+	/**
+	 * Pauses video playback.
+	 */
+	public function pause():Void;
+
+	/**
+	 * Resumes playback of a paused video.
+	 */
+	public function resume():Void;
+
+	/**
+	 * Toggles between play and pause states of the video.
+	 */
+	public function togglePaused():Void;
+}
+#end

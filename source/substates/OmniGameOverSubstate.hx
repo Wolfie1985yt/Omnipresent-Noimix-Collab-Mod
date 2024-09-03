@@ -12,14 +12,9 @@ import flixel.tweens.FlxTween;
 import flixel.text.FlxText;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
-import states.StoryMenuState;
-import states.FreeplayState;
+import states.PlayState;
 import objects.Character;
-import backend.Song;
-import haxe.Json;
-import states.PlayState as PlayState;
-
-import hxvlc.flixel.FlxVideoSprite;
+import vlc.MP4Handler as VideoHandler;
 
 class OmniGameOverSubstate extends MusicBeatSubstate
 {
@@ -30,11 +25,12 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 	var opponentName:String;
 	var gfName:String;
 	var bfName:String;
+	#if desktop
+	var video:VideoHandler = new VideoHandler();
+	#else
+	var video:MP4Handler;
+	#end
 	var videoIsFinished:Bool = false;
-	
-	var video:FlxVideoSprite;
-	
-	public static var SONG:SwagSong = null;
 
 	override function create()
 	{
@@ -49,13 +45,12 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 		super();
 
 		var playStateInstance = PlayState.instance;
-
 		opponentName = playStateInstance.dad.curCharacter;
 		gfName = playStateInstance.gf.curCharacter;
 		bfName = playStateInstance.boyfriend.curCharacter;
-    
+		
 		trace(playStateInstance.dad.curCharacter);
-
+		
 		PlayState.instance.setOnLuas('inGameOver', true);
 
 		Conductor.songPosition = 0;
@@ -70,385 +65,206 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(blackScreen);
 		blackScreen.cameras = [coolcamera];
-
-		switch(FlxG.random.int(1, 100)) {			
-		case 100:
-			video = new FlxVideoSprite(0, 0);
-			video.updateHitbox();
-			video.load(Paths.video('tune this out bitch'));
-			add(video);
-			video.play();
-			video.bitmap.onEndReached.add(function() 
-			{
-				video.destroy();
-				endBullshit();
-			});
-		case 99:
-			video = new FlxVideoSprite(0, 0);
-			video.updateHitbox();
-			video.load(Paths.video('YEAAAAAAAAAAAAAAAAAAAAAAAAA'));
-			add(video);
-			video.play();
-			video.bitmap.onEndReached.add(function() 
-			{
-				video.destroy();
-				endBullshit();
-			});
-		case 98:
-			video = new FlxVideoSprite(0, 0);
-			video.updateHitbox();
-			video.load(Paths.video('bfhair'));
-			add(video);
-			video.play();
-			video.bitmap.onEndReached.add(function() 
-			{
-				video.destroy();
-				endBullshit();
-			});
-
-		case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97:
-			if (opponentName == 'tailsdoll' || opponentName == 'tailsdoll-flipped') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('test1'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (opponentName == 'xterion-first' || opponentName == 'xterion-second') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('what'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (gfName == 'sonic' || opponentName == 'fleetway' || opponentName == 'fleetway-anims2' || opponentName == 'fleetway-anims3' || opponentName == 'fleetwaylaser') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('fleetgeta'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (opponentName == 'Chaotix' || opponentName == 'wechBeast' || opponentName == 'Knuckles-Encore' || opponentName == 'wechBeast-flipped') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('i am wechidn-asdfl;'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (opponentName == 'Satanos' || opponentName == 'Eggman-Encore' || opponentName == 'Eggman-Encore-flipped') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('EGGMAN NO'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (opponentName == 'sonicexe' || opponentName == 'ycr-cherribun' || opponentName == 'ycr-mad-cherribun') {
-				switch(FlxG.random.int(1, 2)) {
-					case 1:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('omg sonic'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
-						
-					case 2:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('myfinger'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
+		#if desktop
+		video = new VideoHandler();
+		#else
+		video = new MP4Handler();
+		#end
+		switch(FlxG.random.int(1, 100)) {
+			case 100:
+				#if desktop video.play #else video.playVideo #end(Paths.video('tune this out bitch'));
+				#if desktop
+				video.volume = 100;
+				#end
+			
+			case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99:	
+				if (opponentName == 'tailsdoll' || opponentName == 'tailsdoll-flipped') {
+					#if desktop video.play #else video.playVideo #end(Paths.video('test1'));
+					#if desktop
+					video.volume = 100;
+					#end
 				}
-			}
-			if (opponentName == 'lordxEncore') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video("HUEHUEHUE'D"));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}	
-			if (opponentName == 'Tails-Encore' || opponentName == 'Needlemouse' || opponentName == 'Needlemouse' && gfName == 'Tails-Encore' || opponentName == 'Needlemouse-flipped' || opponentName == 'Needlemouse-p2' || opponentName == 'Needlemouse-p2-flipped' || opponentName == 'Tails-Encore-flipped') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('he has a point'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (opponentName == 'sunky' || opponentName == 'sanic') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('Sunky Chad'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (opponentName == 'BEAST-Enc' && gfName == 'Tails-Encore') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('sonic_jacking_off'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (opponentName == 'majin' || opponentName == 'majin-flipped') {
-				switch(FlxG.random.int(1, 2)) {
-					case 1:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('bitchless'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
-					
-					case 2:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('Mother I have shidded the bed.'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
+				if (opponentName == 'BEAST-Enc' && gfName == 'Tails-Encore') {
+					#if desktop video.play #else video.playVideo #end(Paths.video('sonic_jacking_off'));
+					#if desktop
+					video.volume = 100;
+					#end
 				}
-			}
-			if (opponentName == 'BEAST-Enc' && bfName == 'Encore-right') {
-				switch(FlxG.random.int(1, 2)) {
-					case 1:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('forkliftcertified'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
-				
-					case 2:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('no_ice_cream'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
+				if (bfName == 'bf-encore-small' && opponentName == 'BEAST-Enc' && gfName == 'Needlemouse' || bfName == 'bf-encore-pixel-smaller' || bfName == 'bf-needle-encore-small' || bfName == 'bf-john9doe-3d-small') {
+					switch(FlxG.random.int(1, 2)) {
+						case 1:
+							#if desktop video.play #else video.playVideo #end(Paths.video('YEAAAAAAAAAAAAAAAAAAAAAAAAA'));
+							#if desktop
+							video.volume = 100;
+							#end
+						case 2:
+							#if desktop video.play #else video.playVideo #end(Paths.video('bfhair'));
+							#if desktop
+							video.volume = 100;
+							#end
+					}
 				}
-			}
-			if (opponentName == 'coldsteel' || opponentName == 'coldsteel_guitar' || opponentName == 'coldsteel-flipped') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('gettrolled'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (opponentName == 'faker-encore') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('imbouttocuuuuuuuuuuuuuuuuuuu'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (opponentName == 'faker_pixel') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('its his mic fr'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (opponentName == 'exe-encore') {
-				video = new FlxVideoSprite(0, 0);
-				video.updateHitbox();
-				video.load(Paths.video('Googoogaagaa'));
-				add(video);
-				video.play();
-				video.bitmap.onEndReached.add(function() 
-				{
-					video.destroy();
-					endBullshit();
-				});
-			}
-			if (opponentName == 'fatal-sonic' || opponentName == 'true-fatal') {
-				switch(FlxG.random.int(1, 10)) {
-					case 1, 2, 3, 4, 5, 6, 7, 8, 9:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('howitfeelstochew5gum'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
-					
-					case 10:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('Fatal Error Singing'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
+				if (opponentName == 'Chaotix' || opponentName == 'wechBeast' || opponentName == 'Knuckles-Encore' || opponentName == 'wechBeast-flipped') {
+					#if desktop video.play #else video.playVideo #end(Paths.video('i am wechidn-asdfl;'));
+					#if desktop
+					video.volume = 100;
+					#end
 				}
-			}
-			if (opponentName == 'hog') {
-				switch(FlxG.random.int(1, 2)) {
-					case 1:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('HogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHog'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
-					
-					case 2:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('hogToaster'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
+				if (opponentName == 'Satanos' || opponentName == 'Eggman-Encore' || opponentName == 'Eggman-Encore-flipped' || opponentName == 'wechBeast-flipped') {
+					#if desktop video.play #else video.playVideo #end(Paths.video('EGGMAN NO'));
+					#if desktop
+					video.volume = 100;
+					#end
 				}
-			}
-			if (opponentName == 'scorched') {
-				switch(FlxG.random.int(1, 2)) {
-					case 1:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('Scorched Yes'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
-					
-					case 2:
-						video = new FlxVideoSprite(0, 0);
-						video.updateHitbox();
-						video.load(Paths.video('MWAHAHAHA'));
-						add(video);
-						video.play();
-						video.bitmap.onEndReached.add(function() 
-						{
-							video.destroy();
-							endBullshit();
-						});
+				if (opponentName == 'exe-encore') {
+					#if desktop video.play #else video.playVideo #end(Paths.video('Googoogaagaa'));
+					#if desktop
+					video.volume = 100;
+					#end
 				}
-			}
+				if (opponentName == 'fleetway' || opponentName == 'fleetway-anims2' || opponentName == 'fleetway-anims3' || opponentName == 'fleetwaylaser') {
+					#if desktop video.play #else video.playVideo #end(Paths.video('fleetgeta'));
+					#if desktop
+					video.volume = 100;
+					#end
+				}
+				if (opponentName == 'sunky' || opponentName == 'coldsteel' || opponentName == 'coldsteel_guitar' || opponentName == 'sanic' || opponentName == 'coldsteel-flipped' || opponentName == 'sanic-flipped') {
+					switch(FlxG.random.int(1, 2)) {
+						case 1:
+							#if desktop video.play #else video.playVideo #end(Paths.video('gettrolled'));
+							#if desktop
+							video.volume = 100;
+							#end
+						case 2:
+							#if desktop video.play #else video.playVideo #end(Paths.video('Sunky Chad'));
+							#if desktop
+							video.volume = 100;
+							#end
+					}
+				}
+				if (opponentName == 'hog') {
+					switch(FlxG.random.int(1, 2)) {
+						case 1:
+							#if desktop video.play #else video.playVideo #end(Paths.video('HogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHog'));
+							#if desktop
+							video.volume = 100;
+							#end
+						case 2:
+							#if desktop video.play #else video.playVideo #end(Paths.video('hogToaster'));
+							#if desktop
+							video.volume = 100;
+							#end
+					}
+				}
+				if (opponentName == 'lordxEncore') {
+					#if desktop video.play #else video.playVideo #end(Paths.video("HUEHUEHUE'D"));
+					#if desktop
+					video.volume = 100;
+					#end
+				}
+				if (opponentName == 'Needlemouse' || opponentName == 'Needlemouse-flipped' || opponentName == 'Needlemouse-p2' || opponentName == 'Needlemouse-p2-flipped' || opponentName == 'Tails-Encore' || opponentName == 'Tails-Encore-flipped') {
+					#if desktop video.play #else video.playVideo #end(Paths.video('he has a point'));
+					#if desktop
+					video.volume = 100;
+					#end
+				}
+				if (opponentName == 'xterion-first' || opponentName == 'xterion-second') {
+					#if desktop video.play #else video.playVideo #end(Paths.video('what'));
+					#if desktop
+					video.volume = 100;
+					#end
+				}
+				if (opponentName == 'scorched' || opponentName == 'scorched-flipped') {
+					switch(FlxG.random.int(1, 2)) {
+						case 1:
+							#if desktop video.play #else video.playVideo #end(Paths.video('MWAHAHAHA'));
+							#if desktop
+							video.volume = 100;
+							#end
+						case 2:
+							#if desktop video.play #else video.playVideo #end(Paths.video('Scorched Yes'));
+							#if desktop
+							video.volume = 100;
+							#end
+					}
+				}
+				if (opponentName == 'faker-encore' || opponentName == 'faker_pixel') {
+					switch(FlxG.random.int(1, 2)) {
+						case 1:
+							#if desktop video.play #else video.playVideo #end(Paths.video('imbouttocuuuuuuuuuuuuuuuuuuu'));
+							#if desktop
+							video.volume = 100;
+							#end
+						case 2:
+							#if desktop video.play #else video.playVideo #end(Paths.video('its his mic fr'));
+							#if desktop
+							video.volume = 100;
+							#end
+					}
+				}
+				if (opponentName == 'majin' || opponentName == 'majin-flipped') {
+					switch(FlxG.random.int(1, 2)) {
+						case 1:
+							#if desktop video.play #else video.playVideo #end(Paths.video('Mother I have shidded the bed.'));
+							#if desktop
+							video.volume = 100;
+							#end
+						case 2:
+							#if desktop video.play #else video.playVideo #end(Paths.video('bitchless'));
+							#if desktop
+							video.volume = 100;
+							#end
+					}
+				}
+				if (opponentName == 'fatal-sonic' || opponentName == 'true-fatal') {
+					switch(FlxG.random.int(1, 2)) {
+						case 1:
+							#if desktop video.play #else video.playVideo #end(Paths.video('Fatal Error Singing'));
+							#if desktop
+							video.volume = 100;
+							#end
+						case 2:
+							#if desktop video.play #else video.playVideo #end(Paths.video('howitfeelstochew5gums'));
+							#if desktop
+							video.volume = 100;
+							#end
+					}
+				}
+				if (opponentName == 'BEAST-Enc' && gfName == 'gf' || opponentName == 'sonicexe' || opponentName == 'ycr-cherribun' || opponentName == 'ycr-mad-cherribun') {
+					switch(FlxG.random.int(1, 4)) {
+						case 1:
+							#if desktop video.play #else video.playVideo #end(Paths.video('forkliftcertified'));
+							#if desktop
+							video.volume = 100;
+							#end
+						case 2:
+							#if desktop video.play #else video.playVideo #end(Paths.video('omg sonic'));
+							#if desktop
+							video.volume = 100;
+							#end
+						case 3:
+							#if desktop video.play #else video.playVideo #end(Paths.video('myfinger'));
+							#if desktop
+							video.volume = 100;
+							#end
+						case 4:
+							#if desktop video.play #else video.playVideo #end(Paths.video('no_ice_cream'));
+							#if desktop
+							video.volume = 100;
+							#end
+					}
+				}
 		}
+		#if desktop
+		video.onEndReached.add(function() { videoIsFinished = true; video.dispose(); endBullshit(); }, true);
+		#else
+		video.finishCallback = function() { videoIsFinished = true; endBullshit(); }
+		#end
+		
 		#if mobile
 		addVirtualPad(NONE, A_B);
 		addHitboxCamera();
 		#end
-	}
-
-	override function update(elapsed:Float)
-	{
-	
-		super.update(elapsed);
-
-		PlayState.instance.callOnLuas('onUpdate', [elapsed]);
-
-		if (controls.ACCEPT && videoIsFinished || controls.BACK && videoIsFinished)
-		{
-			endBullshit();
-		}
-		
-		if (FlxG.sound.music.playing)
-		{
-			Conductor.songPosition = FlxG.sound.music.time;
-		}
-		PlayState.instance.callOnScripts('onUpdatePost', [elapsed]);
 	}
 
 	var isEnding:Bool = false;
@@ -471,11 +287,4 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 			PlayState.instance.callOnLuas('onGameOverConfirm', [true]);
 		}
 	}
-
-	override function destroy()
-	{
-		instance = null;
-		super.destroy();
-	}
 }
-

@@ -1,0 +1,111 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				10,
+				-10
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "AAAA",
+			"indices": [],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				100,
+				76
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "Shut up",
+			"indices": [],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				100,
+				140
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "Grrr",
+			"indices": [],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				120,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "lmao",
+			"indices": [],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				90,
+				90
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "Step it up",
+			"indices": [],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				13,
+				78
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "fatphobia",
+			"indices": [],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				140,
+				90
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "WHAT",
+			"indices": [],
+			"name": "fun"
+		},
+		{
+			"offsets": [
+				0,
+				40
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "Finished",
+			"indices": [],
+			"name": "fun"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "blank",
+	"position": [
+		60,
+		110
+	],
+	"healthicon": "fleetway",
+	"flip_x": false,
+	"healthbar_colors": [
+		175,
+		115,
+		0
+	],
+	"camera_position": [
+		-50,
+		-50
+	],
+	"sing_duration": 4,
+	"scale": 0.95
+}

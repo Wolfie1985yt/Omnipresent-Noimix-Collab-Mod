@@ -7,7 +7,6 @@ import openfl.Assets;
 import sys.io.Process;
 import objects.Character;
 import states.PlayState as PlayState;
-import hxvlc.flixel.FlxVideoSprite;
 
 class Omni extends BaseStage
 {
@@ -61,7 +60,6 @@ class Omni extends BaseStage
 	var whiteFuck:FlxSprite;
 	
 	var knuckles_bg:FlxSprite;
-	var knuckles_city2:FlxSprite;
 	var knuckles_floor:FlxSprite;
 	
 	var wechidna_sky:FlxSprite;
@@ -152,50 +150,14 @@ class Omni extends BaseStage
 	var scorchedTrees:BGSprite;
 	var scorchedRocks:BGSprite;
 	
+	#if LOW_QUALITY
+	var lowerQuality:Bool = true;
+	#else
+	var lowerQuality:Bool = false;
+	#end
+
 	var vignette:FlxSprite;
 	var circle:FlxSprite;
-	
-	var char1:FlxSprite;
-	var char2:FlxSprite;
-	var char3:FlxSprite;
-	var char4:FlxSprite;
-	var char5:FlxSprite;
-	var char6:FlxSprite;
-	var char7:FlxSprite;
-	var char8:FlxSprite;
-	var char9:FlxSprite;
-	var char10:FlxSprite;
-	var char12:FlxSprite;
-	var char13:FlxSprite;
-	var char14:FlxSprite;
-	var char16:FlxSprite;
-	var char17:FlxSprite;
-	var char18:FlxSprite;
-	var char19:FlxSprite;
-	var char20:FlxSprite;
-	var char21:FlxSprite;
-	var char22:FlxSprite;
-	var char24:FlxSprite;
-	var char25:FlxSprite;
-	var char26:FlxSprite;
-	var char27:FlxSprite;
-	var char28:FlxSprite;
-	var char29:FlxSprite;
-	var char30:FlxSprite;
-	var char31:FlxSprite;
-	var char32:FlxSprite;
-	var char33:FlxSprite;
-	var char34:FlxSprite;
-	var char35:FlxSprite;
-	var char36:FlxSprite;
-	var char37:FlxSprite;
-	var char38:FlxSprite;
-	var char39:FlxSprite;
-	var char40:FlxSprite;
-	var char41:FlxSprite;
-	var char42:FlxSprite;
-
-	var video:FlxVideoSprite;
 
 	var monitorCounter:Int = 0;
 	var theThing:Int = 1;
@@ -209,18 +171,6 @@ class Omni extends BaseStage
 		add(newthing);
 		remove(newthing);
     }
-	
-	public function preloadVideo(graphic:String) {
-		video = new FlxVideoSprite(0, 0);
-		video.updateHitbox();
-		video.screenCenter();
-		video.load(Paths.video(graphic));
-		add(video);
-		video.play();
-		video.pause();
-		video.destroy();
-		trace("Video Preloaded Successfully: " + graphic + ".mp4");
-    }
 
 	override function create()
 	{
@@ -231,31 +181,33 @@ class Omni extends BaseStage
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		if (!lowQuality) {
 		DiscordClient.changePresence("Loading Assets 0%", null);
-		}
 		#end
 		
 		if (ClientPrefs.data.smartCache && !lowQuality) {
 			gpuCache = true;
 		}
-		//Gpu stuff
-		if (gpuCache)
+		if (gpuCache && !lowQuality)
 		{
 			ClientPrefs.data.cacheOnGPU = true;
 			backend.ClientPrefs.saveSettings();
 			
 			preload('characters/BF/HD/needle-bf-encore');
 			preload('characters/FakerAndExe/faker-exe-encore');
-			preload('characters/Fleetway/Fleetway_Super_Sonic');
-			preload('characters/Fleetway/fleetway1');
+			if (lowerQuality && lowQuality) {
+				preload('blank');
+			} else {
+				preload('characters/Fleetway/Fleetway_Super_Sonic');
+				preload('characters/Fleetway/fleetway1');
+				preload('characters/Wechidna/wechBeast');
+			}
+			
 			preload('characters/HogAndScorched/scorched');
 			preload('characters/LordX/lordxEncore');
 			preload('characters/Majin/SonicFunAssets');
 			preload('characters/Sanic/sanic');
 			preload('characters/Satanos/Satanos');
 			preload('characters/Tails/tails-encore');
-			preload('characters/Wechidna/wechBeast');
 			preload('characters/XenoAndGrimbo/HD/Beast');
 			preload('characters/XenoAndGrimbo/HD/sonicexe');
 			preload('bgs/Chamber/Emeralds');
@@ -303,57 +255,59 @@ class Omni extends BaseStage
 		}
 			
 		//Characters
-		if(!lowQuality) {
-			preload('characters/Wechidna/wechBeast');
-			preload('characters/BF/HD/Sonic');
+		preload('characters/BF/HD/Sonic');
+		if (lowerQuality && lowQuality) {
+			preload('blank');
+		} else {
 			preload('characters/Fleetway/Fleetway_Super_Sonic');
 			preload('characters/Fleetway/fleetway1');
-			preload('characters/HogAndScorched/scorched');
-			preload('characters/Satanos/Satanos');
-			preload('characters/TailsDoll/3D/Tails_Doll');
-			preload('characters/NeedlemouseSarahShadowmouseLutherSunter/Needlemouse');
-			preload('characters/BF/HD/needle-bf-encore');
-			preload('characters/Sanic/sanic');
-			preload('characters/LordX/lordxEncore');
-			preload('characters/Majin/SonicFunAssets');
-			preload('characters/XenoAndGrimbo/HD/Beast');
-			preload('characters/XenoAndGrimbo/HD/sonicexe');
-			preload('characters/FakerAndExe/faker-exe-encore');
-			preload('characters/FakerAndExe/faker_encore');
-			preload('characters/Coldsteel/coldsteel_assets');
-			preload('characters/Coldsteel/coldsteel_guitar');
-			preload('characters/Eggman/eggman-encore');
-			preload('characters/Tails/tails-encore');
-			preload('characters/BF/HD/BF_Requital');
-			preload('characters/BF/HD/encoreBF');
-			preload('characters/BF/HD/encoreBF-blackTint');
-			preload('characters/BF/HD/encoreBF-majin');
-			preload('characters/BF/HD/encoreBF-redTint');
-			preload('characters/HogAndScorched/Hog');
-			preload('characters/Knuckles/knux-encore');
-			preload('characters/Sunky/Sunky');
-			preload('characters/BF/3D/bf-3d');
-			preload('characters/XTerion/3D/xterion-first');
-			preload('characters/ChotixXenotixAndChaotix/HD/chaotix-hd');
-			preload('characters/XenoAndGrimbo/HD/YCR-Mad-Cherribun');
-			preload('characters/XenoAndGrimbo/HD/YCR-Cherribun');
-			preload('characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix');
-			preload('characters/FatalAndCritical/fatal-error-sonic');
-			preload('characters/FatalAndCritical/true-fatal');
-			preload('characters/BF/Pixel/bf-encore-pixel');
-			preload('characters/BF/Pixel/pixel-normal');
-			preload('characters/FakerAndExe/faker_pixel');
+			preload('characters/Wechidna/wechBeast');
+			preload('characters/Fleetway/fleetway3');
+			preload('characters/Wechidna/wechBeast');
 		}
+		preload('characters/HogAndScorched/scorched');
+		preload('characters/Satanos/Satanos');
+		preload('characters/TailsDoll/3D/Tails_Doll');
+		preload('characters/NeedlemouseSarahShadowmouseLutherSunter/Needlemouse');
+		preload('characters/BF/HD/needle-bf-encore');
+		preload('characters/Sanic/sanic');
+		preload('characters/LordX/lordxEncore');
+		preload('characters/Majin/SonicFunAssets');
+		preload('characters/XenoAndGrimbo/HD/Beast');
+		preload('characters/XenoAndGrimbo/HD/sonicexe');
+		preload('characters/FakerAndExe/faker-exe-encore');
+		preload('characters/FakerAndExe/faker_encore');
+		preload('characters/Coldsteel/coldsteel_assets');
+		preload('characters/Coldsteel/coldsteel_guitar');
+		preload('characters/Eggman/eggman-encore');
+		preload('characters/Tails/tails-encore');
+		preload('characters/BF/HD/BF_Requital');
+		preload('characters/BF/HD/encoreBF');
+		preload('characters/BF/HD/encoreBF-blackTint');
+		preload('characters/BF/HD/encoreBF-majin');
+		preload('characters/BF/HD/encoreBF-redTint');
+		preload('characters/HogAndScorched/Hog');
+		preload('characters/Knuckles/knux-encore');
+		preload('characters/Sunky/Sunky');
+		preload('characters/BF/3D/bf-3d');
+		preload('characters/XTerion/3D/xterion-first');
+		preload('characters/ChotixXenotixAndChaotix/HD/chaotix-hd');
+		preload('characters/XenoAndGrimbo/HD/YCR-Mad-Cherribun');
+		preload('characters/XenoAndGrimbo/HD/YCR-Cherribun');
+		preload('characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix');
+		preload('characters/FatalAndCritical/fatal-error-sonic');
+		preload('characters/FatalAndCritical/true-fatal');
+		preload('characters/BF/Pixel/bf-encore-pixel');
+		preload('characters/BF/Pixel/pixel-normal');
+		preload('characters/FakerAndExe/faker_pixel');
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		if (!lowQuality) {
 		DiscordClient.changePresence("Loading Assets 20%", null);
-		}
 		#end
 		
 		//Stages
-		if(!lowQuality) {
+		if (!lowQuality && !lowerQuality || lowerQuality) {
 			preload('bgs/Chamber/Emerald Beam Charged');
 			preload('bgs/Chamber/Emeralds');
 			preload('bgs/Chamber/FleetwayBGshit');
@@ -387,7 +341,7 @@ class Omni extends BaseStage
 			preload('bgs/Wechidna/sky');
 			preload('bgs/faker-encore/bgP1');
 			preload('bgs/faker-encore/bgP2');
-			preload	('bgs/faker-encore/eclipiceP1');
+			preload('bgs/faker-encore/eclipiceP1');
 			preload('bgs/faker-encore/eclipiceP2');
 			preload('bgs/faker-encore/moutainsP1');
 			preload('bgs/faker-encore/moutainsP2');
@@ -451,144 +405,148 @@ class Omni extends BaseStage
 			preload('bgs/chaotix/BG_knuckles');
 			preload('bgs/chaotix/BG_mighty');
 			preload('bgs/chaotix/BG_vector');
-		}
-			
-		#if DISCORD_ALLOWED
-		// Updating Discord Rich Presence
-		if (!lowQuality) {
-		DiscordClient.changePresence("Loading Assets 40%", null);
-		}
-		#end
-		
-		//Other used stuff
-		if (!lowQuality) {
-			preload('Phase3Static');
 			preload('sonicJUMPSCARE');
 			preload('epicjump');
 			preload('wechidna');
 			preload('exedeath');
-			preload('WhiteVG');
-			preload('bad');
-			preload('blank');
-			preload('box');
-			preload('circleshit');
-			preload('error_popups');
-			preload('good');
 			preload('guitar');
-			preload('healthBar');
-			preload('num0');
-			preload('num1');
-			preload('num2');
-			preload('num3');
-			preload('num4');
-			preload('num5');
-			preload('num6');
-			preload('num7');
-			preload('num8');
-			preload('num9');
-			preload('shit');
-			preload('sick');
-			preload('noteSplashes/noteSplashes-Bloodsplash');
-			preload('StartScreens/Text1-omnipresent');
-			preload('StartScreens/Text2-omnipresent');
-			preload('characters/GF_assets');
-			preload('healthBar');
-			preload('hpR-dark');
-			preload('timeBar');
-			preload('tbR-dark');
-		}
-		//Icons
-		if (!lowQuality) {
-			preload('icons/icon-xterion-first');
-			preload('icons/icon-needlemouse');
-			preload('icons/icon-bf-needlemouse');
-			preload('icons/icon-tails-encore');
-			preload('icons/icon-bunfriend');
-			preload('icons/icon-fleetway');
-			preload('icons/icon-chaotix-pixel');
-			preload('icons/icon-pixel-bunfriend');
-			preload('icons/icon-knuckles-encore');
-			preload('icons/icon-wechBeast');
-			preload('icons/icon-satanos');
-			preload('icons/icon-egg-encore');
-			preload('icons/icon-sonicexe');
-			preload('icons/icon-lordx-encore');
-			preload('icons/icon-fatal-sonic');
-			preload('icons/icon-ycr');
-			preload('icons/icon-BEAST');
-			preload('icons/icon-majin');
-			preload('icons/icon-sunky');
-			preload('icons/icon-sanic');
-			preload('icons/icon-fatal-glitched');
-			preload('icons/icon-bunfriend-needlemouse');
-			preload('icons/icon-true-fatal');
-			preload('icons/icon-ycrep4');
-			preload('icons/icon-ycr-pissy');
-			preload('icons/icon-coldsteel');
-			preload('icons/icon-exe-enc');
-			preload('icons/icon-faker-enc');
-			preload('icons/icon-scorched');
-			preload('icons/icon-bfpixel');
-			preload('icons/icon-fakerpixel');
-			preload('icons/icon-taildoll');
-			preload('icons/icon-bf-3d');
-			preload('icons/icon-hog');
-			preload('icons/icon-chaotix-hd');
-			preload('icons/icon-gf');
-			preload('icons/icon-sonic-rr');
-			preload('icons/icon-face');
-			preload('noteSkins/NOTE_assets');
-			preload('philly/gradient');
-			preload('philly/particle');
-			preload('characters/BF/HD/BOYFRIEND');
+		} else {
+			preload('bgs/Chamber/FleetwayBGshitLowQuality');
+			preload('bgs/chaotix/horizonLowQuality');
+			preload('bgs/digitalized/bg');
+			preload('bgs/digitalized/ring');
+			preload('bgs/faker-encore/bg1LowQuality');
+			preload('bgs/faker-encore/bg2LowQuality');
+			preload('bgs/faker-encore/fakerpixel');
+			preload('bgs/fatal/domain2');
+			preload('bgs/FunInfiniteStage/Bush 1');
+			preload('bgs/FunInfiniteStage/Bush2');
+			preload('bgs/FunInfiniteStage/overlay');
+			preload('bgs/FunInfiniteStage/sonicFUNsky');
+			preload('bgs/FunInfiniteStage/floor BG');
+			preload('bgs/hog/bg');
+			preload('bgs/hog/floor');
+			preload('bgs/hog/HillsandHills');
+			preload('bgs/hog/motains');
+			preload('bgs/hog/overlay');
+			preload('bgs/hog/trees');
+			preload('bgs/hog/Waterfalls');
+			preload('bgs/hog/blast/Floor');
+			preload('bgs/hog/blast/Hills');
+			preload('bgs/hog/blast/Monitor');
+			preload('bgs/hog/blast/Mountains');
+			preload('bgs/hog/blast/Plants');
+			preload('bgs/hog/blast/Sunset');
+			preload('bgs/hog/blast/Waterfalls');
+			preload('bgs/LordXStage/lordxstageLowQuality');
+			preload('bgs/needlemouse/needlemouseLowQuality');
+			preload('bgs/sanic/sanicbg');
+			preload('bgs/satanos-bg/satanosLowQuality');
+			preload('bgs/sunky/floor');
+			preload('bgs/sunky/speakers');
+			preload('bgs/sunky/sunky BG');
+			preload('bgs/tails-doll/bg');
+			preload('bgs/too-slow-encore/too-slowLowQuality');
+			preload('bgs/triple-trouble-encore/eggman/eggbgLowQuality');
+			preload('bgs/triple-trouble-encore/knuckles/knucklesLowQuality');
+			preload('bgs/triple-trouble-encore/tails/tailsLowQuality');
+			preload('bgs/triple-trouble-encore/xeno/xeno_floor');
+			preload('bgs/void/shadow');
+			preload('bgs/Wechidna/WechidnaLowQuality');
 		}
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		if (!lowQuality) {
-		DiscordClient.changePresence("Loading Assets 60%", null);
-		}
+		DiscordClient.changePresence("Loading Assets 40%", null);
 		#end
 		
-		//Videos
-		preloadVideo('bfhair');
-		preloadVideo('bitchless');
-		preloadVideo('EGGMAN NO');
-		preloadVideo('Fatal Error Singing');
-		preloadVideo('fleetgeta');
-		preloadVideo('forkliftcertified');
-		preloadVideo('gettrolled');
-		preloadVideo('Googoogaagaa');
-		preloadVideo('he has a point');
-		preloadVideo('HogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHogHog');
-		preloadVideo('hogToaster');
-		preloadVideo('howitfeelstochew5gum');
-		preloadVideo("HUEHUEHUE'D");
-		preloadVideo('i am wechidn-asdfl;');
-		preloadVideo('imbouttocuuuuuuuuuuuuuuuuuuu');
-		preloadVideo('its his mic fr');
-		preloadVideo('Mother I have shidded the bed.');
-		preloadVideo('MWAHAHAHA');
-		preloadVideo('myfinger');
-		preloadVideo('no_ice_cream');
-		preloadVideo('omg sonic');
-		preloadVideo('tune this out bitch');
-		preloadVideo('Scorched Yes');
-		preloadVideo('sonic_jacking_off');
-		preloadVideo('Sunky Chad');
-		preloadVideo('test1');
-		preloadVideo('what');
-		preloadVideo('YEAAAAAAAAAAAAAAAAAAAAAAAAA');
-
-		char41 = new FlxSprite(0, 0);
-		char41.loadGraphic(Paths.image('characters/Wechidna/wechBeast'));
-		char41.scrollFactor.set(1, 1);
-		char41.scale.set(1, 1);
-		char41.antialiasing = ClientPrefs.data.antialiasing;
-		char41.alpha = 0.00001;
-		char41.screenCenter(X);
-		char41.screenCenter(Y);
-		add(char41);
+		//Other used stuff
+		preload('Phase3Static');
+		preload('WhiteVG');
+		preload('bad');
+		preload('blank');
+		preload('box');
+		preload('circleshit');
+		preload('error_popups');
+		preload('good');
+		preload('healthBar');
+		preload('num0');
+		preload('num1');
+		preload('num2');
+		preload('num3');
+		preload('num4');
+		preload('num5');
+		preload('num6');
+		preload('num7');
+		preload('num8');
+		preload('num9');
+		preload('shit');
+		preload('sick');
+		preload('noteSplashes/noteSplashes-Bloodsplash');
+		preload('ring');
+		preload('STATICNOTE_assets');
+		preload('PHANTOMNOTE_assets');
+		preload('hitStatic');
+		preload('spacebar_icon');
+		preload('StartScreens/Text2-omnipresent');
+		preload('characters/GF_assets');
+		preload('healthBar');
+		preload('hpR-dark');
+		preload('timeBar');
+		preload('tbR-dark');
+		
+		//Icons
+		preload('icons/icon-xterion-first');
+		preload('icons/icon-needlemouse');
+		preload('icons/icon-bf-needlemouse');
+		preload('icons/icon-tails-encore');
+		preload('icons/icon-bunfriend');
+		preload('icons/icon-fleetway');
+		preload('icons/icon-chaotix-pixel');
+		preload('icons/icon-pixel-bunfriend');
+		preload('icons/icon-knuckles-encore');
+		preload('icons/icon-wechBeast');
+		preload('icons/icon-satanos');
+		preload('icons/icon-egg-encore');
+		preload('icons/icon-sonicexe');
+		preload('icons/icon-lordx-encore');
+		preload('icons/icon-fatal-sonic');
+		preload('icons/icon-ycr');
+		preload('icons/icon-BEAST');
+		preload('icons/icon-majin');
+		preload('icons/icon-sunky');
+		preload('icons/icon-sanic');
+		preload('icons/icon-fatal-glitched');
+		preload('icons/icon-bunfriend-needlemouse');
+		preload('icons/icon-true-fatal');
+		preload('icons/icon-ycrep4');
+		preload('icons/icon-ycr-pissy');
+		preload('icons/icon-coldsteel');
+		preload('icons/icon-exe-enc');
+		preload('icons/icon-faker-enc');
+		preload('icons/icon-scorched');
+		preload('icons/icon-bfpixel');
+		preload('icons/icon-fakerpixel');
+		preload('icons/icon-taildoll');
+		preload('icons/icon-bf-3d');
+		preload('icons/icon-hog');
+		preload('icons/icon-chaotix-hd');
+		preload('icons/icon-gf');
+		preload('icons/icon-sonic-rr');
+		preload('icons/icon-face');
+		preload('noteSkins/NOTE_assets');
+		preload('philly/gradient');
+		preload('philly/particle');
+		preload('characters/BF/HD/BOYFRIEND');
+		
+		#if DISCORD_ALLOWED
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Loading Assets 60%", null);
+		#end
+		
+		#if LOW_QUALITY
+		trace('Low quality init');
+		#end
 		
 		tailsdoll_floor = new FlxSprite(-700, -100);
 		tailsdoll_floor.loadGraphic(Paths.image('bgs/tails-doll/bg'));
@@ -614,43 +572,37 @@ class Omni extends BaseStage
 		tails_sky.visible = false;
 		add(tails_sky);
 		
-		needleMoutains = new BGSprite('bgs/needlemouse/mountains', -700, -175, 0.8, 0.9);
-		needleMoutains.setGraphicSize(Std.int(needleMoutains.width * 1.1));
-		needleMoutains.visible = false;
-		add(needleMoutains);
-		
-		if (!lowQuality) {
+		if (!lowQuality && !lowerQuality || lowerQuality) {
+			needleMoutains = new BGSprite('bgs/needlemouse/mountains', -700, -175, 0.8, 0.9);
+			needleMoutains.setGraphicSize(Std.int(needleMoutains.width * 1.1));
+			needleMoutains.visible = false;
+			add(needleMoutains);
+
 			needleBuildings = new BGSprite('bgs/needlemouse/buildings', -974, -27, 1, 0.9);
 			needleBuildings.visible = false;
 			add(needleBuildings);
-		} else {
-			needleBuildings = new BGSprite('blank', -744, 367, 1, 0.9);
-			needleBuildings.visible = false;
-			add(needleBuildings);
-		}
 
-		conkCreet = new BGSprite('bgs/needlemouse/CONK_CREET', -775, 841, 1, 0.9);
-		conkCreet.setGraphicSize(Std.int(conkCreet.width * 1.4));
-		conkCreet.visible = false;
-		add(conkCreet);
+			conkCreet = new BGSprite('bgs/needlemouse/CONK_CREET', -775, 901, 1, 0.9);
+			conkCreet.setGraphicSize(Std.int(conkCreet.width * 1.4));
+			conkCreet.visible = false;
+			add(conkCreet);
 
-		tails_sky = new FlxSprite(-450, -1000);
-		tails_sky.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_sky'));
-		tails_sky.scrollFactor.set(1, 1);
-		tails_sky.scale.set(1.6, 1.2);
-		tails_sky.antialiasing = ClientPrefs.data.antialiasing;
-		tails_sky.visible = false;
-		add(tails_sky);
+			tails_sky = new FlxSprite(-450, -1000);
+			tails_sky.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_sky'));
+			tails_sky.scrollFactor.set(1, 1);
+			tails_sky.scale.set(1.6, 1.2);
+			tails_sky.antialiasing = ClientPrefs.data.antialiasing;
+			tails_sky.visible = false;
+			add(tails_sky);
 		
-		tails_trees1 = new FlxSprite(-500, -800);
-		tails_trees1.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_trees1'));
-		tails_trees1.scrollFactor.set(0.8, 0.9);
-		tails_trees1.scale.set(0.95, 0.95);
-		tails_trees1.antialiasing = ClientPrefs.data.antialiasing;
-		tails_trees1.visible = false;
-		add(tails_trees1);
+			tails_trees1 = new FlxSprite(-500, -800);
+			tails_trees1.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_trees1'));
+			tails_trees1.scrollFactor.set(0.8, 0.9);
+			tails_trees1.scale.set(0.95, 0.95);
+			tails_trees1.antialiasing = ClientPrefs.data.antialiasing;
+			tails_trees1.visible = false;
+			add(tails_trees1);
 		
-		if (!lowQuality) {
 			tails_trees2 = new FlxSprite(-500, -800);
 			tails_trees2.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_trees2'));
 			tails_trees2.scrollFactor.set(0.9, 1);
@@ -658,25 +610,15 @@ class Omni extends BaseStage
 			tails_trees2.antialiasing = ClientPrefs.data.antialiasing;
 			tails_trees2.visible = false;
 			add(tails_trees2);
-		} else {
-			tails_trees2 = new FlxSprite(-500, -800);
-			tails_trees2.loadGraphic(Paths.image('blank'));
-			tails_trees2.scrollFactor.set(0.9, 1);
-			tails_trees2.scale.set(0.95, 0.95);
-			tails_trees2.antialiasing = ClientPrefs.data.antialiasing;
-			tails_trees2.visible = false;
-			add(tails_trees2);
-		}
 		
-		tails_floor = new FlxSprite(-550, -900);
-		tails_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_floor'));
-		tails_floor.scrollFactor.set(1, 1);
-		tails_floor.scale.set(0.95, 0.95);
-		tails_floor.antialiasing = ClientPrefs.data.antialiasing;
-		tails_floor.visible = false;
-		add(tails_floor);
-		
-		if (!lowQuality) {
+			tails_floor = new FlxSprite(-550, -900);
+			tails_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_floor'));
+			tails_floor.scrollFactor.set(1, 1);
+			tails_floor.scale.set(0.95, 0.95);
+			tails_floor.antialiasing = ClientPrefs.data.antialiasing;
+			tails_floor.visible = false;
+			add(tails_floor);
+
 			fleetwaybgshit = new FlxSprite(-2629.05, -1344.05);
 			fleetwaybgshit.loadGraphic(Paths.image('bgs/Chamber/FleetwayBGshit'));
 			fleetwaybgshit.antialiasing = ClientPrefs.data.antialiasing;
@@ -684,25 +626,16 @@ class Omni extends BaseStage
 			fleetwaybgshit.scrollFactor.set(1.1, 1);
 			fleetwaybgshit.alpha = 0.000001;
 			add(fleetwaybgshit);
-		} else {
-			fleetwaybgshit = new FlxSprite(-2629.05, -1344.05);
-			fleetwaybgshit.loadGraphic(Paths.image('blank'));
-			fleetwaybgshit.antialiasing = ClientPrefs.data.antialiasing;
-			fleetwaybgshit.scrollFactor.set(1.1, 1);
-			fleetwaybgshit.alpha = 0.000001;
-			add(fleetwaybgshit);
-		}
 				
-		emeraldbeamyellow = new FlxSprite(-300, -1376.95 - 200);
-		emeraldbeamyellow.antialiasing = ClientPrefs.data.antialiasing;
-		emeraldbeamyellow.frames = Paths.getSparrowAtlas('bgs/Chamber/Emerald Beam Charged');
-		emeraldbeamyellow.animation.addByPrefix('a', 'Emerald Beam Charged instance 1', 24, true);
-		emeraldbeamyellow.animation.play('a');
-		emeraldbeamyellow.scrollFactor.set(1.1, 1);
-		emeraldbeamyellow.alpha = 0.000001;
-		add(emeraldbeamyellow);
+			emeraldbeamyellow = new FlxSprite(-300, -1376.95 - 200);
+			emeraldbeamyellow.antialiasing = ClientPrefs.data.antialiasing;
+			emeraldbeamyellow.frames = Paths.getSparrowAtlas('bgs/Chamber/Emerald Beam Charged');
+			emeraldbeamyellow.animation.addByPrefix('a', 'Emerald Beam Charged instance 1', 24, true);
+			emeraldbeamyellow.animation.play('a');
+			emeraldbeamyellow.scrollFactor.set(1.1, 1);
+			emeraldbeamyellow.alpha = 0.000001;
+			add(emeraldbeamyellow);
 
-		if (!lowQuality) {
 			emeralds = new FlxSprite(326.6, -191.75);
 			emeralds.antialiasing = ClientPrefs.data.antialiasing;
 			emeralds.loadGraphic(Paths.image('bgs/Chamber/Emeralds'));
@@ -710,7 +643,148 @@ class Omni extends BaseStage
 			emeralds.antialiasing = ClientPrefs.data.antialiasing;
 			emeralds.alpha = 0.000001;
 			add(emeralds);
+			
+			thechamber = new FlxSprite(-465.05, 813.9);
+			thechamber.loadGraphic(Paths.image('bgs/Chamber/The Chamber'));
+			thechamber.scrollFactor.set(1.1, 1);
+			thechamber.antialiasing = ClientPrefs.data.antialiasing;
+			thechamber.alpha = 0.000001;
+			add(thechamber);
+
+			fucklesBGPixel = new BGSprite('bgs/chaotix/horizonsky', -1450, -725, 1.2, 0.9);
+			fucklesBGPixel.visible = false;
+			fucklesBGPixel.antialiasing = false;
+			add(fucklesBGPixel);
+
+			fucklesFGPixel = new BGSprite('bgs/chaotix/horizonFg', -550, -735, 1, 0.9);
+			fucklesFGPixel.visible = false;
+			fucklesFGPixel.antialiasing = false;
+			add(fucklesFGPixel);
+	
+			fucklesAmyBg = new FlxSprite(1195, 630);
+			fucklesAmyBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_amy');
+			fucklesAmyBg.animation.addByPrefix('idle', 'amy bobbing', 24, false);
+			fucklesAmyBg.animation.addByPrefix('fear', 'amy fear', 24, false);
+			fucklesAmyBg.scale.x = 6;
+			fucklesAmyBg.scale.y = 6;
+			fucklesAmyBg.visible = false;
+			fucklesAmyBg.antialiasing = false;
+
+			fucklesCharmyBg = new FlxSprite(1000, 500);
+			fucklesCharmyBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_charmy');
+			fucklesCharmyBg.animation.addByPrefix('idle', 'charmy bobbing', 24, false);
+			fucklesCharmyBg.animation.addByPrefix('fear', 'charmy fear', 24, false);
+			fucklesCharmyBg.scale.x = 6;
+			fucklesCharmyBg.scale.y = 6;
+			fucklesCharmyBg.visible = false;
+			fucklesCharmyBg.antialiasing = false;
+			
+			fucklesMightyBg = new FlxSprite(590, 650);
+			fucklesMightyBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_mighty');
+			fucklesMightyBg.animation.addByPrefix('idle', 'mighty bobbing', 24, false);
+			fucklesMightyBg.animation.addByPrefix('fear', 'mighty fear', 24, false);
+			fucklesMightyBg.scale.x = 6;
+			fucklesMightyBg.scale.y = 6;
+			fucklesMightyBg.visible = false;
+			fucklesMightyBg.antialiasing = false;
+			
+			fucklesEspioBg = new FlxSprite(1400, 660);
+			fucklesEspioBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_espio');
+			fucklesEspioBg.animation.addByPrefix('idle', 'espio bobbing', 24, false);
+			fucklesEspioBg.animation.addByPrefix('fear', 'espio fear', 24, false);
+			fucklesEspioBg.scale.x = 6;
+			fucklesEspioBg.scale.y = 6;
+			fucklesEspioBg.visible = false;
+			fucklesEspioBg.antialiasing = false;
+		
+			fucklesKnuxBg = new FlxSprite(-60, 645);
+			fucklesKnuxBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_knuckles');
+			fucklesKnuxBg.animation.addByPrefix('idle', 'knuckles bobbing', 24, false);
+			fucklesKnuxBg.animation.addByPrefix('fear', 'knuckles fear', 24, false);
+			fucklesKnuxBg.scale.x = 6;
+			fucklesKnuxBg.scale.y = 6;
+			fucklesKnuxBg.visible = false;
+			fucklesKnuxBg.antialiasing = false;
+	
+			fucklesVectorBg = new FlxSprite(-250, 615);
+			fucklesVectorBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_vector');
+			fucklesVectorBg.animation.addByPrefix('idle', 'vector bobbing', 24, false);
+			fucklesVectorBg.animation.addByPrefix('fear', 'vector fear', 24, false);
+			fucklesVectorBg.scale.x = 6;
+			fucklesVectorBg.scale.y = 6;
+			fucklesVectorBg.visible = false;
+			fucklesVectorBg.antialiasing = false;
+
+			add(fucklesAmyBg);
+			add(fucklesCharmyBg);
+			add(fucklesMightyBg);
+			add(fucklesEspioBg);
+			add(fucklesKnuxBg);
+			add(fucklesVectorBg);
 		} else {
+			if (!lowerQuality) {
+			needleMoutains = new BGSprite('blank', -700, -175, 0.8, 0.9);
+			needleMoutains.setGraphicSize(Std.int(needleMoutains.width * 1.1));
+			needleMoutains.visible = false;
+			add(needleMoutains);
+
+			needleBuildings = new BGSprite('blank', -974, -27, 1, 0.9);
+			needleBuildings.visible = false;
+			add(needleBuildings);
+
+			conkCreet = new BGSprite('bgs/needlemouse/needlemouseLowQuality', -775, -141, 1, 0.9);
+			conkCreet.visible = false;
+			add(conkCreet);
+
+			tails_sky = new FlxSprite(-450, -1000);
+			tails_sky.loadGraphic(Paths.image('blank'));
+			tails_sky.scrollFactor.set(1, 1);
+			tails_sky.scale.set(1.6, 1.2);
+			tails_sky.antialiasing = ClientPrefs.data.antialiasing;
+			tails_sky.visible = false;
+			add(tails_sky);
+		
+			tails_trees1 = new FlxSprite(-500, -800);
+			tails_trees1.loadGraphic(Paths.image('blank'));
+			tails_trees1.scrollFactor.set(0.8, 0.9);
+			tails_trees1.scale.set(0.95, 0.95);
+			tails_trees1.antialiasing = ClientPrefs.data.antialiasing;
+			tails_trees1.visible = false;
+			add(tails_trees1);
+		
+			tails_trees2 = new FlxSprite(-500, -800);
+			tails_trees2.loadGraphic(Paths.image('blank'));
+			tails_trees2.scrollFactor.set(0.9, 1);
+			tails_trees2.scale.set(0.95, 0.95);
+			tails_trees2.antialiasing = ClientPrefs.data.antialiasing;
+			tails_trees2.visible = false;
+			add(tails_trees2);
+		
+			tails_floor = new FlxSprite(-700, -900);
+			tails_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/tailsLowQuality'));
+			tails_floor.scrollFactor.set(1, 1);
+			tails_floor.scale.set(0.95, 0.95);
+			tails_floor.antialiasing = ClientPrefs.data.antialiasing;
+			tails_floor.visible = false;
+			add(tails_floor);
+			
+			fleetwaybgshit = new FlxSprite(-2629.05, -1344.05);
+			fleetwaybgshit.loadGraphic(Paths.image('bgs/Chamber/FleetwayBGshitLowQuality'));
+			fleetwaybgshit.antialiasing = ClientPrefs.data.antialiasing;
+			fleetwaybgshit.scale.y = 1.015;
+			fleetwaybgshit.scrollFactor.set(1.1, 1);
+			fleetwaybgshit.alpha = 0.000001;
+			add(fleetwaybgshit);
+				
+			emeraldbeamyellow = new FlxSprite(-300, -1376.95 - 200);
+			emeraldbeamyellow.antialiasing = ClientPrefs.data.antialiasing;
+			emeraldbeamyellow.frames = Paths.getSparrowAtlas('blank');
+			emeraldbeamyellow.animation.addByPrefix('a', 'fun', 24, true);
+			emeraldbeamyellow.animation.play('a');
+			emeraldbeamyellow.scrollFactor.set(1.1, 1);
+			emeraldbeamyellow.alpha = 0.000001;
+			add(emeraldbeamyellow);
+
 			emeralds = new FlxSprite(326.6, -191.75);
 			emeralds.antialiasing = ClientPrefs.data.antialiasing;
 			emeralds.loadGraphic(Paths.image('blank'));
@@ -718,208 +792,187 @@ class Omni extends BaseStage
 			emeralds.antialiasing = ClientPrefs.data.antialiasing;
 			emeralds.alpha = 0.000001;
 			add(emeralds);
-		}
 			
-		thechamber = new FlxSprite(-465.05, 813.9);
-		thechamber.loadGraphic(Paths.image('bgs/Chamber/The Chamber'));
-		thechamber.scrollFactor.set(1.1, 1);
-		thechamber.antialiasing = ClientPrefs.data.antialiasing;
-		thechamber.alpha = 0.000001;
-		add(thechamber);
+			thechamber = new FlxSprite(-465.05, 813.9);
+			thechamber.loadGraphic(Paths.image('blank'));
+			thechamber.scrollFactor.set(1.1, 1);
+			thechamber.antialiasing = ClientPrefs.data.antialiasing;
+			thechamber.alpha = 0.000001;
+			add(thechamber);
 
-		fucklesBGPixel = new BGSprite('bgs/chaotix/horizonsky', -1450, -725, 1.2, 0.9);
-		fucklesBGPixel.visible = false;
-		fucklesBGPixel.antialiasing = false;
-		add(fucklesBGPixel);
+			fucklesBGPixel = new BGSprite('blank', -1450, -725, 1.2, 0.9);
+			fucklesBGPixel.visible = false;
+			fucklesBGPixel.antialiasing = false;
+			add(fucklesBGPixel);
 
-		fucklesFGPixel = new BGSprite('bgs/chaotix/horizonFg', -550, -735, 1, 0.9);
-		fucklesFGPixel.visible = false;
-		fucklesFGPixel.antialiasing = false;
-		add(fucklesFGPixel);
+			fucklesFGPixel = new BGSprite('bgs/chaotix/horizonLowQuality', -550, -735, 1, 0.9);
+			fucklesFGPixel.visible = false;
+			fucklesFGPixel.antialiasing = false;
+			add(fucklesFGPixel);
 	
-		fucklesAmyBg = new FlxSprite(1195, 630);
-		fucklesAmyBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_amy');
-		fucklesAmyBg.animation.addByPrefix('idle', 'amy bobbing', 24, false);
-		fucklesAmyBg.animation.addByPrefix('fear', 'amy fear', 24, false);
-		fucklesAmyBg.scale.x = 6;
-		fucklesAmyBg.scale.y = 6;
-		fucklesAmyBg.visible = false;
-		fucklesAmyBg.antialiasing = false;
+			fucklesAmyBg = new FlxSprite(1195, 630);
+			fucklesAmyBg.frames = Paths.getSparrowAtlas('blank');
+			fucklesAmyBg.animation.addByPrefix('idle', 'fun', 24, false);
+			fucklesAmyBg.scale.x = 6;
+			fucklesAmyBg.scale.y = 6;
+			fucklesAmyBg.visible = false;
+			fucklesAmyBg.antialiasing = false;
 
-		fucklesCharmyBg = new FlxSprite(1000, 500);
-		fucklesCharmyBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_charmy');
-		fucklesCharmyBg.animation.addByPrefix('idle', 'charmy bobbing', 24, false);
-		fucklesCharmyBg.animation.addByPrefix('fear', 'charmy fear', 24, false);
-		fucklesCharmyBg.scale.x = 6;
-		fucklesCharmyBg.scale.y = 6;
-		fucklesCharmyBg.visible = false;
-		fucklesCharmyBg.antialiasing = false;
+			fucklesCharmyBg = new FlxSprite(1000, 500);
+			fucklesCharmyBg.frames = Paths.getSparrowAtlas('blank');
+			fucklesCharmyBg.animation.addByPrefix('idle', 'fun', 24, false);
+			fucklesCharmyBg.scale.x = 6;
+			fucklesCharmyBg.scale.y = 6;
+			fucklesCharmyBg.visible = false;
+			fucklesCharmyBg.antialiasing = false;
 			
-		fucklesMightyBg = new FlxSprite(590, 650);
-		fucklesMightyBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_mighty');
-		fucklesMightyBg.animation.addByPrefix('idle', 'mighty bobbing', 24, false);
-		fucklesMightyBg.animation.addByPrefix('fear', 'mighty fear', 24, false);
-		fucklesMightyBg.scale.x = 6;
-		fucklesMightyBg.scale.y = 6;
-		fucklesMightyBg.visible = false;
-		fucklesMightyBg.antialiasing = false;
+			fucklesMightyBg = new FlxSprite(590, 650);
+			fucklesMightyBg.frames = Paths.getSparrowAtlas('blank');
+			fucklesMightyBg.animation.addByPrefix('idle', 'fun', 24, false);
+			fucklesMightyBg.scale.x = 6;
+			fucklesMightyBg.scale.y = 6;
+			fucklesMightyBg.visible = false;
+			fucklesMightyBg.antialiasing = false;
 			
-		fucklesEspioBg = new FlxSprite(1400, 660);
-		fucklesEspioBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_espio');
-		fucklesEspioBg.animation.addByPrefix('idle', 'espio bobbing', 24, false);
-		fucklesEspioBg.animation.addByPrefix('fear', 'espio fear', 24, false);
-		fucklesEspioBg.scale.x = 6;
-		fucklesEspioBg.scale.y = 6;
-		fucklesEspioBg.visible = false;
-		fucklesEspioBg.antialiasing = false;
+			fucklesEspioBg = new FlxSprite(1400, 660);
+			fucklesEspioBg.frames = Paths.getSparrowAtlas('blank');
+			fucklesEspioBg.animation.addByPrefix('idle', 'fun', 24, false);
+			fucklesEspioBg.scale.x = 6;
+			fucklesEspioBg.scale.y = 6;
+			fucklesEspioBg.visible = false;
+			fucklesEspioBg.antialiasing = false;
 		
-		fucklesKnuxBg = new FlxSprite(-60, 645);
-		fucklesKnuxBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_knuckles');
-		fucklesKnuxBg.animation.addByPrefix('idle', 'knuckles bobbing', 24, false);
-		fucklesKnuxBg.animation.addByPrefix('fear', 'knuckles fear', 24, false);
-		fucklesKnuxBg.scale.x = 6;
-		fucklesKnuxBg.scale.y = 6;
-		fucklesKnuxBg.visible = false;
-		fucklesKnuxBg.antialiasing = false;
+			fucklesKnuxBg = new FlxSprite(-60, 645);
+			fucklesKnuxBg.frames = Paths.getSparrowAtlas('blank');
+			fucklesKnuxBg.animation.addByPrefix('idle', 'fun', 24, false);
+			fucklesKnuxBg.scale.x = 6;
+			fucklesKnuxBg.scale.y = 6;
+			fucklesKnuxBg.visible = false;
+			fucklesKnuxBg.antialiasing = false;
 	
-		fucklesVectorBg = new FlxSprite(-250, 615);
-		fucklesVectorBg.frames = Paths.getSparrowAtlas('bgs/chaotix/BG_vector');
-		fucklesVectorBg.animation.addByPrefix('idle', 'vector bobbing', 24, false);
-		fucklesVectorBg.animation.addByPrefix('fear', 'vector fear', 24, false);
-		fucklesVectorBg.scale.x = 6;
-		fucklesVectorBg.scale.y = 6;
-		fucklesVectorBg.visible = false;
-		fucklesVectorBg.antialiasing = false;
+			fucklesVectorBg = new FlxSprite(-250, 615);
+			fucklesVectorBg.frames = Paths.getSparrowAtlas('blank');
+			fucklesVectorBg.animation.addByPrefix('idle', 'fun', 24, false);
+			fucklesVectorBg.scale.x = 6;
+			fucklesVectorBg.scale.y = 6;
+			fucklesVectorBg.visible = false;
+			fucklesVectorBg.antialiasing = false;
 
-		add(fucklesAmyBg);
-		add(fucklesCharmyBg);
-		add(fucklesMightyBg);
-		add(fucklesEspioBg);
-		add(fucklesKnuxBg);
-		add(fucklesVectorBg);
+			add(fucklesAmyBg);
+			add(fucklesCharmyBg);
+			add(fucklesMightyBg);
+			add(fucklesEspioBg);
+			add(fucklesKnuxBg);
+			add(fucklesVectorBg);
+			}
+		}
 
 		whiteFuck = new FlxSprite(-600, 0).makeGraphic(FlxG.width * 6, FlxG.height * 6, FlxColor.BLACK);
 		whiteFuck.alpha = 0;
 		add(whiteFuck);
 		
-		knuckles_bg = new FlxSprite(-930, -600);
-		knuckles_bg.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/kn_bg'));
-		knuckles_bg.scrollFactor.set(1, 1);
-		knuckles_bg.scale.set(2, 1.6);
-		knuckles_bg.visible = false;
-		add(knuckles_bg);
-		
-		if (!lowQuality) {
-			knuckles_city2 = new FlxSprite(-930, -860);
-			knuckles_city2.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/kn_city2'));
-			knuckles_city2.scrollFactor.set(1.07, 1);
-			knuckles_city2.scale.set(2, 1.6);
-			knuckles_city2.visible = false;
-			add(knuckles_city2);
-		} else {
-			knuckles_city2 = new FlxSprite(-930, -800);
-			knuckles_city2.loadGraphic(Paths.image('blank'));
-			knuckles_city2.scrollFactor.set(1.07, 1);
-			knuckles_city2.scale.set(2, 1.6);
-			knuckles_city2.visible = false;
-			add(knuckles_city2);
-		}
-		
-		knuckles_floor = new FlxSprite(-1000, -1000);
-		knuckles_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/kn_floor'));
-		knuckles_floor.scrollFactor.set(1, 1);
-		knuckles_floor.scale.set(2.3, 2.3);
-		knuckles_floor.visible = false;
-		add(knuckles_floor);
-		
-		wechidna_sky = new FlxSprite(-820, -1250);
-		wechidna_sky.loadGraphic(Paths.image('bgs/Wechidna/sky'));
-		wechidna_sky.scrollFactor.set(0.1, 0.1);
-		wechidna_sky.scale.set(1, 1);
-		wechidna_sky.visible = false;
-		wechidna_sky.antialiasing = ClientPrefs.data.antialiasing;
-		add(wechidna_sky);
-		
-		wechidna_building1 = new FlxSprite(-800, -200);
-		wechidna_building1.loadGraphic(Paths.image('bgs/Wechidna/building'));
-		wechidna_building1.scrollFactor.set(0.3, 0.3);
-		wechidna_building1.scale.set(1, 1);
-		wechidna_building1.visible = false;
-		wechidna_building1.antialiasing = ClientPrefs.data.antialiasing;
-		add(wechidna_building1);
-		
-		wechidna_building2 = new FlxSprite(-400, -600);
-		wechidna_building2.loadGraphic(Paths.image('bgs/Wechidna/bg-building'));
-		wechidna_building2.scrollFactor.set(0.5, 0.5);
-		wechidna_building2.scale.set(1, 1);
-		wechidna_building2.visible = false;
-		wechidna_building2.antialiasing = ClientPrefs.data.antialiasing;
-		add(wechidna_building2);
-		
-		wechidna_floor = new FlxSprite(0, 0);
-		wechidna_floor.loadGraphic(Paths.image('bgs/Wechidna/floor'));
-		wechidna_floor.scrollFactor.set(1, 1);
-		wechidna_floor.scale.set(1, 1);
-		wechidna_floor.visible = false;
-		wechidna_floor.antialiasing = ClientPrefs.data.antialiasing;
-		add(wechidna_floor);
-		
-		satanos_sky = new FlxSprite(-600, -200);
-		satanos_sky.loadGraphic(Paths.image('bgs/satanos-bg/Sky'));
-		satanos_sky.scrollFactor.set(1, 1);
-		satanos_sky.scale.set(1.2, 1.2);
-		satanos_sky.visible = false;
-		satanos_sky.antialiasing = ClientPrefs.data.antialiasing;
-		add(satanos_sky);
-		
-		satanos_trees = new FlxSprite(-950, -220);
-		satanos_trees.loadGraphic(Paths.image('bgs/satanos-bg/Trees'));
-		satanos_trees.scrollFactor.set(1.2, 0.9);
-		satanos_trees.scale.set(1.2, 1.2);
-		satanos_trees.visible = false;
-		satanos_trees.antialiasing = ClientPrefs.data.antialiasing;
-		add(satanos_trees);
+		if (!lowQuality && !lowerQuality || lowerQuality) {
+			knuckles_bg = new FlxSprite(-930, -600);
+			knuckles_bg.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/kn_bg'));
+			knuckles_bg.scrollFactor.set(1, 1);
+			knuckles_bg.scale.set(2, 1.6);
+			knuckles_bg.visible = false;
+			add(knuckles_bg);
 			
-		satanos_floor = new FlxSprite(-950, -820);
-		satanos_floor.loadGraphic(Paths.image('bgs/satanos-bg/gamemasters'));
-		satanos_floor.scrollFactor.set(1, 1);
-		satanos_floor.scale.set(1.2, 1.2);
-		satanos_floor.visible = false;
-		satanos_floor.antialiasing = ClientPrefs.data.antialiasing;
-		add(satanos_floor);
-		
-		sonic_bg = new FlxSprite(-520, -700);
-		sonic_bg.loadGraphic(Paths.image('bgs/too-slow-encore/bg'));
-		sonic_bg.scrollFactor.set(0.3, 0.75);
-		sonic_bg.scale.set(1, 1);
-		sonic_bg.visible = false;
-		sonic_bg.antialiasing = ClientPrefs.data.antialiasing;
-		add(sonic_bg);
-		
-		sonic_ground = new FlxSprite(-650, -700);
-		sonic_ground.loadGraphic(Paths.image('bgs/too-slow-encore/ground'));
-		sonic_ground.scrollFactor.set(1, 1);
-		sonic_ground.scale.set(1, 1);
-		sonic_ground.visible = false;
-		sonic_ground.antialiasing = ClientPrefs.data.antialiasing;
-		add(sonic_ground);
+			knuckles_floor = new FlxSprite(-1000, -1000);
+			knuckles_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/knucklesLowQuality'));
+			knuckles_floor.scrollFactor.set(1, 1);
+			knuckles_floor.scale.set(2.3, 2.3);
+			knuckles_floor.visible = false;
+			add(knuckles_floor);
+			
+			wechidna_sky = new FlxSprite(-820, -1250);
+			wechidna_sky.loadGraphic(Paths.image('bgs/Wechidna/sky'));
+			wechidna_sky.scrollFactor.set(0.1, 0.1);
+			wechidna_sky.scale.set(1, 1);
+			wechidna_sky.visible = false;
+			wechidna_sky.antialiasing = ClientPrefs.data.antialiasing;
+			add(wechidna_sky);
+			
+			wechidna_building1 = new FlxSprite(-800, -200);
+			wechidna_building1.loadGraphic(Paths.image('bgs/Wechidna/building'));
+			wechidna_building1.scrollFactor.set(0.3, 0.3);
+			wechidna_building1.scale.set(1, 1);
+			wechidna_building1.visible = false;
+			wechidna_building1.antialiasing = ClientPrefs.data.antialiasing;
+			add(wechidna_building1);
+			
+			wechidna_building2 = new FlxSprite(-400, -600);
+			wechidna_building2.loadGraphic(Paths.image('bgs/Wechidna/bg-building'));
+			wechidna_building2.scrollFactor.set(0.5, 0.5);
+			wechidna_building2.scale.set(1, 1);
+			wechidna_building2.visible = false;
+			wechidna_building2.antialiasing = ClientPrefs.data.antialiasing;
+			add(wechidna_building2);
+			
+			wechidna_floor = new FlxSprite(0, 0);
+			wechidna_floor.loadGraphic(Paths.image('bgs/Wechidna/floor'));
+			wechidna_floor.scrollFactor.set(1, 1);
+			wechidna_floor.scale.set(1, 1);
+			wechidna_floor.visible = false;
+			wechidna_floor.antialiasing = ClientPrefs.data.antialiasing;
+			add(wechidna_floor);
+			
+			satanos_sky = new FlxSprite(-600, -200);
+			satanos_sky.loadGraphic(Paths.image('bgs/satanos-bg/Sky'));
+			satanos_sky.scrollFactor.set(1, 1);
+			satanos_sky.scale.set(1.2, 1.2);
+			satanos_sky.visible = false;
+			satanos_sky.antialiasing = ClientPrefs.data.antialiasing;
+			add(satanos_sky);
+			
+			satanos_trees = new FlxSprite(-950, -220);
+			satanos_trees.loadGraphic(Paths.image('bgs/satanos-bg/Trees'));
+			satanos_trees.scrollFactor.set(1.2, 0.9);
+			satanos_trees.scale.set(1.2, 1.2);
+			satanos_trees.visible = false;
+			satanos_trees.antialiasing = ClientPrefs.data.antialiasing;
+			add(satanos_trees);
+			
+			satanos_floor = new FlxSprite(-950, -820);
+			satanos_floor.loadGraphic(Paths.image('bgs/satanos-bg/gamemasters'));
+			satanos_floor.scrollFactor.set(1, 1);
+			satanos_floor.scale.set(1.2, 1.2);
+			satanos_floor.visible = false;
+			satanos_floor.antialiasing = ClientPrefs.data.antialiasing;
+			add(satanos_floor);
+			
+			sonic_bg = new FlxSprite(-520, -700);
+			sonic_bg.loadGraphic(Paths.image('bgs/too-slow-encore/bg'));
+			sonic_bg.scrollFactor.set(0.3, 0.75);
+			sonic_bg.scale.set(1, 1);
+			sonic_bg.visible = false;
+			sonic_bg.antialiasing = ClientPrefs.data.antialiasing;
+			add(sonic_bg);
+			
+			sonic_ground = new FlxSprite(-650, -700);
+			sonic_ground.loadGraphic(Paths.image('bgs/too-slow-encore/ground'));
+			sonic_ground.scrollFactor.set(1, 1);
+			sonic_ground.scale.set(1, 1);
+			sonic_ground.visible = false;
+			sonic_ground.antialiasing = ClientPrefs.data.antialiasing;
+			add(sonic_ground);
 
-		lordx_sky = new BGSprite('bgs/LordXStage/sky', -1900, -906, 1.0, 1.0);
-		lordx_sky.setGraphicSize(Std.int(lordx_sky.width * 0.5));
-		lordx_sky.visible = false;
-		add(lordx_sky);
-
-		lordx_floor = new BGSprite('bgs/LordXStage/floor', -1450, 426, 1.0, 1.0);
-		lordx_floor.setGraphicSize(Std.int(lordx_floor.width * 0.55));
-		lordx_floor.visible = false;
-		add(lordx_floor);
+			lordx_sky = new BGSprite('bgs/LordXStage/sky', -1900, -906, 1.0, 1.0);
+			lordx_sky.setGraphicSize(Std.int(lordx_sky.width * 0.5));
+			lordx_sky.visible = false;
+			add(lordx_sky);
 		
-		if (!lowQuality) {
+			lordx_floor = new BGSprite('bgs/LordXStage/floor', -1450, 426, 1.0, 1.0);
+			lordx_floor.setGraphicSize(Std.int(lordx_floor.width * 0.55));
+			lordx_floor.visible = false;
+			add(lordx_floor);
+			
 			lordx_eyeflower = new BGSprite('bgs/LordXStage/WeirdAssFlower_Assets', 100 - 500, 100, 1.0, 1.0, ['flower'], true);
 			lordx_eyeflower.setGraphicSize(Std.int(lordx_eyeflower.width * 0.8));
 			lordx_eyeflower.visible = false;
 			add(lordx_eyeflower);
-
+	
 			lordx_notknuckles = new BGSprite('bgs/LordXStage/NotKnuckles_Assets', 100 - 300, -400 + 25, 1.0, 1.0, ['Notknuckles'], true);
 			lordx_notknuckles.setGraphicSize(Std.int(lordx_notknuckles.width * 0.5));
 			lordx_notknuckles.visible = false;
@@ -935,22 +988,119 @@ class Omni extends BaseStage
 			lordx_tree.visible = false;
 			add(lordx_tree);
 		} else {
+			knuckles_bg = new FlxSprite(-930, -600);
+			knuckles_bg.loadGraphic(Paths.image('blank'));
+			knuckles_bg.scrollFactor.set(1, 1);
+			knuckles_bg.scale.set(2, 1.6);
+			knuckles_bg.visible = false;
+			add(knuckles_bg);
+			
+			knuckles_floor = new FlxSprite(-1000, -1000);
+			knuckles_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/knucklesLowQuality'));
+			knuckles_floor.scrollFactor.set(1, 1);
+			knuckles_floor.scale.set(2.3, 2.3);
+			knuckles_floor.visible = false;
+			add(knuckles_floor);
+			
+			wechidna_sky = new FlxSprite(-820, -1250);
+			wechidna_sky.loadGraphic(Paths.image('blank'));
+			wechidna_sky.scrollFactor.set(0.1, 0.1);
+			wechidna_sky.scale.set(1, 1);
+			wechidna_sky.visible = false;
+			wechidna_sky.antialiasing = ClientPrefs.data.antialiasing;
+			add(wechidna_sky);
+			
+			wechidna_building1 = new FlxSprite(-800, -200);
+			wechidna_building1.loadGraphic(Paths.image('blank'));
+			wechidna_building1.scrollFactor.set(0.3, 0.3);
+			wechidna_building1.scale.set(1, 1);
+			wechidna_building1.visible = false;
+			wechidna_building1.antialiasing = ClientPrefs.data.antialiasing;
+			add(wechidna_building1);
+			
+			wechidna_building2 = new FlxSprite(-400, -600);
+			wechidna_building2.loadGraphic(Paths.image('blank'));
+			wechidna_building2.scrollFactor.set(0.5, 0.5);
+			wechidna_building2.scale.set(1, 1);
+			wechidna_building2.visible = false;
+			wechidna_building2.antialiasing = ClientPrefs.data.antialiasing;
+			add(wechidna_building2);
+			
+			wechidna_floor = new FlxSprite(0, 0);
+			wechidna_floor.loadGraphic(Paths.image('bgs/Wechidna/WechidnaLowQuality'));
+			wechidna_floor.scrollFactor.set(1, 1);
+			wechidna_floor.scale.set(1, 1);
+			wechidna_floor.visible = false;
+			wechidna_floor.antialiasing = ClientPrefs.data.antialiasing;
+			add(wechidna_floor);
+			
+			satanos_sky = new FlxSprite(-600, -200);
+			satanos_sky.loadGraphic(Paths.image('blank'));
+			satanos_sky.scrollFactor.set(1, 1);
+			satanos_sky.scale.set(1.2, 1.2);
+			satanos_sky.visible = false;
+			satanos_sky.antialiasing = ClientPrefs.data.antialiasing;
+			add(satanos_sky);
+			
+			satanos_trees = new FlxSprite(-950, -220);
+			satanos_trees.loadGraphic(Paths.image('blank'));
+			satanos_trees.scrollFactor.set(1.2, 0.9);
+			satanos_trees.scale.set(1.2, 1.2);
+			satanos_trees.visible = false;
+			satanos_trees.antialiasing = ClientPrefs.data.antialiasing;
+			add(satanos_trees);
+			
+			satanos_floor = new FlxSprite(-950, -820);
+			satanos_floor.loadGraphic(Paths.image('bgs/satanos-bg/satanosLowQuality'));
+			satanos_floor.scrollFactor.set(1, 1);
+			satanos_floor.scale.set(1.2, 1.2);
+			satanos_floor.visible = false;
+			satanos_floor.antialiasing = ClientPrefs.data.antialiasing;
+			add(satanos_floor);
+			
+			sonic_bg = new FlxSprite(-520, -700);
+			sonic_bg.loadGraphic(Paths.image('blank'));
+			sonic_bg.scrollFactor.set(0.3, 0.75);
+			sonic_bg.scale.set(1, 1);
+			sonic_bg.visible = false;
+			sonic_bg.antialiasing = ClientPrefs.data.antialiasing;
+			add(sonic_bg);
+			
+			sonic_ground = new FlxSprite(-650, -700);
+			sonic_ground.loadGraphic(Paths.image('bgs/too-slow-encore/too-slowLowQuality'));
+			sonic_ground.scrollFactor.set(1, 1);
+			sonic_ground.scale.set(1, 1);
+			sonic_ground.visible = false;
+			sonic_ground.antialiasing = ClientPrefs.data.antialiasing;
+			add(sonic_ground);
+
+			lordx_sky = new BGSprite('blank', -1900, -906, 1.0, 1.0);
+			lordx_sky.setGraphicSize(Std.int(lordx_sky.width * 0.5));
+			lordx_sky.visible = false;
+			add(lordx_sky);
+		
+			lordx_floor = new BGSprite('bgs/LordXStage/lordxstageLowQuality', -1650, -756, 1.0, 1.0);
+			lordx_floor.visible = false;
+			lordx_floor.setGraphicSize(Std.int(lordx_floor.width * 1));
+			lordx_floor.setGraphicSize(Std.int(lordx_floor.height * 1));
+			add(lordx_floor);
+			
 			lordx_eyeflower = new BGSprite('blank', 100 - 500, 100, 1.0, 1.0, ['fun'], true);
 			lordx_eyeflower.setGraphicSize(Std.int(lordx_eyeflower.width * 0.8));
 			lordx_eyeflower.visible = false;
 			add(lordx_eyeflower);
-
+	
 			lordx_notknuckles = new BGSprite('blank', 100 - 300, -400 + 25, 1.0, 1.0, ['fun'], true);
 			lordx_notknuckles.setGraphicSize(Std.int(lordx_notknuckles.width * 0.5));
 			lordx_notknuckles.visible = false;
 			add(lordx_notknuckles);
-	
-			lordx_bfsmallflower = new BGSprite('blank', -100 + 300, -6 - 50, 1.0, 1.0);
+				
+			lordx_bfsmallflower = new BGSprite('blank', -100 + 200, 406 - 50, 1.0, 1.0);
 			lordx_bfsmallflower.setGraphicSize(Std.int(lordx_bfsmallflower.width * 0.6));
 			lordx_bfsmallflower.visible = false;
 			add(lordx_bfsmallflower);
 
-			lordx_tree = new BGSprite('blank', -1000 + 950 - 100, -1006 + 350, 1.0, 1.0);
+			lordx_tree = new BGSprite('blank', 150 + 1000 - 100, -1006 + 400, 1.0, 1.0);
 			lordx_tree.setGraphicSize(Std.int(lordx_tree.width * 0.7));
 			lordx_tree.visible = false;
 			add(lordx_tree);
@@ -966,8 +1116,8 @@ class Omni extends BaseStage
 		domain2.scrollFactor.set(1, 1);
 		domain2.visible = false;
 		add(domain2);
-
-		if (!lowQuality) {
+		
+		if (!lowQuality && !lowerQuality || lowerQuality) {
 			domain = new FlxSprite(100, 200);
 			domain.frames = Paths.getSparrowAtlas('bgs/fatal/domain');
 			domain.animation.addByIndices('begin', 'idle', [0, 1, 2, 3, 4], "", 12, true);
@@ -1004,16 +1154,16 @@ class Omni extends BaseStage
 		majin_sky.visible = false;
 		add(majin_sky);
 		
-		if (!lowQuality) {
-			majin_bush = new BGSprite('bgs/FunInfiniteStage/Bush 1', -42, 171, 1.0, 1.0);
-			majin_bush.visible = false;
-			add(majin_bush);
-					
+		majin_bush = new BGSprite('bgs/FunInfiniteStage/Bush 1', -42, 171, 1.0, 1.0);
+		majin_bush.visible = false;
+		add(majin_bush);
+
+		if (!lowQuality && !lowerQuality || lowerQuality) {	
 			majin_pillars2 = new BGSprite('bgs/FunInfiniteStage/Majin Boppers Back',  182, -100, 1.0, 1.0, ['MajinBop2 instance 1'], true);
 			majin_pillars2.visible = false;
 			add(majin_pillars2);
 
-			majin_bush2 = new BGSprite('bgs/FunInfiniteStage/Bush2', 132, 354, 1.0, 1.0);
+			majin_bush2 = new BGSprite('bgs/FunInfiniteStage/Bush2', 332, 354, 1.0, 1.0);
 			majin_bush2.visible = false;
 			add(majin_bush2);
 
@@ -1021,16 +1171,14 @@ class Omni extends BaseStage
 			majin_pillars1.visible = false;
 			add(majin_pillars1);
 		} else {
-			majin_bush = new BGSprite('blank', -42, 171, 1.0, 1.0);
-			majin_bush.visible = false;
-			add(majin_bush);
-					
 			majin_pillars2 = new BGSprite('blank',  182, -100, 1.0, 1.0, ['fun'], true);
 			majin_pillars2.visible = false;
 			add(majin_pillars2);
 
-			majin_bush2 = new BGSprite('blank', 132, 354, 1.0, 1.0);
+			majin_bush2 = new BGSprite('bgs/FunInfiniteStage/Bush2', -332, 354, 1.0, 1.0);
 			majin_bush2.visible = false;
+			majin_bush2.scale.x = 1.5;
+			majin_bush2.scale.y = 1.5;
 			add(majin_bush2);
 
 			majin_pillars1 = new BGSprite('blank', -169, -167, 1.0, 1.0, ['fun'], true);
@@ -1040,9 +1188,7 @@ class Omni extends BaseStage
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		if (!lowQuality) {
 		DiscordClient.changePresence("Loading Assets 90%", null);
-		}
 		#end
 		
 		majin_floor = new BGSprite('bgs/FunInfiniteStage/floor BG', -340, 660, 1.0, 1.0);
@@ -1053,26 +1199,46 @@ class Omni extends BaseStage
 		sunky_bg.visible = false;
 		sunky_bg.scale.x = 2;
 		add(sunky_bg);
-		
-		sunky_milk = new FlxSprite(1210, 10);
-		sunky_milk.loadGraphic(Paths.image('bgs/sunky/milk'));
-		sunky_milk.scrollFactor.set(0.7, 0.7);
-		sunky_milk.scale.set(1, 1);
-		sunky_milk.visible = false;
-		sunky_milk.angle = 0;
-		sunky_milk.antialiasing = ClientPrefs.data.antialiasing;
-		add(sunky_milk);
-		
-		sunky_cereal = new FlxSprite(350, 0);
-		sunky_cereal.loadGraphic(Paths.image('bgs/sunky/ceral'));
-		sunky_cereal.scrollFactor.set(0.7, 0.7);
-		sunky_cereal.scale.set(1, 1);
-		sunky_cereal.visible = false;
-		sunky_cereal.angle = 0;
-		sunky_cereal.antialiasing = ClientPrefs.data.antialiasing;
-		add(sunky_cereal);
 
-		if (!lowQuality) {
+		if (!lowQuality && !lowerQuality || lowerQuality) {
+			sunky_milk = new FlxSprite(1210, 10);
+			sunky_milk.loadGraphic(Paths.image('bgs/sunky/milk'));
+			sunky_milk.scrollFactor.set(0.7, 0.7);
+			sunky_milk.scale.set(1, 1);
+			sunky_milk.visible = false;
+			sunky_milk.angle = 0;
+			sunky_milk.antialiasing = ClientPrefs.data.antialiasing;
+			add(sunky_milk);
+			
+			sunky_cereal = new FlxSprite(350, 0);
+			sunky_cereal.loadGraphic(Paths.image('bgs/sunky/ceral'));
+			sunky_cereal.scrollFactor.set(0.7, 0.7);
+			sunky_cereal.scale.set(1, 1);
+			sunky_cereal.visible = false;
+			sunky_cereal.angle = 0;
+			sunky_cereal.antialiasing = ClientPrefs.data.antialiasing;
+			add(sunky_cereal);
+		} else {
+			sunky_milk = new FlxSprite(1210, 10);
+			sunky_milk.loadGraphic(Paths.image('blank'));
+			sunky_milk.scrollFactor.set(0.7, 0.7);
+			sunky_milk.scale.set(1, 1);
+			sunky_milk.visible = false;
+			sunky_milk.angle = 0;
+			sunky_milk.antialiasing = ClientPrefs.data.antialiasing;
+			add(sunky_milk);
+			
+			sunky_cereal = new FlxSprite(350, 0);
+			sunky_cereal.loadGraphic(Paths.image('blank'));
+			sunky_cereal.scrollFactor.set(0.7, 0.7);
+			sunky_cereal.scale.set(1, 1);
+			sunky_cereal.visible = false;
+			sunky_cereal.angle = 0;
+			sunky_cereal.antialiasing = ClientPrefs.data.antialiasing;
+			add(sunky_cereal);
+		}
+
+		if (!lowQuality && !lowerQuality || lowerQuality) {
 			sunky_balls = new FlxSprite(270, -350);
 			sunky_balls.frames = Paths.getSparrowAtlas('bgs/sunky/hang');
 			sunky_balls.animation.addByPrefix('spin', 'hang', 12);
@@ -1083,13 +1249,14 @@ class Omni extends BaseStage
 			sunky_balls.x += 400;
 			add(sunky_balls);
 		} else {
-			sunky_balls = new FlxSprite(20, -300);
+			sunky_balls = new FlxSprite(270, -350);
 			sunky_balls.frames = Paths.getSparrowAtlas('blank');
 			sunky_balls.animation.addByPrefix('spin', 'fun', 12);
 			sunky_balls.animation.play('spin');
 			sunky_balls.scrollFactor.set(0.9, 0.9);
 			sunky_balls.visible = false;
 			sunky_balls.screenCenter(X);
+			sunky_balls.x += 400;
 			add(sunky_balls);
 		}
 
@@ -1118,43 +1285,33 @@ class Omni extends BaseStage
 		coldsteel_whiteFuck.x -= 300;
 		add(coldsteel_whiteFuck);
 		
-		if (!lowQuality) {
-			coldsteel_shadow = new FlxSprite(-900, 100);
-			coldsteel_shadow.loadGraphic(Paths.image('bgs/void/shadow'));
-			coldsteel_shadow.scrollFactor.set(1, 1);
-			coldsteel_shadow.scale.set(4, 1);
-			coldsteel_shadow.visible = false;
-			coldsteel_shadow.antialiasing = ClientPrefs.data.antialiasing;
-			add(coldsteel_shadow);
-		} else {
-			coldsteel_shadow = new FlxSprite(-900, 100);
-			coldsteel_shadow.loadGraphic(Paths.image('blank'));
-			coldsteel_shadow.scrollFactor.set(1, 1);
-			coldsteel_shadow.scale.set(4, 1);
-			coldsteel_shadow.visible = false;
-			coldsteel_shadow.antialiasing = ClientPrefs.data.antialiasing;
-			add(coldsteel_shadow);
-		}
+		coldsteel_shadow = new FlxSprite(-900, 100);
+		coldsteel_shadow.loadGraphic(Paths.image('bgs/void/shadow'));
+		coldsteel_shadow.scrollFactor.set(1, 1);
+		coldsteel_shadow.scale.set(4, 1);
+		coldsteel_shadow.visible = false;
+		coldsteel_shadow.antialiasing = ClientPrefs.data.antialiasing;
+		add(coldsteel_shadow);
 		
 		phillyLightsColors = [0xFF31A2FD, 0xFF31FD8C, 0xFFFB33F5, 0xFFFD4531, 0xFFFBA633];
 		
-		faker_sky = new FlxSprite(-500, -700);
-		faker_sky.loadGraphic(Paths.image('bgs/faker-encore/skyP1'));
-		faker_sky.scrollFactor.set(0.6, 0.6);
-		faker_sky.scale.set(1.4, 1.6);
-		faker_sky.visible = false;
-		faker_sky.antialiasing = ClientPrefs.data.antialiasing;
-		add(faker_sky);
+		if (!lowQuality && !lowerQuality || lowerQuality) {
+			faker_sky = new FlxSprite(-500, -700);
+			faker_sky.loadGraphic(Paths.image('bgs/faker-encore/skyP1'));
+			faker_sky.scrollFactor.set(0.6, 0.6);
+			faker_sky.scale.set(1.4, 1.6);
+			faker_sky.visible = false;
+			faker_sky.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_sky);
 		
-		faker_eclipse = new FlxSprite(-500, -120);
-		faker_eclipse.loadGraphic(Paths.image('bgs/faker-encore/eclipiceP1'));
-		faker_eclipse.scrollFactor.set(0.6, 0.6);
-		faker_eclipse.scale.set(1.3, 1.3);
-		faker_eclipse.visible = false;
-		faker_eclipse.antialiasing = ClientPrefs.data.antialiasing;
-		add(faker_eclipse);
+			faker_eclipse = new FlxSprite(-500, -120);
+			faker_eclipse.loadGraphic(Paths.image('bgs/faker-encore/eclipiceP1'));
+			faker_eclipse.scrollFactor.set(0.6, 0.6);
+			faker_eclipse.scale.set(1.3, 1.3);
+			faker_eclipse.visible = false;
+			faker_eclipse.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_eclipse);
 		
-		if (!lowQuality) {
 			faker_moutains = new FlxSprite(-1080, -220);
 			faker_moutains.loadGraphic(Paths.image('bgs/faker-encore/moutainsP1'));
 			faker_moutains.scrollFactor.set(0.7, 0.55);
@@ -1170,8 +1327,32 @@ class Omni extends BaseStage
 			faker_rings.visible = false;
 			faker_rings.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_rings);
+		
+			faker_bg = new FlxSprite(-700, -400);
+			faker_bg.loadGraphic(Paths.image('bgs/faker-encore/bgP1'));
+			faker_bg.scrollFactor.set(1, 1);
+			faker_bg.scale.set(1.5, 1.5);
+			faker_bg.visible = false;
+			faker_bg.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_bg);
 		} else {
-			faker_moutains = new FlxSprite(-1080, -250);
+			faker_sky = new FlxSprite(-500, -700);
+			faker_sky.loadGraphic(Paths.image('blank'));
+			faker_sky.scrollFactor.set(0.6, 0.6);
+			faker_sky.scale.set(1.4, 1.6);
+			faker_sky.visible = false;
+			faker_sky.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_sky);
+		
+			faker_eclipse = new FlxSprite(-500, -120);
+			faker_eclipse.loadGraphic(Paths.image('blank'));
+			faker_eclipse.scrollFactor.set(0.6, 0.6);
+			faker_eclipse.scale.set(1.3, 1.3);
+			faker_eclipse.visible = false;
+			faker_eclipse.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_eclipse);
+		
+			faker_moutains = new FlxSprite(-1080, -220);
 			faker_moutains.loadGraphic(Paths.image('blank'));
 			faker_moutains.scrollFactor.set(0.7, 0.55);
 			faker_moutains.scale.set(0.87, 0.87);
@@ -1179,22 +1360,22 @@ class Omni extends BaseStage
 			faker_moutains.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_moutains);
 		
-			faker_rings = new FlxSprite(-600, -300);
+			faker_rings = new FlxSprite(-360, -160);
 			faker_rings.loadGraphic(Paths.image('blank'));
 			faker_rings.scrollFactor.set(0.8, 0.8);
 			faker_rings.scale.set(1.2, 1.2);
 			faker_rings.visible = false;
 			faker_rings.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_rings);
-		}
 		
-		faker_bg = new FlxSprite(-700, -400);
-		faker_bg.loadGraphic(Paths.image('bgs/faker-encore/bgP1'));
-		faker_bg.scrollFactor.set(1, 1);
-		faker_bg.scale.set(1.5, 1.5);
-		faker_bg.visible = false;
-		faker_bg.antialiasing = ClientPrefs.data.antialiasing;
-		add(faker_bg);
+			faker_bg = new FlxSprite(-700, -400);
+			faker_bg.loadGraphic(Paths.image('bgs/faker-encore/bg1LowQuality'));
+			faker_bg.scrollFactor.set(1, 1);
+			faker_bg.scale.set(1.5, 1.5);
+			faker_bg.visible = false;
+			faker_bg.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_bg);
+		}
 		
 		hogBg = new BGSprite('bgs/hog/bg', 0, -300, 1.1, 0.9);
 		hogBg.scale.x = 1.5;
@@ -1207,41 +1388,23 @@ class Omni extends BaseStage
 		hogMotain.scale.y = 1.5;
 		hogMotain.visible = false;
 		add(hogMotain);
+			
+		hogWaterFalls = new FlxSprite(-1100, 200);
+		hogWaterFalls.frames = Paths.getSparrowAtlas('bgs/hog/Waterfalls');
+		hogWaterFalls.animation.addByPrefix('water', 'British', 12);
+		hogWaterFalls.animation.play('water');
+		hogWaterFalls.scrollFactor.set(1, 1);
+		hogWaterFalls.visible = false;
+		add(hogWaterFalls);
+			
+		hogLoops = new FlxSprite(-200, 170);
+		hogLoops.frames = Paths.getSparrowAtlas('bgs/hog/HillsandHills');
+		hogLoops.animation.addByPrefix('loops', 'DumbassMF', 12);
+		hogLoops.animation.play('loops');
+		hogLoops.scrollFactor.set(1, 0.9);
+		hogLoops.visible = false;
+		add(hogLoops);
 				
-		if (!lowQuality) {
-			hogWaterFalls = new FlxSprite(-1100, 200);
-			hogWaterFalls.frames = Paths.getSparrowAtlas('bgs/hog/Waterfalls');
-			hogWaterFalls.animation.addByPrefix('water', 'British', 12);
-			hogWaterFalls.animation.play('water');
-			hogWaterFalls.scrollFactor.set(1, 1);
-			hogWaterFalls.visible = false;
-			add(hogWaterFalls);
-
-			hogLoops = new FlxSprite(-200, 170);
-			hogLoops.frames = Paths.getSparrowAtlas('bgs/hog/HillsandHills');
-			hogLoops.animation.addByPrefix('loops', 'DumbassMF', 12);
-			hogLoops.animation.play('loops');
-			hogLoops.scrollFactor.set(1, 0.9);
-			hogLoops.visible = false;
-			add(hogLoops);
-		} else {
-			hogWaterFalls = new FlxSprite(-1100, 200);
-			hogWaterFalls.frames = Paths.getSparrowAtlas('blank');
-			hogWaterFalls.animation.addByPrefix('water', 'fun', 12);
-			hogWaterFalls.animation.play('water');
-			hogWaterFalls.scrollFactor.set(1, 1);
-			hogWaterFalls.visible = false;
-			add(hogWaterFalls);
-
-			hogLoops = new FlxSprite(-200, 170);
-			hogLoops.frames = Paths.getSparrowAtlas('blank');
-			hogLoops.animation.addByPrefix('loops', 'fun', 12);
-			hogLoops.animation.play('loops');
-			hogLoops.scrollFactor.set(1, 0.9);
-			hogLoops.visible = false;
-			add(hogLoops);
-		}
-					
 		hogTrees = new BGSprite('bgs/hog/trees', -600, -120, 1, 0.9);
 		hogTrees.visible = false;
 		add(hogTrees);
@@ -1252,23 +1415,23 @@ class Omni extends BaseStage
 		hogFloor.visible = false;
 		add(hogFloor);
 		
-		faker_sky2 = new FlxSprite(-500, -700);
-		faker_sky2.loadGraphic(Paths.image('bgs/faker-encore/skyP2'));
-		faker_sky2.scrollFactor.set(0.6, 0.6);
-		faker_sky2.scale.set(1.4, 1.6);
-		faker_sky2.visible = false;
-		faker_sky2.antialiasing = ClientPrefs.data.antialiasing;
-		add(faker_sky2);
-		
-		faker_eclipse2 = new FlxSprite(-500, -120);
-		faker_eclipse2.loadGraphic(Paths.image('bgs/faker-encore/eclipiceP2'));
-		faker_eclipse2.scrollFactor.set(0.6, 0.6);
-		faker_eclipse2.scale.set(1.3, 1.3);
-		faker_eclipse2.visible = false;
-		faker_eclipse2.antialiasing = ClientPrefs.data.antialiasing;
-		add(faker_eclipse2);
-		
-		if (!lowQuality) {
+		if (!lowQuality && !lowerQuality || lowerQuality) {
+			faker_sky2 = new FlxSprite(-500, -700);
+			faker_sky2.loadGraphic(Paths.image('bgs/faker-encore/skyP2'));
+			faker_sky2.scrollFactor.set(0.6, 0.6);
+			faker_sky2.scale.set(1.4, 1.6);
+			faker_sky2.visible = false;
+			faker_sky2.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_sky2);
+			
+			faker_eclipse2 = new FlxSprite(-500, -120);
+			faker_eclipse2.loadGraphic(Paths.image('bgs/faker-encore/eclipiceP2'));
+			faker_eclipse2.scrollFactor.set(0.6, 0.6);
+			faker_eclipse2.scale.set(1.3, 1.3);
+			faker_eclipse2.visible = false;
+			faker_eclipse2.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_eclipse2);
+			
 			faker_moutains2 = new FlxSprite(-1080, -220);
 			faker_moutains2.loadGraphic(Paths.image('bgs/faker-encore/moutainsP2'));
 			faker_moutains2.scrollFactor.set(0.7, 0.55);
@@ -1284,8 +1447,32 @@ class Omni extends BaseStage
 			faker_rings2.visible = false;
 			faker_rings2.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_rings2);
+		
+			faker_bg2 = new FlxSprite(-700, -400);
+			faker_bg2.loadGraphic(Paths.image('bgs/faker-encore/bgP2'));
+			faker_bg2.scrollFactor.set(1, 1);
+			faker_bg2.scale.set(1.5, 1.5);
+			faker_bg2.visible = false;
+			faker_bg2.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_bg2);
 		} else {
-			faker_moutains2 = new FlxSprite(-1080, -750);
+			faker_sky2 = new FlxSprite(-500, -700);
+			faker_sky2.loadGraphic(Paths.image('blank'));
+			faker_sky2.scrollFactor.set(0.6, 0.6);
+			faker_sky2.scale.set(1.4, 1.6);
+			faker_sky2.visible = false;
+			faker_sky2.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_sky2);
+			
+			faker_eclipse2 = new FlxSprite(-500, -120);
+			faker_eclipse2.loadGraphic(Paths.image('blank'));
+			faker_eclipse2.scrollFactor.set(0.6, 0.6);
+			faker_eclipse2.scale.set(1.3, 1.3);
+			faker_eclipse2.visible = false;
+			faker_eclipse2.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_eclipse2);
+			
+			faker_moutains2 = new FlxSprite(-1080, -220);
 			faker_moutains2.loadGraphic(Paths.image('blank'));
 			faker_moutains2.scrollFactor.set(0.7, 0.55);
 			faker_moutains2.scale.set(0.87, 0.87);
@@ -1293,22 +1480,22 @@ class Omni extends BaseStage
 			faker_moutains2.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_moutains2);
 			
-			faker_rings2 = new FlxSprite(-600, -300);
+			faker_rings2 = new FlxSprite(-360, -160);
 			faker_rings2.loadGraphic(Paths.image('blank'));
 			faker_rings2.scrollFactor.set(0.8, 0.8);
 			faker_rings2.scale.set(1.2, 1.2);
 			faker_rings2.visible = false;
 			faker_rings2.antialiasing = ClientPrefs.data.antialiasing;
 			add(faker_rings2);
-		}
 		
-		faker_bg2 = new FlxSprite(-700, -400);
-		faker_bg2.loadGraphic(Paths.image('bgs/faker-encore/bgP2'));
-		faker_bg2.scrollFactor.set(1, 1);
-		faker_bg2.scale.set(1.5, 1.5);
-		faker_bg2.visible = false;
-		faker_bg2.antialiasing = ClientPrefs.data.antialiasing;
-		add(faker_bg2);
+			faker_bg2 = new FlxSprite(-700, -400);
+			faker_bg2.loadGraphic(Paths.image('bgs/faker-encore/bg2LowQuality'));
+			faker_bg2.scrollFactor.set(1, 1);
+			faker_bg2.scale.set(1.5, 1.5);
+			faker_bg2.visible = false;
+			faker_bg2.antialiasing = ClientPrefs.data.antialiasing;
+			add(faker_bg2);
+		}
 					
 		scorchedBg = new BGSprite('bgs/hog/blast/Sunset', -200, 0, 1.1, 0.9);
 		scorchedBg.scale.x = 1.75;
@@ -1322,59 +1509,31 @@ class Omni extends BaseStage
 		scorchedMotain.visible = false;
 		add(scorchedMotain);
 		
-		if (!lowQuality) {
-			scorchedWaterFalls = new FlxSprite(-1000, 200);
-			scorchedWaterFalls.frames = Paths.getSparrowAtlas('bgs/hog/blast/Waterfalls');
-			scorchedWaterFalls.animation.addByPrefix('water', 'British instance 1', 12);
-			scorchedWaterFalls.animation.play('water');
-			scorchedWaterFalls.scale.x = 1.1;
-			scorchedWaterFalls.scale.y = 1.1;
-			scorchedWaterFalls.scrollFactor.set(1, 1);
-			scorchedWaterFalls.visible = false;
-			add(scorchedWaterFalls);
+		scorchedWaterFalls = new FlxSprite(-1000, 200);
+		scorchedWaterFalls.frames = Paths.getSparrowAtlas('bgs/hog/blast/Waterfalls');
+		scorchedWaterFalls.animation.addByPrefix('water', 'British instance 1', 12);
+		scorchedWaterFalls.animation.play('water');
+		scorchedWaterFalls.scale.x = 1.1;
+		scorchedWaterFalls.scale.y = 1.1;
+		scorchedWaterFalls.scrollFactor.set(1, 1);
+		scorchedWaterFalls.visible = false;
+		add(scorchedWaterFalls);
 					
-			scorchedHills = new BGSprite('bgs/hog/blast/Hills', -100, 230, 1, 0.9);
-			scorchedHills.visible = false;
-			add(scorchedHills);
-					
-			scorchedMonitor = new FlxSprite(1100, 265);
-			scorchedMonitor.frames = Paths.getSparrowAtlas('bgs/hog/blast/Monitor');
-			scorchedMonitor.animation.addByPrefix('idle', 'Monitor', 12, false);
-			scorchedMonitor.animation.addByPrefix('fatal', 'Fatalerror', 12, false);
-			scorchedMonitor.animation.addByPrefix('nmi', 'NMI', 12, false);
-			scorchedMonitor.animation.addByPrefix('needle', 'Needlemouse', 12, false);
-			scorchedMonitor.animation.addByPrefix('starved', 'Storved', 12, false);
-			scorchedMonitor.animation.play('idle');
-			scorchedMonitor.scrollFactor.set(1, 0.9);
-			scorchedMonitor.visible = false;
-			add(scorchedMonitor);
-		} else {
-			scorchedWaterFalls = new FlxSprite(-1000, 200);
-			scorchedWaterFalls.frames = Paths.getSparrowAtlas('blank');
-			scorchedWaterFalls.animation.addByPrefix('water', 'fun', 12);
-			scorchedWaterFalls.animation.play('water');
-			scorchedWaterFalls.scale.x = 1.1;
-			scorchedWaterFalls.scale.y = 1.1;
-			scorchedWaterFalls.scrollFactor.set(1, 1);
-			scorchedWaterFalls.visible = false;
-			add(scorchedWaterFalls);
-					
-			scorchedHills = new BGSprite('blank', -100, 230, 1, 0.9);
-			scorchedHills.visible = false;
-			add(scorchedHills);
-					
-			scorchedMonitor = new FlxSprite(1100, 265);
-			scorchedMonitor.frames = Paths.getSparrowAtlas('blank');
-			scorchedMonitor.animation.addByPrefix('idle', 'fun', 12, false);
-			scorchedMonitor.animation.addByPrefix('fatal', 'fun', 12, false);
-			scorchedMonitor.animation.addByPrefix('nmi', 'fun', 12, false);
-			scorchedMonitor.animation.addByPrefix('needle', 'fun', 12, false);
-			scorchedMonitor.animation.addByPrefix('starved', 'fun', 12, false);
-			scorchedMonitor.animation.play('idle');
-			scorchedMonitor.scrollFactor.set(1, 0.9);
-			scorchedMonitor.visible = false;
-			add(scorchedMonitor);
-		}
+		scorchedHills = new BGSprite('bgs/hog/blast/Hills', -100, 230, 1, 0.9);
+		scorchedHills.visible = false;
+		add(scorchedHills);
+				
+		scorchedMonitor = new FlxSprite(1100, 265);
+		scorchedMonitor.frames = Paths.getSparrowAtlas('bgs/hog/blast/Monitor');
+		scorchedMonitor.animation.addByPrefix('idle', 'Monitor', 12, false);
+		scorchedMonitor.animation.addByPrefix('fatal', 'Fatalerror', 12, false);
+		scorchedMonitor.animation.addByPrefix('nmi', 'NMI', 12, false);
+		scorchedMonitor.animation.addByPrefix('needle', 'Needlemouse', 12, false);
+		scorchedMonitor.animation.addByPrefix('starved', 'Storved', 12, false);
+		scorchedMonitor.animation.play('idle');
+		scorchedMonitor.scrollFactor.set(1, 0.9);
+		scorchedMonitor.visible = false;
+		add(scorchedMonitor);
 		
 		scorchedTrees = new BGSprite('bgs/hog/blast/Plants', -400, -50, 1, 0.9);
 		scorchedTrees.visible = false;
@@ -1403,8 +1562,8 @@ class Omni extends BaseStage
 			ClientPrefs.data.cacheOnGPU = false;
 			backend.ClientPrefs.saveSettings();
 		}
-		
-		if (!lowQuality) {
+
+		if (!lowQuality && !lowerQuality || lowerQuality) {		
 			needleFg = new FlxSprite(-690, 560).loadGraphic(Paths.image('bgs/needlemouse/fg'));
 			needleFg.setGraphicSize(Std.int(needleFg.width * 1.1));
 			needleFg.scrollFactor.set(1, 0.9);
@@ -1482,7 +1641,7 @@ class Omni extends BaseStage
 			hogRocks.visible = false;
 			add(hogRocks);
 		} else {
-			needleFg = new FlxSprite(-690, 780).loadGraphic(Paths.image('blank'));
+			needleFg = new FlxSprite(-690, 560).loadGraphic(Paths.image('blank'));
 			needleFg.setGraphicSize(Std.int(needleFg.width * 1.1));
 			needleFg.scrollFactor.set(1, 0.9);
 			needleFg.visible = false;
@@ -1495,15 +1654,15 @@ class Omni extends BaseStage
 			tails_fg.antialiasing = ClientPrefs.data.antialiasing;
 			tails_fg.visible = false;
 			add(tails_fg);
-		
-			wechidna_treesFG = new FlxSprite(-200, 0);
+
+			wechidna_treesFG = new FlxSprite(-300, 400);
 			wechidna_treesFG.loadGraphic(Paths.image('blank'));
 			wechidna_treesFG.scrollFactor.set(0.8, 1);
 			wechidna_treesFG.scale.set(1, 1);
 			wechidna_treesFG.visible = false;
 			add(wechidna_treesFG);
 
-			wechidna_thingFG = new FlxSprite(-250, -125);
+			wechidna_thingFG = new FlxSprite(-210, 1725);
 			wechidna_thingFG.loadGraphic(Paths.image('blank'));
 			wechidna_thingFG.scrollFactor.set(0.7, 0.9);
 			wechidna_thingFG.scale.set(1, 1);
@@ -1511,22 +1670,31 @@ class Omni extends BaseStage
 			wechidna_thingFG.antialiasing = ClientPrefs.data.antialiasing;
 			add(wechidna_thingFG);
 			
-			wechidna_grassFG = new FlxSprite(-360, -240);
+			wechidna_grassFG = new FlxSprite(-390, 940);
 			wechidna_grassFG.loadGraphic(Paths.image('blank'));
 			wechidna_grassFG.scrollFactor.set(0.6, 0.8);
 			wechidna_grassFG.scale.set(1, 1);
 			wechidna_grassFG.visible = false;
 			wechidna_grassFG.antialiasing = ClientPrefs.data.antialiasing;
 			add(wechidna_grassFG);
-		
-			satanos_rock = new FlxSprite(2350, 1020);
+			
+			satanos_rock = new FlxSprite(930, 500);
 			satanos_rock.loadGraphic(Paths.image('blank'));
 			satanos_rock.scrollFactor.set(0.8, 0.9);
 			satanos_rock.scale.set(1.2, 1.2);
 			satanos_rock.visible = false;
 			satanos_rock.antialiasing = ClientPrefs.data.antialiasing;
 			add(satanos_rock);
-
+			
+			guitar = new FlxSprite(360, -1000);
+			guitar.loadGraphic(Paths.image('blank'));
+			guitar.scrollFactor.set(1, 1);
+			guitar.visible = false;
+			guitar.scale.x = 0.5;
+			guitar.scale.y = 0.5;
+			guitar.antialiasing = ClientPrefs.data.antialiasing;
+			add(guitar);
+			
 			xeno_fg = new FlxSprite(-800, -1100);
 			xeno_fg.loadGraphic(Paths.image('blank'));
 			xeno_fg.scrollFactor.set(1.4, 0.9);
@@ -1534,8 +1702,8 @@ class Omni extends BaseStage
 			xeno_fg.visible = false;
 			xeno_fg.flipX = true;
 			xeno_fg.antialiasing = ClientPrefs.data.antialiasing;
-			add(xeno_fg);	
-
+			add(xeno_fg);
+			
 			majin_fgmajin = new BGSprite('blank', 1426, 903, 1.0, 1.0, ['fun'], true);
 			majin_fgmajin.visible = false;
 			add(majin_fgmajin);
@@ -1557,7 +1725,7 @@ class Omni extends BaseStage
 		hogOverlay.visible = false;
 		add(hogOverlay);
 
-		if (!lowQuality) {
+		if (!lowQuality && !lowerQuality || lowerQuality) {
 			sunkyTransition = new FlxSprite(-131, -200);
 			sunkyTransition.frames = Paths.getSparrowAtlas('bgs/sunky/sunkTransition');
 			sunkyTransition.animation.addByPrefix('b', 'sunkTransition', 26, false);
@@ -1567,14 +1735,13 @@ class Omni extends BaseStage
 			sunkyTransition.visible = false;
 			add(sunkyTransition);
 		} else {
-			sunkyTransition = new FlxSprite(0, 0);
+			sunkyTransition = new FlxSprite(-131, -200);
 			sunkyTransition.frames = Paths.getSparrowAtlas('blank');
-			sunkyTransition.animation.addByPrefix('b', 'fun', 24, false);
+			sunkyTransition.animation.addByPrefix('b', 'fun', 26, false);
 			sunkyTransition.scrollFactor.set(1, 1);
 			sunkyTransition.antialiasing = ClientPrefs.data.antialiasing;
 			sunkyTransition.cameras = [camHUD];
 			sunkyTransition.visible = false;
-			sunkyTransition.screenCenter();
 			add(sunkyTransition);
 		}
 	
@@ -1588,21 +1755,13 @@ class Omni extends BaseStage
 		faker_overlay.screenCenter();
 		add(faker_overlay);
 	
-		if (!lowQuality) {
+		if (!lowQuality && !lowerQuality || lowerQuality) {
 			scorchedRocks = new BGSprite('bgs/hog/blast/Rocks', -500, 600, 1.1, 0.9);
 			scorchedRocks.scale.x = 1.25;
 			scorchedRocks.scale.y = 1.25;
 			scorchedRocks.visible = false;
 			add(scorchedRocks);
-		} else {
-			scorchedRocks = new BGSprite('blank', -500, 600, 1.1, 0.9);
-			scorchedRocks.scale.x = 1.25;
-			scorchedRocks.scale.y = 1.25;
-			scorchedRocks.visible = false;
-			add(scorchedRocks);
-		}
 	
-		if (!lowQuality) {
 			daJumpscare = new FlxSprite();
 			daJumpscare.frames = Paths.getSparrowAtlas('sonicJUMPSCARE');
 			daJumpscare.animation.addByPrefix('jump', "sonicSPOOK", 21.29032258, false);
@@ -1615,6 +1774,12 @@ class Omni extends BaseStage
 			daJumpscare.cameras = [camOther];
 			add(daJumpscare);
 		} else {
+			scorchedRocks = new BGSprite('blank', -500, 600, 1.1, 0.9);
+			scorchedRocks.scale.x = 1.25;
+			scorchedRocks.scale.y = 1.25;
+			scorchedRocks.visible = false;
+			add(scorchedRocks);
+	
 			daJumpscare = new FlxSprite();
 			daJumpscare.frames = Paths.getSparrowAtlas('blank');
 			daJumpscare.animation.addByPrefix('jump', "fun", 21.29032258, false);
@@ -1623,6 +1788,7 @@ class Omni extends BaseStage
 			daJumpscare.updateHitbox();
 			daJumpscare.screenCenter();
 			daJumpscare.y += 370;
+			daJumpscare.alpha = 0.0000001;
 			daJumpscare.cameras = [camOther];
 			add(daJumpscare);
 		}
@@ -1637,35 +1803,67 @@ class Omni extends BaseStage
 		vignette.screenCenter();
 		add(vignette);
 		
-		exeDie = new FlxSprite(100, 200);
-		exeDie.frames = Paths.getSparrowAtlas('exedeath');
-		exeDie.animation.addByIndices('frame1', 'DieLmao', [1], "", 12, false);
-		exeDie.animation.addByIndices('frame2', 'DieLmao', [3], "", 12, false);
-		exeDie.animation.addByIndices('frame3', 'DieLmao', [4], "", 12, false);
-		exeDie.animation.addByIndices('frame4', 'DieLmao', [5], "", 12, false);
-		exeDie.animation.addByIndices('frame5', 'DieLmao', [6], "", 12, false);
-		exeDie.animation.addByIndices('frame5', 'DieLmao', [7], "", 12, false);
-		exeDie.animation.addByIndices('frame6', 'DieLmao', [8], "", 12, false);
-		exeDie.animation.addByIndices('frame7', 'DieLmao', [9], "", 12, false);
-		exeDie.animation.addByIndices('frame8', 'DieLmao', [10], "", 12, false);
-		exeDie.animation.play('frame1');
-		exeDie.scale.x = 1.8;
-		exeDie.scale.y = 1.8;
-		exeDie.alpha = 0.000001;
-		exeDie.antialiasing = ClientPrefs.data.antialiasing;
-		exeDie.scrollFactor.set(1, 1);
-		exeDie.screenCenter(X);
-		exeDie.screenCenter(Y);
-		exeDie.visible = true;
-		exeDie.cameras = [camOther];
-		add(exeDie);
-		
-		wechJump = new FlxSprite(0, 0);
-		wechJump.loadGraphic(Paths.image('wechidna'));
-		wechJump.antialiasing = ClientPrefs.data.antialiasing;
-		wechJump.scrollFactor.set(1.1, 1);
-		wechJump.alpha = 0.000001;
-		add(wechJump);
+		if (!lowQuality && !lowerQuality || lowerQuality) {
+			exeDie = new FlxSprite(100, 200);
+			exeDie.frames = Paths.getSparrowAtlas('exedeath');
+			exeDie.animation.addByIndices('frame1', 'DieLmao', [1], "", 12, false);
+			exeDie.animation.addByIndices('frame2', 'DieLmao', [3], "", 12, false);
+			exeDie.animation.addByIndices('frame3', 'DieLmao', [4], "", 12, false);
+			exeDie.animation.addByIndices('frame4', 'DieLmao', [5], "", 12, false);
+			exeDie.animation.addByIndices('frame5', 'DieLmao', [6], "", 12, false);
+			exeDie.animation.addByIndices('frame5', 'DieLmao', [7], "", 12, false);
+			exeDie.animation.addByIndices('frame6', 'DieLmao', [8], "", 12, false);
+			exeDie.animation.addByIndices('frame7', 'DieLmao', [9], "", 12, false);
+			exeDie.animation.addByIndices('frame8', 'DieLmao', [10], "", 12, false);
+			exeDie.animation.play('frame1');
+			exeDie.scale.x = 1.8;
+			exeDie.scale.y = 1.8;
+			exeDie.alpha = 0.000001;
+			exeDie.antialiasing = ClientPrefs.data.antialiasing;
+			exeDie.scrollFactor.set(1, 1);
+			exeDie.screenCenter(X);
+			exeDie.screenCenter(Y);
+			exeDie.visible = true;
+			exeDie.cameras = [camOther];
+			add(exeDie);
+			
+			wechJump = new FlxSprite(0, 0);
+			wechJump.loadGraphic(Paths.image('wechidna'));
+			wechJump.antialiasing = ClientPrefs.data.antialiasing;
+			wechJump.scrollFactor.set(1.1, 1);
+			wechJump.alpha = 0.000001;
+			add(wechJump);
+		} else {
+			exeDie = new FlxSprite(100, 200);
+			exeDie.frames = Paths.getSparrowAtlas('blank');
+			exeDie.animation.addByIndices('frame1', 'fun', [1], "", 12, false);
+			exeDie.animation.addByIndices('frame2', 'fun', [3], "", 12, false);
+			exeDie.animation.addByIndices('frame3', 'fun', [4], "", 12, false);
+			exeDie.animation.addByIndices('frame4', 'fun', [5], "", 12, false);
+			exeDie.animation.addByIndices('frame5', 'fun', [6], "", 12, false);
+			exeDie.animation.addByIndices('frame5', 'fun', [7], "", 12, false);
+			exeDie.animation.addByIndices('frame6', 'fun', [8], "", 12, false);
+			exeDie.animation.addByIndices('frame7', 'fun', [9], "", 12, false);
+			exeDie.animation.addByIndices('frame8', 'fun', [10], "", 12, false);
+			exeDie.animation.play('frame1');
+			exeDie.scale.x = 1.8;
+			exeDie.scale.y = 1.8;
+			exeDie.alpha = 0.000001;
+			exeDie.antialiasing = ClientPrefs.data.antialiasing;
+			exeDie.scrollFactor.set(1, 1);
+			exeDie.screenCenter(X);
+			exeDie.screenCenter(Y);
+			exeDie.visible = true;
+			exeDie.cameras = [camOther];
+			add(exeDie);
+			
+			wechJump = new FlxSprite(0, 0);
+			wechJump.loadGraphic(Paths.image('blank'));
+			wechJump.antialiasing = ClientPrefs.data.antialiasing;
+			wechJump.scrollFactor.set(1.1, 1);
+			wechJump.alpha = 0.000001;
+			add(wechJump);
+		}
 	
 		ring = new FlxSprite(0, 0);
 		ring.frames = Paths.getSparrowAtlas('bgs/digitalized/ring');
@@ -1683,435 +1881,12 @@ class Omni extends BaseStage
 
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		if (!lowQuality) {
 		DiscordClient.changePresence("Loading Assets 99%", null);
-		}
 		#end
-	
-		char1 = new FlxSprite(0, 0);
-		char1.loadGraphic(Paths.image('characters/BF/3D/bf-3d'));
-		char1.scrollFactor.set(1, 1);
-		char1.scale.set(1, 1);
-		char1.antialiasing = ClientPrefs.data.antialiasing;
-		char1.alpha = 0.00001;
-		char1.screenCenter(X);
-		char1.screenCenter(Y);
-		add(char1);
-	
-		char2 = new FlxSprite(0, 0);
-		char2.loadGraphic(Paths.image('characters/TailsDoll/3D/Tails_Doll'));
-		char2.scrollFactor.set(1, 1);
-		char2.scale.set(1, 1);
-		char2.antialiasing = ClientPrefs.data.antialiasing;
-		char2.alpha = 0.00001;
-		char2.screenCenter(X);
-		char2.screenCenter(Y);
-		add(char2);
-	
-		char3 = new FlxSprite(0, 0);
-		char3.loadGraphic(Paths.image('characters/XTerion/3D/xterion-first'));
-		char3.scrollFactor.set(1, 1);
-		char3.scale.set(1, 1);
-		char3.antialiasing = ClientPrefs.data.antialiasing;
-		char3.alpha = 0.00001;
-		char3.screenCenter(X);
-		char3.screenCenter(Y);
-		add(char3);
-	
-		char4 = new FlxSprite(0, 0);
-		char4.loadGraphic(Paths.image('characters/LordX/lordxEncore'));
-		char4.scrollFactor.set(1, 1);
-		char4.scale.set(1, 1);
-		char4.antialiasing = ClientPrefs.data.antialiasing;
-		char4.alpha = 0.00001;
-		char4.screenCenter(X);
-		char4.screenCenter(Y);
-		add(char4);
-	
-		char5 = new FlxSprite(0, 0);
-		char5.loadGraphic(Paths.image('characters/Tails/tails-encore'));
-		char5.scrollFactor.set(1, 1);
-		char5.scale.set(1, 1);
-		char5.antialiasing = ClientPrefs.data.antialiasing;
-		char5.alpha = 0.00001;
-		char5.screenCenter(X);
-		char5.screenCenter(Y);
-		add(char5);
-	
-		char6 = new FlxSprite(0, 0);
-		char6.loadGraphic(Paths.image('characters/Fleetway/Fleetway_Super_Sonic'));
-		char6.scrollFactor.set(1, 1);
-		char6.scale.set(1, 1);
-		char6.antialiasing = ClientPrefs.data.antialiasing;
-		char6.alpha = 0.00001;
-		char6.screenCenter(X);
-		char6.screenCenter(Y);
-		add(char6);
-	
-		char7 = new FlxSprite(0, 0);
-		char7.loadGraphic(Paths.image('characters/BF/HD/encoreBF'));
-		char7.scrollFactor.set(1, 1);
-		char7.scale.set(1, 1);
-		char7.antialiasing = ClientPrefs.data.antialiasing;
-		char7.alpha = 0.00001;
-		char7.screenCenter(X);
-		char7.screenCenter(Y);
-		add(char7);
-	
-		char8 = new FlxSprite(0, 0);
-		char8.loadGraphic(Paths.image('characters/BF/HD/encoreBF-majin'));
-		char8.scrollFactor.set(1, 1);
-		char8.scale.set(1, 1);
-		char8.antialiasing = ClientPrefs.data.antialiasing;
-		char8.alpha = 0.00001;
-		char8.screenCenter(X);
-		char8.screenCenter(Y);
-		add(char8);
-	
-		char9 = new FlxSprite(0, 0);
-		char9.loadGraphic(Paths.image('characters/BF/HD/encoreBF-redTint'));
-		char9.scrollFactor.set(1, 1);
-		char9.scale.set(1, 1);
-		char9.antialiasing = ClientPrefs.data.antialiasing;
-		char9.alpha = 0.00001;
-		char9.screenCenter(X);
-		char9.screenCenter(Y);
-		add(char9);
-	
-		char10 = new FlxSprite(0, 0);
-		char10.loadGraphic(Paths.image('characters/BF/HD/encoreBF-blackTint'));
-		char10.scrollFactor.set(1, 1);
-		char10.scale.set(1, 1);
-		char10.antialiasing = ClientPrefs.data.antialiasing;
-		char10.alpha = 0.00001;
-		char10.screenCenter(X);
-		char10.screenCenter(Y);
-		add(char10);
-	
-		char12 = new FlxSprite(0, 0);
-		char12.loadGraphic(Paths.image('characters/BF/HD/needle-bf-encore'));
-		char12.scrollFactor.set(1, 1);
-		char12.scale.set(1, 1);
-		char12.antialiasing = ClientPrefs.data.antialiasing;
-		char12.alpha = 0.00001;
-		char12.screenCenter(X);
-		char12.screenCenter(Y);
-		add(char12);
-	
-		char13 = new FlxSprite(0, 0);
-		char13.loadGraphic(Paths.image('characters/BF/HD/Sonic'));
-		char13.scrollFactor.set(1, 1);
-		char13.scale.set(1, 1);
-		char13.antialiasing = ClientPrefs.data.antialiasing;
-		char13.alpha = 0.00001;
-		char13.screenCenter(X);
-		char13.screenCenter(Y);
-		add(char13);
-	
-		char14 = new FlxSprite(0, 0);
-		char14.loadGraphic(Paths.image('characters/BF/Pixel/bf-encore-pixel'));
-		char14.scrollFactor.set(1, 1);
-		char14.scale.set(1, 1);
-		char14.antialiasing = ClientPrefs.data.antialiasing;
-		char14.alpha = 0.00001;
-		char14.screenCenter(X);
-		char14.screenCenter(Y);
-		add(char14);
-	
-		char16 = new FlxSprite(0, 0);
-		char16.loadGraphic(Paths.image('characters/ChotixXenotixAndChaotix/Pixel/faker_chaotix'));
-		char16.scrollFactor.set(1, 1);
-		char16.scale.set(1, 1);
-		char16.antialiasing = ClientPrefs.data.antialiasing;
-		char16.alpha = 0.00001;
-		char16.screenCenter(X);
-		char16.screenCenter(Y);
-		add(char16);
-	
-		char17 = new FlxSprite(0, 0);
-		char17.loadGraphic(Paths.image('characters/Coldsteel/coldsteel_assets'));
-		char17.scrollFactor.set(1, 1);
-		char17.scale.set(1, 1);
-		char17.antialiasing = ClientPrefs.data.antialiasing;
-		char17.alpha = 0.00001;
-		char17.screenCenter(X);
-		char17.screenCenter(Y);
-		add(char17);
-	
-		char18 = new FlxSprite(0, 0);
-		char18.loadGraphic(Paths.image('characters/Coldsteel/coldsteel_guitar'));
-		char18.scrollFactor.set(1, 1);
-		char18.scale.set(1, 1);
-		char18.antialiasing = ClientPrefs.data.antialiasing;
-		char18.alpha = 0.00001;
-		char18.screenCenter(X);
-		char18.screenCenter(Y);
-		add(char18);
-	
-		char19 = new FlxSprite(0, 0);
-		char19.loadGraphic(Paths.image('characters/Eggman/eggman-encore'));
-		char19.scrollFactor.set(1, 1);
-		char19.scale.set(1, 1);
-		char19.antialiasing = ClientPrefs.data.antialiasing;
-		char19.alpha = 0.00001;
-		char19.screenCenter(X);
-		char19.screenCenter(Y);
-		add(char19);
-	
-		char20 = new FlxSprite(0, 0);
-		char20.loadGraphic(Paths.image('characters/FakerAndExe/faker_encore'));
-		char20.scrollFactor.set(1, 1);
-		char20.scale.set(1, 1);
-		char20.antialiasing = ClientPrefs.data.antialiasing;
-		char20.alpha = 0.00001;
-		char20.screenCenter(X);
-		char20.screenCenter(Y);
-		add(char20);
-	
-		char21 = new FlxSprite(0, 0);
-		char21.loadGraphic(Paths.image('characters/FakerAndExe/faker-exe-encore'));
-		char21.scrollFactor.set(1, 1);
-		char21.scale.set(1, 1);
-		char21.antialiasing = ClientPrefs.data.antialiasing;
-		char21.alpha = 0.00001;
-		char21.screenCenter(X);
-		char21.screenCenter(Y);
-		add(char21);
-	
-		char22 = new FlxSprite(0, 0);
-		char22.loadGraphic(Paths.image('characters/FatalAndCritical/fatal-error-sonic'));
-		char22.scrollFactor.set(1, 1);
-		char22.scale.set(1, 1);
-		char22.antialiasing = ClientPrefs.data.antialiasing;
-		char22.alpha = 0.00001;
-		char22.screenCenter(X);
-		char22.screenCenter(Y);
-		add(char22);
-	
-		char24 = new FlxSprite(0, 0);
-		char24.loadGraphic(Paths.image('characters/FatalAndCritical/true-fatal'));
-		char24.scrollFactor.set(1, 1);
-		char24.scale.set(1, 1);
-		char24.antialiasing = ClientPrefs.data.antialiasing;
-		char24.alpha = 0.00001;
-		char24.screenCenter(X);
-		char24.screenCenter(Y);
-		add(char24);
-	
-		char25 = new FlxSprite(0, 0);
-		char25.loadGraphic(Paths.image('characters/Fleetway/fleetway1'));
-		char25.scrollFactor.set(1, 1);
-		char25.scale.set(1, 1);
-		char25.antialiasing = ClientPrefs.data.antialiasing;
-		char25.alpha = 0.00001;
-		char25.screenCenter(X);
-		char25.screenCenter(Y);
-		add(char25);
-	
-		char26 = new FlxSprite(0, 0);
-		char26.loadGraphic(Paths.image('characters/HogAndScorched/Hog'));
-		char26.scrollFactor.set(1, 1);
-		char26.scale.set(1, 1);
-		char26.antialiasing = ClientPrefs.data.antialiasing;
-		char26.alpha = 0.00001;
-		char26.screenCenter(X);
-		char26.screenCenter(Y);
-		add(char26);
-	
-		char27 = new FlxSprite(0, 0);
-		char27.loadGraphic(Paths.image('characters/HogAndScorched/scorched'));
-		char27.scrollFactor.set(1, 1);
-		char27.scale.set(1, 1);
-		char27.antialiasing = ClientPrefs.data.antialiasing;
-		char27.alpha = 0.00001;
-		char27.screenCenter(X);
-		char27.screenCenter(Y);
-		add(char27);
-	
-		char28 = new FlxSprite(0, 0);
-		char28.loadGraphic(Paths.image('characters/Knuckles/knux-encore'));
-		char28.scrollFactor.set(1, 1);
-		char28.scale.set(1, 1);
-		char28.antialiasing = ClientPrefs.data.antialiasing;
-		char28.alpha = 0.00001;
-		char28.screenCenter(X);
-		char28.screenCenter(Y);
-		add(char28);
-	
-		char29 = new FlxSprite(0, 0);
-		char29.loadGraphic(Paths.image('characters/Majin/SonicFunAssets'));
-		char29.scrollFactor.set(1, 1);
-		char29.scale.set(1, 1);
-		char29.antialiasing = ClientPrefs.data.antialiasing;
-		char29.alpha = 0.00001;
-		char29.screenCenter(X);
-		char29.screenCenter(Y);
-		add(char29);
-	
-		char30 = new FlxSprite(0, 0);
-		char30.loadGraphic(Paths.image('characters/NeedlemouseSarahShadowmouseLutherSunter/Needlemouse'));
-		char30.scrollFactor.set(1, 1);
-		char30.scale.set(1, 1);
-		char30.antialiasing = ClientPrefs.data.antialiasing;
-		char30.alpha = 0.00001;
-		char30.screenCenter(X);
-		char30.screenCenter(Y);
-		add(char30);
-	
-		char31 = new FlxSprite(0, 0);
-		char31.loadGraphic(Paths.image('characters/Sanic/sanic'));
-		char31.scrollFactor.set(1, 1);
-		char31.scale.set(1, 1);
-		char31.antialiasing = ClientPrefs.data.antialiasing;
-		char31.alpha = 0.00001;
-		char31.screenCenter(X);
-		char31.screenCenter(Y);
-		add(char31);
-		
-		char32 = new FlxSprite(0, 0);
-		char32.loadGraphic(Paths.image('characters/Satanos/Satanos'));
-		char32.scrollFactor.set(1, 1);
-		char32.scale.set(1, 1);
-		char32.antialiasing = ClientPrefs.data.antialiasing;
-		char32.alpha = 0.00001;
-		char32.screenCenter(X);
-		char32.screenCenter(Y);
-		add(char32);
-	
-		char33 = new FlxSprite(0, 0);
-		char33.loadGraphic(Paths.image('characters/Sunky/Sunky'));
-		char33.scrollFactor.set(1, 1);
-		char33.scale.set(1, 1);
-		char33.antialiasing = ClientPrefs.data.antialiasing;
-		char33.alpha = 0.00001;
-		char33.screenCenter(X);
-		char33.screenCenter(Y);
-		add(char33);
-	
-		char34 = new FlxSprite(0, 0);
-		char34.loadGraphic(Paths.image('characters/XenoAndGrimbo/HD/Beast'));
-		char34.scrollFactor.set(1, 1);
-		char34.scale.set(1, 1);
-		char34.antialiasing = ClientPrefs.data.antialiasing;
-		char34.alpha = 0.00001;
-		char34.screenCenter(X);
-		char34.screenCenter(Y);
-		add(char34);
-	
-		char35 = new FlxSprite(0, 0);
-		char35.loadGraphic(Paths.image('characters/XenoAndGrimbo/HD/sonicexe'));
-		char35.scrollFactor.set(1, 1);
-		char35.scale.set(1, 1);
-		char35.antialiasing = ClientPrefs.data.antialiasing;
-		char35.alpha = 0.00001;
-		char35.screenCenter(X);
-		char35.screenCenter(Y);
-		add(char35);
-	
-		char36 = new FlxSprite(0, 0);
-		char36.loadGraphic(Paths.image('characters/XenoAndGrimbo/HD/YCR-Mad-Cherribun'));
-		char36.scrollFactor.set(1, 1);
-		char36.scale.set(1, 1);
-		char36.antialiasing = ClientPrefs.data.antialiasing;
-		char36.alpha = 0.00001;
-		char36.screenCenter(X);
-		char36.screenCenter(Y);
-		add(char36);
-	
-		char37 = new FlxSprite(0, 0);
-		char37.loadGraphic(Paths.image('characters/XenoAndGrimbo/HD/YCR-Cherribun'));
-		char37.scrollFactor.set(1, 1);
-		char37.scale.set(1, 1);
-		char37.antialiasing = ClientPrefs.data.antialiasing;
-		char37.alpha = 0.00001;
-		char37.screenCenter(X);
-		char37.screenCenter(Y);
-		add(char37);
-	
-		char38 = new FlxSprite(0, 0);
-		char38.loadGraphic(Paths.image('characters/BF/Pixel/pixel-normal'));
-		char38.scrollFactor.set(1, 1);
-		char38.scale.set(1, 1);
-		char38.antialiasing = ClientPrefs.data.antialiasing;
-		char38.alpha = 0.00001;
-		char38.screenCenter(X);
-		char38.screenCenter(Y);
-		add(char38);
-
-		char39 = new FlxSprite(0, 0);
-		char39.loadGraphic(Paths.image('characters/FakerAndExe/faker_pixel'));
-		char39.scrollFactor.set(1, 1);
-		char39.scale.set(1, 1);
-		char39.antialiasing = ClientPrefs.data.antialiasing;
-		char39.alpha = 0.00001;
-		char39.screenCenter(X);
-		char39.screenCenter(Y);
-		add(char39);
-	
-		char40 = new FlxSprite(0, 0);
-		char40.loadGraphic(Paths.image('characters/ChotixXenotixAndChaotix/HD/chaotix-hd'));
-		char40.scrollFactor.set(1, 1);
-		char40.scale.set(1, 1);
-		char40.antialiasing = ClientPrefs.data.antialiasing;
-		char40.alpha = 0.00001;
-		char40.screenCenter(X);
-		char40.screenCenter(Y);
-		add(char40);
-	
-		char42 = new FlxSprite(0, 0);
-		char42.loadGraphic(Paths.image('characters/BF/HD/BF_Requital'));
-		char42.scrollFactor.set(1, 1);
-		char42.scale.set(1, 1);
-		char42.antialiasing = ClientPrefs.data.antialiasing;
-		char42.alpha = 0.00001;
-		char42.screenCenter(X);
-		char42.screenCenter(Y);
-		add(char42);
-		
-		char1.destroy();
-		char2.destroy();
-		char3.destroy();
-		char4.destroy();
-		char5.destroy();
-		char6.destroy();
-		char7.destroy();
-		char8.destroy();
-		char9.destroy();
-		char10.destroy();
-		char12.destroy();
-		char13.destroy();
-		char14.destroy();
-		char16.destroy();
-		char17.destroy();
-		char18.destroy();
-		char19.destroy();
-		char20.destroy();
-		char21.destroy();
-		char22.destroy();
-		char24.destroy();
-		char25.destroy();
-		char26.destroy();
-		char27.destroy();
-		char28.destroy();
-		char29.destroy();
-		char30.destroy();
-		char31.destroy();
-		char32.destroy();
-		char33.destroy();
-		char34.destroy();
-		char35.destroy();
-		char36.destroy();
-		char37.destroy();
-		char38.destroy();
-		char39.destroy();
-		char40.destroy();
-		char42.destroy();
 		
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
-		if (!lowQuality) {
 		DiscordClient.changePresence("Starting Song...", null);
-		}
 		#end
 	}
 
@@ -2256,7 +2031,6 @@ class Omni extends BaseStage
 				sunky_stage.visible = false;
 				sanic_bg.visible = false;
 				knuckles_bg.visible = false;
-				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 			
 			case 272, 528, 656, 912, 10160, 10288: //tailsdoll
@@ -2325,7 +2099,6 @@ class Omni extends BaseStage
 		
 			case 3222: //preload knuckles, wechidna
 				knuckles_bg.visible = true;
-				knuckles_city2.visible = true;
 				knuckles_floor.visible = true;
 				wechidna_sky.visible = true;
 				wechidna_building1.visible = true;
@@ -2337,7 +2110,6 @@ class Omni extends BaseStage
 				
 			case 3231: //remove preload stuff
 				knuckles_bg.visible = false;
-				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 				wechidna_sky.visible = false;
 				wechidna_building1.visible = false;
@@ -2350,7 +2122,6 @@ class Omni extends BaseStage
 			case 3360, 3520, 3680, 4064, 4192, 11056: //knuckles
 				redRingTransition();
 				knuckles_bg.visible = true;
-				knuckles_city2.visible = true;
 				knuckles_floor.visible = true;
 				fucklesBGPixel.visible = false;
 				fucklesFGPixel.visible = false;
@@ -2374,7 +2145,6 @@ class Omni extends BaseStage
 			case 3408, 3648, 3712: //chaotix
 				redRingTransition();
 				knuckles_bg.visible = false;
-				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 				fucklesBGPixel.visible = true;
 				fucklesFGPixel.visible = true;
@@ -2396,7 +2166,6 @@ class Omni extends BaseStage
 				wechidna_thingFG.visible = true;
 				wechidna_grassFG.visible = true;
 				knuckles_bg.visible = false;
-				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 				fucklesBGPixel.visible = false;
 				fucklesFGPixel.visible = false;
@@ -2431,7 +2200,6 @@ class Omni extends BaseStage
 			case 4256, 4768, 5056, 5184, 5424, 11184: //satanos
 				redRingTransition();
 				knuckles_bg.visible = false;
-				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 				satanos_sky.visible = true;
 				satanos_trees.visible = true;
@@ -2452,6 +2220,10 @@ class Omni extends BaseStage
 				majin_bush.visible = true;
 				majin_floor.visible = true;
 				majin_pillars1.visible = true;
+				sunky_speakers.visible = true;
+				sunky_balls.visible = true;
+				sunky_stage.visible = true;
+				sanic_bg.visible = true;
 				
 			case 5346: //remove preload shit
 				xeno_fg.visible = false;
@@ -2460,6 +2232,10 @@ class Omni extends BaseStage
 				majin_bush.visible = false;
 				majin_floor.visible = false;
 				majin_pillars1.visible = false;
+				sunky_speakers.visible = false;
+				sunky_balls.visible = false;
+				sunky_stage.visible = false;
+				sanic_bg.visible = false;
 				
 			case 5473: //Preload sonic.exe
 				sonic_bg.visible = true;
@@ -2467,6 +2243,9 @@ class Omni extends BaseStage
 				majin_pillars2.visible = true;
 				majin_fgmajin.visible = true;
 				majin_fgmajin2.visible = true;
+				sunky_bg.visible = true;
+				sunky_milk.visible = true;
+				sunky_cereal.visible = true;
 				
 			case 5474: //remove preload shit
 				sonic_bg.visible = false;
@@ -2474,6 +2253,9 @@ class Omni extends BaseStage
 				majin_pillars2.visible = false;
 				majin_fgmajin.visible = false;
 				majin_fgmajin2.visible = false;
+				sunky_bg.visible = false;
+				sunky_milk.visible = false;
+				sunky_cereal.visible = false;
 				
 			case 5585: //preload lordx, fatal
 				lordx_sky.visible = true;
@@ -2546,13 +2328,6 @@ class Omni extends BaseStage
 				majin_pillars2.visible = true;
 				majin_fgmajin.visible = true;
 				majin_fgmajin2.visible = true;
-				sunky_bg.visible = true;
-				sunky_milk.visible = true;
-				sunky_cereal.visible = true;
-				sunky_speakers.visible = true;
-				sunky_balls.visible = true;
-				sunky_stage.visible = true;
-				sanic_bg.visible = true;
 				sunkyTransition.visible = true;
 				coldsteel_whiteFuck.visible = true;
 				guitar.visible = true;
@@ -2583,7 +2358,6 @@ class Omni extends BaseStage
 			case 6608: //ycr-normal
 				redRingTransition();
 				knuckles_bg.visible = true;
-				knuckles_city2.visible = true;
 				knuckles_floor.visible = true;
 				lordx_sky.visible = false;
 				lordx_floor.visible = false;
@@ -2600,7 +2374,6 @@ class Omni extends BaseStage
 				xeno_fg.visible = true;
 				xeno_floor.visible = true;
 				knuckles_bg.visible = false;
-				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 				majin_bush2.visible = false;
 				majin_bush.visible = false;
@@ -2788,13 +2561,11 @@ class Omni extends BaseStage
 				faker_bg2.visible = false;
 				faker_overlay.visible = false;
 				knuckles_bg.visible = true;
-				knuckles_city2.visible = true;
 				knuckles_floor.visible = true;
 				
 			case 10161: //Back to Tailsdoll
 				redRingTransition();
 				knuckles_bg.visible = false;
-				knuckles_city2.visible = false;
 				knuckles_floor.visible = false;
 		
 			case 12240:
@@ -2810,86 +2581,6 @@ class Omni extends BaseStage
 
 	public function doTheThing()
 	{
-		char1.alpha = 1;
-		char2.alpha = 1;
-		char3.alpha = 1;
-		char4.alpha = 1;
-		char5.alpha = 1;
-		char6.alpha = 1;
-		char7.alpha = 1;
-		char8.alpha = 1;
-		char9.alpha = 1;
-		char10.alpha = 1;
-		char12.alpha = 1;
-		char13.alpha = 1;
-		char14.alpha = 1;
-		char16.alpha = 1;
-		char17.alpha = 1;
-		char18.alpha = 1;
-		char19.alpha = 1;
-		char20.alpha = 1;
-		char21.alpha = 1;
-		char22.alpha = 1;
-		char24.alpha = 1;
-		char25.alpha = 1;
-		char26.alpha = 1;
-		char27.alpha = 1;
-		char28.alpha = 1;
-		char29.alpha = 1;
-		char30.alpha = 1;
-		char31.alpha = 1;
-		char32.alpha = 1;
-		char33.alpha = 1;
-		char34.alpha = 1;
-		char35.alpha = 1;
-		char36.alpha = 1;
-		char37.alpha = 1;
-		char38.alpha = 1;
-		char39.alpha = 1;
-		char40.alpha = 1;
-		char41.alpha = 1;
-		char42.alpha = 1;
-	
-		char1.alpha = 0;
-		char2.alpha = 0;
-		char3.alpha = 0;
-		char4.alpha = 0.00001;
-		char5.alpha = 0;
-		char6.alpha = 0;
-		char7.alpha = 0;
-		char8.alpha = 0;
-		char9.alpha = 0;
-		char10.alpha = 0;
-		char12.alpha = 0;
-		char13.alpha = 0;
-		char14.alpha = 0;
-		char16.alpha = 0;
-		char17.alpha = 0;
-		char18.alpha = 0;
-		char19.alpha = 0.00001;
-		char20.alpha = 0.00001;
-		char21.alpha = 0.00001;
-		char22.alpha = 0;
-		char24.alpha = 0;
-		char25.alpha = 0.00001;
-		char26.alpha = 0.00001;
-		char27.alpha = 0.00001;
-		char28.alpha = 0;
-		char29.alpha = 0;
-		char30.alpha = 0;
-		char31.alpha = 0;
-		char32.alpha = 0.00001;
-		char33.alpha = 0;
-		char34.alpha = 0;
-		char35.alpha = 0.00001;
-		char36.alpha = 0;
-		char37.alpha = 0;
-		char38.alpha = 0;
-		char39.alpha = 0;
-		char40.alpha = 0;
-		char41.alpha = 0.00001;
-		char42.alpha = 0;
-
 		sunkyTransition.visible = true;
 		daJumpscare.visible = true;
 		ring.visible = true;
@@ -2953,10 +2644,8 @@ class Omni extends BaseStage
 		whiteFuck.visible = false;
 		
 		knuckles_bg.visible = true;
-		knuckles_city2.visible = true;
 		knuckles_floor.visible = true;
 		knuckles_bg.visible = false;
-		knuckles_city2.visible = false;
 		knuckles_floor.visible = false;
 		
 		wechidna_sky.visible = true;
@@ -3187,7 +2876,6 @@ class Omni extends BaseStage
 				sunky_stage.visible = true;
 				sanic_bg.visible = true;
 				knuckles_bg.visible = true;
-				knuckles_city2.visible = true;
 				knuckles_floor.visible = true;
 				
 			case 10417: //Destroy Xterion
@@ -3232,7 +2920,6 @@ class Omni extends BaseStage
 				
 			case 11185: //Destroy Knuckles/YCR
 				knuckles_bg.destroy();
-				knuckles_city2.destroy();
 				knuckles_floor.destroy();
 				
 			case 11249: //Destroy Satanos

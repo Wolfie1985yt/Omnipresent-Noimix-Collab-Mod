@@ -65,15 +65,28 @@ class FreeplayState extends MusicBeatState
 		FlxG.cameras.reset(camGame);
 		FlxCamera.defaultCameras = [camGame];
 		
-		BG = new FlxSprite(0, 0);
-		BG.frames = Paths.getSparrowAtlas('mainmenu/bg');
-		BG.antialiasing = false;
-		BG.animation.addByPrefix('bgAnim', 'BG instance 1', 24);
-		BG.setGraphicSize(Std.int(BG.width * 1));
-		BG.animation.play('bgAnim');
-		BG.updateHitbox();
-		BG.screenCenter();
-		add(BG);
+		if (!ClientPrefs.data.lowQuality) {
+			BG = new FlxSprite(0, 0);
+			BG.frames = Paths.getSparrowAtlas('mainmenu/bg');
+			BG.antialiasing = false;
+			BG.animation.addByPrefix('bgAnim', 'BG instance 1', 24);
+			BG.setGraphicSize(Std.int(BG.width * 1));
+			BG.animation.play('bgAnim');
+			BG.updateHitbox();
+			BG.screenCenter();
+			add(BG);
+		} else {
+			BG = new FlxSprite(0, 0);
+			BG.frames = Paths.getSparrowAtlas('blank');
+			BG.antialiasing = false;
+			BG.animation.addByPrefix('bgAnim', 'fun', 24);
+			BG.setGraphicSize(Std.int(BG.width * 1));
+			BG.animation.play('bgAnim');
+			BG.updateHitbox();
+			BG.screenCenter();
+			add(BG);
+		}
+		
 
 		art = new FlxSprite(-325, 0);
 		if (omniBeaten) {

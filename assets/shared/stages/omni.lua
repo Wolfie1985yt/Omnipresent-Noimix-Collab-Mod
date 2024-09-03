@@ -24,6 +24,7 @@ local loading = false;
 local vgspeed = 0;
 local color = 'FFFFFF';
 local stop = true;
+local stop2 = true;
 local beat = 0;
 local color2 = 'FFFFFF';
 local fps = 0;
@@ -125,28 +126,55 @@ function onCreate()
 	setProperty('faker_pixel.visible', false);
 	addLuaSprite('faker_pixel', false);
 
-	makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/egg_bg', -1000, -1000);
-	scaleObject('eggman_bg', 1.5, 1.5);
-	setScrollFactor('eggman_bg', 1, 1);
-	setProperty('eggman_bg.antialiasing', true);
-	setProperty('eggman_bg.visible', false);
-	addLuaSprite('eggman_bg', false);
+	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false then
+		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/egg_bg', -1000, -1000);
+		scaleObject('eggman_bg', 1.5, 1.5);
+		setScrollFactor('eggman_bg', 1, 1);
+		setProperty('eggman_bg.antialiasing', true);
+		setProperty('eggman_bg.visible', false);
+		addLuaSprite('eggman_bg', false);
 	
-	makeLuaSprite('eggman_eys', 'bgs/triple-trouble-encore/eggman/egg_eys', -1000, -1000);
-	scaleObject('eggman_eys', 1.5, 1.5);
-	setScrollFactor('eggman_eys', 1, 1);
-	setProperty('eggman_eys.antialiasing', true);
-	setProperty('eggman_eys.visible', false);
-	addLuaSprite('eggman_eys', false);
+		makeLuaSprite('eggman_eys', 'bgs/triple-trouble-encore/eggman/egg_eys', -1000, -1000);
+		scaleObject('eggman_eys', 1.5, 1.5);
+		setScrollFactor('eggman_eys', 1, 1);
+		setProperty('eggman_eys.antialiasing', true);
+		setProperty('eggman_eys.visible', false);
+		addLuaSprite('eggman_eys', false);
+	else
+		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/eggbgLowQuality', -1000, -1000);
+		scaleObject('eggman_bg', 1.5, 1.5);
+		setScrollFactor('eggman_bg', 1, 1);
+		setProperty('eggman_bg.antialiasing', true);
+		setProperty('eggman_bg.visible', false);
+		addLuaSprite('eggman_bg', false);
 	
-	makeLuaSprite('simplejump', 'epicjump', 0, 0);
-	setScrollFactor('simplejump', 0, 0);
-	setGraphicSize('simplejump',screenWidth,screenHeight);
-	setProperty('simplejump.antialiasing', true);
-	setProperty('simplejump.visible', false);
-	setObjectCamera('simplejump','camHUD');
-	screenCenter('simplejump');
-	addLuaSprite('simplejump', false);
+		makeLuaSprite('eggman_eys', 'blank', -1000, -1000);
+		scaleObject('eggman_eys', 1.5, 1.5);
+		setScrollFactor('eggman_eys', 1, 1);
+		setProperty('eggman_eys.antialiasing', true);
+		setProperty('eggman_eys.visible', false);
+		addLuaSprite('eggman_eys', false);
+	end
+	
+	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false then
+		makeLuaSprite('simplejump', 'epicjump', 0, 0);
+		setScrollFactor('simplejump', 0, 0);
+		setGraphicSize('simplejump',screenWidth,screenHeight);
+		setProperty('simplejump.antialiasing', true);
+		setProperty('simplejump.visible', false);
+		setObjectCamera('simplejump','camHUD');
+		screenCenter('simplejump');
+		addLuaSprite('simplejump', false);
+	else
+		makeLuaSprite('simplejump', 'blank', 0, 0);
+		setScrollFactor('simplejump', 0, 0);
+		setGraphicSize('simplejump',screenWidth,screenHeight);
+		setProperty('simplejump.antialiasing', true);
+		setProperty('simplejump.visible', false);
+		setObjectCamera('simplejump','camHUD');
+		screenCenter('simplejump');
+		addLuaSprite('simplejump', false);
+	end
 	
 	if getPropertyFromClass('states.PlayState','chartingMode') == false then
 		makeLuaSprite('black', '', 0, 0);
@@ -263,6 +291,14 @@ function onStartCountdown()
 	runTimer('preload',0.5);
 	runTimer('preload',0.6);
 	runTimer('reset-preload',0.7);
+end
+function onStepHit()
+	if stop == true then
+		setProperty('VG2.alpha',0);
+	end
+	if stop2 == true then
+		setProperty('VG3.alpha',0);
+	end
 end
 function onUpdate(elapsed)
 	if fleetwayMoment == true then
@@ -787,8 +823,17 @@ function onUpdate(elapsed)
 		setProperty('defaultCamZoom',0.7);
 		setObjectOrder('eggman_bg',104);
 		setObjectOrder('eggman_eys',105);
-		setObjectOrder('gfGroup', 114)
-		setObjectOrder('dadGroup', 115)
+		setObjectOrder('gfGroup', 112)
+		setObjectOrder('dadGroup', 113)
+		setObjectOrder('boyfriendGroup', 116)
+	end
+	if curStep == 12081 then
+		setObjectOrder('gfGroup', 110)
+		setObjectOrder('dadGroup', 104)
+	end
+	if curStep == 12224 then
+		setObjectOrder('gfGroup', 112)
+		setObjectOrder('dadGroup', 113)
 		setObjectOrder('boyfriendGroup', 116)
 	end
 	if curStep == 12240 then --badappleshit
@@ -1071,10 +1116,10 @@ function onUpdate(elapsed)
 		doTweenAlpha('sunkyAlpha', 'sunky', 0, 0.5, 'linear');
 	end
 	if curStep == 12208 then
-		doTweenAlpha('secondtolastflash', 'flashingshit3', 1, 0.2);
+		doTweenAlpha('secondtolastflash', 'flashingshit2', 1, 0.2);
 	end
 	if curStep == 12224 then
-		doTweenAlpha('secondtolastflash', 'flashingshit3', 0, 1.29);
+		doTweenAlpha('secondtolastflash', 'flashingshit2', 0, 1.29);
 	end
 	if curStep == 8976 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 1, 'linear');
@@ -1340,7 +1385,7 @@ function onUpdate(elapsed)
                 triggerEvent('Camera Follow Pos',xx2,yy2)
             end
         end
-		if getPropertyFromGroup('notes', id, 'gfNote') and gfMoment == true and mustHitSection == true then
+		if getPropertyFromGroup('notes', id, 'gfNote') and mustHitSection == true and gfMoment == true then
 			if getProperty('gf.animation.curAnim.name') == 'singLEFT' then
 				triggerEvent('Camera Follow Pos',xx3-ofs,yy3)
 			end
@@ -1389,6 +1434,9 @@ function onUpdate(elapsed)
 	end
 	if stop == true then
 		setProperty('VG2.alpha',0);
+	end
+	if stop2 == true then
+		setProperty('VG3.alpha',0);
 	end
 	if curStep >= 2064 and curStep <= 3200 or curStep >= 10672 and curStep <= 10927 then
 		setScrollFactor('boyfriendGhost', 1.1, 1);
@@ -1827,6 +1875,26 @@ function Lerp(Min,Max,Ratio)
 end
 
 function goodNoteHit(id, direction, noteType, isSustainNote, gfNote)
+	if getPropertyFromGroup('notes', id, 'gfNote') == true and mustHitSection == true or getPropertyFromGroup('notes', id, 'gfNote') == 'GF Sing' and mustHitSection == true then
+		if getProperty('gf.animation.curAnim.name') == 'singLEFT' then
+			triggerEvent('Camera Follow Pos',xx3-ofs,yy3)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'singRIGHT' then
+			triggerEvent('Camera Follow Pos',xx3+ofs,yy3)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'singUP' then
+			triggerEvent('Camera Follow Pos',xx3,yy3-ofs)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'singDOWN' then
+			triggerEvent('Camera Follow Pos',xx3,yy3+ofs)
+		end	
+		if getProperty('gf.animation.curAnim.name') == 'idle-alt' then
+			triggerEvent('Camera Follow Pos',xx3,yy3)
+		end
+		if getProperty('gf.animation.curAnim.name') == 'idle' then
+			triggerEvent('Camera Follow Pos',xx3,yy3)
+		end
+	end
 	if curStep <= 12220 and curStep >= 0 or curStep >= 12776 and curStep <= 13104 then
 		if not isSustainNote and noteType == '' or noteType == 'GF and BF' and not isSustainNote then
 			if not getPropertyFromGroup('notes', id, 'gfNote') then
@@ -1899,26 +1967,6 @@ function goodNoteHit(id, direction, noteType, isSustainNote, gfNote)
 		end
 		if direction == 3 then
 			triggerEvent('Play Animation', 'singRIGHT', 'bf')
-		end
-	end
-	if getPropertyFromGroup('notes', id, 'gfNote') and gfMoment == true and mustHitSection == true then
-		if getProperty('gf.animation.curAnim.name') == 'singLEFT' then
-			triggerEvent('Camera Follow Pos',xx3-ofs,yy3)
-		end
-		if getProperty('gf.animation.curAnim.name') == 'singRIGHT' then
-			triggerEvent('Camera Follow Pos',xx3+ofs,yy3)
-		end
-		if getProperty('gf.animation.curAnim.name') == 'singUP' then
-			triggerEvent('Camera Follow Pos',xx3,yy3-ofs)
-		end
-		if getProperty('gf.animation.curAnim.name') == 'singDOWN' then
-			triggerEvent('Camera Follow Pos',xx3,yy3+ofs)
-		end	
-		if getProperty('gf.animation.curAnim.name') == 'idle-alt' then
-			triggerEvent('Camera Follow Pos',xx3,yy3)
-		end
-		if getProperty('gf.animation.curAnim.name') == 'idle' then
-			triggerEvent('Camera Follow Pos',xx3,yy3)
 		end
 	end
 end
@@ -2154,12 +2202,14 @@ function onEvent(name, value1, value2)
 	if name == 'Trigger VG' then
 		beat = value1;
 		color2 = value2;
+		stop2 = false;
 		doTweenColor('VG3Color', 'VG3', color2, 0.00001, 'linear');
 		setProperty('VG3.alpha',0.7);
 		doTweenAlpha('VG3Tween', 'VG3', 0, 0.4, 'linear');
 	end
 	if name == 'Trigger VG' and value1 == '0' then
 		beat = 0;
+		stop2 = true;
 		cancelTween('VG3Color');
 		cancelTween('VG3Tween');
 		setProperty('VG3.alpha',0);

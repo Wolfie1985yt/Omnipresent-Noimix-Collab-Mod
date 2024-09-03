@@ -76,15 +76,27 @@ class StoryMenuState extends MusicBeatState
 		FlxG.sound.playMusic(Paths.music('storymode'), 0);
 		FlxG.sound.music.fadeIn(0.5, 0, 0.6);
 
-		bg = new FlxSprite(0, 0);
-		bg.frames = Paths.getSparrowAtlas('story-mode/bg');
-		bg.animation.addByPrefix('idlexd', "static", 24);
-		bg.animation.play('idlexd');
-		bg.alpha = 1;
-		bg.antialiasing = true;
-		bg.setGraphicSize(Std.int(bg.width));
-		bg.updateHitbox();
-		add(bg);
+		if (!ClientPrefs.data.lowQuality) {
+			bg = new FlxSprite(0, 0);
+			bg.frames = Paths.getSparrowAtlas('story-mode/bg');
+			bg.animation.addByPrefix('idlexd', "static", 24);
+			bg.animation.play('idlexd');
+			bg.alpha = 1;
+			bg.antialiasing = true;
+			bg.setGraphicSize(Std.int(bg.width));
+			bg.updateHitbox();
+			add(bg);
+		} else {
+			bg = new FlxSprite(0, 0);
+			bg.frames = Paths.getSparrowAtlas('blank');
+			bg.animation.addByPrefix('idlexd', "fun", 24);
+			bg.animation.play('idlexd');
+			bg.alpha = 1;
+			bg.antialiasing = true;
+			bg.setGraphicSize(Std.int(bg.width));
+			bg.updateHitbox();
+			add(bg);
+		}
 
 		greyBOX = new FlxSprite(147, 76).loadGraphic(Paths.image('story-mode/greybox'));
 		greyBOX.antialiasing = true;

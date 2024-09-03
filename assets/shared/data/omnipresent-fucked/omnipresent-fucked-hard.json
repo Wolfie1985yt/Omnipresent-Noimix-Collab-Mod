@@ -52990,6 +52990,11 @@
 						"funnyHudStuff",
 						"1",
 						"0.72"
+					],
+					[
+						"funnyHudStuff",
+						"2",
+						"0.5"
 					]
 				]
 			],
@@ -53020,11 +53025,6 @@
 						"Add Camera Zoom",
 						"0.03",
 						""
-					],
-					[
-						"funnyHudStuff",
-						"2",
-						"0.2"
 					]
 				]
 			],

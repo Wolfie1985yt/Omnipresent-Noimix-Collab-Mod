@@ -126,28 +126,55 @@ function onCreate()
 	setProperty('faker_pixel.visible', false);
 	addLuaSprite('faker_pixel', false);
 
-	makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/egg_bg', -1000, -1000);
-	scaleObject('eggman_bg', 1.5, 1.5);
-	setScrollFactor('eggman_bg', 1, 1);
-	setProperty('eggman_bg.antialiasing', true);
-	setProperty('eggman_bg.visible', false);
-	addLuaSprite('eggman_bg', false);
+	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false then
+		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/egg_bg', -1000, -1000);
+		scaleObject('eggman_bg', 1.5, 1.5);
+		setScrollFactor('eggman_bg', 1, 1);
+		setProperty('eggman_bg.antialiasing', true);
+		setProperty('eggman_bg.visible', false);
+		addLuaSprite('eggman_bg', false);
 	
-	makeLuaSprite('eggman_eys', 'bgs/triple-trouble-encore/eggman/egg_eys', -1000, -1000);
-	scaleObject('eggman_eys', 1.5, 1.5);
-	setScrollFactor('eggman_eys', 1, 1);
-	setProperty('eggman_eys.antialiasing', true);
-	setProperty('eggman_eys.visible', false);
-	addLuaSprite('eggman_eys', false);
+		makeLuaSprite('eggman_eys', 'bgs/triple-trouble-encore/eggman/egg_eys', -1000, -1000);
+		scaleObject('eggman_eys', 1.5, 1.5);
+		setScrollFactor('eggman_eys', 1, 1);
+		setProperty('eggman_eys.antialiasing', true);
+		setProperty('eggman_eys.visible', false);
+		addLuaSprite('eggman_eys', false);
+	else
+		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/eggbgLowQuality', -1000, -1000);
+		scaleObject('eggman_bg', 1.5, 1.5);
+		setScrollFactor('eggman_bg', 1, 1);
+		setProperty('eggman_bg.antialiasing', true);
+		setProperty('eggman_bg.visible', false);
+		addLuaSprite('eggman_bg', false);
 	
-	makeLuaSprite('simplejump', 'epicjump', 0, 0);
-	setScrollFactor('simplejump', 0, 0);
-	setGraphicSize('simplejump',screenWidth,screenHeight);
-	setProperty('simplejump.antialiasing', true);
-	setProperty('simplejump.visible', false);
-	setObjectCamera('simplejump','camHUD');
-	screenCenter('simplejump');
-	addLuaSprite('simplejump', false);
+		makeLuaSprite('eggman_eys', 'blank', -1000, -1000);
+		scaleObject('eggman_eys', 1.5, 1.5);
+		setScrollFactor('eggman_eys', 1, 1);
+		setProperty('eggman_eys.antialiasing', true);
+		setProperty('eggman_eys.visible', false);
+		addLuaSprite('eggman_eys', false);
+	end
+	
+	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false then
+		makeLuaSprite('simplejump', 'epicjump', 0, 0);
+		setScrollFactor('simplejump', 0, 0);
+		setGraphicSize('simplejump',screenWidth,screenHeight);
+		setProperty('simplejump.antialiasing', true);
+		setProperty('simplejump.visible', false);
+		setObjectCamera('simplejump','camHUD');
+		screenCenter('simplejump');
+		addLuaSprite('simplejump', false);
+	else
+		makeLuaSprite('simplejump', 'blank', 0, 0);
+		setScrollFactor('simplejump', 0, 0);
+		setGraphicSize('simplejump',screenWidth,screenHeight);
+		setProperty('simplejump.antialiasing', true);
+		setProperty('simplejump.visible', false);
+		setObjectCamera('simplejump','camHUD');
+		screenCenter('simplejump');
+		addLuaSprite('simplejump', false);
+	end
 	
 	if getPropertyFromClass('states.PlayState','chartingMode') == false then
 		makeLuaSprite('black', '', 0, 0);
@@ -770,7 +797,7 @@ function onUpdate(elapsed)
 		setProperty('gfGroup.x',300);
 		setProperty('gfGroup.y',-30);
 	end
-	if curStep == 9200 or curStep == 9456 or curStep == 9840 or curStep == 12080 then --scorched
+		if curStep == 9200 or curStep == 9456 or curStep == 9840 or curStep == 12080 then --scorched
 		scorchedMoment = true;
 		exeMoment = false;
 		runTimer('ringStart',0.1);
@@ -788,8 +815,17 @@ function onUpdate(elapsed)
 		setProperty('defaultCamZoom',0.7);
 		setObjectOrder('eggman_bg',104);
 		setObjectOrder('eggman_eys',105);
-		setObjectOrder('gfGroup', 114)
-		setObjectOrder('dadGroup', 115)
+		setObjectOrder('gfGroup', 112)
+		setObjectOrder('dadGroup', 113)
+		setObjectOrder('boyfriendGroup', 116)
+	end
+	if curStep == 12081 then
+		setObjectOrder('gfGroup', 110)
+		setObjectOrder('dadGroup', 104)
+	end
+	if curStep == 12224 then
+		setObjectOrder('gfGroup', 112)
+		setObjectOrder('dadGroup', 113)
 		setObjectOrder('boyfriendGroup', 116)
 	end
 	if curStep == 12240 then --badappleshit
@@ -1233,10 +1269,10 @@ function onUpdate(elapsed)
 		doTweenAlpha('lastflash', 'flashingshit3', 1, 2.58);
 	end
 	if curStep == 12208 then
-		doTweenAlpha('secondtolastflash', 'flashingshit3', 1, 0.2);
+		doTweenAlpha('secondtolastflash', 'flashingshit2', 1, 0.2);
 	end
 	if curStep == 12224 then
-		doTweenAlpha('secondtolastflash', 'flashingshit3', 0, 1.29);
+		doTweenAlpha('secondtolastflash', 'flashingshit2', 0, 1.29);
 	end
 	if curStep == 13136 then
 		setProperty('flashingshit2.alpha',1);
@@ -1342,7 +1378,7 @@ function onUpdate(elapsed)
                 triggerEvent('Camera Follow Pos',xx2,yy2)
             end
         end
-		if getPropertyFromGroup('notes', id, 'gfNote') and gfMoment == true and mustHitSection == true then
+		if getPropertyFromGroup('notes', id, 'gfNote') and mustHitSection == true and gfMoment == true then
 			if getProperty('gf.animation.curAnim.name') == 'singLEFT' then
 				triggerEvent('Camera Follow Pos',xx3-ofs,yy3)
 			end
@@ -1404,6 +1440,14 @@ function onUpdate(elapsed)
 		setScrollFactor('boyfriendGhost', 1, 1);
 		setScrollFactor('dadGhost', 1, 1);
 		setScrollFactor('gfGhost', 1, 1);
+	end
+end
+function onStepHit()
+	if stop == true then
+		setProperty('VG2.alpha',0);
+	end
+	if stop2 == true then
+		setProperty('VG3.alpha',0);
 	end
 end
 function onTimerCompleted(tag, loops, loopsLeft)
