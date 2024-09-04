@@ -333,6 +333,9 @@ function onUpdate(elapsed)
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
 	end
+	if curStep == 12496 then
+		triggerEvent('Cam Zoom', '2.6', '20.75, easeInOut');
+	end
 	if curStep == 16 then --wolfie credits
 		makeLuaSprite('CreditsBG',nil,-292,200)
 		makeGraphic('CreditsBG',252,100,'ffffff')

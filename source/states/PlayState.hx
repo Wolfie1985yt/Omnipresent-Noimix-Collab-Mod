@@ -2499,10 +2499,6 @@ class PlayState extends MusicBeatState
 						setOnScripts('boyfriendName', boyfriend.curCharacter);
 
 					case 1:
-						#if LOW_QUALITY
-						if(ClientPrefs.data.lowQuality) {
-						if(value2 != 'fleetway' || value2 != 'fleetway-anims2' || value2 != 'fleetway-anims3' || value2 != 'fleetwaylaser' || value2 != 'wechBeast' || value2 != 'wechBeast-flipped') {
-						#end
 						if(dad.curCharacter != value2) {
 							if(!dadMap.exists(value2)) {
 								addCharacterToList(value2, charType);
@@ -2528,77 +2524,7 @@ class PlayState extends MusicBeatState
 							iconP2.changeIcon(dad.healthIcon);
 						}
 						setOnScripts('dadName', dad.curCharacter);
-					#if LOW_QUALITY
-					}
-					}
-					#end
-					#if LOW_QUALITY
-					if(ClientPrefs.data.lowQuality) {
-					if(value2 == 'fleetway' || value2 == 'fleetway-anims2' || value2 == 'fleetway-anims3' || value2 == 'fleetwaylaser' || value2 == 'wechBeast' || value2 == 'wechBeast-flipped') {
-						value2 = value2 + '-empty';
-						if(dad.curCharacter != value2) {
-							if(!dadMap.exists(value2)) {
-								addCharacterToList(value2, charType);
-							}
-
-							var wasGf:Bool = dad.curCharacter.startsWith('gf-') || dad.curCharacter == 'gf';
-							var lastAlpha:Float = dad.alpha;
-							if (value2 == 'BEAST-Enc' || value2 == 'coldsteel' || value2 == 'coldsteel_guitar' || value2 == 'Eggman-Encore' || value2 == 'Tails-Encore' || value2 == 'xterion-first' || value2 == 'Needlemouse' || value2 == 'fleetway' || value2 == 'fleetway-anims3' || value2 == 'majin' || value2 == 'lordxEncore' || value2 == 'fatal-sonic' || value2 == 'ycr-cherribun' || value2 == 'ycr-mad-cherribun' || value2 == 'Satanos' || value2 == 'wechBeast' || value2 == 'hog' || value2 == 'exe-encore' || value2 == 'scorched') {
-								dad.alpha = 0.00001;
-							} else {
-								dad.alpha = 0.00001;
-								dad.alpha = 0;
-							}
-							dad = dadMap.get(value2);
-							if(!dad.curCharacter.startsWith('gf-') && dad.curCharacter != 'gf') {
-								if(wasGf && gf != null) {
-									gf.visible = true;
-								}
-							} else if(gf != null) {
-								gf.visible = false;
-							}
-							dad.alpha = lastAlpha;
-							iconP2.changeIcon(dad.healthIcon);
-						}
-						setOnScripts('dadName', dad.curCharacter);
-						}
-					}
-					#end
 					case 2:
-						#if LOW_QUALITY
-						if(ClientPrefs.data.lowQuality) {
-						if(value2 != 'fleetway' || value2 != 'fleetway-anims2' || value2 != 'fleetway-anims3' || value2 != 'fleetwaylaser' || value2 != 'wechBeast' || value2 != 'wechBeast-flipped') {
-						#end
-						if(gf != null)
-						{
-							if(gf.curCharacter != value2)
-							{
-								if(!gfMap.exists(value2)) {
-									addCharacterToList(value2, charType);
-								}
-
-								var lastAlpha:Float = gf.alpha;
-								if (value2 == 'sonic') {
-									gf.alpha = 0.00001;
-								} else {
-									gf.alpha = 0.00001;
-									gf.alpha = 0;
-								}
-								gf = gfMap.get(value2);
-								gf.alpha = lastAlpha;
-							}
-							setOnScripts('gfName', gf.curCharacter);
-						}
-					#if LOW_QUALITY
-					}
-					}
-					#else
-					}
-					#end
-					#if LOW_QUALITY
-					if(ClientPrefs.data.lowQuality) {
-					if(value2 == 'fleetway' || value2 == 'fleetway-anims2' || value2 == 'fleetway-anims3' || value2 == 'fleetwaylaser' || value2 == 'wechBeast' || value2 == 'wechBeast-flipped') {
-						value2 = value2 + '-empty';
 						if(gf != null)
 						{
 							if(gf.curCharacter != value2)
@@ -2620,9 +2546,6 @@ class PlayState extends MusicBeatState
 							setOnScripts('gfName', gf.curCharacter);
 						}
 					}
-				}
-				}
-				#end
 				reloadHealthBarColors();
 			case 'Change Scroll Speed':
 				if (songSpeedType != "constant")

@@ -486,6 +486,9 @@ function onUpdate(elapsed)
 		setProperty('defaultCamZoom',0.7);
 		setProperty('gf.alpha',1);
 	end
+	if curStep == 12496 then
+		triggerEvent('Cam Zoom', '2.6', '20.75, easeInOut');
+	end
 	if curStep == 3232 or curStep == 3408 or curStep == 3648 or curStep == 3712 then --chaotix
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);

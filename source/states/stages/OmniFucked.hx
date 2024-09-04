@@ -2829,6 +2829,7 @@ class OmniFucked extends BaseStage
 				exeDie.destroy();
 		
 			case 10321: //Destroy Tailsdoll
+				tailsdoll_floor.visible = false;
 				tailsdoll_floor.destroy();
 				majin_bush2.visible = true;
 				majin_bush.visible = true;
@@ -2858,119 +2859,201 @@ class OmniFucked extends BaseStage
 				knuckles_floor.visible = true;
 				
 			case 10417: //Destroy Xterion
+				xterion_floor.visible = false;
 				xterion_floor.destroy();
 			
 			case 10545: //Destroy Needlemouse
+				needleMoutains.visible = false;
 				needleMoutains.destroy();
+				needleBuildings.visible = false;
 				needleBuildings.destroy();
+				conkCreet.visible = false;
 				conkCreet.destroy();
+				needleFg.visible = false;
 				needleFg.destroy();
 			
 			case 10673: //Destroy Tails soul
+				tails_sky.visible = false;
 				tails_sky.destroy();
+				tails_fg.visible = false;
 				tails_fg.destroy();
+				tails_trees1.visible = false;
 				tails_trees1.destroy();
+				tails_trees2.visible = false;
 				tails_trees2.destroy();
+				tails_floor.visible = false;
 				tails_floor.destroy();
 				
 			case 10929: //Destroy Fleetway
+				fleetwaybgshit.visible = false;
 				fleetwaybgshit.destroy();
+				emeraldbeamyellow.visible = false;
 				emeraldbeamyellow.destroy();
+				emeralds.visible = false;
 				emeralds.destroy();
+				thechamber.visible = false;
 				thechamber.destroy();
 			
 			case 11057: //Destroy Chaotix/Wechidna
 				fucklesBeats = false;
+				fucklesBGPixel.visible = false;
 				fucklesBGPixel.destroy();
+				fucklesFGPixel.visible = false;
 				fucklesFGPixel.destroy();
+				fucklesAmyBg.visible = false;
 				fucklesAmyBg.destroy();
+				fucklesCharmyBg.visible = false;
 				fucklesCharmyBg.destroy();
+				fucklesMightyBg.visible = false;
 				fucklesMightyBg.destroy();
+				fucklesEspioBg.visible = false;
 				fucklesEspioBg.destroy();
+				fucklesKnuxBg.visible = false;
 				fucklesKnuxBg.destroy();
+				fucklesVectorBg.visible = false;	
 				fucklesVectorBg.destroy();		
+				wechidna_sky.visible = false;
 				wechidna_sky.destroy();
+				wechidna_building1.visible = false;
 				wechidna_building1.destroy();
+				wechidna_building2.visible = false;
 				wechidna_building2.destroy();
+				wechidna_floor.visible = false;
 				wechidna_floor.destroy();
+				wechidna_treesFG.visible = false;
 				wechidna_treesFG.destroy();
+				wechidna_thingFG.visible = false;
 				wechidna_thingFG.destroy();
+				wechidna_grassFG.visible = false;
 				wechidna_grassFG.destroy();
 				
 			case 11185: //Destroy Knuckles/YCR
+				knuckles_bg.visible = false;
 				knuckles_bg.destroy();
+				knuckles_floor.visible = false;
 				knuckles_floor.destroy();
 				
 			case 11249: //Destroy Satanos
+				satanos_sky.visible = false;
 				satanos_sky.destroy();
+				satanos_trees.visible = false;
 				satanos_trees.destroy();
+				satanos_floor.visible = false;
 				satanos_floor.destroy();
+				satanos_rock.visible = false;
 				satanos_rock.destroy();
 				
 			case 11585: //Destroy Sonic.exe
+				sonic_bg.visible = false;
 				sonic_bg.destroy();
+				sonic_ground.visible = false;
 				sonic_ground.destroy();
 
 			case 12248: //Destroy Xeno
+				xeno_fg.visible = false;
 				xeno_fg.destroy();
+				xeno_floor.visible = false;
 				xeno_floor.destroy();
 				
 			case 11601: //Destroy Fatal
+				domain.visible = false;
 				domain.destroy();
+				domain2.visible = false;
 				domain2.destroy();
 				
 			case 11617: //Destroy LordX
+				lordx_sky.visible = false;
 				lordx_sky.destroy();
+				lordx_floor.visible = false;
 				lordx_floor.destroy();
+				lordx_eyeflower.visible = false;
 				lordx_eyeflower.destroy();
+				lordx_notknuckles.visible = false;
 				lordx_notknuckles.destroy();
+				lordx_bfsmallflower.visible = false;
 				lordx_bfsmallflower.destroy();
+				lordx_tree.visible = false;
 				lordx_tree.destroy();
 				
 			case 11697: //Destroy Majin
+				majin_bush2.visible = false;
 				majin_bush2.destroy();
+				majin_bush.visible = false;
 				majin_bush.destroy();
+				majin_floor.visible = false;
 				majin_floor.destroy();
+				majin_pillars1.visible = false;
 				majin_pillars1.destroy();
+				majin_pillars2.visible = false;
 				majin_pillars2.destroy();
+				majin_fgmajin.visible = false;
 				majin_fgmajin.destroy();
+				majin_fgmajin2.visible = false;
 				majin_fgmajin2.destroy();
 				
 			case 11729: //Destroy Sunky
 				sunkyMoment = false;
+				sunky_bg.visible = false;
 				sunky_bg.destroy();
+				sunky_milk.visible = false;
 				sunky_milk.destroy();
+				sunky_cereal.visible = false;
 				sunky_cereal.destroy();
+				sunky_speakers.visible = false;
 				sunky_speakers.destroy();
+				sunky_balls.visible = false;
 				sunky_balls.destroy();
+				sunky_stage.visible = false;
 				sunky_stage.destroy();
 				
 			case 11825: //Destroy Sanic
+				sanic_bg.visible = false;
 				sanic_bg.destroy();
 				
 			case 11953: //Destroy Coldsteel
+				coldsteel_whiteFuck.visible = false;
 				coldsteel_whiteFuck.destroy();
+				coldsteel_shadow.visible = false;
 				coldsteel_shadow.destroy();
 				
 			case 12081: //Destroy Faker/Exe/Hog
+				faker_sky2.visible = false;
 				faker_sky2.destroy();
+				faker_eclipse2.visible = false;
 				faker_eclipse2.destroy();
+				faker_moutains2.visible = false;
 				faker_moutains2.destroy();
+				faker_rings2.visible = false;
 				faker_rings2.destroy();
+				faker_bg2.visible = false;
 				faker_bg2.destroy();
+				faker_overlay.visible = false;
 				faker_overlay.destroy();
+				hogBg.visible = false;
 				hogBg.destroy();
+				hogMotain.visible = false;
 				hogMotain.destroy();
+				hogWaterFalls.visible = false;
 				hogWaterFalls.destroy();
+				hogLoops.visible = false;
 				hogLoops.destroy();
+				hogTrees.visible = false;
 				hogTrees.destroy();
+				hogFloor.visible = false;
 				hogFloor.destroy();
+				hogRocks.visible = false;
 				hogRocks.destroy();
+				hogOverlay.visible = false;
 				hogOverlay.destroy();
+				faker_sky.visible = false;
 				faker_sky.destroy();
+				faker_eclipse.visible = false;
 				faker_eclipse.destroy();
+				faker_moutains.visible = false;
 				faker_moutains.destroy();
+				faker_rings.visible = false;
 				faker_rings.destroy();
+				faker_bg.visible = false;
 				faker_bg.destroy();
 				
 			case 12225: //Destroy Scorched
