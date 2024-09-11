@@ -14,7 +14,11 @@ import flixel.FlxSprite;
 import flixel.FlxCamera;
 import states.PlayState;
 import objects.Character;
+#if desktop
 import vlc.MP4Handler as VideoHandler;
+#else
+import vlc.MP4Handler as MP4Handler;
+#end
 
 class OmniGameOverSubstate extends MusicBeatSubstate
 {
