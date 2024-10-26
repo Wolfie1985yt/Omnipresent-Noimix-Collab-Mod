@@ -3,9 +3,13 @@ Hello! This is Wolfie_1985, aka the person main coder of the mod.
 
 If you would like to edit this mod and post it or use it in a video, just put a link to original gamebanana page or github page please! 
 
+ALSO IF YOU WANT TO POST THE EDITED MOD, YOU MUST ALLOW OTHER PEOPLE TO EDIT OR USE IT AS WELL ty!
+
 Also if you want, mention me! I'd love to see the things you do with the mod, or just any fan content in general!
 
 (https://gamebanana.com/mods/539909 or https://github.com/Wolfie1985yt/Omnipresent-Noichi-V2)
+
+Credits are in the credits menu and the gamebanana page for anyone I forgot to add initially.
 
 Thanks!
 
