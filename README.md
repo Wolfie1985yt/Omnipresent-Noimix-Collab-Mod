@@ -7,7 +7,7 @@ ALSO IF YOU WANT TO POST THE EDITED MOD, YOU MUST ALLOW OTHER PEOPLE TO EDIT OR 
 
 Also if you want, mention me! I'd love to see the things you do with the mod, or just any fan content in general!
 
-(https://gamebanana.com/mods/539909 or https://github.com/Wolfie1985yt/Omnipresent-Noichi-V2)
+(https://gamebanana.com/mods/539909 or https://github.com/Wolfie1985yt/Omnipresent-Noimix-Collab-Mod)
 
 Credits are in the credits menu and the gamebanana page for anyone I forgot to add initially.
 
