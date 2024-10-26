@@ -1,3 +1,9 @@
+# Omnipresent Noimix Collab Mod Use Info
+Hello! This is Wolfie_1985, aka the person main coder of the mod.
+If you would like to edit this mod and post it or use it in a video, just put a link to original gamebanana page or github page please! (https://gamebanana.com/mods/539909 or https://github.com/Wolfie1985yt/Omnipresent-Noichi-V2)
+Thanks!
+(also there is compile shit in the setup folder so yeah)
+
 # Friday Night Funkin' - Psych Engine
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
