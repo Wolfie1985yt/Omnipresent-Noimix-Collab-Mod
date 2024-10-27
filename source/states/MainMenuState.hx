@@ -179,11 +179,6 @@ class MainMenuState extends MusicBeatState
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		blackScreen.alpha = 0;
 		add(blackScreen);
-		
-		#if mobile
-			addVirtualPad(UP_DOWN, A_B_C_D);
-			virtualPad.y = -150;
-		#end
 
 		var psychVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
 		psychVer.scrollFactor.set();
