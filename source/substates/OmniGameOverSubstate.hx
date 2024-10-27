@@ -264,11 +264,6 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 		#else
 		video.finishCallback = function() { videoIsFinished = true; endBullshit(); }
 		#end
-		
-		#if mobile
-		addVirtualPad(NONE, A_B);
-		addHitboxCamera();
-		#end
 	}
 
 	var isEnding:Bool = false;
