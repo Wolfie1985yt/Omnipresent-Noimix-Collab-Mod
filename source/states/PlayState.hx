@@ -415,16 +415,16 @@ class PlayState extends MusicBeatState
 
 		// "GLOBAL" SCRIPTS
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-    for (file in Assets.list().filter(folder -> folder.contains('assets/shared/scripts/')))
+			for (file in Assets.list().filter(folder -> folder.contains('assets/shared/scripts/')))
 			{
 				#if LUA_ALLOWED
 				if(file.toLowerCase().endsWith('.lua'))
-					new FunkinLua(folder + file);
+					new FunkinLua(file);
 				#end
 
 				#if HSCRIPT_ALLOWED
 				if(file.toLowerCase().endsWith('.hx'))
-					initHScript(folder + file);
+					initHScript(file);
 				#end
 			}
 		#end
@@ -631,16 +631,16 @@ class PlayState extends MusicBeatState
 
 		// SONG SPECIFIC SCRIPTS
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-    for (file in Assets.list().filter(folder -> folder.contains('assets/shared/data/$songName/')))
+			for (file in Assets.list().filter(folder -> folder.contains('assets/shared/data/$songName/')))
 			{
 				#if LUA_ALLOWED
 				if(file.toLowerCase().endsWith('.lua'))
-					new FunkinLua(folder + file);
+					new FunkinLua(file);
 				#end
 
 				#if HSCRIPT_ALLOWED
 				if(file.toLowerCase().endsWith('.hx'))
-					initHScript(folder + file);
+					initHScript(file);
 				#end
 			}
 		#end
