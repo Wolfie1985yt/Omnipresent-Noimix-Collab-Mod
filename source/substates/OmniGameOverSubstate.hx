@@ -275,9 +275,6 @@ class OmniGameOverSubstate extends MusicBeatSubstate
 			isEnding = true;
 			new FlxTimer().start(0.7, function(tmr:FlxTimer)
 			{
-				#if android
-				FlxTween.tween(virtualPad, {alpha: 0}, 2); //mariomaster was here
-				#end
 				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
 				{
 					MusicBeatState.resetState();
