@@ -17,6 +17,6 @@ haxelib set hxCodec 2.6.1
 haxelib install tjson
 haxelib git SScript https://github.com/MaysLastPlays-Stuff/SScript
 haxelib git flxanimate https://github.com/MaysLastPlays-Stuff/flxanimate dev
-haxelib git linc_luajhaxelib set flixelit https://github.com/superpowers04/linc_luajit
+haxelib git linc_luajit https://github.com/superpowers04/linc_luajit
 echo Finished!
 pause
