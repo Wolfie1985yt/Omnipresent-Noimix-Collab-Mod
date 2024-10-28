@@ -207,7 +207,7 @@ class StoryMenuState extends MusicBeatState
 				oneclickpls = false;
 			}
 
-			if (controls.ACCEPT || (FlxG.mouse.overlaps(redBOX) && (FlxG.mouse.justPressedMiddle || FlxG.mouse.justPressed))
+			if (controls.ACCEPT || (FlxG.mouse.overlaps(redBOX) && (FlxG.mouse.justPressedMiddle || FlxG.mouse.justPressed)))
 			{
 				if (oneclickpls)
 				{
