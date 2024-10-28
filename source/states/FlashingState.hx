@@ -37,7 +37,7 @@ class FlashingState extends MusicBeatState
 			"Hey, watch out!\n
 			This Mod contains some flashing lights!\n
 			And, this WILL lag, there is no getting around that. Some of it is intentional though.\n
-			Press ESCAPE to start the game\n
+			Touch to start the game\n
 			You've been warned!",
 			32);
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
@@ -47,12 +47,22 @@ class FlashingState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		#if mobile
+		var touched:Bool = controls.ACCEPT;
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed)
+			{
+				touched = true;
+			}
+		}
+		#end
+
 		if(!leftState) {
-			var back:Bool = controls.BACK;
-			if (controls.ACCEPT || back) {
+			if (#if mobile touched #else controls.ACCEPT || controls.BACK #end) {
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
-				if(!back) {
+				if(#if android FlxG.android.justReleased.BACK #else controls.BACK #end) {
 					ClientPrefs.data.flashing = false;
 					ClientPrefs.saveSettings();
 					FlxG.sound.play(Paths.sound('confirmMenu'));
