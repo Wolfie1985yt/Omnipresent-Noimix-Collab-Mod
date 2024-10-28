@@ -200,14 +200,14 @@ class StoryMenuState extends MusicBeatState
 			lerpRating = intendedRating;
 		ScoreUPD();
 
-			if ((controls.BACK #if desktop || FlxG.mouse.justPressedRight #end) && oneclickpls)
+			if ((controls.BACK #if desktop || FlxG.mouse.justPressedRight #elseif android FlxG.android.justReleased.BACK #end) && oneclickpls)
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxG.switchState(new MainMenuState());
 				oneclickpls = false;
 			}
 
-			if (controls.ACCEPT #if desktop || (FlxG.mouse.overlaps(redBOX) && (FlxG.mouse.justPressedMiddle || FlxG.mouse.justPressed)) #end)
+			if (controls.ACCEPT || (FlxG.mouse.overlaps(redBOX) && (FlxG.mouse.justPressedMiddle || FlxG.mouse.justPressed))
 			{
 				if (oneclickpls)
 				{
