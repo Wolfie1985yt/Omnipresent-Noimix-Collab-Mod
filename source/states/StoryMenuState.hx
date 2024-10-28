@@ -200,7 +200,7 @@ class StoryMenuState extends MusicBeatState
 			lerpRating = intendedRating;
 		ScoreUPD();
 
-			if ((controls.BACK #if desktop || FlxG.mouse.justPressedRight #elseif android FlxG.android.justReleased.BACK #end) && oneclickpls)
+			if ((controls.BACK #if desktop || FlxG.mouse.justPressedRight #elseif android || FlxG.android.justReleased.BACK #end) && oneclickpls)
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxG.switchState(new MainMenuState());
