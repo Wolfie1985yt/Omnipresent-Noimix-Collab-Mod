@@ -107,7 +107,7 @@ class Main extends Sprite
 		ClientPrefs.loadDefaultKeys();
 		#if ACHIEVEMENTS_ALLOWED Achievements.load(); #end
 		#if mobile
-		addChild(new FlxGame(1280, 720, Init, 60, 60, true, false));
+		addChild(new FlxGame(1280, 720, TitleState, 60, 60, true, false));
 		#else
 		addChild(new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 		#enr
