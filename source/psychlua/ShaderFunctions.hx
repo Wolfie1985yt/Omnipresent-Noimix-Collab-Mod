@@ -265,7 +265,7 @@ class ShaderFunctions
 		});
 	}
 	
-	#if (!flash && sys)
+	#if (!flash && !sys)
 	public static function getShader(obj:String):FlxRuntimeShader
 	{
 		var split:Array<String> = obj.split('.');
