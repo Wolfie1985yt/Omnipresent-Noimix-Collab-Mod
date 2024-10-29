@@ -633,10 +633,10 @@ class PlayState extends MusicBeatState
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 			for (file in Assets.list().filter(folder -> folder.contains('assets/shared/data/$songName/')))
 			{
-				#if LUA_ALLOWED
+				/*#if LUA_ALLOWED
 				if(file.toLowerCase().endsWith('.lua'))
 					new FunkinLua(file);
-				#end
+				#end*/
 
 				#if HSCRIPT_ALLOWED
 				if(file.toLowerCase().endsWith('.hx'))
