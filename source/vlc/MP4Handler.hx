@@ -1,5 +1,5 @@
 package vlc;
-#if hxvlc
+#if (hxvlc && desktop)
 
 import flixel.FlxG;
 import hxvlc.flixel.*;
