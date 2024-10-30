@@ -2,7 +2,7 @@ package vlc;
 #if (hxvlc && desktop)
 
 import flixel.FlxG;
-import hxvlc.flixel.*;
+import hxvlc.flixel.FlxVideo;
 import openfl.events.Event;
 import sys.FileSystem;
 
