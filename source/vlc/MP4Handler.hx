@@ -6,10 +6,10 @@ import hxvlc.flixel.FlxVideo;
 import openfl.events.Event;
 import sys.FileSystem;
 
-class MP4Handler extends FlxVideo
+/*class MP4Handler extends FlxVideo
 {
-	// Variables
-	public var autoResize:Bool = true;
+// Variables
+  public var autoResize:Bool = true;
 
 	public function new():Void
 	{
@@ -82,7 +82,8 @@ class MP4Handler extends FlxVideo
 		}
 		volume = Std.int((FlxG.sound.muted ? 0 : 1) * (FlxG.sound.volume * 170));
 	}
-}
+}*/
+	typedef MP4Handler = hxvlc.flixel.FlxVideo;
 #else
 import flixel.input.keyboard.FlxKey;
 import flixel.FlxG;
