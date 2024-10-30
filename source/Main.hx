@@ -77,10 +77,12 @@ class Main extends Sprite
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		#if VIDEOS_ALLOWED
+		#if hxvlc
 		#if (hxvlc < "1.4.1")
 		hxvlc.libvlc.Handle.init();
     #else
     hxvlc.util.Handle.init(#if (hxvlc >= "1.8.0")  ['--no-lua'] #end);
+		#end
 		#end
 		#end
 	}
