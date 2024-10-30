@@ -1,5 +1,5 @@
 package vlc;
-#if desktop
+#if hxvlc
 
 import flixel.FlxG;
 import hxcodec.openfl.Video;
