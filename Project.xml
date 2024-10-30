@@ -62,6 +62,7 @@
 <define name="CRASH_HANDLER" if="desktop release || mobile" />
 
 	<!-- Assets -->
+	<assets path="alsoft.ini" />
 	<assets path="assets/fonts" />
 	<assets path="assets/shared"        exclude="*.ogg" if="web"/>
 	<assets path="assets/shared"        exclude="*.mp3" unless="web"/>

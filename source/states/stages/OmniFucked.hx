@@ -248,6 +248,7 @@ class OmniFucked extends BaseStage
 			preload('bgs/Wechidna/floor');
 			preload('bgs/Wechidna/building');
 			preload('bgs/Wechidna/bg-building');
+			preload('Phase3Static');
 			preload('philly/particle');
 		}
 		
@@ -329,7 +330,6 @@ class OmniFucked extends BaseStage
 			preload('bgs/triple-trouble-encore/xeno/xeno_floor');
 			preload('bgs/triple-trouble-encore/xeno/xeno_fg');
 			preload('bgs/triple-trouble-encore/knuckles/kn_bg');
-			preload('bgs/triple-trouble-encore/knuckles/kn_city2');
 			preload('bgs/triple-trouble-encore/knuckles/kn_floor');
 			preload('bgs/triple-trouble-encore/tails/ts_fg');
 			preload('bgs/triple-trouble-encore/tails/ts_floor');
@@ -487,7 +487,6 @@ class OmniFucked extends BaseStage
 		preload('shit');
 		preload('sick');
 		preload('noteSplashes/noteSplashes-Bloodsplash');
-		preload('ring');
 		preload('STATICNOTE_assets');
 		preload('PHANTOMNOTE_assets');
 		preload('hitStatic');
@@ -878,7 +877,7 @@ class OmniFucked extends BaseStage
 			add(knuckles_bg);
 			
 			knuckles_floor = new FlxSprite(-1000, -1000);
-			knuckles_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/knucklesLowQuality'));
+			knuckles_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/kn_floor'));
 			knuckles_floor.scrollFactor.set(1, 1);
 			knuckles_floor.scale.set(2.3, 2.3);
 			knuckles_floor.visible = false;

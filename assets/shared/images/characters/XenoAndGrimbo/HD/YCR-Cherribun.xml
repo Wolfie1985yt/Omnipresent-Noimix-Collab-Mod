@@ -1,31 +1,34 @@
-<?xml version='1.0' encoding='utf-8'?>
-<TextureAtlas imagePath="YCR-Cherribun.png">
-<SubTexture name="YcrIDLE0000" x="0" y="1666" width="562" height="801" frameX="0" frameY="-2" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0001" x="0" y="1666" width="562" height="801" frameX="0" frameY="-2" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0002" x="1104" y="1666" width="534" height="797" frameX="-11" frameY="-6" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0003" x="1104" y="1666" width="534" height="797" frameX="-11" frameY="-6" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0004" x="562" y="1666" width="542" height="798" frameX="-9" frameY="-5" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0005" x="562" y="1666" width="542" height="798" frameX="-9" frameY="-5" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0006" x="2085" y="804" width="551" height="803" frameX="-5" frameY="-1" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0007" x="2085" y="804" width="551" height="803" frameX="-5" frameY="-1" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0008" x="721" y="836" width="555" height="804" frameX="-1" frameY="0" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0009" x="721" y="836" width="555" height="804" frameX="-1" frameY="0" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0010" x="1276" y="836" width="555" height="804" frameX="0" frameY="0" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0011" x="1276" y="836" width="555" height="804" frameX="0" frameY="0" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0012" x="2085" y="0" width="551" height="804" frameX="0" frameY="0" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrIDLE0013" x="2085" y="0" width="551" height="804" frameX="0" frameY="0" frameWidth="565" frameHeight="810" />
-<SubTexture name="YcrLAUGH0000" x="0" y="836" width="721" height="830" frameX="0" frameY="0" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0001" x="0" y="836" width="721" height="830" frameX="0" frameY="0" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0002" x="0" y="0" width="702" height="836" frameX="-10" frameY="-5" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0003" x="0" y="0" width="702" height="836" frameX="-10" frameY="-5" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0004" x="702" y="0" width="691" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0005" x="702" y="0" width="691" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0006" x="1393" y="0" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0007" x="1393" y="0" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0008" x="1393" y="0" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0009" x="1393" y="0" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0010" x="1393" y="0" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0011" x="1393" y="0" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0012" x="1393" y="0" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856" />
-<SubTexture name="YcrLAUGH0013" x="1393" y="0" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="YCR-Cherribun.png" width="2519" height="2235">
+	<SubTexture name="YcrIDLE0000" x="1944" y="807" width="562" height="801" frameX="-0" frameY="-2" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0001" x="1944" y="807" width="562" height="801" frameX="-0" frameY="-2" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0002" x="1984" y="1" width="534" height="797" frameX="-11" frameY="-6" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0003" x="1984" y="1" width="534" height="797" frameX="-11" frameY="-6" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0004" x="1615" y="1641" width="798" height="542" rotated="true" frameX="-9" frameY="-5" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0005" x="1615" y="1641" width="798" height="542" rotated="true" frameX="-9" frameY="-5" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0006" x="1430" y="1" width="551" height="803" frameX="-5" frameY="-1" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0007" x="1430" y="1" width="551" height="803" frameX="-5" frameY="-1" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0008" x="1" y="1679" width="804" height="555" rotated="true" frameX="-1" frameY="-0" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0009" x="1" y="1679" width="804" height="555" rotated="true" frameX="-1" frameY="-0" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0010" x="808" y="1679" width="804" height="555" rotated="true" frameX="-0" frameY="-0" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0011" x="808" y="1679" width="804" height="555" rotated="true" frameX="-0" frameY="-0" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0012" x="1390" y="834" width="551" height="804" frameX="-0" frameY="-0" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrIDLE0013" x="1390" y="834" width="551" height="804" frameX="-0" frameY="-0" frameWidth="565" frameHeight="810"/>
+	<SubTexture name="YcrLAUGH0000" x="706" y="1" width="721" height="830" frameX="-0" frameY="-0" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0001" x="706" y="1" width="721" height="830" frameX="-0" frameY="-0" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0002" x="1" y="1" width="702" height="836" frameX="-10" frameY="-5" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0003" x="1" y="1" width="702" height="836" frameX="-10" frameY="-5" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0004" x="1" y="840" width="691" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0005" x="1" y="840" width="691" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0006" x="695" y="840" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0007" x="695" y="840" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0008" x="695" y="840" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0009" x="695" y="840" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0010" x="695" y="840" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0011" x="695" y="840" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0012" x="695" y="840" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856"/>
+	<SubTexture name="YcrLAUGH0013" x="695" y="840" width="692" height="836" frameX="-11" frameY="-8" frameWidth="732" frameHeight="856"/>
 </TextureAtlas>
