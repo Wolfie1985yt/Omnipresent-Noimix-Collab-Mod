@@ -6,7 +6,7 @@ import hxvlc.flixel.*;
 import openfl.events.Event;
 import sys.FileSystem;
 
-class MP4Handler extends Video
+class MP4Handler extends FlxVideo
 {
 	// Variables
 	public var autoResize:Bool = true;
