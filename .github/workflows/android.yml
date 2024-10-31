@@ -23,8 +23,7 @@ jobs:
 
       - name: Install Libraries
         run: |
-          haxelib install hmm --quiet
-          haxelib run hmm install --quiet
+          haxe -cp ./setup -D analyzer-optimize -main Main --interp
           haxelib run lime rebuild hxcpp
 
       - name: Configure Android
