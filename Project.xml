@@ -57,8 +57,6 @@
 	<classpath name="source" />
 
 	<!-- __________________________ Game Assets & Etc. __________________________ -->
-	<!-- Turn on Crash Handler -->
-	<define name="CRASH_HANDLER" if="desktop release || mobile" />
 
 	<!-- Assets -->
 	<assets path="alsoft.ini" />
@@ -151,11 +149,13 @@
 	<!--Disable deprecated warnings-->
 	<haxedef name='no-deprecation-warnings' />
 
+  <section if="android">
 	<config:android gradle-version="7.5.1" />
   <config:android gradle-plugin="7.3.1" />
 	<android permission="android.permission.CAPTURE_AUDIO_OUTPUT"/>
 	<android target-sdk-version="29" if="android"/>
 	<android min-sdk-version="19" if="android"/>
+	</section>
 
 	<!-- _________________________________ Custom _______________________________ -->
 
