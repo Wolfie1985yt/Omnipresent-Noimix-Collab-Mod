@@ -194,12 +194,12 @@ class FreeplayState extends MusicBeatState
 			select = true;
             songText.color = 0xFFFFFFFF;
         }
-        if (controls.BACK && !select && !loading) {
+        if (#if desktop controls.BACK #elseif android FlxG.android.justReleased.BACK #end  && !select && !loading) {
             loading = true;
             FlxG.sound.play(Paths.sound('cancelMenu'));
             FlxG.switchState(new MainMenuState());
         }
-        if (controls.BACK && select && !loading) {
+        if (#if desktop controls.BACK #elseif android FlxG.android.justReleased.BACK #end && select && !loading) {
             FlxG.sound.play(Paths.sound('cancelMenu'));
 			select = false;
             songText.color = 0xFF232323;
