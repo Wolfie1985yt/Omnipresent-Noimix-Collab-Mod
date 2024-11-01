@@ -62,7 +62,7 @@ class FlashingState extends MusicBeatState
 			if (#if mobile touched #else controls.ACCEPT || controls.BACK #end) {
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
-				if(#if android FlxG.android.justReleased.BACK #else controls.BACK #end) {
+				if(#if android TouchInput.BACK #else controls.BACK #end) {
 					ClientPrefs.data.flashing = false;
 					ClientPrefs.saveSettings();
 					FlxG.sound.play(Paths.sound('confirmMenu'));
