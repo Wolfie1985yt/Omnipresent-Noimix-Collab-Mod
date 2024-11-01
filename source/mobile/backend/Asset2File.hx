@@ -2,6 +2,7 @@ package mobile.backend;
 
 import haxe.crypto.Md5;
 import openfl.utils.Assets;
+import lime.system.System;
 #if sys
 import sys.FileSystem;
 import sys.io.File;
@@ -9,7 +10,7 @@ import sys.io.File;
 
 class Asset2File
 {
-	public static var path:String = lime.system.System.applicationStorageDirectory;
+	public static var path:String = System.applicationStorageDirectory;
 
 	public static function getPath(id:String)
 	{
