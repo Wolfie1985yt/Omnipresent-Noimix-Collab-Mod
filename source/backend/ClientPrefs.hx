@@ -15,6 +15,7 @@ import states.TitleState;
 	public var flashing:Bool = true;
 	public var autoPause:Bool = true;
 	public var antialiasing:Bool = true;
+	public var hitboxtype:String = 'Default';
 	public var noteSkin:String = 'Default';
 	public var splashSkin:String = 'Bloodsplash';
 	public var splashAlpha:Float = 1;
