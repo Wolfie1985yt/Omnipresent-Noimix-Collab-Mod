@@ -172,6 +172,8 @@ class NoteOffsetState extends MusicBeatState
 		Conductor.bpm = 128.0;
 		FlxG.sound.playMusic(Paths.music('offsetSong'), 1, true);
 
+		#if mobile addVPad(NONE, B); #end
+
 		super.create();
 	}
 
@@ -395,7 +397,7 @@ class NoteOffsetState extends MusicBeatState
 		}
 
 		if((!controls.controllerMode && controls.ACCEPT) ||
-		(controls.controllerMode && FlxG.gamepads.anyJustPressed(START)))
+		(controls.controllerMode && FlxG.gamepads.anyJustPressed(START)) || TouchInput.justPressed(changeModeText))
 		{
 			onComboMenu = !onComboMenu;
 			updateMode();

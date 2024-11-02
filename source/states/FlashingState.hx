@@ -43,26 +43,17 @@ class FlashingState extends MusicBeatState
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
+
+		#if mobile addVPad(NONE, A_B); #end
 	}
 
 	override function update(elapsed:Float)
 	{
-		#if mobile
-		var touched:Bool = controls.ACCEPT;
-		for (touch in FlxG.touches.list)
-		{
-			if (touch.justPressed)
-			{
-				touched = true;
-			}
-		}
-		#end
-
 		if(!leftState) {
-			if (#if mobile touched #else controls.ACCEPT || controls.BACK #end) {
+			if (controls.ACCEPT || controls.BACK) {
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
-				if(#if android TouchInput.BACK #else controls.BACK #end) {
+				if(controls.BACK) {
 					ClientPrefs.data.flashing = false;
 					ClientPrefs.saveSettings();
 					FlxG.sound.play(Paths.sound('confirmMenu'));

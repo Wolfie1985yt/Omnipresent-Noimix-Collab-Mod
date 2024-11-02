@@ -1,13 +1,23 @@
 package backend;
 
 import flixel.FlxSubState;
+#if mobile
+import flixel.FlxCamera;
+import flixel.input.actions.FlxActionInput;
+import mobile.FlxVirtualPad;
+#end
 
 class MusicBeatSubstate extends FlxSubState
 {
 	public function new()
 	{
 		super();
+		instance = this;
+		#if mobile
+		this.controls.isSubState = true;
+		#end
 	}
+	public static var instance:MusicBeatSubstate;
 
 	private var curSection:Int = 0;
 	private var stepsToDo:Int = 0;
@@ -24,6 +34,42 @@ class MusicBeatSubstate extends FlxSubState
 
 	inline function get_controls():Controls
 		return Controls.instance;
+
+	#if mobile
+	public var vPad:FlxVirtualPad;
+
+	public function addVPad(?DPad:FlxDPadMode, ?Action:FlxActionMode) {
+		vPad = new FlxVirtualPad(DPad, Action);
+		vPad.alpha = 0.35;
+		add(vPad);
+	}
+	
+	public function addVPadCamera() {
+	  var camcontrol = new FlxCamera(); 
+    FlxG.cameras.add(camcontrol, false); 
+    camcontrol.bgColor.alpha = 0; 
+    vPad.cameras = [camcontrol];
+	}
+
+	public function removeVPad() {
+	  if (vPad != null) {
+	    remove(vPad);
+	  }
+	}
+	#end
+
+	override function destroy()
+	{
+	  super.destroy();
+	  
+	  #if mobile
+	  this.controls.isSubState = false;
+	  if (vPad != null) {
+	    vPad.destroy();
+	    vPad = null;
+	  }
+	  #end
+	}
 
 	override function update(elapsed:Float)
 	{

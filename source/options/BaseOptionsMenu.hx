@@ -102,6 +102,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		changeSelection();
 		reloadCheckboxes();
+
+		#if mobile addVPad(NONE, B); #end
 	}
 
 	public function addOption(option:Option) {
@@ -130,21 +132,12 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		}
 
 		if (controls.UI_UP_P)
-		{
 			changeSelection(-1);
-		}
 		if (controls.UI_DOWN_P)
-		{
 			changeSelection(1);
-		}
 
 		if (controls.BACK) {
-		  #if desktop
 			close();
-			#else
-			FlxG.resetState();
-			ClientPrefs.saveSettings();
-			#end
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		}
 
@@ -164,7 +157,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			{
 				if(curOption.type == 'keybind')
 				{
-					if(controls.ACCEPT)
+					if(controls.ACCEPT || (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null && TouchInput.justPressed(checkboxGroup.members[curSelected])))
 					{
 						bindingBlack = new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
 						bindingBlack.scale.set(FlxG.width, FlxG.height);
@@ -219,7 +212,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 								case 'string':
 									var num:Int = curOption.curOption; //lol
 									if(controls.UI_LEFT_P) --num;
-									else num++;
+									else if (controls.UI_RIGHT_P) num++;
 
 									if(num < 0)
 										num = curOption.options.length - 1;

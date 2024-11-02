@@ -133,6 +133,8 @@ class PauseSubState extends MusicBeatSubstate
 		FlxG.mouse.visible = false;
 
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+
+		#if mobile addVPad(NONE, A); addVPadCamera(); #end
 	}
 
 	function ButtonsTween(elapsed:Float):Void

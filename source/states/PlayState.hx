@@ -605,6 +605,42 @@ class PlayState extends MusicBeatState
 		noteGroup.cameras = [camHUD];
 		comboGroup.cameras = [camHUD];
 
+		#if mobile
+		addMControls();
+		if (mcontrols.mode.toLowerCase() == 'hitbox') {
+		    mcontrolsKeys = [
+		        mcontrols.hitbox.buttonLeft,
+		        mcontrols.hitbox.buttonDown,
+		        mcontrols.hitbox.buttonUp,
+		        mcontrols.hitbox.buttonRight
+		    ];
+		} else if (mcontrols.mode.toLowerCase().startsWith('vpad')){
+		    mcontrolsKeys = [
+		        mcontrols.vPad.buttonLeft,
+		        mcontrols.vPad.buttonDown,
+		        mcontrols.vPad.buttonUp,
+		        mcontrols.vPad.buttonRight
+		    ];
+		} else mcontrolsKeys = [];
+
+		for (button in mcontrolsKeys)
+		{
+		    button.onDown.callback = () -> {
+		        if (controls.controllerMode) return;
+		        keyPressed(getMControlsKeys(button));
+		        if (mcontrols.mode.toLowerCase() == 'hitbox')
+		            button.alpha = 0.15;
+		    }
+		    button.onUp.callback = () -> {
+		        if (controls.controllerMode) return;
+		        keyReleased(getMControlsKeys(button));
+		        if (mcontrols.mode.toLowerCase() == 'hitbox')
+		            button.alpha = 0.1;
+		    }
+		    button.onOut.callback = button.onUp.callback;
+		}
+		#end
+
 		startingSong = true;
 
 		#if LUA_ALLOWED
@@ -945,6 +981,7 @@ class PlayState extends MusicBeatState
 
 			generateStaticArrows(0);
 			generateStaticArrows(1);
+			#if mobile mcontrols.visible = true; #end
 			for (i in 0...playerStrums.length) {
 				setOnScripts('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnScripts('defaultPlayerStrumY' + i, playerStrums.members[i].y);
@@ -1884,7 +1921,7 @@ class PlayState extends MusicBeatState
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 
-		if (controls.PAUSE #if android || TouchInput.BACK #end && startedCountdown && canPause)
+		if (controls.PAUSE && startedCountdown && canPause)
 		{
 			var ret:Dynamic = callOnScripts('onPause', null, true);
 			if(ret != LuaUtils.Function_Stop) {
@@ -2707,6 +2744,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		#if mobile mcontrols.visible = false; #end
 		timeBar.visible = false;
 		timeTxt.visible = false;
 		canPause = false;
@@ -3067,6 +3105,14 @@ class PlayState extends MusicBeatState
 
 		return FlxSort.byValues(FlxSort.ASCENDING, a.strumTime, b.strumTime);
 	}
+
+	  #if mobile
+	  var mcontrolsKeys:Array<mobile.FlxButton> = [];
+	  private function getMControlsKeys(button:mobile.FlxButton):Int
+	  {
+	      return mcontrolsKeys.indexOf(button);
+	  }
+	  #end
 
 	private function onKeyRelease(event:KeyboardEvent):Void
 	{

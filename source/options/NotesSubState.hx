@@ -165,6 +165,8 @@ class NotesSubState extends MusicBeatSubstate
 		FlxG.mouse.visible = !controls.controllerMode;
 		controllerPointer.visible = controls.controllerMode;
 		_lastControllerMode = controls.controllerMode;
+
+		#if mobile addVPad(NONE, B); #end
 	}
 
 	function updateTip()
@@ -238,7 +240,6 @@ class NotesSubState extends MusicBeatSubstate
 			controllerPointer.y = Math.max(0, Math.min(FlxG.height, controllerPointer.y + analogY * 1000 * elapsed));
 		}
 		var controllerPressed:Bool = (controls.controllerMode && controls.ACCEPT);
-		//
 
 		if(FlxG.keys.justPressed.CONTROL)
 		{

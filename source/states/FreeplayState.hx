@@ -86,7 +86,6 @@ class FreeplayState extends MusicBeatState
 			BG.screenCenter();
 			add(BG);
 		}
-		
 
 		art = new FlxSprite(-325, 0);
 		if (omniBeaten) {
@@ -177,7 +176,7 @@ class FreeplayState extends MusicBeatState
 
         scoreText.text = 'Score: ' + lerpScore;
 
-        if (controls.ACCEPT && select && !loading && omniBeaten) {
+        if (controls.ACCEPT || TouchInput.justPressed(art) && select && !loading && omniBeaten) {
             FlxG.sound.play(Paths.sound('confirmMenu'));
             loading = true;
             PlayState.SONG = backend.Song.loadFromJson('omnipresent-fucked' + '-hard', 'omnipresent-fucked');
@@ -186,20 +185,20 @@ class FreeplayState extends MusicBeatState
             PlayState.isStoryMode = false;
 			new FlxTimer().start(1, function(tmr:FlxTimer) { LoadingState.loadAndSwitchState(new PlayState()); });
         }
-		if (controls.ACCEPT && select && !loading && !omniBeaten) {
+		if (controls.ACCEPT || TouchInput.justPressed(art) && select && !loading && !omniBeaten) {
 			FlxG.sound.play(Paths.sound('deniedMOMENT'), 1);
 		}
-        if (controls.ACCEPT && !select && !loading) {
+        if (controls.ACCEPT || TouchInput.justPressed(art) && !select && !loading) {
             FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 			select = true;
             songText.color = 0xFFFFFFFF;
         }
-        if (#if desktop controls.BACK #elseif android TouchInput.BACK #end  && !select && !loading) {
+        if (controls.BACK && !select && !loading) {
             loading = true;
             FlxG.sound.play(Paths.sound('cancelMenu'));
             FlxG.switchState(new MainMenuState());
         }
-        if (#if desktop controls.BACK #elseif android TouchInput.BACK #end && select && !loading) {
+        if (controls.BACK && select && !loading) {
             FlxG.sound.play(Paths.sound('cancelMenu'));
 			select = false;
             songText.color = 0xFF232323;

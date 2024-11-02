@@ -310,7 +310,7 @@ class MainMenuState extends MusicBeatState
 					holdTime = 0;
 				}
 			
-			if ((controls.ACCEPT) || (FlxG.mouse.overlaps(Buttons) && (FlxG.mouse.justReleased) || (FlxG.mouse.justPressedMiddle))) {
+			if ((controls.ACCEPT || TouchInput.justPressed(Buttons.members[curSelected])) || (FlxG.mouse.overlaps(Buttons) && (FlxG.mouse.justReleased) || (FlxG.mouse.justPressedMiddle))) {
 					#if desktop
 					lockMouseSelection = true;
 					#end

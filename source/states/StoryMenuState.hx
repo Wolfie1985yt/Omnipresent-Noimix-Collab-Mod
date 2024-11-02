@@ -172,6 +172,8 @@ class StoryMenuState extends MusicBeatState
 
 		ScoreUPD();
 
+		#if mobile addVPad(NONE, B); #end
+
 		super.create();
 	}
 
@@ -200,14 +202,14 @@ class StoryMenuState extends MusicBeatState
 			lerpRating = intendedRating;
 		ScoreUPD();
 
-			if ((controls.BACK #if desktop || FlxG.mouse.justPressedRight #elseif android || TouchInput.BACK #end) && oneclickpls)
+			if ((controls.BACK || FlxG.mouse.justPressedRight) && oneclickpls)
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxG.switchState(new MainMenuState());
 				oneclickpls = false;
 			}
 
-			if (controls.ACCEPT || (FlxG.mouse.overlaps(redBOX) && (FlxG.mouse.justPressedMiddle || FlxG.mouse.justPressed)))
+			if (controls.ACCEPT || TouchInput.justPressed(redBOX) || (FlxG.mouse.overlaps(redBOX) && (FlxG.mouse.justPressedMiddle || FlxG.mouse.justPressed)))
 			{
 				if (oneclickpls)
 				{
