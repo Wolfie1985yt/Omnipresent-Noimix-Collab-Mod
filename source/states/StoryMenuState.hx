@@ -172,8 +172,6 @@ class StoryMenuState extends MusicBeatState
 
 		ScoreUPD();
 
-		#if mobile addVPad(NONE, B); #end
-
 		super.create();
 	}
 
