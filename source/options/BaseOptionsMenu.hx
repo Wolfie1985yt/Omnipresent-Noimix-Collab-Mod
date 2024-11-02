@@ -145,7 +145,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			if(curOption.type == 'bool')
 			{
-				if(controls.ACCEPT)
+				if(controls.ACCEPT || (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null && TouchInput.justPressed(checkboxGroup.members[curSelected])))
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
@@ -157,7 +157,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			{
 				if(curOption.type == 'keybind')
 				{
-					if(controls.ACCEPT || (grpOptions != null && grpOptions.members != null && grpOptions.members[curSelected] != null && TouchInput.justPressed(grpOptions.members[curSelected])))
+					if(controls.ACCEPT)
 					{
 						bindingBlack = new FlxSprite().makeGraphic(1, 1, FlxColor.WHITE);
 						bindingBlack.scale.set(FlxG.width, FlxG.height);
