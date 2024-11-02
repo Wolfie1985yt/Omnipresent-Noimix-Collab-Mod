@@ -9,6 +9,12 @@ import flixel.util.FlxSave;
 import flixel.math.FlxPoint;
 import haxe.Json;
 import lime.system.Clipboard;
+import flixel.graphics.frames.FlxAtlasFrames;
+import options.OptionsState as OptionsMenu;
+
+/**
+ * TODO: Rewrite this? ~ Idklool
+ */
 
 using StringTools;
 
@@ -48,7 +54,7 @@ class CustomControlsState extends MusicBeatSubstate
 		config = new Config();
 
 		// bg
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic('assets/images/menuBG.png');
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic('assets/shared/images/menuBGBlue.png');
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.18;
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
@@ -67,16 +73,16 @@ class CustomControlsState extends MusicBeatSubstate
 		inputvari = new FlxText(125, 50, 0,controlitems[0], 48);
 
 		//arrows
-		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
+		var arrow_tex = FlxAtlasFrames.fromSparrow('assets/mobile/arrows.png', 'assets/mobile/arrows.xml');
 
 		leftArrow = new FlxSprite(inputvari.x - 60,inputvari.y - 10);
-		leftArrow.frames = ui_tex;
+		leftArrow.frames = arrow_tex;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
 		leftArrow.animation.play('idle');
 
 		rightArrow = new FlxSprite(inputvari.x + inputvari.width + 10, leftArrow.y);
-		rightArrow.frames = ui_tex;
+		rightArrow.frames = arrow_tex;
 		rightArrow.animation.addByPrefix('idle', 'arrow right');
 		rightArrow.animation.addByPrefix('press', "arrow push right", 24, false);
 		rightArrow.animation.play('idle');
@@ -98,7 +104,7 @@ class CustomControlsState extends MusicBeatSubstate
 
 		var savebutton = new FlxUIButton((exitbutton.x + exitbutton.width + 25),25,"exit and save",() -> {
 			save();
-			FlxG.switchState(new options.OptionsState());
+			FlxG.switchState(new OptionsMenu());
 		});
 		savebutton.resize(250,50);
 		savebutton.setLabelFormat("VCR OSD Mono",24,FlxColor.BLACK,"center");
@@ -147,7 +153,7 @@ class CustomControlsState extends MusicBeatSubstate
 
 		var androidback:Bool = #if android FlxG.android.justReleased.BACK #else false #end;
 		if (exitbutton.justReleased || androidback)
-			FlxG.switchState(new options.OptionsState());
+			FlxG.switchState(new OptionsMenu());
 		
 		for (touch in FlxG.touches.list){
 			//left arrow animation
