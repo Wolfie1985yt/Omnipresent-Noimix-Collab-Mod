@@ -629,7 +629,7 @@ class PlayState extends MusicBeatState
 		        if (controls.controllerMode) return;
 		        keyPressed(getMControlsKeys(button));
 		        if (mcontrols.mode.toLowerCase() == 'hitbox') {
-		          if (ClientPrefs.hitboxtype !='F. Invisible')
+		          if (ClientPrefs.data.hitboxtype !='F. Invisible')
 		            button.alpha = 0.15;
 		            else
 		            button.alpha = 0.0001;
@@ -639,10 +639,10 @@ class PlayState extends MusicBeatState
 		        if (controls.controllerMode) return;
 		        keyReleased(getMControlsKeys(button));
 		        if (mcontrols.mode.toLowerCase() == 'hitbox')
-		            if(ClientPrefs.hitboxtype =='Default') {
+		            if(ClientPrefs.data.hitboxtype =='Default') {
 		            button.alpha = 0.1;
 		            }
-		            else if (ClientPrefs.hitboxtype == 'P. Invisible' && ClientPrefs.hitboxtype == 'F. Invisible') {
+		            else if (ClientPrefs.data.hitboxtype == 'P. Invisible' && ClientPrefs.data.hitboxtype == 'F. Invisible') {
 		            button.alpha = 0.0001;            
 		            }
 		    }
