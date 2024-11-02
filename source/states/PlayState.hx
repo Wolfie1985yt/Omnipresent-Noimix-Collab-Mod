@@ -628,21 +628,14 @@ class PlayState extends MusicBeatState
 		    button.onDown.callback = () -> {
 		        if (controls.controllerMode) return;
 		        keyPressed(getMControlsKeys(button));
-		        if (mcontrols.mode.toLowerCase() == 'hitbox') {
-		          if (ClientPrefs.data.hitboxtype !='F. Invisible')
-		            button.alpha = 0.15;
-		            else
-		            button.alpha = 0.0001;
-		        }
+		        if (mcontrols.mode.toLowerCase() == 'hitbox')
+			    button.alpha = (ClientPrefs.data.hitboxtype != 'F. Invisible') ? 0.15 : 0.0001;
 		    }
 		    button.onUp.callback = () -> {
 		        if (controls.controllerMode) return;
 		        keyReleased(getMControlsKeys(button));
 		        if (mcontrols.mode.toLowerCase() == 'hitbox')
-		            if(ClientPrefs.data.hitboxtype == 'Default') 
-		            button.alpha = 0.1;
-		            else
-		            button.alpha = 0.0001;
+		            button.alpha = (ClientPrefs.data.hitboxtype == 'Default') ? 0.1 : 0.0001;
 		    }
 		    button.onOut.callback = button.onUp.callback;
 		}
