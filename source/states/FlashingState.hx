@@ -37,14 +37,15 @@ class FlashingState extends MusicBeatState
 			"Hey, watch out!\n
 			This Mod contains some flashing lights!\n
 			And, this WILL lag, there is no getting around that. Some of it is intentional though.\n
-			Touch to start the game\n
+			Press button A to start the game\n
+			Press button B to start the game and disable flashing lights\n
 			You've been warned!",
 			32);
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
 
-		#if mobile addVPad(NONE, A_B); #end
+		#if mobile addVPad(NONE, A_B); isSubState = false; #end
 	}
 
 	override function update(elapsed:Float)
