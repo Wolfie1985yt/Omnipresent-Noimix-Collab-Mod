@@ -45,16 +45,16 @@ class FlashingState extends MusicBeatState
 		warnText.screenCenter(Y);
 		add(warnText);
 
-		#if mobile addVPad(NONE, A_B); isSubState = false; #end
+		#if mobile addVPad(NONE, A_B); #end
 	}
 
 	override function update(elapsed:Float)
 	{
 		if(!leftState) {
-			if (controls.ACCEPT || controls.BACK) {
+			if ((controls.ACCEPT #if mobile || vPad.buttonA.justPressed #end) || (controls.BACK #if mobile || vPad.buttonB.justPressed #end)) {
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
-				if(controls.BACK) {
+				if(controls.BACK #if mobile || vPad.buttonB.justPressed #end) {
 					ClientPrefs.data.flashing = false;
 					ClientPrefs.saveSettings();
 					FlxG.sound.play(Paths.sound('confirmMenu'));
