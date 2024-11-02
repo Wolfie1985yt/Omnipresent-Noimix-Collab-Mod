@@ -146,7 +146,7 @@ class VisualsUISubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Hitbox Type:',
 			"What hitbox type you want to use?",
-			'pauseMusic',
+			'hitboxtype',
 			'string',
 			['Default', 'P. Invisible', 'F. Invisible']);
 		addOption(option);
