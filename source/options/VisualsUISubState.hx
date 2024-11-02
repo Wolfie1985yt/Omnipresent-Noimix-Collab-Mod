@@ -144,6 +144,13 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 		#end
 
+		var option:Option = new Option('Hitbox Type:',
+			"What hitbox type you want to use?",
+			'pauseMusic',
+			'string',
+			['Default', 'P. Invisible', 'F. Invisible']);
+		addOption(option);
+
 		var option:Option = new Option('Combo Stacking',
 			"If unchecked, Ratings and Combo won't stack, saving on System Memory and making them easier to read",
 			'comboStacking',
