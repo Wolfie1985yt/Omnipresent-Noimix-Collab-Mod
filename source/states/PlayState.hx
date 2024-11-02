@@ -639,12 +639,10 @@ class PlayState extends MusicBeatState
 		        if (controls.controllerMode) return;
 		        keyReleased(getMControlsKeys(button));
 		        if (mcontrols.mode.toLowerCase() == 'hitbox')
-		            if(ClientPrefs.data.hitboxtype =='Default') {
+		            if(ClientPrefs.data.hitboxtype == 'Default') 
 		            button.alpha = 0.1;
-		            }
-		            else if (ClientPrefs.data.hitboxtype == 'P. Invisible' && ClientPrefs.data.hitboxtype == 'F. Invisible') {
-		            button.alpha = 0.0001;            
-		            }
+		            else
+		            button.alpha = 0.0001;
 		    }
 		    button.onOut.callback = button.onUp.callback;
 		}
