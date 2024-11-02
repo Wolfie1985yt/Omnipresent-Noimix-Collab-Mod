@@ -4,8 +4,7 @@ cd ..
 @echo on
 echo Installing dependencies.
 haxelib install lime 8.0.2
-haxelib install lime 8.0.2
-haxelib set lime 8.1.0
+haxelib set lime 8.0.2
 haxelib install openfl 9.2.2
 haxelib set openfl 9.2.2
 haxelib install flixel 5.5.0
