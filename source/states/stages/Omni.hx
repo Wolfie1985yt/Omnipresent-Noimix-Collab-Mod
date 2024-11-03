@@ -439,7 +439,6 @@ class Omni extends BaseStage
 			preload('bgs/hog/blast/Sunset');
 			preload('bgs/hog/blast/Waterfalls');
 			preload('bgs/LordXStage/lordxstageLowQuality');
-			preload('bgs/needlemouse/needlemouseLowQuality');
 			preload('bgs/sanic/sanicbg');
 			preload('bgs/satanos-bg/satanosLowQuality');
 			preload('bgs/sunky/floor');
@@ -571,21 +570,21 @@ class Omni extends BaseStage
 		tails_sky.visible = false;
 		add(tails_sky);
 		
+		needleMoutains = new BGSprite('bgs/needlemouse/mountains', -700, -175, 0.8, 0.9);
+		needleMoutains.setGraphicSize(Std.int(needleMoutains.width * 1.1));
+		needleMoutains.visible = false;
+		add(needleMoutains);
+
+		needleBuildings = new BGSprite('bgs/needlemouse/buildings', -974, -27, 1, 0.9);
+		needleBuildings.visible = false;
+		add(needleBuildings);
+
+		conkCreet = new BGSprite('bgs/needlemouse/CONK_CREET', -775, 901, 1, 0.9);
+		conkCreet.setGraphicSize(Std.int(conkCreet.width * 1.4));
+		conkCreet.visible = false;
+		add(conkCreet);
+
 		if (!lowQuality && !lowerQuality || lowerQuality) {
-			needleMoutains = new BGSprite('bgs/needlemouse/mountains', -700, -175, 0.8, 0.9);
-			needleMoutains.setGraphicSize(Std.int(needleMoutains.width * 1.1));
-			needleMoutains.visible = false;
-			add(needleMoutains);
-
-			needleBuildings = new BGSprite('bgs/needlemouse/buildings', -974, -27, 1, 0.9);
-			needleBuildings.visible = false;
-			add(needleBuildings);
-
-			conkCreet = new BGSprite('bgs/needlemouse/CONK_CREET', -775, 901, 1, 0.9);
-			conkCreet.setGraphicSize(Std.int(conkCreet.width * 1.4));
-			conkCreet.visible = false;
-			add(conkCreet);
-
 			tails_sky = new FlxSprite(-450, -1000);
 			tails_sky.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_sky'));
 			tails_sky.scrollFactor.set(1, 1);
@@ -722,18 +721,6 @@ class Omni extends BaseStage
 			add(fucklesVectorBg);
 		} else {
 			if (!lowerQuality) {
-			needleMoutains = new BGSprite('blank', -700, -175, 0.8, 0.9);
-			needleMoutains.setGraphicSize(Std.int(needleMoutains.width * 1.1));
-			needleMoutains.visible = false;
-			add(needleMoutains);
-
-			needleBuildings = new BGSprite('blank', -974, -27, 1, 0.9);
-			needleBuildings.visible = false;
-			add(needleBuildings);
-
-			conkCreet = new BGSprite('bgs/needlemouse/needlemouseLowQuality', -775, -141, 1, 0.9);
-			conkCreet.visible = false;
-			add(conkCreet);
 
 			tails_sky = new FlxSprite(-450, -1000);
 			tails_sky.loadGraphic(Paths.image('blank'));
