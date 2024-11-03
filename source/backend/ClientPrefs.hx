@@ -19,7 +19,7 @@ import states.TitleState;
 	public var noteSkin:String = 'Default';
 	public var splashSkin:String = 'Bloodsplash';
 	public var splashAlpha:Float = 1;
-	public var lowQuality:Bool = false;
+	public var lowQuality:Bool = true;
 	public var shaders:Bool = true;
 	public var omnipresentBeat:Bool = false;
 	public var cacheOnGPU:Bool = false;
