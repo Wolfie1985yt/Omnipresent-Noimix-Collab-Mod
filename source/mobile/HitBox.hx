@@ -38,7 +38,7 @@ class HitBox extends FlxSpriteGroup
     {
         var button:FlxButton = new FlxButton(x, y);
         button.makeGraphic(width, height, FlxColor.fromString(color));
-        button.alpha = 0.1;
+        button.alpha = (ClientPrefs.data.hitboxtype == 'Default') ? 0.1 : 0.0001;
 
         button.onDown.callback = () -> button.alpha = 0.15;
         button.onUp.callback = () -> button.alpha = 0.1;
