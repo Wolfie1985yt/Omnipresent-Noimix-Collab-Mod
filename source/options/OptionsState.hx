@@ -14,21 +14,21 @@ class OptionsState extends MusicBeatState
 	function openSelectedSubstate(label:String) {
 		switch(label) {
 			case 'Note Colors':
-			  #if mobile vPad.visible = false; #end
+			  #if mobile removeVPad; #end
 				openSubState(new options.NotesSubState());
 			case 'Mobile Controls':
 			    #if mobile FlxG.switchState(new mobile.CustomControlsState()); #end
 			case 'Controls':
-			  #if mobile vPad.visible = false; #end
+			  #if mobile removeVPad(); #end
 				openSubState(new options.ControlsSubState());
 			case 'Graphics':
-			  #if mobile vPad.visible = false; #end
+			  #if mobile removeVPad(); #end
 				openSubState(new options.GraphicsSettingsSubState());
 			case 'Visuals and UI':
-			  #if mobile vPad.visible = false; #end
+			  #if mobile removeVPad(); #end
 				openSubState(new options.VisualsUISubState());
 			case 'Gameplay':
-			  #if mobile vPad.visible = false; #end
+			  #if mobile removeVPad(); #end
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
 				MusicBeatState.switchState(new options.NoteOffsetState());
@@ -77,8 +77,6 @@ class OptionsState extends MusicBeatState
 	override function closeSubState() {
 		super.closeSubState();
 		ClientPrefs.saveSettings();
-		#if mobile
-		if (!vPad.visible) new FlxTimer().start(0.2, (tmr) -> vPad.visible = true); #end
 		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("Options Menu", null);
 		#end
