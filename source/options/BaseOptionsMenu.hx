@@ -145,7 +145,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			if(curOption.type == 'bool')
 			{
-				if(controls.ACCEPT || (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null))
+				if(#if desktop controls.ACCEPT #else || vPad.buttonA.justPressed #end || (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null))
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
@@ -256,7 +256,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				}
 			}
 
-			if(controls.RESET #if mobile || vPad.buttonC.justPressed #end)
+			if(#if desktop controls.RESET #else || vPad.buttonC.justPressed #end)
 			{
 				var leOption:Option = optionsArray[curSelected];
 				if(leOption.type != 'keybind')
