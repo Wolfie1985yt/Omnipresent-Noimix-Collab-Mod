@@ -14,7 +14,7 @@ class OptionsState extends MusicBeatState
 	function openSelectedSubstate(label:String) {
 		switch(label) {
 			case 'Note Colors':
-			  #if mobile removeVPad; #end
+			  #if mobile removeVPad(); #end
 				openSubState(new options.NotesSubState());
 			case 'Mobile Controls':
 			    #if mobile FlxG.switchState(new mobile.CustomControlsState()); #end
