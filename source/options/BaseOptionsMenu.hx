@@ -145,7 +145,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			if(curOption.type == 'bool')
 			{
-				if(controls.ACCEPT || (grpOptions != null && grpOptions.members != null && grpOptions.members[curSelected] != null && TouchInput.justPressed(grpOptions.members[curSelected])))
+				if(controls.ACCEPT || TouchInput.justPressed(checkboxGroup.members[curSelected]) && (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null))
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
