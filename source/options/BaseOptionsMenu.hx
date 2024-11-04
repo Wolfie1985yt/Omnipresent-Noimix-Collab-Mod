@@ -256,7 +256,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				}
 			}
 
-			if(#if desktop controls.RESET #else || vPad.buttonC.justPressed #end)
+			if(#if desktop controls.RESET #else vPad.buttonC.justPressed #end)
 			{
 				var leOption:Option = optionsArray[curSelected];
 				if(leOption.type != 'keybind')
