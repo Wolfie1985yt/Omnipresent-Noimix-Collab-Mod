@@ -157,7 +157,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			if(curOption.type == 'bool')
 			{
-				if(#if desktop controls.ACCEPT #else || vPad.buttonA.justPressed #end && (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null))
+				if(#if desktop controls.ACCEPT #else vPad.buttonA.justPressed #end && (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null))
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
