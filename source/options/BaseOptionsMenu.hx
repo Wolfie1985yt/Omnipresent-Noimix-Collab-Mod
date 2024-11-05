@@ -131,6 +131,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			if (touch.justPressed)
 			{
+			 if (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null)
 				pressedEnter = true;
 			}
 		}
