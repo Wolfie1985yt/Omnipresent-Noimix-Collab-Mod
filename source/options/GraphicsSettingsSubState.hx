@@ -25,6 +25,12 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			'bool'); //Variable type
 		addOption(option);
 
+		var option:Option = new Option('Potato Mode', //Name
+			'If checked, all background aspects will be removed', //Description
+			'potatoMode', //Save data variable name
+			'bool'); //Variable type
+		addOption(option);
+
 		var option:Option = new Option('Anti-Aliasing',
 			'If unchecked, disables anti-aliasing, increases performance\nat the cost of sharper visuals.',
 			'antialiasing',
