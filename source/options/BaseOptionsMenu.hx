@@ -133,8 +133,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			{
 				pressedEnter = true;
 			}
-			return pressedEnter = false;
 		}
+    return pressedEnter = false;
 		#end
 
 		if(bindingKey)
