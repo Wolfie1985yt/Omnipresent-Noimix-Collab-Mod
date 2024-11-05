@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="FNF': Omnipresent Noimix" file="Omnipresent" packageName="com.wolfie.omnipresent" package="com.wolfie.omnipresent" main="Main" version="1.1" company="Wolfie_1985" />
+	<app title="FNF': Omnipresent Noimix" file="Omnipresent" packageName="com.wolfie.omnipresent" package="com.wolfie.omnipresent" main="Main" version="1.2.0" company="Wolfie_1985" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
@@ -22,10 +22,12 @@
 
 	<define name="MODS_ALLOWED" if="desktop" />
 	<define name="HSCRIPT_ALLOWED" if="desktop" />
-	<define name="LUA_ALLOWED" if="desktop" />
-	<define name="DISCORD_ALLOWED" />
+	<define name="LUA_ALLOWED" if="desktop || android" />
+	<define name="DISCORD_ALLOWED" if="desktop" />
 	<define name="VIDEOS_ALLOWED" if="desktop || mobile" unless="32bits"/> <!-- IF YOU WANT TO USE VIDEOS ON YOUR SOURCE MOD, GET THIS LINE OUTSIDE OF THE SECTION -->
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
+
+	<define name="CRASH_HANDLER" if="desktop release || android" />
 
 	<section if="officialBuild">
 		<define name="TITLE_SCREEN_EASTER_EGG"/>
@@ -43,7 +45,7 @@
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/>
 
 	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
+        <window if="mobile" orientation="landscape" width="1280" height="720" fullscreen="true" resizable="false"/>
 
 	<!--Switch-specific-->
 	<window if="switch" orientation="landscape" fullscreen="true" width="0" height="0" resizable="true" />
@@ -55,14 +57,16 @@
 	<set name="BUILD_DIR" value="export/32bit" if="32bits" />
 
 	<classpath name="source" />
+	<assets path='assets/mobile' if='mobile' />
 
 	<!-- __________________________ Game Assets & Etc. __________________________ -->
 
 	<!-- Assets -->
+	<assets path="alsoft.ini" />
 	<assets path="assets/fonts" />
 	<assets path="assets/shared"        exclude="*.ogg" if="web"/>
 	<assets path="assets/shared"        exclude="*.mp3" unless="web"/>
-	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED"/>
+	<assets path="assets/videos"        if="VIDEOS_ALLOWED"/>
 	<assets path="assets/songs"         library="songs"         exclude="*.ogg" if="web"/>
 	<assets path="systeminfo" rename="assets" exclude="*.mp3"  unless="web"/>
 	<assets path="assets/songs"         library="songs"         exclude="*.mp3" unless="web"/>
@@ -74,7 +78,6 @@
 		<assets path="assets/secrets" rename="assets/shared" exclude="*.mp3"  unless="web"/>
 	</section>
 
-	<library name="videos"        preload="true" if="VIDEOS_ALLOWED"/>
 	<library name="songs"         preload="true" />
 
 	<define name="CHECK_FOR_UPDATES" if="desktop officialBuild"/>
@@ -148,6 +151,14 @@
 	
 	<!--Disable deprecated warnings-->
 	<haxedef name='no-deprecation-warnings' />
+
+  <section if="android">
+	<config:android gradle-version="7.5.1" />
+  <config:android gradle-plugin="7.3.1" />
+	<android permission="android.permission.CAPTURE_AUDIO_OUTPUT"/>
+	<android target-sdk-version="29" if="android"/>
+	<android min-sdk-version="19" if="android"/>
+	</section>
 
 	<!-- _________________________________ Custom _______________________________ -->
 

@@ -68,6 +68,8 @@ class GameOverSubstate extends MusicBeatSubstate
 		PlayState.instance.setOnScripts('inGameOver', true);
 		PlayState.instance.callOnScripts('onGameOverStart', []);
 
+		#if mobile addVPad(NONE, B); addVPadCamera();  #end
+
 		super.create();
 	}
 
@@ -78,7 +80,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		PlayState.instance.callOnScripts('onUpdate', [elapsed]);
 
-		if (controls.ACCEPT)
+		if (controls.ACCEPT || TouchInput.justPressed(boyfriend))
 		{
 			endBullshit();
 		}

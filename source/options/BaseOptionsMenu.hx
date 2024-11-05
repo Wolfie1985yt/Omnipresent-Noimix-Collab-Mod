@@ -102,6 +102,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		changeSelection();
 		reloadCheckboxes();
+
+		#if mobile addVPad(FULL, A_B); #end
 	}
 
 	public function addOption(option:Option) {
@@ -126,17 +128,13 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		if(bindingKey)
 		{
 			bindingKeyUpdate(elapsed);
-			return;
+		  return;
 		}
 
 		if (controls.UI_UP_P)
-		{
 			changeSelection(-1);
-		}
 		if (controls.UI_DOWN_P)
-		{
 			changeSelection(1);
-		}
 
 		if (controls.BACK) {
 			close();
@@ -147,7 +145,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			if(curOption.type == 'bool')
 			{
-				if(controls.ACCEPT)
+				if(controls.ACCEPT && (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null))
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
@@ -214,7 +212,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 								case 'string':
 									var num:Int = curOption.curOption; //lol
 									if(controls.UI_LEFT_P) --num;
-									else num++;
+									else if (controls.UI_RIGHT_P) num++;
 
 									if(num < 0)
 										num = curOption.options.length - 1;

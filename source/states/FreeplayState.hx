@@ -65,28 +65,15 @@ class FreeplayState extends MusicBeatState
 		FlxG.cameras.reset(camGame);
 		FlxCamera.defaultCameras = [camGame];
 		
-		if (!ClientPrefs.data.lowQuality) {
-			BG = new FlxSprite(0, 0);
-			BG.frames = Paths.getSparrowAtlas('mainmenu/bg');
-			BG.antialiasing = false;
-			BG.animation.addByPrefix('bgAnim', 'BG instance 1', 24);
-			BG.setGraphicSize(Std.int(BG.width * 1));
-			BG.animation.play('bgAnim');
-			BG.updateHitbox();
-			BG.screenCenter();
-			add(BG);
-		} else {
-			BG = new FlxSprite(0, 0);
-			BG.frames = Paths.getSparrowAtlas('blank');
-			BG.antialiasing = false;
-			BG.animation.addByPrefix('bgAnim', 'fun', 24);
-			BG.setGraphicSize(Std.int(BG.width * 1));
-			BG.animation.play('bgAnim');
-			BG.updateHitbox();
-			BG.screenCenter();
-			add(BG);
-		}
-		
+		BG = new FlxSprite(0, 0);
+		BG.frames = Paths.getSparrowAtlas('mainmenu/bg');
+		BG.antialiasing = false;
+		BG.animation.addByPrefix('bgAnim', 'BG instance 1', 24);
+		BG.setGraphicSize(Std.int(BG.width * 1));
+		BG.animation.play('bgAnim');
+		BG.updateHitbox();
+		BG.screenCenter();
+		add(BG);
 
 		art = new FlxSprite(-325, 0);
 		if (omniBeaten) {
@@ -177,7 +164,7 @@ class FreeplayState extends MusicBeatState
 
         scoreText.text = 'Score: ' + lerpScore;
 
-        if (controls.ACCEPT && select && !loading && omniBeaten) {
+        if (controls.ACCEPT || TouchInput.justPressed(art) && select && !loading && omniBeaten) {
             FlxG.sound.play(Paths.sound('confirmMenu'));
             loading = true;
             PlayState.SONG = backend.Song.loadFromJson('omnipresent-fucked' + '-hard', 'omnipresent-fucked');
@@ -186,10 +173,10 @@ class FreeplayState extends MusicBeatState
             PlayState.isStoryMode = false;
 			new FlxTimer().start(1, function(tmr:FlxTimer) { LoadingState.loadAndSwitchState(new PlayState()); });
         }
-		if (controls.ACCEPT && select && !loading && !omniBeaten) {
+		if (controls.ACCEPT || TouchInput.justPressed(art) && select && !loading && !omniBeaten) {
 			FlxG.sound.play(Paths.sound('deniedMOMENT'), 1);
 		}
-        if (controls.ACCEPT && !select && !loading) {
+        if (controls.ACCEPT || TouchInput.justPressed(art) && !select && !loading) {
             FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 			select = true;
             songText.color = 0xFFFFFFFF;

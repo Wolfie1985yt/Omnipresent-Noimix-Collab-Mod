@@ -5,7 +5,7 @@ import backend.StageData;
 
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay'];
+	var options:Array<String> = ['Note Colors', 'Controls', #if mobile 'Mobile Controls', #end 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -14,14 +14,21 @@ class OptionsState extends MusicBeatState
 	function openSelectedSubstate(label:String) {
 		switch(label) {
 			case 'Note Colors':
+			  #if mobile vPad.visible = false; #end
 				openSubState(new options.NotesSubState());
+			case 'Mobile Controls':
+			    #if mobile FlxG.switchState(new mobile.CustomControlsState()); #end
 			case 'Controls':
+			  #if mobile vPad.visible = false; #end
 				openSubState(new options.ControlsSubState());
 			case 'Graphics':
+			  #if mobile vPad.visible = false; #end
 				openSubState(new options.GraphicsSettingsSubState());
 			case 'Visuals and UI':
+			  #if mobile vPad.visible = false; #end
 				openSubState(new options.VisualsUISubState());
 			case 'Gameplay':
+			  #if mobile vPad.visible = false; #end
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
 				MusicBeatState.switchState(new options.NoteOffsetState());
@@ -62,12 +69,16 @@ class OptionsState extends MusicBeatState
 		changeSelection();
 		ClientPrefs.saveSettings();
 
+                #if mobile addVPad(NONE, B); #end
+
 		super.create();
 	}
 
 	override function closeSubState() {
 		super.closeSubState();
 		ClientPrefs.saveSettings();
+		#if mobile
+		if (!vPad.visible) new FlxTimer().start(0.2, (tmr) -> vPad.visible = true); #end
 		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("Options Menu", null);
 		#end
@@ -76,12 +87,10 @@ class OptionsState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (controls.UI_UP_P) {
+		if (controls.UI_UP_P)
 			changeSelection(-1);
-		}
-		if (controls.UI_DOWN_P) {
+		if (controls.UI_DOWN_P)
 			changeSelection(1);
-		}
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -93,7 +102,7 @@ class OptionsState extends MusicBeatState
 			}
 			else MusicBeatState.switchState(new MainMenuState());
 		}
-		else if (controls.ACCEPT) openSelectedSubstate(options[curSelected]);
+		else if (controls.ACCEPT || TouchInput.justPressed(grpOptions.members[curSelected])) openSelectedSubstate(options[curSelected]);
 	}
 	
 	function changeSelection(change:Int = 0) {

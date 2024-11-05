@@ -27,7 +27,7 @@ class CoolUtil
 	inline public static function coolTextFile(path:String):Array<String>
 	{
 		var daList:String = null;
-		#if (sys && MODS_ALLOWED)
+		#if MODS_ALLOWED
 		var formatted:Array<String> = path.split(':'); //prevent "shared:", "preload:" and other library names on file path
 		path = formatted[formatted.length-1];
 		if(FileSystem.exists(path)) daList = File.getContent(path);

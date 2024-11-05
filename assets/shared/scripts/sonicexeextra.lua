@@ -2,7 +2,7 @@
 local json
 
 --Name of the char json
-local char2parse = 'sunky'
+local char2parse = 'sonicexe'
 
 --Sing Anims
 local anims = {
@@ -22,8 +22,8 @@ local isPlayer = false
 
 --Character stage offset
 local stageOffsets = {
-    0, --x
-    250 --y
+    600, --x
+    300 --y
 }
 
 local idleSuffix = '' --alt idle thing don't touch
@@ -33,11 +33,7 @@ local idleLoop
 local doIdle = true
 local specialAnim = false
 function onCreate()
-    if currentModDirectory ~= nil and currentModDirectory ~= '' then
-        json = require("mods/scripts/jsonlua")
-    else
-        json = require("mods/scripts/jsonlua")
-    end
+        json = require("assets/shared/scripts/jsonlua")
 
     local charJson = json.parse(getTextFromFile('characters/'..char2parse..'.json'))
 
@@ -87,15 +83,18 @@ function singStuff(membersIndex, noteData, noteType, isSustainNote)
 end
 
 function onCreatePost()
-	setProperty('sunky.visible',false);
+	setProperty('sonicexe.visible',false);
+	setProperty('sonicexe.antialiasing',true);
 end
 
 function onStepHit()
-	if curStep == 8430 then
-		setProperty('sunky.visible',true);
+	if curStep == 6464 then
+		setProperty('sonicexe.visible',true);
+		setProperty('gfGroup.x',-400);
+		setProperty('gfGroup.y',275);
 	end
-	if curStep == 8528 then
-		setProperty('sunky.visible',false);
+	if curStep == 6608 then
+		setProperty('sonicexe.visible',false);
 	end
 end
 

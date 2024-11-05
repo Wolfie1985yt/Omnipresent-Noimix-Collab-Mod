@@ -1,15 +1,15 @@
 package vlc;
-#if desktop
+#if (hxvlc && desktop)
 
 import flixel.FlxG;
-import hxcodec.openfl.Video;
+import hxvlc.flixel.FlxVideo;
 import openfl.events.Event;
 import sys.FileSystem;
 
-class MP4Handler extends Video
+/*class MP4Handler extends FlxVideo
 {
-	// Variables
-	public var autoResize:Bool = true;
+// Variables
+  public var autoResize:Bool = true;
 
 	public function new():Void
 	{
@@ -82,7 +82,8 @@ class MP4Handler extends Video
 		}
 		volume = Std.int((FlxG.sound.muted ? 0 : 1) * (FlxG.sound.volume * 170));
 	}
-}
+}*/
+	typedef MP4Handler = hxvlc.flixel.FlxVideo;
 #else
 import flixel.input.keyboard.FlxKey;
 import flixel.FlxG;

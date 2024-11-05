@@ -95,27 +95,15 @@ class MainMenuState extends MusicBeatState
 		
 		persistentUpdate = persistentDraw = true;
 
-		if (!ClientPrefs.data.lowQuality) {
-			BG = new FlxSprite(0, 0);
-			BG.frames = Paths.getSparrowAtlas('mainmenu/bg');
-			BG.antialiasing = false;
-			BG.animation.addByPrefix('bgAnim', 'BG instance 1', 24);
-			BG.setGraphicSize(Std.int(BG.width * 1));
-			BG.animation.play('bgAnim');
-			BG.updateHitbox();
-			BG.screenCenter();
-			add(BG);
-		} else {
-			BG = new FlxSprite(0, 0);
-			BG.frames = Paths.getSparrowAtlas('blank');
-			BG.antialiasing = false;
-			BG.animation.addByPrefix('bgAnim', 'fun', 24);
-			BG.setGraphicSize(Std.int(BG.width * 1));
-			BG.animation.play('bgAnim');
-			BG.updateHitbox();
-			BG.screenCenter();
-			add(BG);
-		}
+		BG = new FlxSprite(0, 0);
+		BG.frames = Paths.getSparrowAtlas('mainmenu/bg');
+		BG.antialiasing = false;
+		BG.animation.addByPrefix('bgAnim', 'BG instance 1', 24);
+		BG.setGraphicSize(Std.int(BG.width * 1));
+		BG.animation.play('bgAnim');
+		BG.updateHitbox();
+		BG.screenCenter();
+		add(BG);
 
 		Buttons = new FlxTypedSpriteGroup<FlxSprite>();
 		add(Buttons);
@@ -179,11 +167,6 @@ class MainMenuState extends MusicBeatState
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		blackScreen.alpha = 0;
 		add(blackScreen);
-		
-		#if mobile
-			addVirtualPad(UP_DOWN, A_B_C_D);
-			virtualPad.y = -150;
-		#end
 
 		var psychVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
 		psychVer.scrollFactor.set();
@@ -315,7 +298,7 @@ class MainMenuState extends MusicBeatState
 					holdTime = 0;
 				}
 			
-			if ((controls.ACCEPT) || (FlxG.mouse.overlaps(Buttons) && (FlxG.mouse.justReleased) || (FlxG.mouse.justPressedMiddle))) {
+			if ((controls.ACCEPT || TouchInput.justPressed(Buttons.members[curSelected])) || (FlxG.mouse.overlaps(Buttons) && (FlxG.mouse.justReleased) || (FlxG.mouse.justPressedMiddle))) {
 					#if desktop
 					lockMouseSelection = true;
 					#end

@@ -38,7 +38,6 @@ import substates.OmniGameOverSubstate;
 import shaders.Greyscale;
 
 #if !flash
-import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
 #end
 
@@ -416,17 +415,16 @@ class PlayState extends MusicBeatState
 
 		// "GLOBAL" SCRIPTS
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'scripts/'))
-			for (file in FileSystem.readDirectory(folder))
+			for (file in Assets.list().filter(folder -> folder.contains('assets/shared/scripts/')))
 			{
 				#if LUA_ALLOWED
 				if(file.toLowerCase().endsWith('.lua'))
-					new FunkinLua(folder + file);
+					new FunkinLua(file);
 				#end
 
 				#if HSCRIPT_ALLOWED
 				if(file.toLowerCase().endsWith('.hx'))
-					initHScript(folder + file);
+					initHScript(file);
 				#end
 			}
 		#end
@@ -607,6 +605,42 @@ class PlayState extends MusicBeatState
 		noteGroup.cameras = [camHUD];
 		comboGroup.cameras = [camHUD];
 
+		#if mobile
+		addMControls();
+		if (mcontrols.mode.toLowerCase() == 'hitbox') {
+		    mcontrolsKeys = [
+		        mcontrols.hitbox.buttonLeft,
+		        mcontrols.hitbox.buttonDown,
+		        mcontrols.hitbox.buttonUp,
+		        mcontrols.hitbox.buttonRight
+		    ];
+		} else if (mcontrols.mode.toLowerCase().startsWith('vpad')){
+		    mcontrolsKeys = [
+		        mcontrols.vPad.buttonLeft,
+		        mcontrols.vPad.buttonDown,
+		        mcontrols.vPad.buttonUp,
+		        mcontrols.vPad.buttonRight
+		    ];
+		} else mcontrolsKeys = [];
+
+		for (button in mcontrolsKeys)
+		{
+		    button.onDown.callback = () -> {
+		        if (controls.controllerMode) return;
+		        keyPressed(getMControlsKeys(button));
+		        if (mcontrols.mode.toLowerCase() == 'hitbox')
+			    button.alpha = (ClientPrefs.data.hitboxtype != 'F. Invisible') ? 0.15 : 0.0001;
+		    }
+		    button.onUp.callback = () -> {
+		        if (controls.controllerMode) return;
+		        keyReleased(getMControlsKeys(button));
+		        if (mcontrols.mode.toLowerCase() == 'hitbox')
+		            button.alpha = (ClientPrefs.data.hitboxtype == 'Default') ? 0.1 : 0.0001;
+		    }
+		    button.onOut.callback = button.onUp.callback;
+		}
+		#end
+
 		startingSong = true;
 
 		#if LUA_ALLOWED
@@ -633,20 +667,29 @@ class PlayState extends MusicBeatState
 
 		// SONG SPECIFIC SCRIPTS
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'data/$songName/'))
-			for (file in FileSystem.readDirectory(folder))
+			for (file in Assets.list().filter(folder -> folder.contains('assets/shared/data/$songName/')))
 			{
-				#if LUA_ALLOWED
+				/*#if LUA_ALLOWED
 				if(file.toLowerCase().endsWith('.lua'))
-					new FunkinLua(folder + file);
-				#end
+					new FunkinLua(file);
+				#end*/
 
 				#if HSCRIPT_ALLOWED
 				if(file.toLowerCase().endsWith('.hx'))
-					initHScript(folder + file);
+					initHScript(file);
 				#end
 			}
 		#end
+
+		@:privateAccess
+		FlxG.sound.playMusic(inst._sound, 0, false);
+		#if FLX_PITCH FlxG.sound.music.pitch = playbackRate; #end
+		FlxG.sound.music.onComplete = finishSong.bind();
+		
+		vocals.play();
+		opponentVocals.play();
+		vocals.stop();
+		opponentVocals.stop();
 
 		startCallback();
 		RecalculateRating();
@@ -938,6 +981,7 @@ class PlayState extends MusicBeatState
 
 			generateStaticArrows(0);
 			generateStaticArrows(1);
+			#if mobile mcontrols.visible = true; #end
 			for (i in 0...playerStrums.length) {
 				setOnScripts('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnScripts('defaultPlayerStrumY' + i, playerStrums.members[i].y);
@@ -2700,6 +2744,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		#if mobile mcontrols.visible = false; #end
 		timeBar.visible = false;
 		timeTxt.visible = false;
 		canPause = false;
@@ -3060,6 +3105,14 @@ class PlayState extends MusicBeatState
 
 		return FlxSort.byValues(FlxSort.ASCENDING, a.strumTime, b.strumTime);
 	}
+
+	  #if mobile
+	  var mcontrolsKeys:Array<mobile.FlxButton> = [];
+	  private function getMControlsKeys(button:mobile.FlxButton):Int
+	  {
+	      return mcontrolsKeys.indexOf(button);
+	  }
+	  #end
 
 	private function onKeyRelease(event:KeyboardEvent):Void
 	{
@@ -3853,76 +3906,6 @@ class PlayState extends MusicBeatState
 
 			if(unlock) Achievements.unlock(name);
 		}
-	}
-	#end
-
-	#if (!flash && sys)
-	public var runtimeShaders:Map<String, Array<String>> = new Map<String, Array<String>>();
-	public function createRuntimeShader(name:String):FlxRuntimeShader
-	{
-		if(!ClientPrefs.data.shaders) return new FlxRuntimeShader();
-
-		#if (!flash && MODS_ALLOWED && sys)
-		if(!runtimeShaders.exists(name) && !initLuaShader(name))
-		{
-			FlxG.log.warn('Shader $name is missing!');
-			return new FlxRuntimeShader();
-		}
-
-		var arr:Array<String> = runtimeShaders.get(name);
-		return new FlxRuntimeShader(arr[0], arr[1]);
-		#else
-		FlxG.log.warn("Platform unsupported for Runtime Shaders!");
-		return null;
-		#end
-	}
-
-	public function initLuaShader(name:String, ?glslVersion:Int = 120)
-	{
-		if(!ClientPrefs.data.shaders) return false;
-
-		#if (MODS_ALLOWED && !flash && sys)
-		if(runtimeShaders.exists(name))
-		{
-			FlxG.log.warn('Shader $name was already initialized!');
-			return true;
-		}
-
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'shaders/'))
-		{
-			var frag:String = folder + name + '.frag';
-			var vert:String = folder + name + '.vert';
-			var found:Bool = false;
-			if(FileSystem.exists(frag))
-			{
-				frag = File.getContent(frag);
-				found = true;
-			}
-			else frag = null;
-
-			if(FileSystem.exists(vert))
-			{
-				vert = File.getContent(vert);
-				found = true;
-			}
-			else vert = null;
-
-			if(found)
-			{
-				runtimeShaders.set(name, [frag, vert]);
-				//trace('Found shader $name!');
-				return true;
-			}
-		}
-			#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-			addTextToDebug('Missing shader $name .frag AND .vert files!', FlxColor.RED);
-			#else
-			FlxG.log.warn('Missing shader $name .frag AND .vert files!');
-			#end
-		#else
-		FlxG.log.warn('This platform doesn\'t support Runtime Shaders!');
-		#end
-		return false;
 	}
 	#end
 }

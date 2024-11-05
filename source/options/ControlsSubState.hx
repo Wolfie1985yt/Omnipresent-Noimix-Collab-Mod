@@ -110,6 +110,8 @@ class ControlsSubState extends MusicBeatSubstate
 		add(text);
 
 		createTexts();
+
+		#if mobile addVPad(NONE, B); #end
 	}
 
 	var lastID:Int = 0;
@@ -275,7 +277,7 @@ class ControlsSubState extends MusicBeatSubstate
 
 		if(!binding)
 		{
-			if(FlxG.keys.justPressed.ESCAPE || FlxG.gamepads.anyJustPressed(B))
+			if(controls.BACK || FlxG.keys.justPressed.ESCAPE || FlxG.gamepads.anyJustPressed(B))
 			{
 				close();
 				return;

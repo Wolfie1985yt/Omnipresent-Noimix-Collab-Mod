@@ -7,6 +7,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		title = 'Gameplay Settings';
 		rpcTitle = 'Gameplay Settings Menu'; //for Discord Rich Presence
 
+		var option:Option = new Option('Hitbox Type:',
+			"What hitbox type you want to use?",
+			'hitboxtype',
+			'string',
+			['Default', 'P. Invisible', 'F. Invisible']);
+		addOption(option);
+
 		//I'd suggest using "Downscroll" as an example for making your own option since it is the simplest here
 		var option:Option = new Option('Downscroll', //Name
 			'If checked, notes go Down instead of Up, simple enough.', //Description

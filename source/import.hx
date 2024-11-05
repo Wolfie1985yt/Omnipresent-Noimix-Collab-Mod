@@ -21,6 +21,10 @@ import sys.io.*;
 import js.html.*;
 #end
 
+#if mobile
+import mobile.backend.*;
+#end
+
 import backend.Paths;
 import backend.Controls;
 import backend.CoolUtil;

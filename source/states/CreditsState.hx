@@ -96,7 +96,10 @@ class CreditsState extends MusicBeatState
 			['Zekuta',				'zekuta',			'Original Sonic.EXE mod Artist',							'https://twitter.com/zekutaanim',																'96ecff'],
 			['ZolZarolZ',			'ZolZarolZ',		'Artist of Restoration of Sonic.EXE',						'https://www.youtube.com/@zolcabeludo',															'502f19'],
 			[''],
-			['Psych Engine Team'],
+			['Android Porters'],
+			['MaysLastPlay',		'MaysLastPlay',		'i exist everywhere, thats the truth',							'https://www.youtube.com/channel/UCx0LxtFR8ROd9sFAq-UxDfw',	'5DE7FF'],
+                        ['Idklool',		    'idklool',		    'hmmm, vrido',	 'https://www.youtube.com/@idklool122',	'D10616'],
+			[''],
 			['Shadow Mario',		'shadowmario',		'Main Programmer and Head of Psych Engine',					 'https://ko-fi.com/shadowmario',		'444444'],
 			['Riveren',				'riveren',			'Main Artist/Animator of Psych Engine',						 'https://twitter.com/riverennn',		'14967B'],
 			[''],
@@ -184,6 +187,9 @@ class CreditsState extends MusicBeatState
 		bg.color = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 		intendedColor = bg.color;
 		changeSelection();
+
+		#if mobile addVPad(NONE, B); #end
+
 		super.create();
 	}
 
@@ -230,7 +236,7 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
+			if(controls.ACCEPT || TouchInput.justPressed(grpOptions.members[curSelected]) && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
 				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
 			}
 			if (controls.BACK)

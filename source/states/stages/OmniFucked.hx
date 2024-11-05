@@ -248,6 +248,7 @@ class OmniFucked extends BaseStage
 			preload('bgs/Wechidna/floor');
 			preload('bgs/Wechidna/building');
 			preload('bgs/Wechidna/bg-building');
+			preload('Phase3Static');
 			preload('philly/particle');
 		}
 		
@@ -329,7 +330,6 @@ class OmniFucked extends BaseStage
 			preload('bgs/triple-trouble-encore/xeno/xeno_floor');
 			preload('bgs/triple-trouble-encore/xeno/xeno_fg');
 			preload('bgs/triple-trouble-encore/knuckles/kn_bg');
-			preload('bgs/triple-trouble-encore/knuckles/kn_city2');
 			preload('bgs/triple-trouble-encore/knuckles/kn_floor');
 			preload('bgs/triple-trouble-encore/tails/ts_fg');
 			preload('bgs/triple-trouble-encore/tails/ts_floor');
@@ -443,7 +443,6 @@ class OmniFucked extends BaseStage
 			preload('bgs/hog/blast/Sunset');
 			preload('bgs/hog/blast/Waterfalls');
 			preload('bgs/LordXStage/lordxstageLowQuality');
-			preload('bgs/needlemouse-p2/needlemouse2LowQuality');
 			preload('bgs/sanic/sanicbg');
 			preload('bgs/satanos-bg/satanosLowQuality');
 			preload('bgs/sunky/floor');
@@ -487,7 +486,6 @@ class OmniFucked extends BaseStage
 		preload('shit');
 		preload('sick');
 		preload('noteSplashes/noteSplashes-Bloodsplash');
-		preload('ring');
 		preload('STATICNOTE_assets');
 		preload('PHANTOMNOTE_assets');
 		preload('hitStatic');
@@ -572,21 +570,21 @@ class OmniFucked extends BaseStage
 		tails_sky.visible = false;
 		add(tails_sky);
 		
+		needleMoutains = new BGSprite('bgs/needlemouse-p2/mountains', -700, -175, 0.8, 0.9);
+		needleMoutains.setGraphicSize(Std.int(needleMoutains.width * 1.1));
+		needleMoutains.visible = false;
+		add(needleMoutains);
+
+		needleBuildings = new BGSprite('bgs/needlemouse-p2/buildings', -974, -27, 1, 0.9);
+		needleBuildings.visible = false;
+		add(needleBuildings);
+
+		conkCreet = new BGSprite('bgs/needlemouse-p2/CONK_CREET', -775, 241, 1, 0.9);
+		conkCreet.setGraphicSize(Std.int(conkCreet.width * 1.4));
+		conkCreet.visible = false;
+		add(conkCreet);
+
 		if (!lowQuality && !lowerQuality || lowerQuality) {
-			needleMoutains = new BGSprite('bgs/needlemouse-p2/mountains', -700, -175, 0.8, 0.9);
-			needleMoutains.setGraphicSize(Std.int(needleMoutains.width * 1.1));
-			needleMoutains.visible = false;
-			add(needleMoutains);
-
-			needleBuildings = new BGSprite('bgs/needlemouse-p2/buildings', -974, -27, 1, 0.9);
-			needleBuildings.visible = false;
-			add(needleBuildings);
-
-			conkCreet = new BGSprite('bgs/needlemouse-p2/CONK_CREET', -775, 241, 1, 0.9);
-			conkCreet.setGraphicSize(Std.int(conkCreet.width * 1.4));
-			conkCreet.visible = false;
-			add(conkCreet);
-
 			tails_sky = new FlxSprite(-450, -1000);
 			tails_sky.loadGraphic(Paths.image('bgs/triple-trouble-encore/tails/ts_sky'));
 			tails_sky.scrollFactor.set(1, 1);
@@ -722,19 +720,6 @@ class OmniFucked extends BaseStage
 			add(fucklesKnuxBg);
 			add(fucklesVectorBg);
 		} else {
-			needleMoutains = new BGSprite('blank', -700, -175, 0.8, 0.9);
-			needleMoutains.setGraphicSize(Std.int(needleMoutains.width * 1.1));
-			needleMoutains.visible = false;
-			add(needleMoutains);
-
-			needleBuildings = new BGSprite('blank', -974, -27, 1, 0.9);
-			needleBuildings.visible = false;
-			add(needleBuildings);
-
-			conkCreet = new BGSprite('bgs/needlemouse-p2/needlemouse2LowQuality', -775, -141, 1, 0.9);
-			conkCreet.visible = false;
-			add(conkCreet);
-
 			tails_sky = new FlxSprite(-450, -1000);
 			tails_sky.loadGraphic(Paths.image('blank'));
 			tails_sky.scrollFactor.set(1, 1);
@@ -994,7 +979,7 @@ class OmniFucked extends BaseStage
 			add(knuckles_bg);
 			
 			knuckles_floor = new FlxSprite(-1000, -1000);
-			knuckles_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/knucklesLowQuality'));
+			knuckles_floor.loadGraphic(Paths.image('bgs/triple-trouble-encore/knuckles/kn_floor'));
 			knuckles_floor.scrollFactor.set(1, 1);
 			knuckles_floor.scale.set(2.3, 2.3);
 			knuckles_floor.visible = false;

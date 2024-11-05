@@ -2,7 +2,7 @@
 local json
 
 --Name of the char json
-local char2parse = 'sonicexe'
+local char2parse = 'true-fatal'
 
 --Sing Anims
 local anims = {
@@ -22,8 +22,8 @@ local isPlayer = false
 
 --Character stage offset
 local stageOffsets = {
-    600, --x
-    300 --y
+    720, --x
+    0 --y
 }
 
 local idleSuffix = '' --alt idle thing don't touch
@@ -33,11 +33,7 @@ local idleLoop
 local doIdle = true
 local specialAnim = false
 function onCreate()
-    if currentModDirectory ~= nil and currentModDirectory ~= '' then
-        json = require("mods/scripts/jsonlua")
-    else
-        json = require("mods/scripts/jsonlua")
-    end
+    json = require("assets/shared/scripts/jsonlua")
 
     local charJson = json.parse(getTextFromFile('characters/'..char2parse..'.json'))
 
@@ -87,18 +83,16 @@ function singStuff(membersIndex, noteData, noteType, isSustainNote)
 end
 
 function onCreatePost()
-	setProperty('sonicexe.visible',false);
-	setProperty('sonicexe.antialiasing',true);
+	setProperty('true-fatal.visible',false);
+	setProperty('true-fatal.antialiasing',false);
 end
 
 function onStepHit()
-	if curStep == 6464 then
-		setProperty('sonicexe.visible',true);
-		setProperty('gfGroup.x',-400);
-		setProperty('gfGroup.y',275);
+	if curStep == 12480 then
+		setProperty('true-fatal.visible',true);
 	end
-	if curStep == 6608 then
-		setProperty('sonicexe.visible',false);
+	if curStep == 12528 then
+		setProperty('true-fatal.visible',false);
 	end
 end
 

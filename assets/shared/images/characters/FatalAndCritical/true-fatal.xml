@@ -1,36 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="true-fatal.png">
-	<!-- Made with CSS sprites, Fuck you animate :imp: -->
-
-    <!-- Normal Animations -->
-
-	<SubTexture name="Down0000" x="10" y="10" width="444" height="312"/>
-	<SubTexture name="Down0001" x="474" y="10" width="444" height="312"/>
-    <SubTexture name="Down0002" x="10" y="342" width="444" height="312"/>
-    <SubTexture name="Down0003" x="474" y="342" width="444" height="312"/>
-    <SubTexture name="Down0004" x="938" y="10" width="444" height="312"/>
-
-	<SubTexture name="Idle0000" x="938" y="342" width="444" height="312"/>
-	<SubTexture name="Idle0001" x="10" y="674" width="444" height="312"/>
-	<SubTexture name="Idle0002" x="474" y="674" width="444" height="312"/>
-	<SubTexture name="Idle0003" x="938" y="674" width="444" height="312"/>
-	<SubTexture name="Idle0004" x="10" y="1006" width="444" height="312"/>
-
-	<SubTexture name="Left0000" x="474" y="1006" width="444" height="312"/>
-	<SubTexture name="Left0001" x="938" y="1006" width="444" height="312"/>
-    <SubTexture name="Left0002" x="1402" y="10" width="444" height="312"/>
-    <SubTexture name="Left0003" x="1402" y="342" width="444" height="312"/>
-    <SubTexture name="Left0004" x="1402" y="674" width="444" height="312"/>
-    
-	<SubTexture name="Right0000" x="1402" y="1006" width="444" height="312"/>
-	<SubTexture name="Right0001" x="10" y="1338" width="444" height="312"/>
-    <SubTexture name="Right0002" x="474" y="1338" width="444" height="312"/>
-    <SubTexture name="Right0003" x="938" y="1338" width="444" height="312"/>
-    <SubTexture name="Right0004" x="1402" y="1338" width="444" height="312"/>
-
-	<SubTexture name="Up0000" x="1866" y="10" width="444" height="312"/>
-	<SubTexture name="Up0001" x="1866" y="342" width="444" height="312"/>
-    <SubTexture name="Up0002" x="1866" y="674" width="444" height="312"/>
-    <SubTexture name="Up0003" x="1866" y="1006" width="444" height="312"/>
-    <SubTexture name="Up0004" x="1866" y="1338" width="444" height="312"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="true-fatal.png" width="1498" height="1278">
+	<SubTexture name="Down0000" x="1256" y="1097" width="231" height="179" frameX="-107" frameY="-111" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Down0001" x="1020" y="1097" width="233" height="180" frameX="-106" frameY="-110" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Down0002" x="1256" y="1" width="235" height="181" frameX="-105" frameY="-109" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Down0003" x="1240" y="259" width="237" height="183" frameX="-104" frameY="-107" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Down0004" x="1208" y="510" width="237" height="184" frameX="-104" frameY="-106" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Idle0000" x="1" y="876" width="362" height="179" frameX="-41" frameY="-111" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Idle0001" x="384" y="719" width="360" height="185" frameX="-42" frameY="-105" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Idle0002" x="1141" y="908" width="356" height="186" frameX="-44" frameY="-104" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Idle0003" x="1141" y="714" width="354" height="191" frameX="-45" frameY="-99" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Idle0004" x="784" y="714" width="354" height="192" frameX="-45" frameY="-98" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Left0000" x="1" y="265" width="398" height="200" frameX="-41" frameY="-90" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Left0001" x="1" y="468" width="393" height="200" frameX="-44" frameY="-90" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Left0002" x="814" y="510" width="391" height="201" frameX="-50" frameY="-89" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Left0003" x="397" y="514" width="384" height="202" frameX="-57" frameY="-88" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Left0004" x="1" y="671" width="380" height="202" frameX="-62" frameY="-88" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Right0000" x="327" y="1093" width="321" height="178" frameX="-98" frameY="-112" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Right0001" x="695" y="1092" width="322" height="178" frameX="-98" frameY="-112" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Right0002" x="695" y="909" width="323" height="180" frameX="-97" frameY="-110" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Right0003" x="1" y="1058" width="323" height="183" frameX="-96" frameY="-107" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Right0004" x="366" y="907" width="326" height="183" frameX="-96" frameY="-107" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Up0000" x="1" y="1" width="422" height="261" frameX="-11" frameY="-29" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Up0001" x="426" y="1" width="420" height="260" frameX="-12" frameY="-30" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Up0002" x="849" y="1" width="404" height="255" frameX="-20" frameY="-35" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Up0003" x="849" y="259" width="388" height="248" frameX="-28" frameY="-42" frameWidth="444" frameHeight="312"/>
+	<SubTexture name="Up0004" x="426" y="264" width="385" height="247" frameX="-29" frameY="-43" frameWidth="444" frameHeight="312"/>
 </TextureAtlas>

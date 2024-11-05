@@ -1,113 +1,114 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="FatalSonic.png">
-	<!-- Created with Adobe Animate version 22.0.0.93 -->
-	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="Fatal sonic down0000" x="0" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0001" x="0" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0002" x="519" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0003" x="519" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0004" x="1038" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0005" x="1038" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0006" x="1557" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0007" x="1557" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0008" x="2076" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0009" x="2076" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0010" x="2076" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0011" x="2076" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0012" x="2076" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic down0013" x="2076" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0000" x="2595" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0001" x="2595" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0002" x="3114" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0003" x="3114" y="0" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0004" x="0" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0005" x="0" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0006" x="519" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0007" x="519" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0008" x="1038" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0009" x="1038" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0010" x="1038" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0011" x="1038" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0012" x="1038" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic idle0013" x="1038" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0000" x="1557" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0001" x="1557" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0002" x="2076" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0003" x="2076" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0004" x="2595" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0005" x="2595" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0006" x="3114" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0007" x="3114" y="409" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0008" x="0" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0009" x="0" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0010" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0011" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0012" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0013" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0014" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0015" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0016" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0017" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0018" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0019" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0020" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0021" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0022" x="2076" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0023" x="2076" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0024" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0025" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0026" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0027" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0028" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0029" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0030" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0031" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0032" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0033" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0034" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0035" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0036" x="2076" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0037" x="2076" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0038" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0039" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0040" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0041" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0042" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0043" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0044" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0045" x="519" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0046" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0047" x="1038" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0048" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0049" x="1557" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0050" x="2076" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic left0051" x="2076" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0000" x="2595" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0001" x="2595" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0002" x="3114" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0003" x="3114" y="818" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0004" x="0" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0005" x="0" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0006" x="519" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0007" x="519" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0008" x="1038" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0009" x="1038" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0010" x="1038" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0011" x="1038" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0012" x="1038" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic right0013" x="1038" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0000" x="1557" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0001" x="1557" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0002" x="2076" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0003" x="2076" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0004" x="2595" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0005" x="2595" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0006" x="3114" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0007" x="3114" y="1227" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0008" x="0" y="1636" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0009" x="0" y="1636" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0010" x="0" y="1636" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0011" x="0" y="1636" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0012" x="0" y="1636" width="519" height="409"/>
-	<SubTexture name="Fatal sonic up0013" x="0" y="1636" width="519" height="409"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="fatal-error-sonic.png" width="1818" height="1512">
+	<SubTexture name="Fatal sonic down0000" x="807" y="809" width="260" height="307" rotated="true" frameX="-101" frameY="-145" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0001" x="807" y="809" width="260" height="307" rotated="true" frameX="-101" frameY="-145" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0002" x="1250" y="1119" width="258" height="305" rotated="true" frameX="-103" frameY="-147" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0003" x="1250" y="1119" width="258" height="305" rotated="true" frameX="-103" frameY="-147" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0004" x="1511" y="1098" width="304" height="256" frameX="-105" frameY="-149" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0005" x="1511" y="1098" width="304" height="256" frameX="-105" frameY="-149" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0006" x="1070" y="809" width="257" height="307" rotated="true" frameX="-105" frameY="-148" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0007" x="1070" y="809" width="257" height="307" rotated="true" frameX="-105" frameY="-148" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0008" x="999" y="546" width="309" height="260" frameX="-105" frameY="-145" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0009" x="999" y="546" width="309" height="260" frameX="-105" frameY="-145" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0010" x="999" y="546" width="309" height="260" frameX="-105" frameY="-145" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0011" x="999" y="546" width="309" height="260" frameX="-105" frameY="-145" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0012" x="999" y="546" width="309" height="260" frameX="-105" frameY="-145" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic down0013" x="999" y="546" width="309" height="260" frameX="-105" frameY="-145" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0000" x="1330" y="801" width="223" height="269" rotated="true" frameX="-113" frameY="-154" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0001" x="1330" y="801" width="223" height="269" rotated="true" frameX="-113" frameY="-154" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0002" x="1074" y="318" width="270" height="225" frameX="-109" frameY="-152" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0003" x="1074" y="318" width="270" height="225" frameX="-109" frameY="-152" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0004" x="1580" y="828" width="233" height="267" rotated="true" frameX="-110" frameY="-144" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0005" x="1580" y="828" width="233" height="267" rotated="true" frameX="-110" frameY="-144" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0006" x="1580" y="559" width="237" height="266" rotated="true" frameX="-110" frameY="-140" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0007" x="1580" y="559" width="237" height="266" rotated="true" frameX="-110" frameY="-140" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0008" x="1311" y="559" width="266" height="239" frameX="-109" frameY="-138" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0009" x="1311" y="559" width="266" height="239" frameX="-109" frameY="-138" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0010" x="1311" y="559" width="266" height="239" frameX="-109" frameY="-138" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0011" x="1311" y="559" width="266" height="239" frameX="-109" frameY="-138" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0012" x="1311" y="559" width="266" height="239" frameX="-109" frameY="-138" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic idle0013" x="1311" y="559" width="266" height="239" frameX="-109" frameY="-138" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0000" x="1348" y="1" width="313" height="275" rotated="true" frameX="-41" frameY="-73" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0001" x="1348" y="1" width="313" height="275" rotated="true" frameX="-41" frameY="-73" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0002" x="1348" y="279" width="311" height="277" rotated="true" frameX="-39" frameY="-75" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0003" x="1348" y="279" width="311" height="277" rotated="true" frameX="-39" frameY="-75" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0004" x="1074" y="1" width="271" height="314" frameX="-45" frameY="-72" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0005" x="1074" y="1" width="271" height="314" frameX="-45" frameY="-72" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0006" x="238" y="1" width="269" height="315" frameX="-47" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0007" x="238" y="1" width="269" height="315" frameX="-47" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0008" x="462" y="319" width="267" height="315" frameX="-49" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0009" x="462" y="319" width="267" height="315" frameX="-49" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0010" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0011" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0012" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0013" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0014" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0015" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0016" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0017" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0018" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0019" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0020" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0021" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0022" x="807" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0023" x="807" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0024" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0025" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0026" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0027" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0028" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0029" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0030" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0031" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0032" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0033" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0034" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0035" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0036" x="807" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0037" x="807" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0038" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0039" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0040" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0041" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0042" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0043" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0044" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0045" x="510" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0046" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0047" x="540" y="637" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0048" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0049" x="732" y="319" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0050" x="807" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic left0051" x="807" y="1" width="264" height="315" frameX="-52" frameY="-71" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0000" x="1" y="1" width="234" height="389" rotated="true" frameX="-130" frameY="-143" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0001" x="1" y="1" width="234" height="389" rotated="true" frameX="-130" frameY="-143" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0002" x="1" y="393" width="229" height="379" rotated="true" frameX="-130" frameY="-148" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0003" x="1" y="393" width="229" height="379" rotated="true" frameX="-130" frameY="-148" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0004" x="233" y="393" width="226" height="367" rotated="true" frameX="-130" frameY="-151" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0005" x="233" y="393" width="226" height="367" rotated="true" frameX="-130" frameY="-151" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0006" x="1029" y="1126" width="218" height="347" rotated="true" frameX="-130" frameY="-159" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0007" x="1029" y="1126" width="218" height="347" rotated="true" frameX="-130" frameY="-159" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0008" x="804" y="1126" width="222" height="347" rotated="true" frameX="-130" frameY="-155" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0009" x="804" y="1126" width="222" height="347" rotated="true" frameX="-130" frameY="-155" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0010" x="804" y="1126" width="222" height="347" rotated="true" frameX="-130" frameY="-155" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0011" x="804" y="1126" width="222" height="347" rotated="true" frameX="-130" frameY="-155" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0012" x="804" y="1126" width="222" height="347" rotated="true" frameX="-130" frameY="-155" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic right0013" x="804" y="1126" width="222" height="347" rotated="true" frameX="-130" frameY="-155" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0000" x="1" y="775" width="264" height="371" frameX="-63" frameY="-6" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0001" x="1" y="775" width="264" height="371" frameX="-63" frameY="-6" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0002" x="1" y="1149" width="265" height="362" frameX="-62" frameY="-15" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0003" x="1" y="1149" width="265" height="362" frameX="-62" frameY="-15" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0004" x="268" y="763" width="269" height="360" frameX="-60" frameY="-17" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0005" x="268" y="763" width="269" height="360" frameX="-60" frameY="-17" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0006" x="537" y="1126" width="264" height="352" frameX="-63" frameY="-25" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0007" x="537" y="1126" width="264" height="352" frameX="-63" frameY="-25" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0008" x="269" y="1126" width="265" height="359" frameX="-62" frameY="-18" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0009" x="269" y="1126" width="265" height="359" frameX="-62" frameY="-18" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0010" x="269" y="1126" width="265" height="359" frameX="-62" frameY="-18" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0011" x="269" y="1126" width="265" height="359" frameX="-62" frameY="-18" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0012" x="269" y="1126" width="265" height="359" frameX="-62" frameY="-18" frameWidth="519" frameHeight="409"/>
+	<SubTexture name="Fatal sonic up0013" x="269" y="1126" width="265" height="359" frameX="-62" frameY="-18" frameWidth="519" frameHeight="409"/>
 </TextureAtlas>

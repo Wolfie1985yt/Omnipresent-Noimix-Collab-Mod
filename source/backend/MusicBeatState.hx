@@ -4,6 +4,13 @@ import flixel.addons.ui.FlxUIState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxState;
 import backend.PsychCamera;
+#if mobile
+import flixel.FlxCamera;
+import flixel.input.actions.FlxActionInput;
+import mobile.FlxVirtualPad;
+import mobile.HitBox;
+import mobile.Mobilecontrols;
+#end
 
 class MusicBeatState extends FlxUIState
 {
@@ -23,9 +30,71 @@ class MusicBeatState extends FlxUIState
 
 	var _psychCameraInitialized:Bool = false;
 
+	public static var instance:MusicBeatState;
+	#if mobile
+	public var vPad:FlxVirtualPad;
+	public var mcontrols:Mobilecontrols;
+
+	public function addVPad(?DPad:FlxDPadMode, ?Action:FlxActionMode) {
+		vPad = new FlxVirtualPad(DPad, Action);
+		vPad.alpha = 0.35;
+		add(vPad);
+	}
+	
+	public function addVPadCamera() {
+	  var camcontrol = new FlxCamera(); 
+    FlxG.cameras.add(camcontrol, false); 
+    camcontrol.bgColor.alpha = 0; 
+    vPad.cameras = [camcontrol];
+	}
+
+	public function removeVPad() {
+	  if (vPad != null) {
+	    remove(vPad);
+	  }
+	}
+	
+	public function addMControls()
+	{
+	  mcontrols = new Mobilecontrols();
+
+	  var camcontrol = new FlxCamera();
+	  FlxG.cameras.add(camcontrol, false);
+	  camcontrol.bgColor.alpha = 0;
+	  mcontrols.cameras = [camcontrol];
+	  mcontrols.visible = false;
+	  add(mcontrols);
+	}
+
+	public function removeMControls()
+	{
+	  if (mcontrols != null) {
+	    remove(mcontrols);
+	  }
+	}
+	#end
+	
+	override function destroy()
+	{
+	  super.destroy();
+	  
+	  #if mobile
+	  if (vPad != null) {
+	    vPad.destroy();
+	    vPad = null;
+	  }
+	  
+	  if (mcontrols != null) {
+	    mcontrols.destroy();
+	    mcontrols = null;
+	  }
+	  #end
+	}
+
 	override function create() {
 		var skip:Bool = FlxTransitionableState.skipNextTransOut;
 		#if MODS_ALLOWED Mods.updatedOnState = false; #end
+		instance = this;
 
 		if(!_psychCameraInitialized) initPsychCamera();
 
