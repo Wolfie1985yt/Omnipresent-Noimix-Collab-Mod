@@ -129,9 +129,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
 		for (touch in FlxG.touches.list)
 		{
-			if (touch.justPressed)
+			if (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null && touch.justPressed)
 			{
-			 if (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null)
 				pressedEnter = true;
 			}
 		}
