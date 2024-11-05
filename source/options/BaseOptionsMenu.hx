@@ -137,11 +137,13 @@ class BaseOptionsMenu extends MusicBeatSubstate
     return pressedEnter = false;
 		#end
 
-		/*if(bindingKey)
+    #if desktop
+		if(bindingKey)
 		{
 			bindingKeyUpdate(elapsed);
 		  return;
-		}*/
+		}
+    #end
 
 		if (#if desktop controls.UI_UP_P #else vPad.buttonUp.justPressed #end)
 			changeSelection(-1);
