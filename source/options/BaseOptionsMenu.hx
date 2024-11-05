@@ -125,6 +125,17 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
+		#if mobile
+		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed)
+			{
+				pressedEnter = true;
+			}
+		}
+		#end
+
 		if(bindingKey)
 		{
 			bindingKeyUpdate(elapsed);
@@ -145,7 +156,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			if(curOption.type == 'bool')
 			{
-				if(controls.ACCEPT && (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null) && TouchInput.justPressed(checkboxGroup.members[curSelected]))
+				if(controls.ACCEPT #if mobile || pressedEnter #end && (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null) /*&& TouchInput.justPressed(checkboxGroup.members[curSelected])*/)
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
