@@ -137,17 +137,15 @@ class BaseOptionsMenu extends MusicBeatSubstate
     return pressedEnter = false;
 		#end
 
-    #if desktop
 		if(bindingKey)
 		{
 			bindingKeyUpdate(elapsed);
 		  return;
 		}
-    #end
 
-		if (#if desktop controls.UI_UP_P #else vPad.buttonUp.justPressed #end)
+		if (controls.UI_UP_P)
 			changeSelection(-1);
-		if (#if desktop controls.UI_DOWN_P #else vPad.buttonDown.justPressed #end)
+		if (controls.UI_DOWN_P)
 			changeSelection(1);
 
 		if (controls.BACK) {
@@ -159,7 +157,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			if(curOption.type == 'bool')
 			{
-				if(#if desktop controls.ACCEPT #else vPad.buttonA.justPressed #end && (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null))
+				if(controls.ACCEPT && (checkboxGroup != null && checkboxGroup.members != null && checkboxGroup.members[curSelected] != null))
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
@@ -194,16 +192,16 @@ class BaseOptionsMenu extends MusicBeatSubstate
 						FlxG.sound.play(Paths.sound('scrollMenu'));
 					}
 				}
-				else if( #if desktop controls.UI_LEFT || controls.UI_RIGHT #else vPad.buttonLeft.justPressed || vPad.buttonRight.justPressed #end)
+				else if(controls.UI_LEFT || controls.UI_RIGHT)
 				{
-					var pressed = ( #if desktop controls.UI_LEFT_P || controls.UI_RIGHT_P #else vPad.buttonLeft.justPressed || vPad.buttonRight.justPressed #end);
+					var pressed = (controls.UI_LEFT_P || controls.UI_RIGHT_P);
 					if(holdTime > 0.5 || pressed)
 					{
 						if(pressed)
 						{
 							var add:Dynamic = null;
 							if(curOption.type != 'string')
-								add = #if desktop controls.UI_LEFT #else vPad.buttonLeft.justPressed #end ? -curOption.changeValue : curOption.changeValue;
+								add = controls.UI_LEFT ? -curOption.changeValue : curOption.changeValue;
 
 							switch(curOption.type)
 							{
@@ -225,8 +223,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 								case 'string':
 									var num:Int = curOption.curOption; //lol
-									if(#if desktop controls.UI_LEFT_P #else vPad.buttonLeft.justPressed #end) --num;
-									else if (#if desktop controls.UI_RIGHT_P #else vPad.buttonRight.justPressed #end) num++;
+									if(controls.UI_LEFT_P) --num;
+									else if (controls.UI_RIGHT_P) num++;
 
 									if(num < 0)
 										num = curOption.options.length - 1;
@@ -243,7 +241,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 						}
 						else if(curOption.type != 'string')
 						{
-							holdValue += curOption.scrollSpeed * elapsed * (#if desktop controls.UI_LEFT #else vPad.buttonLeft.justPressed #end ? -1 : 1);
+							holdValue += curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1);
 							if(holdValue < curOption.minValue) holdValue = curOption.minValue;
 							else if (holdValue > curOption.maxValue) holdValue = curOption.maxValue;
 
@@ -263,7 +261,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 					if(curOption.type != 'string')
 						holdTime += elapsed;
 				}
-				else if(#if desktop controls.UI_LEFT_R || controls.UI_RIGHT_R #else vPad.buttonLeft.justReleased || vPad.buttonRight.justReleased #end)
+				else if(controls.UI_LEFT_R || controls.UI_RIGHT_R)
 				{
 					if(holdTime > 0.5) FlxG.sound.play(Paths.sound('scrollMenu'));
 					holdTime = 0;
