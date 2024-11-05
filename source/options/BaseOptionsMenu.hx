@@ -192,7 +192,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 						FlxG.sound.play(Paths.sound('scrollMenu'));
 					}
 				}
-				else if( #if desktop controls.UI_LEFT || controls.UI_RIGHT #else vPad.buttonLeft || vPad.buttonRight #end)
+				else if( #if desktop controls.UI_LEFT || controls.UI_RIGHT #else vPad.buttonLeft.justPressed || vPad.buttonRight.justPressed #end)
 				{
 					var pressed = ( #if desktop controls.UI_LEFT_P || controls.UI_RIGHT_P #else vPad.buttonLeft.justPressed || vPad.buttonRight.justPressed #end);
 					if(holdTime > 0.5 || pressed)
@@ -201,7 +201,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 						{
 							var add:Dynamic = null;
 							if(curOption.type != 'string')
-								add = #if desktop controls.UI_LEFT #else vPad.buttonLeft #end ? -curOption.changeValue : curOption.changeValue;
+								add = #if desktop controls.UI_LEFT #else vPad.buttonLeft.justPressed #end ? -curOption.changeValue : curOption.changeValue;
 
 							switch(curOption.type)
 							{
@@ -241,7 +241,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 						}
 						else if(curOption.type != 'string')
 						{
-							holdValue += curOption.scrollSpeed * elapsed * (#if desktop controls.UI_LEFT #else vPad.buttonLeft #end ? -1 : 1);
+							holdValue += curOption.scrollSpeed * elapsed * (#if desktop controls.UI_LEFT #else vPad.buttonLeft.justPressed #end ? -1 : 1);
 							if(holdValue < curOption.minValue) holdValue = curOption.minValue;
 							else if (holdValue > curOption.maxValue) holdValue = curOption.maxValue;
 
