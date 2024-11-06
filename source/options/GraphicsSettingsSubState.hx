@@ -26,7 +26,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Potato Mode', //Name
-			'If checked, all background aspects will be removed', //Description
+			'If checked, all background aspects and change character events will be removed', //Description
 			'potatoMode', //Save data variable name
 			'bool'); //Variable type
 		addOption(option);
