@@ -24,7 +24,6 @@
 	<define name="HSCRIPT_ALLOWED" if="desktop" />
 	<define name="LUA_ALLOWED" if="desktop" />
 	<define name="DISCORD_ALLOWED" />
-	<define name="LOW_QUALITY" />
 	<define name="VIDEOS_ALLOWED" if="desktop || mobile" unless="32bits"/> <!-- IF YOU WANT TO USE VIDEOS ON YOUR SOURCE MOD, GET THIS LINE OUTSIDE OF THE SECTION -->
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 
