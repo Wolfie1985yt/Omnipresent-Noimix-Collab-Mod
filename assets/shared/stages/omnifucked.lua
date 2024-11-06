@@ -48,7 +48,7 @@ local ddRows = {}
 local mmRows = {}
 
 function onCreate()
-	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false and getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
+	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false and getPropertyFromClass('backend.ClientPrefs','data.potatoMode') == false then
 		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/egg_bg', -1000, -1000);
 		scaleObject('eggman_bg', 1.5, 1.5);
 		setScrollFactor('eggman_bg', 1, 1);
@@ -62,7 +62,7 @@ function onCreate()
 		setProperty('eggman_eys.antialiasing', true);
 		setProperty('eggman_eys.visible', false);
 		addLuaSprite('eggman_eys', false);
-	elseif getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
+	elseif getPropertyFromClass('backend.ClientPrefs','data.potatoMode') == false then
 		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/eggbgLowQuality', -1000, -1000);
 		scaleObject('eggman_bg', 1.5, 1.5);
 		setScrollFactor('eggman_bg', 1, 1);
@@ -77,7 +77,7 @@ function onCreate()
 		setProperty('eggman_eys.visible', false);
 		addLuaSprite('eggman_eys', false);
 	end
-	if getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
+	if getPropertyFromClass('backend.ClientPrefs','data.potatoMode') == false then
 		addCharacterToList('wechBeast', 'dad');
 		addCharacterToList('fleetway', 'dad');
 		addCharacterToList('Satanos', 'dad');
@@ -150,7 +150,7 @@ function onCreate()
 	precacheSong('omnipresent-fucked/Voices-Opponent');
 	precacheSong('omnipresent-fucked/Voices-Player');
 
-	if getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
+	if getPropertyFromClass('backend.ClientPrefs','data.potatoMode') == false then
 		makeLuaSprite('faker_pixel', 'bgs/faker-encore/fakerpixel', 0, 0);
 		scaleObject('faker_pixel', 1, 1);
 		setScrollFactor('faker_pixel', 1, 1);
@@ -159,7 +159,7 @@ function onCreate()
 		addLuaSprite('faker_pixel', false);
 	end
 
-	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false and getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
+	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false and getPropertyFromClass('backend.ClientPrefs','data.potatoMode') == false then
 		makeLuaSprite('simplejump', 'epicjump', 0, 0);
 		setScrollFactor('simplejump', 0, 0);
 		setGraphicSize('simplejump',screenWidth,screenHeight);
@@ -168,7 +168,7 @@ function onCreate()
 		setObjectCamera('simplejump','camHUD');
 		screenCenter('simplejump');
 		addLuaSprite('simplejump', false);
-	elseif getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
+	elseif getPropertyFromClass('backend.ClientPrefs','data.potatoMode') == false then
 		makeLuaSprite('simplejump', 'blank', 0, 0);
 		setScrollFactor('simplejump', 0, 0);
 		setGraphicSize('simplejump',screenWidth,screenHeight);
@@ -1520,7 +1520,7 @@ function onTimerCompleted(tag, loops, loopsLeft)
 		triggerEvent('Change Character', 'bf', 'bf-john9doe-3d');
 		triggerEvent('Change Character', 'gf', 'gf');
 	end
-	if tag == 'preload' and getPropertyFromClass('states.PlayState','chartingMode') == false and getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
+	if tag == 'preload' and getPropertyFromClass('states.PlayState','chartingMode') == false and getPropertyFromClass('backend.ClientPrefs','data.potatoMode') == false then
 		preload = true;
 		triggerEvent('Change Character', 'dad', 'xterion-first');
 		triggerEvent('Change Character', 'dad', 'bf-john9doe-3d-xterion');
