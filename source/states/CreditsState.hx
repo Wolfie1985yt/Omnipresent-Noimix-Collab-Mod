@@ -69,6 +69,7 @@ class CreditsState extends MusicBeatState
 			['CommandoDev',			'commando',			'Original Sonic.EXE mod Artist / Director',					'https://twitter.com/CommandoDev_?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor',		'b622b9'],
 			['Danix',				'Danix',			'Artist',													'',																								'000cb7'],
 			['Divide',				'divide',			'Original Faker Artist',									'https://drive.google.com/file/d/1JlalyUieEGe0DHd_lzP0vUtEdZbPHEZH/view?usp=sharing',			'000cb7'],
+			['Don Ark',				'donark',			'Made faker pixel, bf pixel, and faker bg sprites',			'https://www.youtube.com/channel/UCfTDQbCO8Zem5LOiepszwog',										'ffffff'],
 			['DStickman',			'DStickman',		'Artist of Restoration of Sonic.EXE',						'https://www.youtube.com/@DStickmanP',															'ffca18'],
 			['Erick Animations',	'erick',			'Original Sonic.EXE mod Artist',							'https://twitter.com/ErickAnim101?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor',		'878787'],
 			['GioIsDead',			'GioIsDead',		'Artist of Restoration of Sonic.EXE',						'https://www.youtube.com/@JustANormalYoutubeGuy',												'ff0000'],
@@ -87,6 +88,7 @@ class CreditsState extends MusicBeatState
 			['O Mundo de Bê',		'mundo',			'Made EXE Sprites',											'https://www.youtube.com/@omundodebe8746/videos',												'fff200'],
 			['Puffywuffy',			'face',				'Artist',													'',																								'878787'],
 			['Raven',				'raven',			'Owner of Faker and Former Director of VS Sonic.EXE',		'https://twitter.com/corven_03',																'aaaaaa'],
+			['SammyPhox',			'sammy',			'Made the Xeno Beast Sprites from exeternal',				'https://www.youtube.com/@SammyPhox',															'ffcf2e'],
 			['ScorchVx',			'scorch',			'Artist / Owner of Grimeware',								'https://twitter.com/ScorchVx?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor',			'ffffff'],
 			['ShutUpJoJo',			'jojo',				'Original Owner of Needlemouse and Artist of VS Sonic.EXE',	'https://x.com/shutupjojo_',																	'565656'],
 			['Stankfield',			'stankfield',		'Original Sonic.EXE mod Artist',							'https://twitter.com/stankfield',																'8100dd'],
@@ -97,9 +99,10 @@ class CreditsState extends MusicBeatState
 			['ZolZarolZ',			'ZolZarolZ',		'Artist of Restoration of Sonic.EXE',						'https://www.youtube.com/@zolcabeludo',															'502f19'],
 			[''],
 			['Android Porters'],
-			['MaysLastPlay',		'MaysLastPlay',		'i exist everywhere, thats the truth',							'https://www.youtube.com/channel/UCx0LxtFR8ROd9sFAq-UxDfw',	'5DE7FF'],
-                        ['Idklool',		    'idklool',		    'hmmm, vrido',	 'https://www.youtube.com/@idklool122',	'D10616'],
+			['MaysLastPlay',		'MaysLastPlay',		'i exist everywhere, thats the truth',						'https://www.youtube.com/channel/UCx0LxtFR8ROd9sFAq-UxDfw',										'5DE7FF'],
+            ['Idklool',		   		'Idklool',		    'hmmm, vrido',	 											'https://www.youtube.com/@idklool122',															'D10616'],
 			[''],
+			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer and Head of Psych Engine',					 'https://ko-fi.com/shadowmario',		'444444'],
 			['Riveren',				'riveren',			'Main Artist/Animator of Psych Engine',						 'https://twitter.com/riverennn',		'14967B'],
 			[''],
@@ -187,9 +190,6 @@ class CreditsState extends MusicBeatState
 		bg.color = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 		intendedColor = bg.color;
 		changeSelection();
-
-		#if mobile addVPad(NONE, B); #end
-
 		super.create();
 	}
 
@@ -236,7 +236,7 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if(controls.ACCEPT || TouchInput.justPressed(grpOptions.members[curSelected]) && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
+			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
 				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
 			}
 			if (controls.BACK)

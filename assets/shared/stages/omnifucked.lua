@@ -48,7 +48,7 @@ local ddRows = {}
 local mmRows = {}
 
 function onCreate()
-	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false then
+	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false and getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
 		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/egg_bg', -1000, -1000);
 		scaleObject('eggman_bg', 1.5, 1.5);
 		setScrollFactor('eggman_bg', 1, 1);
@@ -62,7 +62,7 @@ function onCreate()
 		setProperty('eggman_eys.antialiasing', true);
 		setProperty('eggman_eys.visible', false);
 		addLuaSprite('eggman_eys', false);
-	else
+	elseif getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
 		makeLuaSprite('eggman_bg', 'bgs/triple-trouble-encore/eggman/eggbgLowQuality', -1000, -1000);
 		scaleObject('eggman_bg', 1.5, 1.5);
 		setScrollFactor('eggman_bg', 1, 1);
@@ -77,21 +77,22 @@ function onCreate()
 		setProperty('eggman_eys.visible', false);
 		addLuaSprite('eggman_eys', false);
 	end
-
-	addCharacterToList('wechBeast', 'dad');
-	addCharacterToList('fleetway', 'dad');
-	addCharacterToList('Satanos', 'dad');
-	addCharacterToList('lordxEncore', 'dad');
-	addCharacterToList('sonicexe', 'dad');
-	addCharacterToList('BEAST-Enc', 'dad');
-	addCharacterToList('sonic', 'gf');
-	addCharacterToList('fleetway-anims3', 'dad');
-	addCharacterToList('wechBeast-flipped', 'dad');
-	addCharacterToList('wechBeast-flipped', 'gf');
-	addCharacterToList('bf-encore', 'bf');
-	addCharacterToList('bf-encore-black', 'bf');
-	addCharacterToList('bf-encore-red', 'bf');
-	addCharacterToList('Eggman-Encore', 'dad');
+	if getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
+		addCharacterToList('wechBeast', 'dad');
+		addCharacterToList('fleetway', 'dad');
+		addCharacterToList('Satanos', 'dad');
+		addCharacterToList('lordxEncore', 'dad');
+		addCharacterToList('sonicexe', 'dad');
+		addCharacterToList('BEAST-Enc', 'dad');
+		addCharacterToList('sonic', 'gf');
+		addCharacterToList('fleetway-anims3', 'dad');
+		addCharacterToList('wechBeast-flipped', 'dad');
+		addCharacterToList('wechBeast-flipped', 'gf');
+		addCharacterToList('bf-encore', 'bf');
+		addCharacterToList('bf-encore-black', 'bf');
+		addCharacterToList('bf-encore-red', 'bf');
+		addCharacterToList('Eggman-Encore', 'dad');
+	end
 	
 	precacheMusic('tea-time');
 	precacheSound('unpause');
@@ -149,14 +150,16 @@ function onCreate()
 	precacheSong('omnipresent-fucked/Voices-Opponent');
 	precacheSong('omnipresent-fucked/Voices-Player');
 
-	makeLuaSprite('faker_pixel', 'bgs/faker-encore/fakerpixel', 0, 0);
-	scaleObject('faker_pixel', 1, 1);
-	setScrollFactor('faker_pixel', 1, 1);
-	setProperty('faker_pixel.antialiasing', false);
-	setProperty('faker_pixel.visible', false);
-	addLuaSprite('faker_pixel', false);
-	
-	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false then
+	if getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
+		makeLuaSprite('faker_pixel', 'bgs/faker-encore/fakerpixel', 0, 0);
+		scaleObject('faker_pixel', 1, 1);
+		setScrollFactor('faker_pixel', 1, 1);
+		setProperty('faker_pixel.antialiasing', false);
+		setProperty('faker_pixel.visible', false);
+		addLuaSprite('faker_pixel', false);
+	end
+
+	if getPropertyFromClass('backend.ClientPrefs', 'data.lowQuality') == false and getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
 		makeLuaSprite('simplejump', 'epicjump', 0, 0);
 		setScrollFactor('simplejump', 0, 0);
 		setGraphicSize('simplejump',screenWidth,screenHeight);
@@ -165,7 +168,7 @@ function onCreate()
 		setObjectCamera('simplejump','camHUD');
 		screenCenter('simplejump');
 		addLuaSprite('simplejump', false);
-	else
+	elseif getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
 		makeLuaSprite('simplejump', 'blank', 0, 0);
 		setScrollFactor('simplejump', 0, 0);
 		setGraphicSize('simplejump',screenWidth,screenHeight);
@@ -1517,7 +1520,7 @@ function onTimerCompleted(tag, loops, loopsLeft)
 		triggerEvent('Change Character', 'bf', 'bf-john9doe-3d');
 		triggerEvent('Change Character', 'gf', 'gf');
 	end
-	if tag == 'preload' and getPropertyFromClass('states.PlayState','chartingMode') == false then
+	if tag == 'preload' and getPropertyFromClass('states.PlayState','chartingMode') == false and getPropertyFromClass('backend.ClientPrefs','potatoMode') == false then
 		preload = true;
 		triggerEvent('Change Character', 'dad', 'xterion-first');
 		triggerEvent('Change Character', 'dad', 'bf-john9doe-3d-xterion');
@@ -1575,8 +1578,6 @@ function onTimerCompleted(tag, loops, loopsLeft)
 		triggerEvent('Change Character', 'dad', 'bf-encore-pixel-smaller');
 		triggerEvent('Change Character', 'dad', 'bf-pixel-normal');
 		triggerEvent('Change Character', 'dad', 'faker_pixel');
-		
-		
 
 		triggerEvent('Change Character', 'gf', 'xterion-first');
 		triggerEvent('Change Character', 'gf', 'bf-john9doe-3d-xterion');
