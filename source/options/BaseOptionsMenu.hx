@@ -103,7 +103,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		changeSelection();
 		reloadCheckboxes();
 
-		#if mobile addVPad(FULL, A_B); #end
+		#if mobile addVPad(NONE, A_B); #end
 	}
 
 	public function addOption(option:Option) {
