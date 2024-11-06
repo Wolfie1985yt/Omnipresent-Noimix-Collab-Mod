@@ -53,6 +53,13 @@
       "version": null
     },
     {
+      "name": "SScript",
+      "type": "git",
+      "dir": null,
+      "ref": "main-mobile",
+      "url": "https://github.com/MaysLastPlays-Stuff/SScript.git"
+    },
+    {
       "name": "linc_luajit",
       "type": "git",
       "dir": null,
