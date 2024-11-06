@@ -1,0 +1,1 @@
+lime test android -D NO_PRECOMPILED_HEADERS

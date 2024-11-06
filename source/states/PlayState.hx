@@ -1687,21 +1687,22 @@ class PlayState extends MusicBeatState
 	function eventPushedUnique(event:EventNote) {
 		switch(event.event) {
 			case "Change Character":
-				var charType:Int = 0;
-				switch(event.value1.toLowerCase()) {
-					case 'gf' | 'girlfriend' | '1':
-						charType = 2;
-					case 'dad' | 'opponent' | '0':
-						charType = 1;
-					default:
-						var val1:Int = Std.parseInt(event.value1);
-						if(Math.isNaN(val1)) val1 = 0;
-						charType = val1;
+				if (!ClientPrefs.data.potatoMode) {	
+					var charType:Int = 0;
+					switch(event.value1.toLowerCase()) {
+						case 'gf' | 'girlfriend' | '1':
+							charType = 2;
+						case 'dad' | 'opponent' | '0':
+							charType = 1;
+						default:
+							var val1:Int = Std.parseInt(event.value1);
+							if(Math.isNaN(val1)) val1 = 0;
+							charType = val1;
+					}
+	
+					var newCharacter:String = event.value2;
+					addCharacterToList(newCharacter, charType);
 				}
-
-				var newCharacter:String = event.value2;
-				addCharacterToList(newCharacter, charType);
-
 			case 'Play Sound':
 				Paths.sound(event.value1); //Precache sound
 		}
@@ -2510,87 +2511,87 @@ class PlayState extends MusicBeatState
 
 
 			case 'Change Character':
-				var charType:Int = 0;
-				switch(value1.toLowerCase().trim()) {
-					case 'gf' | 'girlfriend':
-						charType = 2;
-					case 'dad' | 'opponent':
-						charType = 1;
-					default:
-						charType = Std.parseInt(value1);
-						if(Math.isNaN(charType)) charType = 0;
-				}
-
-				switch(charType) {
-					case 0:
-						if(boyfriend.curCharacter != value2) {
-							if(!boyfriendMap.exists(value2)) {
-								addCharacterToList(value2, charType);
-							}
-
-							var lastAlpha:Float = boyfriend.alpha;
-							
-							if (value2 == 'bf-needle-encore' || value2 == 'bf-encore' || value2 == 'bf-encore-red' || value2 == 'bf-encore-majin' || value2 == 'bf-encore-black' || value2 == 'Encore-right') {
-								boyfriend.alpha = 0.00001;
-							} else {
-								boyfriend.alpha = 0.00001;
-								boyfriend.alpha = 0;
-							}
-							boyfriend = boyfriendMap.get(value2);
-							boyfriend.alpha = lastAlpha;
-							iconP1.changeIcon(boyfriend.healthIcon);
-						}
-						setOnScripts('boyfriendName', boyfriend.curCharacter);
-
-					case 1:
-						if(dad.curCharacter != value2) {
-							if(!dadMap.exists(value2)) {
-								addCharacterToList(value2, charType);
-							}
-
-							var wasGf:Bool = dad.curCharacter.startsWith('gf-') || dad.curCharacter == 'gf';
-							var lastAlpha:Float = dad.alpha;
-							if (value2 == 'BEAST-Enc' || value2 == 'coldsteel' || value2 == 'coldsteel_guitar' || value2 == 'Eggman-Encore' || value2 == 'Tails-Encore' || value2 == 'xterion-first' || value2 == 'Needlemouse' || value2 == 'fleetway' || value2 == 'fleetway-anims3' || value2 == 'majin' || value2 == 'lordxEncore' || value2 == 'fatal-sonic' || value2 == 'ycr-cherribun' || value2 == 'ycr-mad-cherribun' || value2 == 'Satanos' || value2 == 'wechBeast' || value2 == 'hog' || value2 == 'exe-encore' || value2 == 'scorched') {
-								dad.alpha = 0.00001;
-							} else {
-								dad.alpha = 0.00001;
-								dad.alpha = 0;
-							}
-							dad = dadMap.get(value2);
-							if(!dad.curCharacter.startsWith('gf-') && dad.curCharacter != 'gf') {
-								if(wasGf && gf != null) {
-									gf.visible = true;
-								}
-							} else if(gf != null) {
-								gf.visible = false;
-							}
-							dad.alpha = lastAlpha;
-							iconP2.changeIcon(dad.healthIcon);
-						}
-						setOnScripts('dadName', dad.curCharacter);
-					case 2:
-						if(gf != null)
-						{
-							if(gf.curCharacter != value2)
-							{
-								if(!gfMap.exists(value2)) {
+				if (!ClientPrefs.data.potatoMode) {
+					var charType:Int = 0;
+					switch(value1.toLowerCase().trim()) {
+						case 'gf' | 'girlfriend':
+							charType = 2;
+						case 'dad' | 'opponent':
+							charType = 1;
+						default:
+							charType = Std.parseInt(value1);
+							if(Math.isNaN(charType)) charType = 0;
+					}
+		
+					switch(charType) {
+						case 0:
+							if(boyfriend.curCharacter != value2) {
+								if(!boyfriendMap.exists(value2)) {
 									addCharacterToList(value2, charType);
 								}
-
-								var lastAlpha:Float = gf.alpha;
-								if (value2 == 'sonic') {
-									gf.alpha = 0.00001;
+		
+								var lastAlpha:Float = boyfriend.alpha;				
+								if (value2 == 'bf-needle-encore' || value2 == 'bf-encore' || value2 == 'bf-encore-red' || value2 == 'bf-encore-majin' || value2 == 'bf-encore-black' || value2 == 'Encore-right') {
+									boyfriend.alpha = 0.00001;
 								} else {
-									gf.alpha = 0.00001;
-									gf.alpha = 0;
+									boyfriend.alpha = 0.00001;
+									boyfriend.alpha = 0;
 								}
-								gf = gfMap.get(value2);
-								gf.alpha = lastAlpha;
+								boyfriend = boyfriendMap.get(value2);
+								boyfriend.alpha = lastAlpha;
+								iconP1.changeIcon(boyfriend.healthIcon);
 							}
-							setOnScripts('gfName', gf.curCharacter);
+							setOnScripts('boyfriendName', boyfriend.curCharacter);
+		
+						case 1:
+							if(dad.curCharacter != value2) {
+								if(!dadMap.exists(value2)) {
+									addCharacterToList(value2, charType);
+								}
+		
+								var wasGf:Bool = dad.curCharacter.startsWith('gf-') || dad.curCharacter == 'gf';
+								var lastAlpha:Float = dad.alpha;
+								if (value2 == 'BEAST-Enc' || value2 == 'coldsteel' || value2 == 'coldsteel_guitar' || value2 == 'Eggman-Encore' || value2 == 'Tails-Encore' || value2 == 'xterion-first' || value2 == 'Needlemouse' || value2 == 'fleetway' || value2 == 'fleetway-anims3' || value2 == 'majin' || value2 == 'lordxEncore' || value2 == 'fatal-sonic' || value2 == 'ycr-cherribun' || value2 == 'ycr-mad-cherribun' || value2 == 'Satanos' || value2 == 'wechBeast' || value2 == 'hog' || value2 == 'exe-encore' || value2 == 'scorched') {
+									dad.alpha = 0.00001;
+								} else {
+									dad.alpha = 0.00001;
+									dad.alpha = 0;
+								}
+								dad = dadMap.get(value2);
+								if(!dad.curCharacter.startsWith('gf-') && dad.curCharacter != 'gf') {
+									if(wasGf && gf != null) {
+										gf.visible = true;
+									}
+								} else if(gf != null) {
+									gf.visible = false;
+								}
+								dad.alpha = lastAlpha;
+								iconP2.changeIcon(dad.healthIcon);
+							}
+							setOnScripts('dadName', dad.curCharacter);
+						case 2:
+							if(gf != null)
+							{
+								if(gf.curCharacter != value2)
+								{
+									if(!gfMap.exists(value2)) {
+										addCharacterToList(value2, charType);
+									}		
+									var lastAlpha:Float = gf.alpha;
+									if (value2 == 'sonic') {
+										gf.alpha = 0.00001;
+									} else {
+										gf.alpha = 0.00001;
+										gf.alpha = 0;
+									}
+									gf = gfMap.get(value2);
+									gf.alpha = lastAlpha;
+								}
+								setOnScripts('gfName', gf.curCharacter);
+							}
 						}
-					}
-				reloadHealthBarColors();
+					reloadHealthBarColors();
+				}
 			case 'Change Scroll Speed':
 				if (songSpeedType != "constant")
 				{

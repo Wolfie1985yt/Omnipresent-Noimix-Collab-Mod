@@ -20,6 +20,7 @@ import states.TitleState;
 	public var splashSkin:String = 'Bloodsplash';
 	public var splashAlpha:Float = 1;
 	public var lowQuality:Bool = true;
+	public var potatoMode:Bool = false;
 	public var shaders:Bool = true;
 	public var omnipresentBeat:Bool = false;
 	public var cacheOnGPU:Bool = false;
