@@ -16,6 +16,7 @@ haxelib install flixel-tools
 haxelib set hxCodec 2.6.1
 haxelib install tjson
 haxelib git flxanimate https://github.com/MaysLastPlays-Stuff/flxanimate main-mobile
+haxelib git SScript https://github.com/MaysLastPlays-Stuff/SScript master
 haxelib git linc_luajit https://github.com/mcagabe19-stuff/linc_luajit-rewriten
 echo Finished!
 pause
