@@ -80638,6 +80638,11 @@
 					],
 					[
 						"Change Character",
+						"dad2",
+						"sonicexe"
+					],
+					[
+						"Change Character",
 						"bf",
 						"bf-encore"
 					]
@@ -89960,6 +89965,11 @@
 						"Change Character",
 						"gf",
 						"sanic"
+					],
+					[
+						"Change Character",
+						"dad2",
+						"sunky"
 					]
 				]
 			],
@@ -104785,6 +104795,11 @@
 						"Change Character",
 						"gf",
 						"Needlemouse-p2"
+					],
+					[
+						"Change Character",
+						"dad2",
+						"true-fatal"
 					]
 				]
 			],
@@ -105210,6 +105225,7 @@
 			]
 		],
 		"player2": "tailsdoll",
+		"player3": "sonicexe",
 		"disableNoteRGB": true,
 		"splashSkin": "noteSplashes/noteSplashes-Bloodsplash",
 		"song": "Omnipresent-Fucked",

@@ -241,6 +241,7 @@ function onCreatePost()
 	setProperty('gfGroup.alpha',0.00001);
 	setProperty('dadGroup.alpha',0.00001);
 	setProperty('boyfriendGroup.alpha',0.00001);
+	setProperty('dad2.alpha',0.00001);
 	runTimer('preload',0.1);
 	runTimer('preload',0.2);
 	runTimer('preload',0.3);
@@ -988,6 +989,10 @@ function onUpdate(elapsed)
 		setProperty('dadGroup.y',480);
 		setProperty('gfGroup.x',1225);
 		setProperty('gfGroup.y',150);
+		setProperty('dad2.visible',true);
+		setProperty('dad2.alpha',0.5);
+		setProperty('dad2Group.x',getProperty('dadGroup.x')+350);
+		setProperty('dad2Group.y',getProperty('dadGroup.y'-1100));
 	end
 	if curStep == 12468 then --Needlemouse-p2 final moment again
 		setProperty('dadGroup.x',1200);
@@ -1038,11 +1043,15 @@ function onUpdate(elapsed)
 		setProperty('dad.alpha', 1);
 		setProperty('gf.alpha', 0.7);
 		setProperty('boyfriend.alpha', 1);
-		setProperty('sonicexe.alpha',0.7);
+	end
+	if curStep == 6464 then
+		setProperty('dad2.alpha',0.7);
+		setProperty('dad2Group.x',getProperty('dadGroup.x')+600);
+		setProperty('dad2Group.y',getProperty('dadGroup.y')+300);
 	end
 	if curStep == 8416 then
 		setProperty('gf.alpha',0);
-		setProperty('sunky.alpha',0);
+		setProperty('dad2.alpha',0);
 	end
 	if curStep == 3544 then
 		setProperty('gfGroup.y',-540);
@@ -1066,7 +1075,7 @@ function onUpdate(elapsed)
 	end
 	if curStep == 6484 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 0.6, 'linear');
-		doTweenAlpha('sonicAlpha', 'sonicexe', 0, 0.6, 'linear');
+		doTweenAlpha('dad2alpha', 'dad2', 0, 0.6, 'linear');
 	end
 	if curStep == 720 or curStep == 1808 or curStep == 4192 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 1.55, 'linear');
@@ -1082,14 +1091,17 @@ function onUpdate(elapsed)
 	end
 	if curStep == 8430 then
 		doTweenAlpha('gfAlpha', 'gf', 0.8, 0.2, 'linear');
-		doTweenAlpha('sunkyAlpha', 'sunky', 0.8, 0.2, 'linear');
+		doTweenAlpha('dad2alpha', 'dad2', 0.8, 0.2, 'linear');
+		setProperty('dad2Group.x',getProperty('dadGroup.x')-550);
+		setProperty('dad2Group.y',getProperty('dadGroup.y')-170);
 	end
 	if curStep == 8456 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 0.5, 'linear');
-		doTweenAlpha('sunkyAlpha', 'sunky', 0, 0.5, 'linear');
+		doTweenAlpha('dad2alpha', 'dad2', 0, 0.5, 'linear');
 	end
 	if curStep == 8976 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 1, 'linear');
+		setProperty('dad2.visible',false);
 	end
 	if curStep == 9840 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 1.55, 'linear');
@@ -1238,7 +1250,7 @@ function onUpdate(elapsed)
 		setProperty('cameraSpeed',200);
 		setProperty('dad.alpha',0.5);
 		setProperty('gf.alpha',0.5);
-		setProperty('true-fatal.alpha',0.5);
+		setProperty('dad2.alpha',0.5);
 		setProperty('gf.color', 000000);
 		ofs = 0;
 		ofs2 = 0;
@@ -1270,7 +1282,8 @@ function onUpdate(elapsed)
 	if curStep == 12496 then
 		doTweenAlpha('gfAlpha', 'gf', 0, 2.43, 'linear');
 		doTweenAlpha('dadAlpha', 'dad', 0, 2.43, 'linear');
-		doTweenAlpha('fatalAlpha', 'true-fatal', 0, 2.43, 'linear');
+		doTweenAlpha('dad2Tween', 'dad2', 0, 2.43, 'linear');
+		runTimer('hidedad2',2.44);
 	end
 	if wechBeastMoment == true then
 		if mustHitSection == false then
@@ -1432,6 +1445,9 @@ function onStepHit()
 	end
 end
 function onTimerCompleted(tag, loops, loopsLeft)
+	if tag == 'hidedad2' then
+		setProperty('dad2.visible',false);
+	end
 	if tag == 'gf-idle' then
 		setProperty('gf.idleSuffix','')
 	end
@@ -1569,7 +1585,6 @@ function onTimerCompleted(tag, loops, loopsLeft)
 		triggerEvent('Change Character', 'dad', 'tailsdoll-flipped');
 		triggerEvent('Change Character', 'dad', 'sanic-flipped');
 		triggerEvent('Change Character', 'dad', 'Tails-Encore-flipped');
-		triggerEvent('Change Character', 'dad', 'true-fatal');
 		triggerEvent('Change Character', 'dad', 'wechBeast-flipped');
 		triggerEvent('Change Character', 'dad', 'coldsteel-flipped');
 		triggerEvent('Change Character', 'dad', 'scorched-flipped');
@@ -1626,7 +1641,6 @@ function onTimerCompleted(tag, loops, loopsLeft)
 		triggerEvent('Change Character', 'gf', 'tailsdoll-flipped');
 		triggerEvent('Change Character', 'gf', 'sanic-flipped');
 		triggerEvent('Change Character', 'gf', 'Tails-Encore-flipped');
-		triggerEvent('Change Character', 'gf', 'true-fatal');
 		triggerEvent('Change Character', 'gf', 'wechBeast-flipped');
 		triggerEvent('Change Character', 'gf', 'coldsteel-flipped');
 		triggerEvent('Change Character', 'gf', 'scorched-flipped');
@@ -1683,7 +1697,6 @@ function onTimerCompleted(tag, loops, loopsLeft)
 		triggerEvent('Change Character', 'bf', 'tailsdoll-flipped');
 		triggerEvent('Change Character', 'bf', 'sanic-flipped');
 		triggerEvent('Change Character', 'bf', 'Tails-Encore-flipped');
-		triggerEvent('Change Character', 'bf', 'true-fatal');
 		triggerEvent('Change Character', 'bf', 'wechBeast-flipped');
 		triggerEvent('Change Character', 'bf', 'coldsteel-flipped');
 		triggerEvent('Change Character', 'bf', 'scorched-flipped');
@@ -1993,7 +2006,7 @@ function onEvent(name, value1, value2)
 		doTweenColor('badapplexd', 'boyfriend', '000000', value2, 'linear')
 		doTweenColor('badapplexd1', 'dad', '000000', value2, 'linear')
 		doTweenColor('badapplexd2', 'gf', '000000', value2, 'linear')
-		doTweenColor('badapplexd2', 'true-fatal', '000000', value2, 'linear')
+		doTweenColor('badapplexd2', 'dad2', '000000', value2, 'linear')
 		doTweenColor('badapplexd6', 'healthBar', '000000', value2, 'linear')
 		doTweenColor('badapplexd100', 'iconP1', '000000', value2, 'linear')
 		doTweenColor('badapplexd10', 'iconP2', '000000', value2, 'linear')
@@ -2004,7 +2017,7 @@ function onEvent(name, value1, value2)
 		doTweenColor('badapplexd', 'boyfriend', '000000', value2, 'linear')
 		doTweenColor('badapplexd1', 'dad', '000000', value2, 'linear')
 		doTweenColor('badapplexd2', 'gf', '000000', value2, 'linear')
-		doTweenColor('badapplexd2', 'true-fatal', '000000', value2, 'linear')
+		doTweenColor('badapplexd2', 'dad2', '000000', value2, 'linear')
 		doTweenColor('badapplexd6', 'healthBar', '000000', value2, 'linear')
 		doTweenColor('badapplexd100', 'iconP1', '000000', value2, 'linear')
 		doTweenColor('badapplexd10', 'iconP2', '000000', value2, 'linear')
@@ -2014,7 +2027,7 @@ function onEvent(name, value1, value2)
 		doTweenColor('badapplexd3', 'boyfriend', 'FFFFFF', value2, 'linear')
 		doTweenColor('badapplexd4', 'dad', 'FFFFFF', value2, 'linear')
 		doTweenColor('badapplexd5', 'gf', 'FFFFFF', value2, 'linear')
-		doTweenColor('badapplexd5', 'true-fatal', 'FFFFFF', value2, 'linear')
+		doTweenColor('badapplexd2', 'dad2', '000000', value2, 'linear')
 		doTweenColor('badapplexd7', 'healthBar', 'FFFFFF', value2, 'linear')
 		doTweenColor('badapplexd101', 'iconP1', 'FFFFFF', value2, 'linear')
 		doTweenColor('badapplexd11', 'iconP2', 'FFFFFF', value2, 'linear')
@@ -2236,7 +2249,7 @@ function onEvent(name, value1, value2)
 		setProperty('healthBar.color', 0x000000);
 		setProperty('healthBarP1.color', 0x000000);
 		setProperty('healthBarP2.color', 0x000000);
-		setProperty('true-fatal.color', 0x000000);
+		setProperty('dad2.color', 0x000000);
 	end
 	if name == 'Better Cinematics' then
 		CinSpeed = tonumber(value1)
