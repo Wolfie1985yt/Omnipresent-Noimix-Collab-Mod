@@ -341,91 +341,6 @@ function onUpdate(elapsed)
 	if curStep == 12496 then
 		triggerEvent('Cam Zoom', '2.6', '20.75, easeInOut');
 	end
-	if curStep == 16 then --wolfie credits
-		makeLuaSprite('CreditsBG',nil,-292,200)
-		makeGraphic('CreditsBG',252,100,'ffffff')
-		setProperty('CreditsBG.alpha',0.4)
-		setObjectCamera('CreditsBG','other')
-		addLuaSprite('CreditsBG',false)
-		Text = 'Part Charted by:\n\n  Wolfie_1985';
-		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
-		setTextAlignment('CreditsTxt','left')
-		setTextSize('CreditsTxt',24)
-		setObjectCamera('CreditsTxt','other')
-		addLuaText('CreditsTxt',true)
-	end
-	if curStep == 2064 then --charizard credits
-		Credits = false;
-		makeLuaSprite('CreditsBG',nil,-292,200)
-		makeGraphic('CreditsBG',252,100,'ffffff')
-		setProperty('CreditsBG.alpha',0.4)
-		setObjectCamera('CreditsBG','other')
-		addLuaSprite('CreditsBG',false)
-		Text = 'Part Charted by:\n\nCharizardslash';
-		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
-		setTextAlignment('CreditsTxt','left')
-		setTextSize('CreditsTxt',24)
-		setObjectCamera('CreditsTxt','other')
-		addLuaText('CreditsTxt',true)
-	end
-	if curStep == 4256 then --raimbow credits
-		Credits = false;
-		makeLuaSprite('CreditsBG',nil,-292,200)
-		makeGraphic('CreditsBG',252,100,'ffffff')
-		setProperty('CreditsBG.alpha',0.4)
-		setObjectCamera('CreditsBG','other')
-		addLuaSprite('CreditsBG',false)
-		Text = 'Part Charted by:\n\n Raimbowcore12';
-		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
-		setTextAlignment('CreditsTxt','left')
-		setTextSize('CreditsTxt',24)
-		setObjectCamera('CreditsTxt','other')
-		addLuaText('CreditsTxt',true)
-	end
-	if curStep == 6352 then --Mr. Half credits
-		Credits = false;
-		makeLuaSprite('CreditsBG',nil,-292,200)
-		makeGraphic('CreditsBG',252,100,'ffffff')
-		setProperty('CreditsBG.alpha',0.4)
-		setObjectCamera('CreditsBG','other')
-		addLuaSprite('CreditsBG',false)
-		Text = 'Part Charted by:\n\n    Mr. Half';
-		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
-		setTextAlignment('CreditsTxt','left')
-		setTextSize('CreditsTxt',24)
-		setObjectCamera('CreditsTxt','other')
-		addLuaText('CreditsTxt',true)
-	end
-	if curStep == 8528 then --leafy credits
-		Credits = false;
-		makeLuaSprite('CreditsBG',nil,-292,200)
-		makeGraphic('CreditsBG',252,100,'ffffff')
-		setProperty('CreditsBG.alpha',0.4)
-		setObjectCamera('CreditsBG','other')
-		addLuaSprite('CreditsBG',false)
-		Text = 'Part Charted by:\n\n Leafy-Ivy_Ray';
-		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
-		setTextAlignment('CreditsTxt','left')
-		setTextSize('CreditsTxt',24)
-		setObjectCamera('CreditsTxt','other')
-		addLuaText('CreditsTxt',true)
-	end
-	if curStep == 10752 then --heckat credits
-		Credits = false;
-		makeLuaSprite('CreditsBG',nil,-292,200)
-		makeGraphic('CreditsBG',252,100,'ffffff')
-		setProperty('CreditsBG.alpha',0.4)
-		setObjectCamera('CreditsBG','other')
-		addLuaSprite('CreditsBG',false)
-		Text = 'Part Charted by:\n\n     Heckat';
-		makeLuaText('CreditsTxt',Text,0,getProperty('CreditsBG.x')+12,getProperty('CreditsBG.y')+12)
-		setTextAlignment('CreditsTxt','left')
-		setTextSize('CreditsTxt',24)
-		setObjectCamera('CreditsTxt','other')
-		addLuaText('CreditsTxt',true)
-		setObjectOrder('CreditsBG', 300);
-		setObjectOrder('CreditsTxt', 301);
-	end
 	if curStep == 136 or curStep == 400 or curStep == 592 or curStep == 848 or curStep == 944 or curStep == 10224 or curStep == 10320 then --xterion
 		runTimer('ringStart',0.1);
 		runTimer('ringFinish',0.2);
@@ -1400,18 +1315,6 @@ function onUpdate(elapsed)
 				triggerEvent('Camera Follow Pos',xx3,yy3)
 			end
 		end
-	end
-	if not Credits and curStep >= 16 then
-        setProperty('CreditsTxt.x',Lerp(getProperty('CreditsTxt.x'),12,0.05))
-        setProperty('CreditsBG.x',Lerp(getProperty('CreditsBG.x'),0,0.05))
-    else
-        setProperty('CreditsTxt.x',Lerp(getProperty('CreditsTxt.x'),-682+12,0.01))
-        setProperty('CreditsBG.x',Lerp(getProperty('CreditsBG.x'),-682,0.01))
-    end
-    if curStep >= 47 and curStep <= 48 or curStep >= 2095 and curStep <= 2096 or curStep >= 4287 and curStep <= 4288 or curStep >= 6383 and curStep <= 6384 or curStep >= 8559 and curStep <= 8560 or curStep >= 10783 and curStep <= 10784 then
-        if getProperty('CreditsBG.x')>-0.9 then
-            Credits = true
-        end
 	end
 	if curStep <= 12220 and curStep >= 0 or curStep >= 12776 and curStep <= 13104 then
 		setProperty(ghost..'.antialiasing', getProperty(char..'.antialiasing'))
