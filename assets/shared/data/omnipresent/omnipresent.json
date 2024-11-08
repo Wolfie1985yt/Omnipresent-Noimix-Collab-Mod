@@ -2,6 +2,7 @@
 	"song": {
 		"player1": "bf-john9doe-3d",
 		"player2": "tailsdoll",
+		"player3": "sonicexe",
 		"events": [
 			[
 				0,
@@ -28608,6 +28609,11 @@
 					],
 					[
 						"Change Character",
+						"dad2",
+						"sonicexe"
+					],
+					[
+						"Change Character",
 						"bf",
 						"bf-encore"
 					]
@@ -37805,6 +37811,11 @@
 						"Change Character",
 						"gf",
 						"sanic"
+					],
+					[
+						"Change Character",
+						"dad2",
+						"sunky"
 					]
 				]
 			],
@@ -52515,6 +52526,11 @@
 						"Change Character",
 						"gf",
 						"Needlemouse"
+					],
+					[
+						"Change Character",
+						"dad2",
+						"true-fatal"
 					]
 				]
 			],

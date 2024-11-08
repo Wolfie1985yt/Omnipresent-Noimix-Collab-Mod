@@ -96,6 +96,7 @@ class PlayState extends MusicBeatState
 	public var boyfriendMap:Map<String, Character> = new Map<String, Character>();
 	public var dadMap:Map<String, Character> = new Map<String, Character>();
 	public var gfMap:Map<String, Character> = new Map<String, Character>();
+	public var dad2Map:Map<String, Character> = new Map<String, Character>();
 	public var variables:Map<String, Dynamic> = new Map<String, Dynamic>();
 
 	var bgSize:Float = 1;
@@ -120,6 +121,8 @@ class PlayState extends MusicBeatState
 	public var BF_Y:Float = 100;
 	public var DAD_X:Float = 100;
 	public var DAD_Y:Float = 100;
+	public var DAD2_X:Float = 100;
+	public var DAD2_Y:Float = 100;
 	public var GF_X:Float = 400;
 	public var GF_Y:Float = 130;
 	
@@ -134,6 +137,7 @@ class PlayState extends MusicBeatState
 
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
+	public var dad2Group:FlxSpriteGroup;
 	public var gfGroup:FlxSpriteGroup;
 	public static var curStage:String = '';
 	public static var stageUI:String = "normal";
@@ -156,6 +160,7 @@ class PlayState extends MusicBeatState
 	public var opponentVocals:FlxSound;
 
 	public var dad:Character = null;
+	public var dad2:Character = null;
 	public var gf:Character = null;
 	public var boyfriend:Character = null;
 
@@ -372,6 +377,8 @@ class PlayState extends MusicBeatState
 		GF_Y = stageData.girlfriend[1];
 		DAD_X = stageData.opponent[0];
 		DAD_Y = stageData.opponent[1];
+		DAD2_X = stageData.opponent[0];
+		DAD2_Y = stageData.opponent[1];
 
 		if(stageData.camera_speed != null)
 			cameraSpeed = stageData.camera_speed;
@@ -390,6 +397,7 @@ class PlayState extends MusicBeatState
 
 		boyfriendGroup = new FlxSpriteGroup(BF_X, BF_Y);
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
+		dad2Group = new FlxSpriteGroup(DAD2_X, DAD2_Y);
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
 
 		switch (curStage)
@@ -405,6 +413,7 @@ class PlayState extends MusicBeatState
 
 		add(gfGroup);
 		add(dadGroup);
+		add(dad2Group);
 		add(boyfriendGroup);
 
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
@@ -452,6 +461,11 @@ class PlayState extends MusicBeatState
 		startCharacterPos(dad, true);
 		dadGroup.add(dad);
 		startCharacterScripts(dad.curCharacter);
+
+		dad2 = new Character(0, 0, SONG.player3);
+		startCharacterPos(dad2, true);
+		dad2Group.add(dad2);
+		startCharacterScripts(dad2.curCharacter);
 
 		boyfriend = new Character(0, 0, SONG.player1, true);
 		startCharacterPos(boyfriend);
@@ -812,6 +826,15 @@ class PlayState extends MusicBeatState
 					newGf.alpha = 0.000000001;
 					startCharacterScripts(newGf.curCharacter);
 				}
+			case 3:
+				if(!dad2Map.exists(newCharacter)) {
+					var newDad2:Character = new Character(0, 0, newCharacter);
+					dad2Map.set(newCharacter, newDad2);
+					dad2Group.add(newDad2);
+					startCharacterPos(newDad2, true);
+					newDad2.alpha = 0.000000001;
+					startCharacterScripts(newDad2.curCharacter);
+				}
 		}
 	}
 
@@ -1108,6 +1131,10 @@ class PlayState extends MusicBeatState
 	public function addBehindDad(obj:FlxBasic)
 	{
 		insert(members.indexOf(dadGroup), obj);
+	}
+	public function addBehindDad2(obj:FlxBasic)
+	{
+		insert(members.indexOf(dad2Group), obj);
 	}
 
 	public function clearNotesBefore(time:Float)
@@ -2514,6 +2541,8 @@ class PlayState extends MusicBeatState
 				if (!ClientPrefs.data.potatoMode) {
 					var charType:Int = 0;
 					switch(value1.toLowerCase().trim()) {
+						case 'dad2' | 'opponent2':
+							charType = 3;
 						case 'gf' | 'girlfriend':
 							charType = 2;
 						case 'dad' | 'opponent':
@@ -2588,6 +2617,17 @@ class PlayState extends MusicBeatState
 									gf.alpha = lastAlpha;
 								}
 								setOnScripts('gfName', gf.curCharacter);
+							}
+						case 3:
+							if(dad2.curCharacter != value2) {
+								if(!dad2Map.exists(value2)) {
+									addCharacterToList(value2, charType);
+								}
+		
+								var lastAlpha:Float = dad2.alpha;
+								dad2.alpha = 0;
+								dad2 = dad2Map.get(value2);
+								dad2.alpha = lastAlpha;
 							}
 						}
 					reloadHealthBarColors();
@@ -3342,6 +3382,28 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		if(note.noteType == 'Hey!' && dad2.animOffsets.exists('hey')) {
+			dad2.playAnim('hey', true);
+			dad2.specialAnim = true;
+			dad2.heyTimer = 0.6;
+		} else if(!note.noAnimation) {
+			var altAnim:String = note.animSuffix;
+
+			if (SONG.notes[curSection] != null)
+				if (SONG.notes[curSection].altAnim && !SONG.notes[curSection].gfSection)
+					altAnim = '-alt';
+
+			var char:Character = dad2;
+			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))] + altAnim;
+			if(note.gfNote) char = gf;
+
+			if(char != null)
+			{
+				char.playAnim(animToPlay, true);
+				char.holdTimer = 0;
+			}
+		}
+
 		if(opponentVocals.length <= 0) vocals.volume = 1;
 		strumPlayAnim(true, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 		note.hitByOpponent = true;
@@ -3550,6 +3612,8 @@ class PlayState extends MusicBeatState
 			boyfriend.dance();
 		if (dad != null && beat % dad.danceEveryNumBeats == 0 && !dad.getAnimationName().startsWith('sing') && !dad.stunned)
 			dad.dance();
+		if (dad2 != null && beat % dad2.danceEveryNumBeats == 0 && !dad2.getAnimationName().startsWith('sing') && !dad2.stunned)
+			dad2.dance();
 	}
 
 	public function playerDance():Void
